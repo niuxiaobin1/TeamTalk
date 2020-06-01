@@ -1,6 +1,7 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.DBInterface;
@@ -42,9 +43,10 @@ public class IMLoginManager extends IMManager {
     private int loginId;
     private UserEntity loginInfo;
 
-
     /**loginManger 自身的状态 todo 状态太多就采用enum的方式*/
     private boolean  identityChanged = false;
+    private boolean  isSendCode = false;
+    private boolean  isRegister = false;
     private boolean isKickout = false;
     private boolean isPcOnline = false;
     //以前是否登陆过，用户重新登陆的判断
@@ -67,6 +69,8 @@ public class IMLoginManager extends IMManager {
         loginId = -1;
         loginInfo = null;
         identityChanged = false;
+        isSendCode = false;
+        isRegister = false;
         isKickout=false;
         isPcOnline = false;
         everLogined = false;
@@ -196,46 +200,83 @@ public class IMLoginManager extends IMManager {
         imSocketManager.reqMsgServerAddrs();
     }
 
-    /**
-     * 链接成功之后
-     * */
-    public void reqLoginMsgServer() {
+
+    public void sendMsgCode(String mail) {
+        isSendCode=true;
+        loginUserName = mail;
+        imSocketManager.reqMsgServerAddrs();
+    }
+
+    private void IMLogin(){
         logger.i("login#reqLoginMsgServer");
         triggerEvent(LoginEvent.LOGINING);
         /** 加密 */
         String desPwd = new String(com.mogujie.tt.Security.getInstance().EncryptPass(loginPwd));
-
         IMLogin.IMLoginReq imLoginReq = IMLogin.IMLoginReq.newBuilder()
-                    .setUserName(loginUserName)
-                    .setPassword(desPwd)
-                    .setOnlineStatus(IMBaseDefine.UserStatType.USER_STATUS_ONLINE)
-                    .setClientType(IMBaseDefine.ClientType.CLIENT_TYPE_ANDROID)
-                    .setClientVersion("1.0.0").build();
+                .setUserName(loginUserName)
+                .setPassword(desPwd)
+                .setOnlineStatus(IMBaseDefine.UserStatType.USER_STATUS_ONLINE)
+                .setClientType(IMBaseDefine.ClientType.CLIENT_TYPE_ANDROID)
+                .setClientVersion("1.0.0").build();
 
-       int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
-       int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_USERLOGIN_VALUE;
-       imSocketManager.sendRequest(imLoginReq,sid,cid,new Packetlistener() {
-           @Override
-           public void onSuccess(Object response) {
-               try {
-                   IMLogin.IMLoginRes  imLoginRes = IMLogin.IMLoginRes.parseFrom((CodedInputStream)response);
-                   onRepMsgServerLogin(imLoginRes);
-               } catch (IOException e) {
-                   triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-                   logger.e("login failed,cause by %s",e.getCause());
-               }
-           }
+        int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
+        int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_USERLOGIN_VALUE;
+        imSocketManager.sendRequest(imLoginReq,sid,cid,new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMLogin.IMLoginRes  imLoginRes = IMLogin.IMLoginRes.parseFrom((CodedInputStream)response);
+                    onRepMsgServerLogin(imLoginRes);
+                } catch (IOException e) {
+                    triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+                    logger.e("login failed,cause by %s",e.getCause());
+                }
+            }
 
-           @Override
-           public void onFaild() {
-               triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-           }
+            @Override
+            public void onFaild() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
 
-           @Override
-           public void onTimeout() {
-               triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-           }
-       });
+            @Override
+            public void onTimeout() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
+        });
+    }
+
+    /**
+     * 发送验证码
+     */
+    private void IMSendCode(){
+        triggerEvent(LoginEvent.LOGINING);
+        final IMLogin.IMRegGetCodeReq imRegGetCodeReq = IMLogin.IMRegGetCodeReq.newBuilder()
+                .setEmail(loginUserName).build();
+
+        int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
+        int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_GET_CODE_VALUE;
+        imSocketManager.sendRequest(imRegGetCodeReq,sid,cid,new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMLogin.IMRegGetCodeRsp  imRegGetCodeRsp = IMLogin.IMRegGetCodeRsp.parseFrom((CodedInputStream)response);
+                    Log.e("nxb",imRegGetCodeRsp.getResultString());
+                } catch (IOException e) {
+                    triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+                    logger.e("login failed,cause by %s",e.getCause());
+                }
+            }
+
+            @Override
+            public void onFaild() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
+
+            @Override
+            public void onTimeout() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
+        });
     }
 
     /**
@@ -270,6 +311,20 @@ public class IMLoginManager extends IMManager {
                 logger.e("login#login msg server inner failed, result:%s", code);
                 triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
             }break;
+        }
+    }
+
+    /**
+     * 链接成功之后
+     * */
+    public void reqLoginMsgServer() {
+        if (isSendCode){
+            isSendCode=false;
+            IMSendCode();
+        }else if(isRegister){
+
+        }else{
+            IMLogin();
         }
     }
 

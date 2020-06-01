@@ -29,6 +29,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:ellipsize="end"
+            android:text="1111111111111111111"
             android:gravity="center"
             android:singleLine="true"
             android:textStyle="bold"

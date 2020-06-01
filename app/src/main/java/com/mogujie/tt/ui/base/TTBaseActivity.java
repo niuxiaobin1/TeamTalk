@@ -16,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kongzue.dialog.v3.WaitDialog;
 import com.mogujie.tt.R;
+import com.mogujie.tt.ui.activity.SignUpActivity;
 
 /**
  * @author Nana
@@ -134,5 +136,14 @@ public abstract class TTBaseActivity extends AppCompatActivity {
             return;
         }
         topBar.setBackgroundResource(resID);
+    }
+
+    protected void showDialog(){
+        WaitDialog.show(TTBaseActivity.this, getResources()
+                .getString(R.string.transfer_wait));
+    }
+
+    protected void dismissDialog(){
+        WaitDialog.dismiss();
     }
 }

@@ -207,36 +207,36 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         mLoginStatusView = findViewById(R.id.login_status);
 
         mSwitchLoginServer = findViewById(R.id.sign_switch_login_server);
-        mSwitchLoginServer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog));
-                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
-                editText.setText(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER));
-                TextView textText = dialog_view.findViewById(R.id.dialog_title);
-                textText.setText(R.string.switch_login_server_title);
-                builder.setView(dialog_view);
-                builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        if (!TextUtils.isEmpty(editText.getText().toString().trim())) {
-                            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, editText.getText().toString().trim());
-                            dialog.dismiss();
-                        }
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.tt_cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                builder.show();
-            }
-        });
+//        mSwitchLoginServer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog));
+//                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
+//                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
+//                editText.setText(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER));
+//                TextView textText = dialog_view.findViewById(R.id.dialog_title);
+//                textText.setText(R.string.switch_login_server_title);
+//                builder.setView(dialog_view);
+//                builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        if (!TextUtils.isEmpty(editText.getText().toString().trim())) {
+//                            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, editText.getText().toString().trim());
+//                            dialog.dismiss();
+//                        }
+//                    }
+//                });
+//                builder.setNegativeButton(getString(R.string.tt_cancel), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.dismiss();
+//                    }
+//                });
+//                builder.show();
+//            }
+//        });
 
         mNameView = findViewById(R.id.name);
         mPasswordView = findViewById(R.id.password);

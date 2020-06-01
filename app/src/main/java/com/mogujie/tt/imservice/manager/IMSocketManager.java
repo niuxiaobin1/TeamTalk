@@ -1,7 +1,6 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.GeneratedMessageLite;
@@ -175,7 +174,6 @@ public class IMSocketManager extends IMManager {
             public void onSuccess(int i, Header[] headers, String s, Object o) {
                 logger.d("socket#req msgAddress onSuccess, response:%s", s);
                 MsgServerAddrsEntity msgServer = (MsgServerAddrsEntity) o;
-                Log.e("nxb11",msgServer.toString());
                 if(msgServer == null){
                     triggerEvent(SocketEvent.REQ_MSG_SERVER_ADDRS_FAILED);
                     return;

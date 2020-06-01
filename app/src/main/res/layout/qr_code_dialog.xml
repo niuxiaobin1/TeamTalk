@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="392dp"
+        android:background="@drawable/rq_code_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal"
+            android:paddingLeft="37dp"
+            android:paddingRight="37dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/tt_round_bg" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lucas Thornto"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="544782917@qq.com"
+                    android:textColor="#989898" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="197dp"
+            android:layout_height="197dp"
+            android:layout_marginTop="17dp"
+            android:src="@mipmap/ic_erweima" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Scan QRCode Add me"
+            android:textColor="#989898" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/ic_straight_line" />
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@mipmap/self_code_close_" />
+
+</LinearLayout>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff8f8f8"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/gridlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/chat_top_line_bg" />
+
+        <com.mogujie.tt.ui.widget.GroupManagerGridView
+            android:id="@+id/group_manager_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fefefe"
+            android:gravity="center"
+            android:numColumns="5"
+            android:padding="20dp"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical"
+            android:verticalSpacing="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#fff8f8f8" />
+
+        <LinearLayout
+            android:id="@+id/group_manager_name"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/group_manager_name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="@string/group_name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/group_manager_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="3dip"
+                android:textColor="#80989898"
+                android:textSize="15sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/ic_next_user" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/tt_divide_line" />
+
+        <LinearLayout
+            android:id="@+id/lin_group_notic"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="Group Notic"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/ic_next_user" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#fff8f8f8"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/lin_approva"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="Approva"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="3dip"
+                android:text="asdasdasdasd"
+                android:textColor="#80989898"
+                android:textSize="15sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/ic_next_user" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/tt_divide_line" />
+
+        <LinearLayout
+            android:id="@+id/lin_my_alia"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="@string/in_group_nick_name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/ic_next_user" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/tt_divide_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:text="@string/chat_to_top"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:checked="true"
+                android:thumb="@drawable/thumb_selector"
+                android:track="@drawable/track_selector" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#fff8f8f8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/exit_group"
+                android:textColor="#E53D53"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:paddingRight="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="20dp"
+                android:text="@string/no_disturb"
+                android:textColor="#a3a2a8"
+                android:textSize="15sp" />
+
+            <CheckBox
+                android:id="@+id/NotificationNoDisturbCheckbox"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@color/toggle_checkbox_background"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/tt_divide_line"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:paddingRight="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:paddingLeft="20dp"
+                android:text="@string/top_message"
+                android:textColor="#a3a2a8"
+                android:textSize="15sp" />
+
+            <CheckBox
+                android:id="@+id/NotificationTopMessageCheckbox"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@color/toggle_checkbox_background"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <!--<View-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:background="@drawable/tt_divide_line"-->
+        <!--/>-->
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

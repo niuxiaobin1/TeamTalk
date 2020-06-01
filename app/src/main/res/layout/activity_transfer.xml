@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.activity.EditAliasActivity">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/tt_round_bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="Mabel Curti"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="49dp"
+        android:text="@string/transfer_amount"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/edit_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="33dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₦"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/edit_content_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:paddingLeft="7dp"
+            android:singleLine="true"
+            android:textColor="@color/color_33"
+            android:textColorHint="@color/color_98"
+            android:textSize="40sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/edit_content_et"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="22dp"
+        android:background="@color/color_E6" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="37.5dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_bg_green_corner5"
+        android:text="@string/chat_transfer"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

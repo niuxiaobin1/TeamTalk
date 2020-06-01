@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@mipmap/ic_bankcard"
+            android:id="@+id/methodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance(₦200)"
+            android:textColor="@color/color_33"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"/>
+
+        <ImageView
+            android:id="@+id/imageCheck"
+            android:layout_gravity="right|center_vertical"
+            android:src="@mipmap/ic_check_0420"
+            android:layout_width="17dp"
+            android:layout_height="17dp" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/chat_title_line_color"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

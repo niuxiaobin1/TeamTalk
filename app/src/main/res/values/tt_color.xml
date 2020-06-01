@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="listview_color">#F0F0F0</color>
+    <color name="message_date">#20465A</color>
+    <color name="panel_bk_color">#fffafafa</color>
+    <color name="emo_bk_color">#ffffffff</color>
+    <color name="default_light_black_color">#424242</color>
+    <color name="txt_hint_color">#999999</color>
+
+    <!-- contact item color -->
+    <color name="messgae_uname_color">#ffee4566</color>
+    <color name="messgae_uname_dark_color">#000000</color>
+    <color name="message_body_text_color">#989898</color>
+    <color name="message_body_nottext_color">#ffee4566</color>
+    <color name="message_time_color">#26000000</color>
+
+    <!-- album -->
+    <color name="list_divider_color">#d1d1d1</color>
+    <color name="album_list_item_count_color">#bcbcbc</color>
+    <color name="user_portrait_bk">#20465A</color>
+
+    <!-- login -->
+    <color name="default_bk">#ffffff</color>
+    <color name="half_transparent_dark">#e0000000</color>
+    <color name="half_transparent_light">#AA000000</color>
+    <color name="login_hint_color">#d4d4d4</color>
+
+    <!-- default -->
+    <color name="default_light_grey_color">#ffaeb2b8</color>
+    <color name="default_blue_color">#01aff4</color>
+    <color name="default_black_color">#000000</color>
+    <color name="default_title_color">#343434</color>
+    <color name="default_fragment_bk_color">#f2f2f2</color>
+    <color name="default_fragment_title_bk_color">#f4f5f7</color>
+    <color name="default_fragment_search_bk_color">#e3e4e6</color>
+    <color name="default_value_color">#333333</color>
+    <color name="contact_name_color">#222222</color>
+    <color name="contact_realname_color">#aaaaaa</color>
+    <color name="default_key_color">#999999</color>
+    <color name="default_line_color">#cccccc</color>
+
+    <!-- contact -->
+    <color name="contact_default_bk">#dedee0</color>
+    <color name="contact_category_title_bk">#f1f0f6</color>
+    <color name="contact_list_item_bk">#ffffff</color>
+    <color name="contact_category_text_color">#858585</color>
+    <color name="contact_side_word_color">#909293</color>
+
+    <!-- group manager -->
+    <color name="group_manager_group_title">#010101</color>
+    <color name="group_manager_user_title">#666666</color>
+    <color name="list_item_sel_color">#eaeaea</color>
+
+    <!--user detail-->
+    <color name="user_detail_base">#ececec</color>
+    <color name="pickimage_item_bg">#ffffff</color>
+
+
+    // 灰色背景
+    <color name="status_bar_color">#EDEDED</color>
+    <color name="conversation_top_color">#F2F2F2</color>
+    <color name="navigation_bar_color">#F7F7F7</color>
+    <color name="slide_bar_hint_color">#CCCCCC</color>
+    <color name="chat_background_color">#F4F4F4</color>
+
+    // 黑色字体
+    <color name="black_font_color">#181818</color>
+    <color name="text_tips_color">#A5A5A5</color>
+
+    // 线
+    <color name="chat_title_line_color">#E6E6E6</color>
+    <color name="input_title_line_color">#D2D2D2</color>
+
+    <color name="btn_blue_standard_color">#338BFF</color>
+    <color name="item_split_color">#cccccc</color>
+    <color name="split_lint_color">#D9D9D9</color>
+
+    <color name="text_color_black">#000</color>
+    <color name="text_color_gray">#696969</color>
+
+    <color name="font_blue">#066fff</color>
+
+    <color name="voice_pressed">#DEDEDE</color>
+    <color name="voice_normal">#ffffff</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="conversation_time_color">#b2b2b2</color>
+    <color name="list_bottom_text_bg">#999999</color>
+    <color name="partTranslucent">#39000000</color>
+    <color name="custom_transparent">#B3000000</color>
+    <color name="dialog_line_bg">#c6c6c6</color>
+    <color name="read_dot_bg">#f74c31</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="line">#DDDDDD</color>
+
+    <color name="text_gray1">#777777</color>
+
+    <color name="title_bar_font_color">#016fff</color>
+
+    <color name="tab_text_selected_color">#48B464</color>
+    <color name="tab_text_normal_color">#AEB2B8</color>
+
+    // 积极钮色值
+    <color name="btn_positive">#00a4ff</color>
+    <color name="btn_positive_hover">#006eff</color>
+
+    // 积极按钮文本色值
+    <color name="text_positive">#48B464</color>
+    <color name="text_positive_hover">#5548B464</color>
+
+    // 消极按钮背景色值
+    <color name="btn_negative">#ffffff</color>
+    <color name="btn_negative_hover">#cc3428</color>
+
+    // 消极按钮文本色值
+    <color name="text_negative">#E53D53</color>
+    <color name="text_negative_hover">#55E53D53</color>
+
+    // 聊天昵称/时间条背景色值
+
+    // 聊天发送/光标色值
+    <color name="green">#70C160</color>
+
+    <color name="color_87">#878787</color>
+    <color name="color_11">#111111</color>
+    <color name="color_33">#333333</color>
+    <color name="color_a3">#a3a3a3</color>
+    <color name="color_2e6ef6">#2e6ef6</color>
+    <color name="color_002266">#002266</color>
+    <color name="color_00912A">#00912A</color>
+    <color name="color_6CA7CF">#6CA7CF</color>
+    <color name="color_FFFAC5">#FFFAC5</color>
+    <color name="color_9c">#9c9c9c</color>
+    <color name="color_48B464">#48B464</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="color_f2">#f2f2f2</color>
+    <color name="color_f8">#f8f8f8</color>
+    <color name="color_98">#989898</color>
+    <color name="color_AEB2B8">#AEB2B8</color>
+    <color name="color_ED">#EDEDED</color>
+    <color name="color_EB">#EBEBEB</color>
+    <color name="color_E6">#e6e6e6</color>
+    <color name="color_FFFEFF">#FFFEFF</color>
+    <color name="color_C2BFC2">#C2BFC2</color>
+    <color name="color_8f">#f8f8f8</color>
+    <color name="color_f7">#f7f7f7</color>
+    <color name="color_e0">#e0e0e0</color>
+    <color name="color_FB9D42">#FB9D42</color>
+    <color name="color_FDCEA1">#FDCEA1</color>
+    <color name="color_78">#787878</color>
+    <color name="color_FFD7B0">#FFD7B0</color>
+    <color name="color_D0AB77">#D0AB77</color>
+    <color name="color_redpacket_result_top">#F3604F</color>
+
+
+
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="40dp"
+    android:paddingTop="40dp"
+    android:paddingRight="40dp"
+    android:paddingBottom="21dp">
+
+    <LinearLayout
+        android:id="@+id/new_friends"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@mipmap/ic_new" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="New Friends"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@mipmap/ic_group" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Group Chats"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

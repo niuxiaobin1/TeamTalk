@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="#fff8f8f8"
+    android:orientation="vertical"
+    tools:context=".ui.activity.EditAliasActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/send_red_packet_input_conner_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/red_packet_amount"
+            android:textColor="@color/color_33"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/amountEt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/transfer_unit"
+            android:textColor="@color/color_33"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:id="@+id/unitTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="@string/transfer_unit"
+            android:textColor="@color/color_33"
+            android:textSize="39sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/amountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/unitTv"
+            android:text="0.00"
+            android:textColor="@color/color_33"
+            android:textSize="55sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="37.5dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/shape_bg_green_corner5"
+        android:text="@string/send_message"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

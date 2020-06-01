@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginLeft="17.5dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/title_bar_back" />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="52dp"
+        android:gravity="left"
+        android:text="@string/app_sign_up"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37.5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:hintTextAppearance="@style/hintAppearance">
+
+        <EditText
+            android:id="@+id/userAccount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:hint="@string/app_Email"
+            android:textColor="@color/color_33"
+            android:textColorHint="@color/color_87"
+            android:textSize="17sp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/codeInputLayout"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/hintAppearance">
+
+            <EditText
+                android:id="@+id/userVerifiCodeEt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:hint="@string/app_EmailCode"
+                android:inputType="number"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_87"
+                android:textSize="17sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/codeInputLayout"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="13dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="12.5dp"
+                android:background="@color/color_48B464" />
+
+            <TextView
+                android:id="@+id/sendCodeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="11.5dp"
+                android:paddingRight="11.5dp"
+                android:text="@string/app_receiver"
+                android:textColor="@color/color_48B464" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/pswInputLayout"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/hintAppearance">
+
+            <EditText
+                android:id="@+id/userPswEt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:hint="@string/password"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_87"
+                android:textSize="17sp" />
+
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/confirmPswInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="23dp"
+            app:hintTextAppearance="@style/hintAppearance">
+
+            <EditText
+                android:id="@+id/userConfirmPswEt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:hint="@string/ConfirmPassword"
+                android:textColor="@color/color_33"
+                android:textColorHint="@color/color_87"
+                android:textSize="17sp" />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="37.5dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/shape_bg_green_corner4"
+        android:onClick="onClickNext"
+        android:text="@string/sure"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

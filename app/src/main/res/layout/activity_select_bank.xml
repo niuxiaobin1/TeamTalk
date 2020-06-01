@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFEFF"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/chat_top_line_bg" />
+
+    <FrameLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/normalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_bg_f6_corner4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_sousuo"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/tuikit_search_bank_name"
+                android:textColor="@color/color_9c"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_f6_corner4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_sousuo" />
+
+                <EditText
+                    android:id="@+id/searchEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/tuikit_search_bank_name"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/color_11"
+                    android:textColorHint="@color/color_87"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/cleartextImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/ic_close_0417"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/cancleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/cancel"
+                android:textColor="@color/color_48B464"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/selectList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/sureTv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_done_btn"
+        android:gravity="center"
+        android:text="@string/sure"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>

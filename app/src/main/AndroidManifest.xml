@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mogujie.tt">
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <application
+        android:name=".app.IMApplication"
+        android:icon="@mipmap/icon_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.activity.SelectBankActivity"></activity>
+        <activity android:name=".ui.activity.NewFriendsActivity" />
+        <activity android:name=".ui.activity.AddMoreActivity" />
+        <activity android:name=".ui.activity.FriendRequestActivity" />
+        <activity android:name=".ui.activity.MessageCardActivity" />
+        <activity android:name=".ui.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.activity.SettingsActivity" />
+        <activity android:name=".ui.activity.PrivacyActivity" />
+        <activity android:name=".ui.activity.SetPINActivity" />
+        <activity android:name=".ui.activity.MessageCardInfoActivity" />
+        <activity android:name=".ui.activity.PaySettingActivity" />
+        <activity android:name=".ui.activity.AddNewCardActivity" />
+        <activity android:name=".ui.activity.NChatPayActivity" />
+        <activity android:name=".ui.activity.MyProfileActivity" />
+        <activity android:name=".ui.activity.TransferActivity" />
+        <activity android:name=".ui.activity.RedPacketActivity" />
+        <activity android:name=".ui.activity.EditAliasActivity" />
+        <activity android:name=".ui.activity.SignUpActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".ui.activity.MessageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ContactFragmentActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/contact_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".imservice.service.IMService"
+            android:exported="false" />
+        <service android:name=".imservice.service.LoadImageService" />
+
+        <activity
+            android:name=".ui.activity.PickPhotoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ImageGridActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PreviewTextActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PreviewGifActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.GroupManagermentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.GroupMemberSelectActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WebViewFragmentActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="com.mogujie.tt" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.DetailPortraitActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PreviewMessageImagesActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

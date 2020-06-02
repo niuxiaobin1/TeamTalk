@@ -478,15 +478,8 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == SIGN_UP_CODE) {
-                IMLogin.IMRegUserRsp imRegUserRsp = (IMLogin.IMRegUserRsp) data.getSerializableExtra("data");
-                if (imRegUserRsp != null) {
-                    try {
-                        mNameView.setText(imRegUserRsp.getEmail());
-                        ToastUtil.toastShortMessage(imRegUserRsp.getResultString());
-                    } catch (Exception e) {
-                    }
-
-                }
+                String result = data.getStringExtra("data");
+                ToastUtil.toastShortMessage(result);
             }
         }
     }

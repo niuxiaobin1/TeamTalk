@@ -11,6 +11,7 @@
     <string name="login_error_unexpected">登陆失败, 请检查你的网络或稍后重试</string>
     <string name="sendMsg_error_unexpected">发送验证码失败, 请检查你的网络或稍后重试</string>
     <string name="register_error_unexpected">注册失败, 请检查你的网络或稍后重试</string>
+    <string name="update_psw_error_unexpected">修改密码失败, 请检查你的网络或稍后重试</string>
     <string name="no_network">网络连接不可用,点击重新连接...</string>
     <string name="no_network_toast">网络连接不可用</string>
     <string name="no_chat">暂无会话</string>

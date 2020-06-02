@@ -57,6 +57,7 @@ public class IMLoginManager extends IMManager {
      */
     private boolean identityChanged = false;
     private boolean isSendCode = false;
+    private boolean isForgetPsw = false;
     private boolean isRegister = false;
     private boolean isKickout = false;
     private boolean isPcOnline = false;
@@ -83,6 +84,7 @@ public class IMLoginManager extends IMManager {
         loginInfo = null;
         identityChanged = false;
         isSendCode = false;
+        isForgetPsw = false;
         isRegister = false;
         isKickout = false;
         isPcOnline = false;
@@ -221,8 +223,9 @@ public class IMLoginManager extends IMManager {
     }
 
 
-    public void sendMsgCode(String mail) {
+    public void sendMsgCode(String mail,boolean isForget) {
         isSendCode = true;
+        isForgetPsw=isForget;
         loginUserName = mail;
         if (!imSocketManager.isSocketConnect()) {
             imSocketManager.reqMsgServerAddrs();
@@ -241,6 +244,18 @@ public class IMLoginManager extends IMManager {
             imSocketManager.reqMsgServerAddrs();
         } else {
            IMRegister();
+        }
+    }
+    public void forgetPsw(String mail, String password, String code) {
+        isForgetPsw=true;
+        loginUserName = mail;
+        loginPwd = password;
+        registerCode = code;
+        identityChanged = true;
+        if (!imSocketManager.isSocketConnect()) {
+            imSocketManager.reqMsgServerAddrs();
+        } else {
+            IMForgetPsw();
         }
     }
 
@@ -286,32 +301,79 @@ public class IMLoginManager extends IMManager {
      * 发送验证码
      */
     private void IMSendCode() {
+        logger.e("sendCode#isForgetPsw="+isForgetPsw);
         triggerEvent(LoginEvent.LOGINING);
         final IMLogin.IMRegGetCodeReq imRegGetCodeReq = IMLogin.IMRegGetCodeReq.newBuilder()
                 .setEmail(loginUserName).build();
-
         int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
         int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_GET_CODE_VALUE;
+        if (isForgetPsw){
+            isForgetPsw=false;
+            cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_FORGET_PASS_CODE_VALUE;
+        }
+
         imSocketManager.sendRequest(imRegGetCodeReq, sid, cid, new Packetlistener() {
             @Override
             public void onSuccess(Object response) {
+                logger.e("sendCode#success=");
                 try {
                     IMLogin.IMRegGetCodeRsp imRegGetCodeRsp = IMLogin.IMRegGetCodeRsp.parseFrom((CodedInputStream) response);
                     onRepMsgServerSendMsg(imRegGetCodeRsp);
                 } catch (IOException e) {
                     triggerEvent(LoginEvent.REGISTER_INNER_FAILED);
+                    logger.e("send code failed,cause by %s", e.getCause());
+                }
+            }
+
+            @Override
+            public void onFaild() {
+                logger.e("sendCode#onFaild=");
+                triggerEvent(LoginEvent.REGISTER_INNER_FAILED);
+            }
+
+            @Override
+            public void onTimeout() {
+                logger.e("sendCode#onTimeout=");
+                triggerEvent(LoginEvent.REGISTER_INNER_FAILED);
+            }
+        });
+    }
+
+    /**
+     * 忘记密码
+     */
+    private void IMForgetPsw() {
+        triggerEvent(LoginEvent.LOGINING);
+        /** 加密 */
+        String desPwd = new String(com.mogujie.tt.Security.getInstance().EncryptPass(loginPwd));
+        final IMLogin.IMForgetPassChangeReq imForgetPassChangeReq = IMLogin.IMForgetPassChangeReq.newBuilder()
+                .setEmail(loginUserName)
+                .setPassword(desPwd)
+                .setAuthcode(registerCode)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
+        int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_FORGET_PASS_CHANGE_VALUE;
+        imSocketManager.sendRequest(imForgetPassChangeReq, sid, cid, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMLogin.IMForgetPassChangeRsp imRegUserRsp = IMLogin.IMForgetPassChangeRsp.parseFrom((CodedInputStream) response);
+                    onRepMsgServerForgetPsw(imRegUserRsp);
+                } catch (IOException e) {
+                    triggerEvent(LoginEvent.REGISTER_FAILED);
                     logger.e("login failed,cause by %s", e.getCause());
                 }
             }
 
             @Override
             public void onFaild() {
-                triggerEvent(LoginEvent.REGISTER_INNER_FAILED);
+                triggerEvent(LoginEvent.REGISTER_FAILED);
             }
 
             @Override
             public void onTimeout() {
-                triggerEvent(LoginEvent.REGISTER_INNER_FAILED);
+                triggerEvent(LoginEvent.REGISTER_FAILED);
             }
         });
     }
@@ -339,7 +401,7 @@ public class IMLoginManager extends IMManager {
                     onRepMsgServerRegister(imRegUserRsp);
                 } catch (IOException e) {
                     triggerEvent(LoginEvent.REGISTER_FAILED);
-                    logger.e("login failed,cause by %s", e.getCause());
+                    logger.e("register failed,cause by %s", e.getCause());
                 }
             }
 
@@ -423,6 +485,21 @@ public class IMLoginManager extends IMManager {
     }
 
     /**
+     * 忘记密码
+     *
+     * @param imForgetPassChangeRsp
+     */
+    public void onRepMsgServerForgetPsw(IMLogin.IMForgetPassChangeRsp imForgetPassChangeRsp) {
+
+        if (imForgetPassChangeRsp == null) {
+            triggerEvent(LoginEvent.MODIFY_PSW_FAILED);
+            return;
+        }
+        EventBus.getDefault().postSticky(imForgetPassChangeRsp);
+    }
+
+
+    /**
      * 链接成功之后
      */
     public void reqLoginMsgServer() {
@@ -432,7 +509,10 @@ public class IMLoginManager extends IMManager {
         } else if (isRegister) {
             isRegister = false;
             IMRegister();
-        } else {
+        } else if(isForgetPsw){
+            isForgetPsw=false;
+
+        }else {
             IMLogin();
         }
     }

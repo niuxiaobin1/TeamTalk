@@ -53,4 +53,7 @@ public interface SysConstant {
 
     //message 每次拉取的条数
     public static final int MSG_CNT_PER_PAGE = 18;
+
+    public static String UI_PARAMS = "ilive_ui_params";
+    public static String SOFT_KEY_BOARD_HEIGHT = "soft_key_board_height";
 }

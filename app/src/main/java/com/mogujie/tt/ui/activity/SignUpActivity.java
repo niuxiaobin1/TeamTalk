@@ -205,10 +205,12 @@ public class SignUpActivity extends TTBaseActivity {
             confirmPswInputLayout.setErrorEnabled(false);
         }
 
+        imService.getLoginManager().forgetPsw(account,psw,code);
+
     }
 
     private void sendCode(String account) {
-        imService.getLoginManager().sendMsgCode(account);
+        imService.getLoginManager().sendMsgCode(account,isForgetPassWord);
     }
 
     class  CountDownTask extends TimerTask {
@@ -239,6 +241,7 @@ public class SignUpActivity extends TTBaseActivity {
     public void onEventMainThread(LoginEvent event) {
         switch (event) {
             case REGISTER_INNER_FAILED:
+            case MODIFY_PSW_FAILED:
             case REGISTER_FAILED:
                 String errorTip = getString(IMUIHelper.getLoginErrorTip(event));
                 Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
@@ -263,7 +266,15 @@ public class SignUpActivity extends TTBaseActivity {
     public void onEventMainThread(IMLogin.IMRegUserRsp imRegUserRsp) {
         logger.e("register#"+imRegUserRsp.getResultString());
         Intent it=new Intent();
-        it.putExtra("data",imRegUserRsp);
+        it.putExtra("data",imRegUserRsp.getResultString());
+        setResult(Activity.RESULT_OK,it);
+        finish();
+    }
+
+    public void onEventMainThread(IMLogin.IMForgetPassChangeRsp imForgetPassChangeRsp) {
+        logger.e("modify psw#"+imForgetPassChangeRsp.getResultString());
+        Intent it=new Intent();
+        it.putExtra("data",imForgetPassChangeRsp.getResultString());
         setResult(Activity.RESULT_OK,it);
         finish();
     }
@@ -281,6 +292,7 @@ public class SignUpActivity extends TTBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        imServiceConnector.disconnect(SignUpActivity.this);
         EventBus.getDefault().unregister(this);
         if (timer!=null){
             timer.cancel();

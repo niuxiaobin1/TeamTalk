@@ -82,8 +82,10 @@ public class IMUIHelper {
                 return R.string.sendMsg_error_unexpected;
             case REGISTER_FAILED:
                 return R.string.register_error_unexpected;
-            default :
-                return  R.string.login_error_unexpected;
+            case MODIFY_PSW_FAILED:
+                return R.string.update_psw_error_unexpected;
+            default:
+                return R.string.login_error_unexpected;
         }
     }
 

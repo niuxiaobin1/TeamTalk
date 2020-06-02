@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8f000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45mm"
+        android:layout_marginRight="45mm"
+        android:background="@drawable/white_conner_bg"
+        android:orientation="vertical"
+        android:padding="25mm">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="51mm">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="51mm"
+                android:layout_height="51mm" />
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7mm"
+                android:layout_toRightOf="@id/imageView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_marginTop="4mm"
+                    android:id="@+id/idTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_98"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/qrcode"
+            android:layout_width="197mm"
+            android:layout_height="197mm" />
+
+        <TextView
+            android:layout_marginTop="20mm"
+            android:text="@string/scran_qrcode_text"
+            android:textColor="@color/color_98"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+    </LinearLayout>
+    
+    
+    <ImageView
+        android:id="@+id/closeImg"
+        android:layout_marginTop="64mm"
+        android:src="@mipmap/self_code_close_"
+        android:layout_width="24mm"
+        android:layout_height="24mm" />
+
+
+</LinearLayout>

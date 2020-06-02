@@ -5,6 +5,7 @@ package com.mogujie.tt.utils;
  */
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -16,6 +17,8 @@ import java.lang.reflect.Field;
 public class ScreenUtil {
     private Context mCtx;
     private static ScreenUtil mScreenTools;
+    private static int navigationBarHeight = 0;
+    private static int SOFT_INPUT_HEIGHT = 0;
 
     public static ScreenUtil instance(Context ctx){
         if(null == mScreenTools){
@@ -100,5 +103,16 @@ public class ScreenUtil {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
+
+    public static int getNavigationBarHeight() {
+        if (navigationBarHeight != 0)
+            return navigationBarHeight;
+        Resources resources = AppContext.getAppContext().getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        navigationBarHeight = height;
+        return height;
+    }
+
 
 }

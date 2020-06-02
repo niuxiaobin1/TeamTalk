@@ -304,6 +304,30 @@ public final class IMBaseDefine {
      * <code>CID_LOGIN_RES_GET_QRCODE = 277;</code>
      */
     CID_LOGIN_RES_GET_QRCODE(20, 277),
+    /**
+     * <code>CID_LOGIN_REQ_FORGET_PASS_CODE = 278;</code>
+     *
+     * <pre>
+     *忘记密码时获取验证码
+     * </pre>
+     */
+    CID_LOGIN_REQ_FORGET_PASS_CODE(21, 278),
+    /**
+     * <code>CID_LOGIN_RES_FORGET_PASS_CODE = 279;</code>
+     */
+    CID_LOGIN_RES_FORGET_PASS_CODE(22, 279),
+    /**
+     * <code>CID_LOGIN_REQ_FORGET_PASS_CHANGE = 280;</code>
+     *
+     * <pre>
+     *忘记密码
+     * </pre>
+     */
+    CID_LOGIN_REQ_FORGET_PASS_CHANGE(23, 280),
+    /**
+     * <code>CID_LOGIN_RES_FORGET_PASS_CHANGE = 281;</code>
+     */
+    CID_LOGIN_RES_FORGET_PASS_CHANGE(24, 281),
     ;
 
     /**
@@ -329,7 +353,7 @@ public final class IMBaseDefine {
     public static final int CID_LOGIN_REQ_USERLOGIN_VALUE = 259;
     /**
      * <code>CID_LOGIN_RES_USERLOGIN = 260;</code>
-     *
+     *2
      * <pre>
      * </pre>
      */
@@ -439,6 +463,30 @@ public final class IMBaseDefine {
      * <code>CID_LOGIN_RES_GET_QRCODE = 277;</code>
      */
     public static final int CID_LOGIN_RES_GET_QRCODE_VALUE = 277;
+    /**
+     * <code>CID_LOGIN_REQ_FORGET_PASS_CODE = 278;</code>
+     *
+     * <pre>
+     *忘记密码时获取验证码
+     * </pre>
+     */
+    public static final int CID_LOGIN_REQ_FORGET_PASS_CODE_VALUE = 278;
+    /**
+     * <code>CID_LOGIN_RES_FORGET_PASS_CODE = 279;</code>
+     */
+    public static final int CID_LOGIN_RES_FORGET_PASS_CODE_VALUE = 279;
+    /**
+     * <code>CID_LOGIN_REQ_FORGET_PASS_CHANGE = 280;</code>
+     *
+     * <pre>
+     *忘记密码
+     * </pre>
+     */
+    public static final int CID_LOGIN_REQ_FORGET_PASS_CHANGE_VALUE = 280;
+    /**
+     * <code>CID_LOGIN_RES_FORGET_PASS_CHANGE = 281;</code>
+     */
+    public static final int CID_LOGIN_RES_FORGET_PASS_CHANGE_VALUE = 281;
 
 
     public final int getNumber() { return value; }
@@ -466,6 +514,10 @@ public final class IMBaseDefine {
         case 275: return CID_LOGIN_RES_REG_USER;
         case 276: return CID_LOGIN_REQ_GET_QRCODE;
         case 277: return CID_LOGIN_RES_GET_QRCODE;
+        case 278: return CID_LOGIN_REQ_FORGET_PASS_CODE;
+        case 279: return CID_LOGIN_RES_FORGET_PASS_CODE;
+        case 280: return CID_LOGIN_REQ_FORGET_PASS_CHANGE;
+        case 281: return CID_LOGIN_RES_FORGET_PASS_CHANGE;
         default: return null;
       }
     }
@@ -605,6 +657,66 @@ public final class IMBaseDefine {
      * </pre>
      */
     CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY(20, 533),
+    /**
+     * <code>CID_BUDDY_ADD_FRIEND_REQUEST = 535;</code>
+     *
+     * <pre>
+     *添加好友
+     * </pre>
+     */
+    CID_BUDDY_ADD_FRIEND_REQUEST(21, 535),
+    /**
+     * <code>CID_BUDDY_ADD_FRIEND_RESPONSE = 536;</code>
+     */
+    CID_BUDDY_ADD_FRIEND_RESPONSE(22, 536),
+    /**
+     * <code>CID_BUDDY_SEARCH_USER_REQUEST = 537;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    CID_BUDDY_SEARCH_USER_REQUEST(23, 537),
+    /**
+     * <code>CID_BUDDY_SEARCH_USER_RESPONSE = 544;</code>
+     */
+    CID_BUDDY_SEARCH_USER_RESPONSE(24, 544),
+    /**
+     * <code>CID_BUDDY_GET_FRIEND_LIST_REQUEST = 545;</code>
+     *
+     * <pre>
+     *获取好友列表
+     * </pre>
+     */
+    CID_BUDDY_GET_FRIEND_LIST_REQUEST(25, 545),
+    /**
+     * <code>CID_BUDDY_GET_FRIEND_LIST_RESPONSE = 546;</code>
+     */
+    CID_BUDDY_GET_FRIEND_LIST_RESPONSE(26, 546),
+    /**
+     * <code>CID_BUDDY_AGREE_ADD_FRIEND_REQUEST = 547;</code>
+     *
+     * <pre>
+     *同意好友添加
+     * </pre>
+     */
+    CID_BUDDY_AGREE_ADD_FRIEND_REQUEST(27, 547),
+    /**
+     * <code>CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE = 548;</code>
+     */
+    CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE(28, 548),
+    /**
+     * <code>CID_BUDDY_DEL_FRIEND_REQUEST = 549;</code>
+     *
+     * <pre>
+     *删除好友
+     * </pre>
+     */
+    CID_BUDDY_DEL_FRIEND_REQUEST(29, 549),
+    /**
+     * <code>CID_BUDDY_DEL_FRIEND_RESPONSE = 550;</code>
+     */
+    CID_BUDDY_DEL_FRIEND_RESPONSE(30, 550),
     ;
 
     /**
@@ -712,6 +824,66 @@ public final class IMBaseDefine {
      * </pre>
      */
     public static final int CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY_VALUE = 533;
+    /**
+     * <code>CID_BUDDY_ADD_FRIEND_REQUEST = 535;</code>
+     *
+     * <pre>
+     *添加好友
+     * </pre>
+     */
+    public static final int CID_BUDDY_ADD_FRIEND_REQUEST_VALUE = 535;
+    /**
+     * <code>CID_BUDDY_ADD_FRIEND_RESPONSE = 536;</code>
+     */
+    public static final int CID_BUDDY_ADD_FRIEND_RESPONSE_VALUE = 536;
+    /**
+     * <code>CID_BUDDY_SEARCH_USER_REQUEST = 537;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    public static final int CID_BUDDY_SEARCH_USER_REQUEST_VALUE = 537;
+    /**
+     * <code>CID_BUDDY_SEARCH_USER_RESPONSE = 544;</code>
+     */
+    public static final int CID_BUDDY_SEARCH_USER_RESPONSE_VALUE = 544;
+    /**
+     * <code>CID_BUDDY_GET_FRIEND_LIST_REQUEST = 545;</code>
+     *
+     * <pre>
+     *获取好友列表
+     * </pre>
+     */
+    public static final int CID_BUDDY_GET_FRIEND_LIST_REQUEST_VALUE = 545;
+    /**
+     * <code>CID_BUDDY_GET_FRIEND_LIST_RESPONSE = 546;</code>
+     */
+    public static final int CID_BUDDY_GET_FRIEND_LIST_RESPONSE_VALUE = 546;
+    /**
+     * <code>CID_BUDDY_AGREE_ADD_FRIEND_REQUEST = 547;</code>
+     *
+     * <pre>
+     *同意好友添加
+     * </pre>
+     */
+    public static final int CID_BUDDY_AGREE_ADD_FRIEND_REQUEST_VALUE = 547;
+    /**
+     * <code>CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE = 548;</code>
+     */
+    public static final int CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE_VALUE = 548;
+    /**
+     * <code>CID_BUDDY_DEL_FRIEND_REQUEST = 549;</code>
+     *
+     * <pre>
+     *删除好友
+     * </pre>
+     */
+    public static final int CID_BUDDY_DEL_FRIEND_REQUEST_VALUE = 549;
+    /**
+     * <code>CID_BUDDY_DEL_FRIEND_RESPONSE = 550;</code>
+     */
+    public static final int CID_BUDDY_DEL_FRIEND_RESPONSE_VALUE = 550;
 
 
     public final int getNumber() { return value; }
@@ -739,6 +911,16 @@ public final class IMBaseDefine {
         case 531: return CID_BUDDY_LIST_CHANGE_SIGN_INFO_REQUEST;
         case 532: return CID_BUDDY_LIST_CHANGE_SIGN_INFO_RESPONSE;
         case 533: return CID_BUDDY_LIST_SIGN_INFO_CHANGED_NOTIFY;
+        case 535: return CID_BUDDY_ADD_FRIEND_REQUEST;
+        case 536: return CID_BUDDY_ADD_FRIEND_RESPONSE;
+        case 537: return CID_BUDDY_SEARCH_USER_REQUEST;
+        case 544: return CID_BUDDY_SEARCH_USER_RESPONSE;
+        case 545: return CID_BUDDY_GET_FRIEND_LIST_REQUEST;
+        case 546: return CID_BUDDY_GET_FRIEND_LIST_RESPONSE;
+        case 547: return CID_BUDDY_AGREE_ADD_FRIEND_REQUEST;
+        case 548: return CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE;
+        case 549: return CID_BUDDY_DEL_FRIEND_REQUEST;
+        case 550: return CID_BUDDY_DEL_FRIEND_RESPONSE;
         default: return null;
       }
     }
@@ -2672,6 +2854,226 @@ public final class IMBaseDefine {
     }
 
     // @@protoc_insertion_point(enum_scope:IM.BaseDefine.DepartmentStatusType)
+  }
+
+  /**
+   * Protobuf enum {@code IM.BaseDefine.AddFriendResourceType}
+   *
+   * <pre>
+   *好友添加来源
+   * </pre>
+   */
+  public enum AddFriendResourceType
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>SEARCH_RES = 1;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    SEARCH_RES(0, 1),
+    /**
+     * <code>QRCODE_RES = 2;</code>
+     *
+     * <pre>
+     *二维码
+     * </pre>
+     */
+    QRCODE_RES(1, 2),
+    /**
+     * <code>GROUP_RES = 3;</code>
+     *
+     * <pre>
+     *群聊添加
+     * </pre>
+     */
+    GROUP_RES(2, 3),
+    /**
+     * <code>INPUT_RES = 4;</code>
+     *
+     * <pre>
+     *输入邮件地址添加
+     * </pre>
+     */
+    INPUT_RES(3, 4),
+    ;
+
+    /**
+     * <code>SEARCH_RES = 1;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    public static final int SEARCH_RES_VALUE = 1;
+    /**
+     * <code>QRCODE_RES = 2;</code>
+     *
+     * <pre>
+     *二维码
+     * </pre>
+     */
+    public static final int QRCODE_RES_VALUE = 2;
+    /**
+     * <code>GROUP_RES = 3;</code>
+     *
+     * <pre>
+     *群聊添加
+     * </pre>
+     */
+    public static final int GROUP_RES_VALUE = 3;
+    /**
+     * <code>INPUT_RES = 4;</code>
+     *
+     * <pre>
+     *输入邮件地址添加
+     * </pre>
+     */
+    public static final int INPUT_RES_VALUE = 4;
+
+
+    public final int getNumber() { return value; }
+
+    public static AddFriendResourceType valueOf(int value) {
+      switch (value) {
+        case 1: return SEARCH_RES;
+        case 2: return QRCODE_RES;
+        case 3: return GROUP_RES;
+        case 4: return INPUT_RES;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<AddFriendResourceType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<AddFriendResourceType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<AddFriendResourceType>() {
+            public AddFriendResourceType findValueByNumber(int number) {
+              return AddFriendResourceType.valueOf(number);
+            }
+          };
+
+    private final int value;
+
+    private AddFriendResourceType(int index, int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.AddFriendResourceType)
+  }
+
+  /**
+   * Protobuf enum {@code IM.BaseDefine.SearchUsersType}
+   *
+   * <pre>
+   *搜索好友类型
+   * </pre>
+   */
+  public enum SearchUsersType
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>ALL_SEARCH = 1;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    ALL_SEARCH(0, 1),
+    /**
+     * <code>EMAIL_SEARCH = 2;</code>
+     *
+     * <pre>
+     *email地址
+     * </pre>
+     */
+    EMAIL_SEARCH(1, 2),
+    /**
+     * <code>REAL_NAME_SEARCH = 3;</code>
+     *
+     * <pre>
+     *真实姓名
+     * </pre>
+     */
+    REAL_NAME_SEARCH(2, 3),
+    /**
+     * <code>INPUT_SEARCH = 4;</code>
+     *
+     * <pre>
+     *准确邮件地址
+     * </pre>
+     */
+    INPUT_SEARCH(3, 4),
+    ;
+
+    /**
+     * <code>ALL_SEARCH = 1;</code>
+     *
+     * <pre>
+     *搜索
+     * </pre>
+     */
+    public static final int ALL_SEARCH_VALUE = 1;
+    /**
+     * <code>EMAIL_SEARCH = 2;</code>
+     *
+     * <pre>
+     *email地址
+     * </pre>
+     */
+    public static final int EMAIL_SEARCH_VALUE = 2;
+    /**
+     * <code>REAL_NAME_SEARCH = 3;</code>
+     *
+     * <pre>
+     *真实姓名
+     * </pre>
+     */
+    public static final int REAL_NAME_SEARCH_VALUE = 3;
+    /**
+     * <code>INPUT_SEARCH = 4;</code>
+     *
+     * <pre>
+     *准确邮件地址
+     * </pre>
+     */
+    public static final int INPUT_SEARCH_VALUE = 4;
+
+
+    public final int getNumber() { return value; }
+
+    public static SearchUsersType valueOf(int value) {
+      switch (value) {
+        case 1: return ALL_SEARCH;
+        case 2: return EMAIL_SEARCH;
+        case 3: return REAL_NAME_SEARCH;
+        case 4: return INPUT_SEARCH;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<SearchUsersType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<SearchUsersType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<SearchUsersType>() {
+            public SearchUsersType findValueByNumber(int number) {
+              return SearchUsersType.valueOf(number);
+            }
+          };
+
+    private final int value;
+
+    private SearchUsersType(int index, int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.SearchUsersType)
   }
 
   public interface IpAddrOrBuilder extends
@@ -5170,6 +5572,1169 @@ public final class IMBaseDefine {
     }
 
     // @@protoc_insertion_point(class_scope:IM.BaseDefine.UserInfo)
+  }
+
+  public interface FriendInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.BaseDefine.FriendInfo)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 friend_id = 2;</code>
+     *
+     * <pre>
+     * 好友id
+     * </pre>
+     */
+    boolean hasFriendId();
+    /**
+     * <code>required uint32 friend_id = 2;</code>
+     *
+     * <pre>
+     * 好友id
+     * </pre>
+     */
+    int getFriendId();
+
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    boolean hasNick();
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
+
+    /**
+     * <code>required uint32 join_time = 4;</code>
+     *
+     * <pre>
+     *加好友时间
+     * </pre>
+     */
+    boolean hasJoinTime();
+    /**
+     * <code>required uint32 join_time = 4;</code>
+     *
+     * <pre>
+     *加好友时间
+     * </pre>
+     */
+    int getJoinTime();
+
+    /**
+     * <code>required uint32 join_type = 5;</code>
+     *
+     * <pre>
+     *通过什么方式添加好友,搜索,邮箱名,二维码等
+     * </pre>
+     */
+    boolean hasJoinType();
+    /**
+     * <code>required uint32 join_type = 5;</code>
+     *
+     * <pre>
+     *通过什么方式添加好友,搜索,邮箱名,二维码等
+     * </pre>
+     */
+    int getJoinType();
+
+    /**
+     * <code>required uint32 last_msg_time = 6;</code>
+     *
+     * <pre>
+     *最后发送消息时间
+     * </pre>
+     */
+    boolean hasLastMsgTime();
+    /**
+     * <code>required uint32 last_msg_time = 6;</code>
+     *
+     * <pre>
+     *最后发送消息时间
+     * </pre>
+     */
+    int getLastMsgTime();
+
+    /**
+     * <code>required uint32 status = 7;</code>
+     *
+     * <pre>
+     *0,申请中,1已添加,2拒绝
+     * </pre>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required uint32 status = 7;</code>
+     *
+     * <pre>
+     *0,申请中,1已添加,2拒绝
+     * </pre>
+     */
+    int getStatus();
+  }
+  /**
+   * Protobuf type {@code IM.BaseDefine.FriendInfo}
+   */
+  public static final class FriendInfo extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.BaseDefine.FriendInfo)
+      FriendInfoOrBuilder {
+    // Use FriendInfo.newBuilder() to construct.
+    private FriendInfo(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private FriendInfo(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final FriendInfo defaultInstance;
+    public static FriendInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public FriendInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private FriendInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              friendId_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              nick_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              joinTime_ = input.readUInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              joinType_ = input.readUInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              lastMsgTime_ = input.readUInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              status_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<FriendInfo> PARSER =
+        new com.google.protobuf.AbstractParser<FriendInfo>() {
+      public FriendInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FriendInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FriendInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int FRIEND_ID_FIELD_NUMBER = 2;
+    private int friendId_;
+    /**
+     * <code>required uint32 friend_id = 2;</code>
+     *
+     * <pre>
+     * 好友id
+     * </pre>
+     */
+    public boolean hasFriendId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 friend_id = 2;</code>
+     *
+     * <pre>
+     * 好友id
+     * </pre>
+     */
+    public int getFriendId() {
+      return friendId_;
+    }
+
+    public static final int NICK_FIELD_NUMBER = 3;
+    private java.lang.Object nick_;
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    public boolean hasNick() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 3;</code>
+     *
+     * <pre>
+     *昵称
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int JOIN_TIME_FIELD_NUMBER = 4;
+    private int joinTime_;
+    /**
+     * <code>required uint32 join_time = 4;</code>
+     *
+     * <pre>
+     *加好友时间
+     * </pre>
+     */
+    public boolean hasJoinTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 join_time = 4;</code>
+     *
+     * <pre>
+     *加好友时间
+     * </pre>
+     */
+    public int getJoinTime() {
+      return joinTime_;
+    }
+
+    public static final int JOIN_TYPE_FIELD_NUMBER = 5;
+    private int joinType_;
+    /**
+     * <code>required uint32 join_type = 5;</code>
+     *
+     * <pre>
+     *通过什么方式添加好友,搜索,邮箱名,二维码等
+     * </pre>
+     */
+    public boolean hasJoinType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required uint32 join_type = 5;</code>
+     *
+     * <pre>
+     *通过什么方式添加好友,搜索,邮箱名,二维码等
+     * </pre>
+     */
+    public int getJoinType() {
+      return joinType_;
+    }
+
+    public static final int LAST_MSG_TIME_FIELD_NUMBER = 6;
+    private int lastMsgTime_;
+    /**
+     * <code>required uint32 last_msg_time = 6;</code>
+     *
+     * <pre>
+     *最后发送消息时间
+     * </pre>
+     */
+    public boolean hasLastMsgTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required uint32 last_msg_time = 6;</code>
+     *
+     * <pre>
+     *最后发送消息时间
+     * </pre>
+     */
+    public int getLastMsgTime() {
+      return lastMsgTime_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 7;
+    private int status_;
+    /**
+     * <code>required uint32 status = 7;</code>
+     *
+     * <pre>
+     *0,申请中,1已添加,2拒绝
+     * </pre>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required uint32 status = 7;</code>
+     *
+     * <pre>
+     *0,申请中,1已添加,2拒绝
+     * </pre>
+     */
+    public int getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      friendId_ = 0;
+      nick_ = "";
+      joinTime_ = 0;
+      joinType_ = 0;
+      lastMsgTime_ = 0;
+      status_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFriendId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNick()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasJoinTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasJoinType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLastMsgTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, friendId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNickBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, joinTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(5, joinType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt32(6, lastMsgTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt32(7, status_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, friendId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getNickBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, joinTime_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, joinType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, lastMsgTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, status_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.BaseDefine.FriendInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.BaseDefine.FriendInfo)
+        com.mogujie.tt.protobuf.IMBaseDefine.FriendInfoOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        friendId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nick_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        joinTime_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        joinType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        lastMsgTime_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        status_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo build() {
+        com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo buildPartial() {
+        com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo result = new com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.friendId_ = friendId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.nick_ = nick_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.joinTime_ = joinTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.joinType_ = joinType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.lastMsgTime_ = lastMsgTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo other) {
+        if (other == com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasFriendId()) {
+          setFriendId(other.getFriendId());
+        }
+        if (other.hasNick()) {
+          bitField0_ |= 0x00000004;
+          nick_ = other.nick_;
+          
+        }
+        if (other.hasJoinTime()) {
+          setJoinTime(other.getJoinTime());
+        }
+        if (other.hasJoinType()) {
+          setJoinType(other.getJoinType());
+        }
+        if (other.hasLastMsgTime()) {
+          setLastMsgTime(other.getLastMsgTime());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasFriendId()) {
+          
+          return false;
+        }
+        if (!hasNick()) {
+          
+          return false;
+        }
+        if (!hasJoinTime()) {
+          
+          return false;
+        }
+        if (!hasJoinType()) {
+          
+          return false;
+        }
+        if (!hasLastMsgTime()) {
+          
+          return false;
+        }
+        if (!hasStatus()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMBaseDefine.FriendInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int friendId_ ;
+      /**
+       * <code>required uint32 friend_id = 2;</code>
+       *
+       * <pre>
+       * 好友id
+       * </pre>
+       */
+      public boolean hasFriendId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 friend_id = 2;</code>
+       *
+       * <pre>
+       * 好友id
+       * </pre>
+       */
+      public int getFriendId() {
+        return friendId_;
+      }
+      /**
+       * <code>required uint32 friend_id = 2;</code>
+       *
+       * <pre>
+       * 好友id
+       * </pre>
+       */
+      public Builder setFriendId(int value) {
+        bitField0_ |= 0x00000002;
+        friendId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 friend_id = 2;</code>
+       *
+       * <pre>
+       * 好友id
+       * </pre>
+       */
+      public Builder clearFriendId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        friendId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object nick_ = "";
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public boolean hasNick() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        nick_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public Builder clearNick() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nick_ = getDefaultInstance().getNick();
+        
+        return this;
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       *
+       * <pre>
+       *昵称
+       * </pre>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        nick_ = value;
+        
+        return this;
+      }
+
+      private int joinTime_ ;
+      /**
+       * <code>required uint32 join_time = 4;</code>
+       *
+       * <pre>
+       *加好友时间
+       * </pre>
+       */
+      public boolean hasJoinTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 join_time = 4;</code>
+       *
+       * <pre>
+       *加好友时间
+       * </pre>
+       */
+      public int getJoinTime() {
+        return joinTime_;
+      }
+      /**
+       * <code>required uint32 join_time = 4;</code>
+       *
+       * <pre>
+       *加好友时间
+       * </pre>
+       */
+      public Builder setJoinTime(int value) {
+        bitField0_ |= 0x00000008;
+        joinTime_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 join_time = 4;</code>
+       *
+       * <pre>
+       *加好友时间
+       * </pre>
+       */
+      public Builder clearJoinTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        joinTime_ = 0;
+        
+        return this;
+      }
+
+      private int joinType_ ;
+      /**
+       * <code>required uint32 join_type = 5;</code>
+       *
+       * <pre>
+       *通过什么方式添加好友,搜索,邮箱名,二维码等
+       * </pre>
+       */
+      public boolean hasJoinType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required uint32 join_type = 5;</code>
+       *
+       * <pre>
+       *通过什么方式添加好友,搜索,邮箱名,二维码等
+       * </pre>
+       */
+      public int getJoinType() {
+        return joinType_;
+      }
+      /**
+       * <code>required uint32 join_type = 5;</code>
+       *
+       * <pre>
+       *通过什么方式添加好友,搜索,邮箱名,二维码等
+       * </pre>
+       */
+      public Builder setJoinType(int value) {
+        bitField0_ |= 0x00000010;
+        joinType_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 join_type = 5;</code>
+       *
+       * <pre>
+       *通过什么方式添加好友,搜索,邮箱名,二维码等
+       * </pre>
+       */
+      public Builder clearJoinType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        joinType_ = 0;
+        
+        return this;
+      }
+
+      private int lastMsgTime_ ;
+      /**
+       * <code>required uint32 last_msg_time = 6;</code>
+       *
+       * <pre>
+       *最后发送消息时间
+       * </pre>
+       */
+      public boolean hasLastMsgTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required uint32 last_msg_time = 6;</code>
+       *
+       * <pre>
+       *最后发送消息时间
+       * </pre>
+       */
+      public int getLastMsgTime() {
+        return lastMsgTime_;
+      }
+      /**
+       * <code>required uint32 last_msg_time = 6;</code>
+       *
+       * <pre>
+       *最后发送消息时间
+       * </pre>
+       */
+      public Builder setLastMsgTime(int value) {
+        bitField0_ |= 0x00000020;
+        lastMsgTime_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 last_msg_time = 6;</code>
+       *
+       * <pre>
+       *最后发送消息时间
+       * </pre>
+       */
+      public Builder clearLastMsgTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        lastMsgTime_ = 0;
+        
+        return this;
+      }
+
+      private int status_ ;
+      /**
+       * <code>required uint32 status = 7;</code>
+       *
+       * <pre>
+       *0,申请中,1已添加,2拒绝
+       * </pre>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required uint32 status = 7;</code>
+       *
+       * <pre>
+       *0,申请中,1已添加,2拒绝
+       * </pre>
+       */
+      public int getStatus() {
+        return status_;
+      }
+      /**
+       * <code>required uint32 status = 7;</code>
+       *
+       * <pre>
+       *0,申请中,1已添加,2拒绝
+       * </pre>
+       */
+      public Builder setStatus(int value) {
+        bitField0_ |= 0x00000040;
+        status_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 status = 7;</code>
+       *
+       * <pre>
+       *0,申请中,1已添加,2拒绝
+       * </pre>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        status_ = 0;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.BaseDefine.FriendInfo)
+    }
+
+    static {
+      defaultInstance = new FriendInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.BaseDefine.FriendInfo)
   }
 
   public interface ContactSessionInfoOrBuilder extends

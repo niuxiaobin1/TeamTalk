@@ -1,27 +1,37 @@
 package com.mogujie.tt.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.R;
-import com.mogujie.tt.imservice.manager.IMLoginManager;
+import com.mogujie.tt.imservice.event.LoginEvent;
+import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.CommonUtils;
+import com.mogujie.tt.utils.IMUIHelper;
+import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import de.greenrobot.event.EventBus;
 
 public class SignUpActivity extends TTBaseActivity {
 
@@ -46,7 +56,7 @@ public class SignUpActivity extends TTBaseActivity {
     private int countDownNum=60;
 
     private IMService imService;
-
+    private Logger logger = Logger.getLogger(SignUpActivity.class);
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onServiceDisconnected() {
@@ -89,7 +99,7 @@ public class SignUpActivity extends TTBaseActivity {
         codeInputLayout = findViewById(R.id.codeInputLayout);
         pswInputLayout = findViewById(R.id.pswInputLayout);
         confirmPswInputLayout = findViewById(R.id.confirmPswInputLayout);
-
+        EventBus.getDefault().register(this);
         isForgetPassWord=getIntent().getBooleanExtra(ISFORGETPASSWORD,false);
         if (isForgetPassWord){
             titleTv.setText(getResources().getString(R.string.app_forgetPassword));
@@ -141,7 +151,19 @@ public class SignUpActivity extends TTBaseActivity {
     }
 
     private void signUp(){
+        String account = mUserAccountEt.getText().toString().trim();
+        String code = userVerifiCodeEt.getText().toString().trim();
+        String psw = userPswEt.getText().toString().trim();
+        String confirmPsw = userConfirmPswEt.getText().toString().trim();
+        if (TextUtils.isEmpty(account)||TextUtils.isEmpty(code)||TextUtils.isEmpty(psw)) {
+            return;
+        }
+        if (!psw.equals(confirmPsw)){
+            ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
+            return;
+        }
 
+        imService.getLoginManager().register(account,psw,code);
     }
 
 
@@ -213,9 +235,53 @@ public class SignUpActivity extends TTBaseActivity {
         }
     }
 
+
+    public void onEventMainThread(LoginEvent event) {
+        switch (event) {
+            case REGISTER_INNER_FAILED:
+            case REGISTER_FAILED:
+                String errorTip = getString(IMUIHelper.getLoginErrorTip(event));
+                Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    public void onEventMainThread(IMLogin.IMRegGetCodeRsp imRegGetCodeRsp) {
+        logger.e("sendMsg#getCode---"+imRegGetCodeRsp.getResultString());
+        if (imRegGetCodeRsp.getResultCode()!=0){
+            ToastUtil.toastShortMessage(imRegGetCodeRsp.getResultString());
+            return;
+        }
+        countDownNum=60;
+        timer=new Timer();
+        timer.schedule(new CountDownTask(),100,1000);
+        sendCodeTv.setEnabled(false);
+        userVerifiCodeEt.setText(imRegGetCodeRsp.getCode());
+        ToastUtil.toastShortMessage(getResources().getString(R.string.app_code_sended));
+    }
+
+    public void onEventMainThread(IMLogin.IMRegUserRsp imRegUserRsp) {
+        logger.e("register#"+imRegUserRsp.getResultString());
+        Intent it=new Intent();
+        it.putExtra("data",imRegUserRsp);
+        setResult(Activity.RESULT_OK,it);
+        finish();
+    }
+
+    public void onEventMainThread(SocketEvent event) {
+        switch (event) {
+            case CONNECT_MSG_SERVER_FAILED:
+            case REQ_MSG_SERVER_ADDRS_FAILED:
+                String errorTip = getString(IMUIHelper.getSocketErrorTip(event));
+                Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         if (timer!=null){
             timer.cancel();
             timer=null;

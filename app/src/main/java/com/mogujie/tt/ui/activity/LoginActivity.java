@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Html;
 import android.text.TextUtils;
@@ -24,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.UrlConstant;
+import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.SocketEvent;
@@ -37,6 +40,7 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
 
 import de.greenrobot.event.EventBus;
 
@@ -466,6 +470,24 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
             Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             intent.putExtra(SignUpActivity.ISFORGETPASSWORD, true);
             startActivityForResult(intent, SIGN_UP_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SIGN_UP_CODE) {
+                IMLogin.IMRegUserRsp imRegUserRsp = (IMLogin.IMRegUserRsp) data.getSerializableExtra("data");
+                if (imRegUserRsp != null) {
+                    try {
+                        mNameView.setText(imRegUserRsp.getEmail());
+                        ToastUtil.toastShortMessage(imRegUserRsp.getResultString());
+                    } catch (Exception e) {
+                    }
+
+                }
+            }
         }
     }
 }

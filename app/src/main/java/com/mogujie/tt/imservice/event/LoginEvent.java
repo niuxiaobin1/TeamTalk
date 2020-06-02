@@ -10,6 +10,8 @@ public enum LoginEvent {
     // 网络登陆验证成功
     LOGIN_OK,
     LOGIN_INNER_FAILED,
+    REGISTER_INNER_FAILED,
+    REGISTER_FAILED,
     LOGIN_AUTH_FAILED,
     LOGIN_OUT,
 

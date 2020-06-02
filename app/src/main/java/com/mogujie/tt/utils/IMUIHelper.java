@@ -78,6 +78,10 @@ public class IMUIHelper {
                 return R.string.login_error_general_failed;
             case LOGIN_INNER_FAILED:
                 return R.string.login_error_unexpected;
+            case REGISTER_INNER_FAILED:
+                return R.string.sendMsg_error_unexpected;
+            case REGISTER_FAILED:
+                return R.string.register_error_unexpected;
             default :
                 return  R.string.login_error_unexpected;
         }

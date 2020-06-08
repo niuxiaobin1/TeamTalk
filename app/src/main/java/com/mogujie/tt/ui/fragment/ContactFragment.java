@@ -8,7 +8,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,9 +18,9 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
-import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.imservice.manager.IMContactManager;
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.activity.NewFriendsActivity;
 import com.mogujie.tt.ui.adapter.ContactAdapter;
 import com.mogujie.tt.ui.adapter.DeptAdapter;

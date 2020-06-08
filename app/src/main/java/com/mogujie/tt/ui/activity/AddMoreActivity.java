@@ -143,9 +143,9 @@ public class AddMoreActivity extends TTBaseActivity {
         if (TextUtils.isEmpty(account)) {
             return;
         }
-//        if (imService!=null){
-//            imService.getContactManager().findContact()
-//        }
+        if (imService!=null){
+            imService.getContactManager().reqSearchUsers(account);
+        }
 
     }
 }

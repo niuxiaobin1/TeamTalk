@@ -511,7 +511,6 @@ public class IMLoginManager extends IMManager {
             IMRegister();
         } else if(isForgetPsw){
             isForgetPsw=false;
-
         }else {
             IMLogin();
         }

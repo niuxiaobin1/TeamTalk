@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -428,6 +429,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
     }
 
     private void onLoginSuccess() {
+        Log.e("nxb","onLoginSuccess");
         logger.i("login#onLoginSuccess");
         loginSuccess = true;
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

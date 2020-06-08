@@ -32,12 +32,14 @@ public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig departmentDaoConfig;
     private final DaoConfig userDaoConfig;
+    private final DaoConfig applyUserDaoConfig;
     private final DaoConfig groupDaoConfig;
     private final DaoConfig messageDaoConfig;
     private final DaoConfig sessionDaoConfig;
 
     private final DepartmentDao departmentDao;
     private final UserDao userDao;
+    private final ApplyUserDao applyUserDao;
     private final GroupDao groupDao;
     private final MessageDao messageDao;
     private final SessionDao sessionDao;
@@ -52,6 +54,9 @@ public class DaoSession extends AbstractDaoSession {
         userDaoConfig = daoConfigMap.get(UserDao.class).clone();
         userDaoConfig.initIdentityScope(type);
 
+        applyUserDaoConfig = daoConfigMap.get(ApplyUserDao.class).clone();
+        applyUserDaoConfig.initIdentityScope(type);
+
         groupDaoConfig = daoConfigMap.get(GroupDao.class).clone();
         groupDaoConfig.initIdentityScope(type);
 
@@ -63,12 +68,14 @@ public class DaoSession extends AbstractDaoSession {
 
         departmentDao = new DepartmentDao(departmentDaoConfig, this);
         userDao = new UserDao(userDaoConfig, this);
+        applyUserDao = new ApplyUserDao(applyUserDaoConfig, this);
         groupDao = new GroupDao(groupDaoConfig, this);
         messageDao = new MessageDao(messageDaoConfig, this);
         sessionDao = new SessionDao(sessionDaoConfig, this);
 
         registerDao(DepartmentEntity.class, departmentDao);
         registerDao(UserEntity.class, userDao);
+        registerDao(UserEntity.class, applyUserDao);
         registerDao(GroupEntity.class, groupDao);
         registerDao(MessageEntity.class, messageDao);
         registerDao(SessionEntity.class, sessionDao);
@@ -88,6 +95,9 @@ public class DaoSession extends AbstractDaoSession {
 
     public UserDao getUserDao() {
         return userDao;
+    }
+    public ApplyUserDao getApplyUserDao() {
+        return applyUserDao;
     }
 
     public GroupDao getGroupDao() {

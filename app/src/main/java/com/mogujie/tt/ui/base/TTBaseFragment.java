@@ -56,6 +56,13 @@ public abstract class TTBaseFragment extends Fragment {
         topRightTitleTxt.setVisibility(View.INVISIBLE);
         topSearchEdt.setVisibility(View.GONE);
 
+        topLeftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

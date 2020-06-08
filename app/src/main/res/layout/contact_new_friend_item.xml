@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:focusable="true"
+    android:paddingBottom="8dp">
+
+    <com.mogujie.tt.ui.widget.IMBaseImageView
+        android:id="@+id/avatar"
+        android:layout_width="51mm"
+        android:layout_height="51mm"
+        android:src="@drawable/tt_round_bg"
+        android:layout_marginLeft="10dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_33"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:maxLines="3"
+            android:textColor="@color/text_gray1"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:textAllCaps="true"
+        android:id="@+id/agree"
+        android:layout_width="61mm"
+        android:layout_height="28mm"
+        android:background="@drawable/shape_bg_f2_corner4"
+        android:textColor="@color/color_48B464"
+        android:textSize="14sp"
+        android:layout_marginRight="12dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

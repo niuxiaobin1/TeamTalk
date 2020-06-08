@@ -15,6 +15,8 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.protobuf.IMBaseDefine;
+import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.ui.activity.EditAliasActivity;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
@@ -35,6 +37,7 @@ public class UserInfoFragment extends MainFragment {
     private IMService imService;
     private UserEntity currentUser;
     private int currentUserId;
+    private IMBaseDefine.UserInfo userInfo;
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
@@ -47,11 +50,17 @@ public class UserInfoFragment extends MainFragment {
             }
 
             currentUserId = getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID, 0);
-            if (currentUserId == 0) {
+            userInfo = (IMBaseDefine.UserInfo) getActivity().getIntent().getSerializableExtra(IntentConstant.KEY_USER_INFO);
+
+            if (currentUserId == 0 && userInfo == null) {
                 logger.e("detail#intent params error!!");
                 return;
             }
-            currentUser = imService.getContactManager().findContact(currentUserId);
+            if (currentUserId == 0) {
+                currentUser = ProtoBuf2JavaBean.getUserEntity(userInfo);
+            } else {
+                currentUser = imService.getContactManager().findContact(currentUserId);
+            }
             if (currentUser != null) {
                 initBaseProfile();
                 initDetailProfile();
@@ -118,6 +127,13 @@ public class UserInfoFragment extends MainFragment {
         setTopTitle(getActivity().getString(R.string.page_user_detail));
         setTopLeftButton(R.drawable.tt_top_back);
         setTopLeftText(getResources().getString(R.string.top_left_back));
+
+        if (getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID, 0) == 0) {
+            curView.findViewById(R.id.lin_alisa).setVisibility(View.GONE);
+            curView.findViewById(R.id.lin_pin).setVisibility(View.GONE);
+            curView.findViewById(R.id.lin_delete).setVisibility(View.GONE);
+            ((TextView) curView.findViewById(R.id.chat_btn)).setText("Add");
+        }
     }
 
     @Override
@@ -171,8 +187,13 @@ public class UserInfoFragment extends MainFragment {
             chatBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    IMUIHelper.openChatActivity(getActivity(), currentUser.getSessionKey());
-                    getActivity().finish();
+                    if (getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID, 0) == 0) {
+                        imService.getContactManager().reqAddUsers(currentUser.getPeerId(),"");
+                    } else {
+                        IMUIHelper.openChatActivity(getActivity(), currentUser.getSessionKey());
+                        getActivity().finish();
+                    }
+
                 }
             });
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mogujie.tt.DB.dao.ApplyUserDao;
 import com.mogujie.tt.DB.dao.DaoMaster;
 import com.mogujie.tt.DB.dao.DaoSession;
 import com.mogujie.tt.DB.dao.DepartmentDao;
@@ -167,6 +168,11 @@ public class DBInterface {
         List<UserEntity> result = dao.loadAll();
         return result;
     }
+    public List<UserEntity> loadAllApplyUsers(){
+        ApplyUserDao dao = openReadableDb().getApplyUserDao();
+        List<UserEntity> result = dao.loadAll();
+        return result;
+    }
 
     public UserEntity getByUserName(String uName){
         UserDao dao = openReadableDb().getUserDao();
@@ -192,6 +198,13 @@ public class DBInterface {
         }
         UserDao userDao =  openWritableDb().getUserDao();
         userDao.insertOrReplaceInTx(entityList);
+    }
+    public void  batchInsertOrUpdateApplyUser(List<UserEntity> entityList){
+        if(entityList.size() <=0){
+            return ;
+        }
+        ApplyUserDao applyUserDao =  openWritableDb().getApplyUserDao();
+        applyUserDao.insertOrReplaceInTx(entityList);
     }
 
     /**update*/

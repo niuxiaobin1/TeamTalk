@@ -1,5 +1,7 @@
 package com.mogujie.tt.imservice.manager;
 
+import android.util.Log;
+
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
@@ -77,6 +79,26 @@ public class IMPacketDispatcher {
             case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_DEPARTMENT_RESPONSE_VALUE:
                 IMBuddy.IMDepartmentRsp departmentRsp = IMBuddy.IMDepartmentRsp.parseFrom(buffer);
                 IMContactManager.instance().onRepDepartment(departmentRsp);
+                return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_SEARCH_USER_RESPONSE_VALUE:
+                IMBuddy.IMSearchUsersRsp searchUsersRsp = IMBuddy.IMSearchUsersRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepSearchDetailUsers(searchUsersRsp);
+                return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_GET_FRIEND_LIST_RESPONSE_VALUE:
+                IMBuddy.IMGetFriendListRsp getFriendListRsp = IMBuddy.IMGetFriendListRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepFriendListUsers(getFriendListRsp);
+                return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_ADD_FRIEND_RESPONSE_VALUE:
+                IMBuddy.IMAddFriendRsp imAddFriendRsp = IMBuddy.IMAddFriendRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepAddFriendsUsers(imAddFriendRsp);
+                return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_GET_APPLY_LIST_RESPONSE_VALUE:
+                IMBuddy.IMGetApplyListRsp getApplyListRsp = IMBuddy.IMGetApplyListRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepApplyListUsers(getApplyListRsp);
+                return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE_VALUE:
+                IMBuddy.IMAgreeFriendRsp imAgreeFriendRsp = IMBuddy.IMAgreeFriendRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepApplyActionUsers(imAgreeFriendRsp);
                 return;
 
         }

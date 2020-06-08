@@ -10,7 +10,16 @@
         android:layout_height="10dp"
         android:background="@drawable/chat_top_line_bg" />
 
+
+    <ListView
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        android:id="@+id/new_friend_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
+        android:visibility="gone"
         android:id="@+id/empty_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

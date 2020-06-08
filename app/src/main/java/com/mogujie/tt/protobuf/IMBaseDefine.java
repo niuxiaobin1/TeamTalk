@@ -353,7 +353,7 @@ public final class IMBaseDefine {
     public static final int CID_LOGIN_REQ_USERLOGIN_VALUE = 259;
     /**
      * <code>CID_LOGIN_RES_USERLOGIN = 260;</code>
-     *2
+     *
      * <pre>
      * </pre>
      */
@@ -717,6 +717,18 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_DEL_FRIEND_RESPONSE = 550;</code>
      */
     CID_BUDDY_DEL_FRIEND_RESPONSE(30, 550),
+    /**
+     * <code>CID_BUDDY_GET_APPLY_LIST_REQUEST = 551;</code>
+     *
+     * <pre>
+     *获取申请列表
+     * </pre>
+     */
+    CID_BUDDY_GET_APPLY_LIST_REQUEST(31, 551),
+    /**
+     * <code>CID_BUDDY_GET_APPLY_LIST_RESPONSE = 552;</code>
+     */
+    CID_BUDDY_GET_APPLY_LIST_RESPONSE(32, 552),
     ;
 
     /**
@@ -884,6 +896,18 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_DEL_FRIEND_RESPONSE = 550;</code>
      */
     public static final int CID_BUDDY_DEL_FRIEND_RESPONSE_VALUE = 550;
+    /**
+     * <code>CID_BUDDY_GET_APPLY_LIST_REQUEST = 551;</code>
+     *
+     * <pre>
+     *获取申请列表
+     * </pre>
+     */
+    public static final int CID_BUDDY_GET_APPLY_LIST_REQUEST_VALUE = 551;
+    /**
+     * <code>CID_BUDDY_GET_APPLY_LIST_RESPONSE = 552;</code>
+     */
+    public static final int CID_BUDDY_GET_APPLY_LIST_RESPONSE_VALUE = 552;
 
 
     public final int getNumber() { return value; }
@@ -921,6 +945,8 @@ public final class IMBaseDefine {
         case 548: return CID_BUDDY_AGREE_ADD_FRIEND_RESPONSE;
         case 549: return CID_BUDDY_DEL_FRIEND_REQUEST;
         case 550: return CID_BUDDY_DEL_FRIEND_RESPONSE;
+        case 551: return CID_BUDDY_GET_APPLY_LIST_REQUEST;
+        case 552: return CID_BUDDY_GET_APPLY_LIST_RESPONSE;
         default: return null;
       }
     }

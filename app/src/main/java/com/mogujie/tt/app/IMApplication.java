@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.StrictMode;
 
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.utils.BackgroundTasks;
 import com.mogujie.tt.utils.ImageLoaderUtil;
 import com.mogujie.tt.utils.Logger;
 
@@ -33,6 +34,7 @@ public class IMApplication extends Application {
 		StrictMode.setVmPolicy(builder.build());
 		builder.detectFileUriExposure();
 		configUnits();
+		BackgroundTasks.initInstance();
 	}
 
 

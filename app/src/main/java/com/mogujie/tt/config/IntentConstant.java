@@ -14,6 +14,7 @@ public class IntentConstant {
     public static final String KEY_LOCATE_DEPARTMENT = "key_locate_department";
     public static final String KEY_SESSION_KEY = "chat_session_key";
     public static final String KEY_PEERID = "key_peerid";
+    public static final String KEY_USER_INFO = "key_userInfo";
 
     public static final String PREVIEW_TEXT_CONTENT = "content";
 

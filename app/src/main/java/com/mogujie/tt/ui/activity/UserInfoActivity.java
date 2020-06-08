@@ -1,9 +1,6 @@
 package com.mogujie.tt.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.base.TTBaseFragmentActivity;

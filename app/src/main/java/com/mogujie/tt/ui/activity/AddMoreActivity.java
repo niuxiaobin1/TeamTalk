@@ -15,16 +15,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.scanResult.ScanResultCallBack;
+import com.mogujie.tt.scanResult.ScanResultUtil;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.widget.QrcodeWindow;
+import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.SoftKeyBoardUtil;
+import com.mogujie.tt.utils.ToastUtil;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import de.greenrobot.event.EventBus;
 import permissions.dispatcher.NeedsPermission;
@@ -152,6 +158,13 @@ public class AddMoreActivity extends TTBaseActivity {
             }
         });
 
+        scan_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMoreActivityPermissionsDispatcher.openCameraScanWithPermissionCheck(AddMoreActivity.this);
+            }
+        });
+
     }
 
     @Override
@@ -194,7 +207,7 @@ public class AddMoreActivity extends TTBaseActivity {
     }
 
     @NeedsPermission({Manifest.permission.CAMERA})
-    public void openCameraScan(){
+    public void openCameraScan() {
         Intent intent = new Intent(AddMoreActivity.this, CaptureActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
@@ -202,7 +215,63 @@ public class AddMoreActivity extends TTBaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        BaseCommonActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        AddMoreActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    doResult(result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtil.toastShortMessage( "scan fail");
+                }
+            }
+        }
+    }
+
+    private void doResult(String result) {
+        ScanResultUtil.doResult(result, new ScanResultCallBack() {
+            @Override
+            public void addCallBack(String openId) {
+                if (imService != null) {
+                    imService.getContactManager().reqSearchUsers(openId);
+                }
+            }
+
+            @Override
+            public void payCallBack(String payCode) {
+
+            }
+
+            @Override
+            public void bScCallBack() {
+
+            }
+
+            @Override
+            public void cSbCallBack1(String url) {
+
+//                Intent it = new Intent(AddMoreActivity.this, WebViewActivity.class);
+//                it.putExtra(WebViewActivity.WEB_TITLE, "");
+//                it.putExtra(WebViewActivity.WEB_URL, url);
+//                startActivity(it);
+            }
+
+            @Override
+            public void cSbCallBack2(String order_sn) {
+//                Intent it = new Intent(AddMoreActivity.this, ScanPayActivity.class);
+//                it.putExtra(ScanPayActivity.ORDER, order_sn);
+//                startActivity(it);
+            }
+        });
+    }
 }

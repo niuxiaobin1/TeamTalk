@@ -26,7 +26,7 @@
         android:textSize="32sp" />
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:textColor="@color/color_33"
             android:textColorHint="@color/color_87"
             android:textSize="17sp" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <RelativeLayout
@@ -53,7 +53,7 @@
         android:layout_marginTop="23dp">
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/codeInputLayout"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
@@ -72,7 +72,7 @@
                 android:textColorHint="@color/color_87"
                 android:textSize="17sp" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <LinearLayout
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pswInputLayout"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
@@ -128,7 +128,7 @@
                 android:textColorHint="@color/color_87"
                 android:textSize="17sp" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -136,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPswInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:textColor="@color/color_33"
                 android:textColorHint="@color/color_87"
                 android:textSize="17sp" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>
 

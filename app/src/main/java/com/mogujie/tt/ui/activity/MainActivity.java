@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
@@ -24,7 +25,7 @@ import com.mogujie.tt.ui.widget.NaviTabButton;
 import de.greenrobot.event.EventBus;
 
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends FragmentActivity {
 	private Fragment[] mFragments;
 	private NaviTabButton[] mTabButtons;
 	private Logger logger = Logger.getLogger(MainActivity.class);

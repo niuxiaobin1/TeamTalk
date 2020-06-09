@@ -1,9 +1,7 @@
 package com.mogujie.tt.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.base.TTBaseActivity;

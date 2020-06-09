@@ -5,14 +5,14 @@
         <attr name="cover" format="reference" />
     </declare-styleable>
     
-    <declare-styleable name="MGWebImageView">
-        <attr name="shape">
-            <enum name="circle" value="0" />
-            <enum name="round_corner" value="1" />
-        </attr>
-        <attr name="cornerSize" format="dimension" />
-    </declare-styleable>
-    
+<!--    <declare-styleable name="MGWebImageView">-->
+<!--        <attr name="shape">-->
+<!--            <enum name="circle" value="0" />-->
+<!--            <enum name="round_corner" value="1" />-->
+<!--        </attr>-->
+<!--        <attr name="cornerSize" format="dimension" />-->
+<!--    </declare-styleable>-->
+<!--    -->
     <declare-styleable name="HorizontalScattered">
         <attr name="item_left_margin" format="dimension" />
         <attr name="item_top_margin" format="dimension" />

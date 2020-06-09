@@ -2,12 +2,9 @@
 package com.mogujie.tt.ui.base;
 
 import android.Manifest;
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.kongzue.dialog.v3.WaitDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mogujie.tt.R;
-import com.mogujie.tt.imservice.service.IMService;
-import com.mogujie.tt.ui.activity.SignUpActivity;
 import com.mogujie.tt.utils.ToastUtil;
 
 import permissions.dispatcher.OnNeverAskAgain;
@@ -32,7 +28,6 @@ import permissions.dispatcher.RuntimePermissions;
  * @Description
  * @date 2014-4-10
  */
-@RuntimePermissions
 public abstract class TTBaseActivity extends AppCompatActivity {
     protected ImageView topLeftBtn;
     protected ImageView topRightBtn;
@@ -148,12 +143,11 @@ public abstract class TTBaseActivity extends AppCompatActivity {
     }
 
     protected void showDialog(){
-        WaitDialog.show(TTBaseActivity.this, getResources()
-                .getString(R.string.transfer_wait));
+
     }
 
     protected void dismissDialog(){
-        WaitDialog.dismiss();
+
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)

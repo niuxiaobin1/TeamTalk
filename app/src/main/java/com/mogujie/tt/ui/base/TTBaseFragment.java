@@ -2,23 +2,19 @@ package com.mogujie.tt.ui.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mogujie.tools.ScreenTools;
+import androidx.fragment.app.Fragment;
+
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.activity.SearchActivity;
 import com.mogujie.tt.utils.Logger;
-import com.mogujie.tt.ui.widget.SearchEditText;
-import com.mogujie.tt.ui.widget.TopTabButton;
 
 public abstract class TTBaseFragment extends Fragment {
     protected ImageView topLeftBtn;

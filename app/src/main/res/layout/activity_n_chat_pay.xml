@@ -117,13 +117,13 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/transactionList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="15dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginRight="15dp"></androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>

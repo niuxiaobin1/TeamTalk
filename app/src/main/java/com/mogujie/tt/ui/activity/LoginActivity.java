@@ -1,8 +1,5 @@
 package com.mogujie.tt.ui.activity;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,9 +8,7 @@ import android.support.design.widget.TextInputLayout;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -26,20 +21,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.UrlConstant;
-import com.mogujie.tt.protobuf.IMLogin;
-import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
-import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.ui.base.TTBaseActivity;
+import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.ToastUtil;
 

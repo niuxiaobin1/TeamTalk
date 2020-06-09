@@ -1,5 +1,7 @@
 package com.mogujie.tt.ui.activity;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -12,14 +14,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
-import com.mogujie.tt.ui.widget.QRCodeDialog;
 import com.mogujie.tt.ui.widget.QrcodeWindow;
 import com.mogujie.tt.utils.SoftKeyBoardUtil;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 
+import de.greenrobot.event.EventBus;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+
+@RuntimePermissions
 public class AddMoreActivity extends TTBaseActivity {
     private final static int REQUEST_CODE = 01;
     private EditText mUserID;
@@ -30,16 +41,25 @@ public class AddMoreActivity extends TTBaseActivity {
     private EditText mAddWording;
     private LinearLayout mIdLayout;
     private LinearLayout scan_layout;
+    private UserEntity loginContact;
 
     private TextView mIdTv;
 
     private QrcodeWindow qrcodeWindow;
 
     private IMService imService;
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
             imService = imServiceConnector.getIMService();
+            if (imService == null) {
+                return;
+            }
+            if (!imService.getContactManager().isUserDataReady()) {
+                logger.i("detail#contact data are not ready");
+            } else {
+                init(imService);
+            }
         }
 
         @Override
@@ -51,7 +71,7 @@ public class AddMoreActivity extends TTBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater.from(this).inflate(R.layout.activity_add_more, topContentView);
-
+        EventBus.getDefault().register(this);
         imServiceConnector.connect(this);
         setTitle(getResources().getString(R.string.new_friend));
         setLeftButton(R.mipmap.ic_back_black);
@@ -66,8 +86,6 @@ public class AddMoreActivity extends TTBaseActivity {
         mIdLayout = findViewById(R.id.mIdLayout);
         scan_layout = findViewById(R.id.scan_layout);
 
-        mIdTv.setText(String.format(getResources().getString(R.string.self_profile_id1)
-                , new String("nchat@xinyi.com")));
 
         search_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +139,12 @@ public class AddMoreActivity extends TTBaseActivity {
             @Override
             public void onClick(View view) {
 
+                if (loginContact == null) {
+                    return;
+                }
+
                 if (qrcodeWindow == null) {
-                    qrcodeWindow = new QrcodeWindow(AddMoreActivity.this);
+                    qrcodeWindow = new QrcodeWindow(AddMoreActivity.this, loginContact);
                     qrcodeWindow.setAlignBackground(true);
                     qrcodeWindow.setPopupGravity(Gravity.BOTTOM);
                 }
@@ -136,16 +158,51 @@ public class AddMoreActivity extends TTBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         imServiceConnector.disconnect(AddMoreActivity.this);
+        EventBus.getDefault().unregister(this);
     }
 
-    private void queryUser(){
+    private void queryUser() {
         String account = searchEt.getText().toString();
         if (TextUtils.isEmpty(account)) {
             return;
         }
-        if (imService!=null){
+        if (imService != null) {
             imService.getContactManager().reqSearchUsers(account);
         }
 
     }
+
+
+    public void onEventMainThread(UserInfoEvent event) {
+        switch (event) {
+            case USER_INFO_OK:
+                init(imServiceConnector.getIMService());
+        }
+    }
+
+    private void init(IMService imService) {
+        if (imService == null) {
+            return;
+        }
+
+        loginContact = imService.getLoginManager().getLoginInfo();
+        if (loginContact == null) {
+            return;
+        }
+        mIdTv.setText(String.format(getResources().getString(R.string.self_profile_id1)
+                , loginContact.getEmail()));
+    }
+
+    @NeedsPermission({Manifest.permission.CAMERA})
+    public void openCameraScan(){
+        Intent intent = new Intent(AddMoreActivity.this, CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        BaseCommonActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
 }

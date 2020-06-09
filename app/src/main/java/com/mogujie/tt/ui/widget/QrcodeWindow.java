@@ -7,20 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.utils.CommonUtils;
 
 import razerdp.basepopup.BasePopupWindow;
 
 public class QrcodeWindow extends BasePopupWindow implements View.OnClickListener {
 
-    private ImageView imageView;
+    private IMBaseImageView imageView;
     private ImageView qrcode;
     private ImageView closeImg;
     private TextView nameTv;
     private TextView idTv;
 
-    public QrcodeWindow(Context context) {
+    public QrcodeWindow(Context context, UserEntity userEntity) {
         super(context);
 
         imageView = findViewById(R.id.imageView);
@@ -29,23 +31,14 @@ public class QrcodeWindow extends BasePopupWindow implements View.OnClickListene
         idTv = findViewById(R.id.idTv);
         closeImg = findViewById(R.id.closeImg);
 
-
-//        if (profile.getGender() == 0) {
-//            nameTv.setCompoundDrawablesWithIntrinsicBounds(null, null,
-//                    getContext().getResources().getDrawable(R.drawable.ic_male), null);
-//        } else {
-//            nameTv.setCompoundDrawablesWithIntrinsicBounds(null, null,
-//                    getContext().getResources().getDrawable(R.drawable.ic_felame), null);
-//        }
-
-//        int width = ScreenUtil.getScreenWidth(getContext());
-//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) qrcode.getLayoutParams();
-//        params.width = width * 3 / 5;
-//        params.height = width * 3 / 5;
-//        qrcode.setLayoutParams(params);
-//        qrcode.setImageBitmap(CommonUtils.createQRImage(
-//                GeneralConfig.FALG_NCAHT_ADD_FRIEND + profile.getIdentifier(),
-//                1000, 1000));
+        imageView.setDefaultImageRes(R.drawable.tt_round_bg);
+        imageView.setCorner(8);
+        imageView.setImageUrl(userEntity.getAvatar());
+        idTv.setText(userEntity.getEmail());
+        nameTv.setText(userEntity.getMainName());
+        qrcode.setImageBitmap(CommonUtils.createQRImage(
+                SysConstant.FALG_NCAHT_ADD_FRIEND + userEntity.getEmail(),
+                1000, 1000));
 
         closeImg.setOnClickListener(new View.OnClickListener() {
             @Override

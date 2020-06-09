@@ -56,4 +56,15 @@ public interface SysConstant {
 
     public static String UI_PARAMS = "ilive_ui_params";
     public static String SOFT_KEY_BOARD_HEIGHT = "soft_key_board_height";
+
+
+    public final static String INSTITUTION_NUMBER = "I0000000001";
+    public final static String API_KEY = "QER5HKWePAFeFRM7RD8wPjwdWAfWPQHR";
+    public final static String CUSTOM_ACCOUNT = "account";
+    public final static String CUSTOM_PHONE = "phone";
+    public final static String FALG_NCAHT_ADD_FRIEND = "Nchat_add";//
+    public final static String FALG_NCAHT_PAY_CODE = "Nchat_pay";
+    public final static String FALG_NCAHT_CODEPAY_START = "npay://";
+    public final static int DEFAULT_AUDIO_RECORD_MAX_TIME = 60;
+    public final static int DEFAULT_VIDEO_RECORD_MAX_TIME = 15;
 }

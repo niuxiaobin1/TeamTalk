@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="51mm">
 
-            <ImageView
+            <com.mogujie.tt.ui.widget.IMBaseImageView
                 android:id="@+id/imageView"
                 android:layout_width="51mm"
                 android:layout_height="51mm" />

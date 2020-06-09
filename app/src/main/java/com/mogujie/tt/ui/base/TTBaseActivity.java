@@ -1,6 +1,7 @@
 
 package com.mogujie.tt.ui.base;
 
+import android.Manifest;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -18,13 +19,20 @@ import android.widget.TextView;
 
 import com.kongzue.dialog.v3.WaitDialog;
 import com.mogujie.tt.R;
+import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.activity.SignUpActivity;
+import com.mogujie.tt.utils.ToastUtil;
+
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  * @author Nana
  * @Description
  * @date 2014-4-10
  */
+@RuntimePermissions
 public abstract class TTBaseActivity extends AppCompatActivity {
     protected ImageView topLeftBtn;
     protected ImageView topRightBtn;
@@ -34,6 +42,7 @@ public abstract class TTBaseActivity extends AppCompatActivity {
     protected ViewGroup topContentView;
     protected LinearLayout baseRoot;
     protected float x1, y1, x2, y2 = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,4 +155,27 @@ public abstract class TTBaseActivity extends AppCompatActivity {
     protected void dismissDialog(){
         WaitDialog.dismiss();
     }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    protected void showDeniedForCamera() {
+        ToastUtil.toastShortMessage(R.string.permission_camera_denied);
+    }
+
+    @OnNeverAskAgain(Manifest.permission.CAMERA)
+    protected void showNeverAskForCamera() {
+        ToastUtil.toastShortMessage(R.string.permission_camera_never_ask);
+    }
+
+    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    protected void showDeniedForReadStorage() {
+        ToastUtil.toastShortMessage(R.string.permission_read_storage_denied);
+    }
+
+    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    protected void showNeverAskForReadStorage() {
+        ToastUtil.toastShortMessage(R.string.permission_read_storage_never_ask);
+    }
+
+
+
 }

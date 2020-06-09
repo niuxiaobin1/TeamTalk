@@ -370,6 +370,7 @@ public class IMContactManager extends IMManager {
         if (imAgreeFriendRsp == null) {
             return;
         }
+        Log.e("nxb",imAgreeFriendRsp.getResultString());
 
     }
 

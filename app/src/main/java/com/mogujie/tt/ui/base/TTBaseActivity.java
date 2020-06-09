@@ -16,12 +16,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kongzue.dialog.v3.WaitDialog;
+import com.lzy.okgo.OkGo;
 import com.mogujie.tt.R;
 import com.mogujie.tt.utils.ToastUtil;
 
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.RuntimePermissions;
 
 /**
  * @author Nana
@@ -37,7 +38,6 @@ public abstract class TTBaseActivity extends AppCompatActivity {
     protected ViewGroup topContentView;
     protected LinearLayout baseRoot;
     protected float x1, y1, x2, y2 = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +142,13 @@ public abstract class TTBaseActivity extends AppCompatActivity {
         topBar.setBackgroundResource(resID);
     }
 
-    protected void showDialog(){
-
+    protected void showDialog() {
+        WaitDialog.show(TTBaseActivity.this, getResources()
+                .getString(R.string.transfer_wait));
     }
 
-    protected void dismissDialog(){
-
+    protected void dismissDialog() {
+        WaitDialog.dismiss();
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
@@ -170,6 +171,9 @@ public abstract class TTBaseActivity extends AppCompatActivity {
         ToastUtil.toastShortMessage(R.string.permission_read_storage_never_ask);
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OkGo.getInstance().cancelTag(this);
+    }
 }

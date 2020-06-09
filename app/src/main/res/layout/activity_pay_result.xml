@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+   >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10mm"
+        android:background="@drawable/chat_top_line_bg" />
+
+    <ImageView
+        android:scaleType="centerInside"
+        android:id="@+id/resultImage"
+        android:layout_marginTop="60mm"
+        android:src="@drawable/ic_zfcg"
+        android:layout_width="70mm"
+        android:layout_height="70mm" />
+
+    <TextView
+        android:id="@+id/resultTv"
+        android:layout_marginTop="10mm"
+        android:textColor="@color/color_48B464"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_marginTop="40mm"
+        android:textColor="@color/color_33"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/amountTv"
+        android:textStyle="bold"
+        android:layout_marginTop="10mm"
+        android:textColor="@color/color_33"
+        android:textSize="55sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="50mm"
+        android:layout_marginLeft="15mm"
+        android:layout_marginBottom="80mm"
+        android:layout_marginRight="15mm"
+        android:background="@drawable/shape_done_btn"
+        android:text="@string/sure"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

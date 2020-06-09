@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.utils.CommonUtils;
 
@@ -37,7 +38,7 @@ public class QrcodeWindow extends BasePopupWindow implements View.OnClickListene
         idTv.setText(userEntity.getEmail());
         nameTv.setText(userEntity.getMainName());
         qrcode.setImageBitmap(CommonUtils.createQRImage(
-                SysConstant.FALG_NCAHT_ADD_FRIEND + userEntity.getEmail(),
+                GeneralConfig.FALG_NCAHT_ADD_FRIEND + userEntity.getEmail(),
                 1000, 1000));
 
         closeImg.setOnClickListener(new View.OnClickListener() {

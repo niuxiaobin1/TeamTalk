@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mogujie.tt.R;
-import com.mogujie.tt.imservice.entity.CardInfo;
+import com.mogujie.tt.dto.CardListDto;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.DividerItemDecoration;
 
@@ -27,7 +27,7 @@ public class MessageCardActivity extends TTBaseActivity {
     private RecyclerView cardsList;
     private MyAdapter myAdapter;
 
-    private List<CardInfo> cardInfos = new ArrayList<>();
+    private List<CardListDto.Data.ListInfoBean> cardInfos = new ArrayList<>();
 
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
@@ -54,24 +54,10 @@ public class MessageCardActivity extends TTBaseActivity {
         myAdapter = new MyAdapter();
         cardsList.setAdapter(myAdapter);
 
-        initData();
 
     }
 
-    private void initData() {
-        CardInfo cardInfo = new CardInfo();
-        cardInfo.setCard_id("ICBC");
-        cardInfo.setCard_bank_no("3344");
-        cardInfo.setCard_bank_name("ICBC");
-        cardInfo.setCard_account_name("ICBC");
-        cardInfo.setCard_account_number("ICBC");
-        cardInfo.setCard_default("ICBC");
 
-        cardInfos.add(cardInfo);
-        cardInfos.add(cardInfo);
-
-        myAdapter.notifyDataSetChanged();
-    }
 
 
     class MyAdapter extends RecyclerView.Adapter<MyHolder> {
@@ -87,10 +73,10 @@ public class MessageCardActivity extends TTBaseActivity {
         public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
 
 
-            holder.cardsName.setText(cardInfos.get(position).getCard_bank_name());
+            holder.cardsName.setText(cardInfos.get(position).cardBankName);
 
-            if (!TextUtils.isEmpty(cardInfos.get(position).getCard_account_number())) {
-                String num = cardInfos.get(position).getCard_account_number();
+            if (!TextUtils.isEmpty(cardInfos.get(position).cardAccountNumber)) {
+                String num = cardInfos.get(position).cardAccountNumber;
                 if (num.length() > 4) {
                     holder.cardsNo.setText(
                             num.substring(num.length() - 4));

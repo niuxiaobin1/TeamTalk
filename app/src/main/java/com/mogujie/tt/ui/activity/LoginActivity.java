@@ -3,11 +3,8 @@ package com.mogujie.tt.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -425,9 +422,9 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
     }
 
     private void onLoginSuccess() {
-        Log.e("nxb","onLoginSuccess");
         logger.i("login#onLoginSuccess");
         loginSuccess = true;
+        imService.getLoginManager().getNchatParams();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         LoginActivity.this.finish();

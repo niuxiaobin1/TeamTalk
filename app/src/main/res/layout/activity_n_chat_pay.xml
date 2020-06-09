@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+
         android:id="@+id/payCodeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,14 +33,14 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_ma" />
+            />
 
         <ImageView
             android:id="@+id/QrCodeImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_erweima" />
+             />
 
         <View
             android:layout_width="match_parent"
@@ -70,7 +71,7 @@
                     android:id="@+id/balanceTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ICBC(3344)"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 

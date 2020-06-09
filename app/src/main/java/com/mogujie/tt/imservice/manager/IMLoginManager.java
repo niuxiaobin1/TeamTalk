@@ -223,9 +223,9 @@ public class IMLoginManager extends IMManager {
     }
 
 
-    public void sendMsgCode(String mail,boolean isForget) {
+    public void sendMsgCode(String mail, boolean isForget) {
         isSendCode = true;
-        isForgetPsw=isForget;
+        isForgetPsw = isForget;
         loginUserName = mail;
         if (!imSocketManager.isSocketConnect()) {
             imSocketManager.reqMsgServerAddrs();
@@ -243,11 +243,12 @@ public class IMLoginManager extends IMManager {
         if (!imSocketManager.isSocketConnect()) {
             imSocketManager.reqMsgServerAddrs();
         } else {
-           IMRegister();
+            IMRegister();
         }
     }
+
     public void forgetPsw(String mail, String password, String code) {
-        isForgetPsw=true;
+        isForgetPsw = true;
         loginUserName = mail;
         loginPwd = password;
         registerCode = code;
@@ -301,14 +302,14 @@ public class IMLoginManager extends IMManager {
      * 发送验证码
      */
     private void IMSendCode() {
-        logger.e("sendCode#isForgetPsw="+isForgetPsw);
+        logger.e("sendCode#isForgetPsw=" + isForgetPsw);
         triggerEvent(LoginEvent.LOGINING);
         final IMLogin.IMRegGetCodeReq imRegGetCodeReq = IMLogin.IMRegGetCodeReq.newBuilder()
                 .setEmail(loginUserName).build();
         int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
         int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_GET_CODE_VALUE;
-        if (isForgetPsw){
-            isForgetPsw=false;
+        if (isForgetPsw) {
+            isForgetPsw = false;
             cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_FORGET_PASS_CODE_VALUE;
         }
 
@@ -509,9 +510,9 @@ public class IMLoginManager extends IMManager {
         } else if (isRegister) {
             isRegister = false;
             IMRegister();
-        } else if(isForgetPsw){
-            isForgetPsw=false;
-        }else {
+        } else if (isForgetPsw) {
+            isForgetPsw = false;
+        } else {
             IMLogin();
         }
     }
@@ -520,7 +521,6 @@ public class IMLoginManager extends IMManager {
         logger.i("login#onLoginOk");
         everLogined = true;
         isKickout = false;
-
         // 判断登陆的类型
         if (isLocalLogin) {
             triggerEvent(LoginEvent.LOCAL_LOGIN_MSG_SERVICE);
@@ -679,5 +679,9 @@ public class IMLoginManager extends IMManager {
 
     public void setPcOnline(boolean isPcOnline) {
         this.isPcOnline = isPcOnline;
+    }
+
+    public void getNchatParams(){
+        imSocketManager.getNchatParams();
     }
 }

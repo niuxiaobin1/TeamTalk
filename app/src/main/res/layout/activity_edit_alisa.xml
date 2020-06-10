@@ -5,53 +5,187 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.EditAliasActivity">
+    android:background="@color/white"
+    tools:context=".ui.activity.SelectionActivity">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10mm"
         android:background="@drawable/chat_top_line_bg" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/edit_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12mm"
+        android:layout_marginRight="12mm"
+        android:layout_marginBottom="105mm">
 
         <EditText
-            android:id="@+id/et_alisa"
-            android:layout_width="wrap_content"
+            android:id="@+id/edit_content_et"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
+            android:layout_marginTop="60mm"
             android:background="@null"
             android:hint="@string/want_line"
-            android:textColor="@color/black" />
+            android:paddingLeft="5mm"
+            android:paddingRight="5mm"
+            android:singleLine="true"
+            android:textColor="@color/color_33"
+            android:textColorHint="@color/color_98"
+            android:textCursorDrawable="@drawable/tt_message_cursor" />
 
-    </LinearLayout>
 
-    <View
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:layout_below="@id/edit_content_et"
+            android:layout_marginTop="14mm"
+            android:background="@color/color_E6" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/cleartextImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40mm"
+        android:src="@mipmap/ic_close"
+        android:visibility="gone" />
+    <!--<RadioGroup-->
+    <!--android:id="@+id/content_list_rg"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:orientation="vertical"></RadioGroup>-->
+
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/searchLayout"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="#ffe6e6e6" />
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/normalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10mm"
+            android:background="@drawable/shape_bg_f6_corner4"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10mm">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/ic_sousuo"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:text="@string/tuikit_search_bank_name"
+                android:textColor="@color/color_9c"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_next"
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10mm"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bg_f6_corner4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10mm">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_sousuo" />
+
+                <EditText
+                    android:id="@+id/searchEt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="@string/tuikit_search_bank_name"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/color_11"
+                    android:textColorHint="@color/color_87"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/cleartextImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/ic_close_0417"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/cancleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15mm"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/cancel"
+                android:textColor="@color/color_48B464"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selectList"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/shape_bg_green_corner5"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20mm"
+        android:layout_marginRight="20mm"
+        android:layout_marginBottom="20mm"
+        android:layout_weight="1"></androidx.recyclerview.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/sureTv"
+        android:layout_width="match_parent"
+        android:layout_height="50mm"
+        android:layout_marginLeft="12mm"
+        android:layout_marginRight="12mm"
+        android:layout_marginBottom="20mm"
+        android:background="@drawable/shape_done_btn"
+        android:gravity="center"
         android:text="@string/sure"
-        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 
 </LinearLayout>

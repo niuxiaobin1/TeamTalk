@@ -1,12 +1,8 @@
 package com.mogujie.tt.ui.activity;
 
 import android.content.Intent;
-
-
 import android.os.Bundle;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +22,6 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.mogujie.tt.OkgoCallBack.NigeriaCallBack;
 import com.mogujie.tt.R;
-import com.mogujie.tt.app.IMApplication;
 import com.mogujie.tt.bean.BaseBean;
 import com.mogujie.tt.bean.CardInfo;
 import com.mogujie.tt.bean.CardListBean;
@@ -39,12 +34,6 @@ import com.mogujie.tt.config.Constants;
 import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.RequestCode;
 import com.mogujie.tt.config.ServerHostConfig;
-import com.mogujie.tt.config.SysConstant;
-import com.mogujie.tt.config.UrlConstant;
-import com.mogujie.tt.dto.CardListDto;
-import com.mogujie.tt.dto.QueryPswDto;
-import com.mogujie.tt.imservice.entity.PayOrderInfoData;
-import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.widget.InputPasswordWindow;
 import com.mogujie.tt.ui.widget.PayDefaultTypeWindow;
@@ -55,8 +44,6 @@ import com.mogujie.tt.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;

@@ -43,19 +43,19 @@
         <activity android:name=".ui.activity.NewFriendsActivity" />
         <activity android:name=".ui.activity.AddMoreActivity" />
         <activity android:name=".ui.activity.FriendRequestActivity" />
-        <activity android:name=".ui.activity.MessageCardActivity" />
+        <activity android:name=".ui.activity.BankCardListActivity" />
         <activity android:name=".ui.activity.ChangePasswordActivity" />
         <activity android:name=".ui.activity.SettingsActivity" />
         <activity android:name=".ui.activity.PrivacyActivity" />
         <activity android:name=".ui.activity.SetPINActivity" />
-        <activity android:name=".ui.activity.MessageCardInfoActivity" />
+        <activity android:name=".ui.activity.ManageCardInfoActivity" />
         <activity android:name=".ui.activity.PaySettingActivity" />
         <activity android:name=".ui.activity.AddNewCardActivity" />
         <activity android:name=".ui.activity.NChatPayActivity" />
         <activity android:name=".ui.activity.MyProfileActivity" />
         <activity android:name=".ui.activity.TransferActivity" />
         <activity android:name=".ui.activity.RedPacketActivity" />
-        <activity android:name=".ui.activity.EditAliasActivity" />
+        <activity android:name=".ui.activity.SelectionActivity" />
         <activity android:name=".ui.activity.SignUpActivity" />
 
         <uses-library

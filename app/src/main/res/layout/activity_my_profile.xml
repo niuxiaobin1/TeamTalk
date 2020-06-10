@@ -1,230 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MyProfileActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <View
+        android:background="@drawable/chat_top_line_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10mm"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_FFFEFF"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@drawable/chat_top_line_bg" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="#fefefe"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:text="@string/modify_user_icon"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:id="@+id/user_portrait"
-                android:layout_width="58dp"
-                android:layout_height="58dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="22dp"
-                android:background="@drawable/tt_round_bg"
-                android:scaleType="centerCrop" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/ic_next_user" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:background="#ffe6e6e6" />
-
-        <LinearLayout
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_user_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:isImage="true"
+            app:isTop="true"
+            app:name="@string/modify_user_icon" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="55mm"
+            app:name="@string/modify_nick_name" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_gender"
+            android:layout_width="match_parent"
+            android:layout_height="55mm"
+            android:visibility="gone"
+            app:name="@string/modify_gender" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_phone"
+            android:layout_width="match_parent"
+            android:layout_height="55mm"
+            app:name="@string/modify_phone" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_account"
+            android:layout_width="match_parent"
+            android:layout_height="55mm"
+            app:name="@string/modify_account" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/modify_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="55mm"
+            app:isImage="true"
+            app:isSmall="true"
+            app:name="@string/modify_qrcode" />
+
+        <View
+            android:background="@color/color_f6"
+            android:layout_width="match_parent"
+            android:layout_height="10mm"/>
+
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:visibility="gone"
+            android:id="@+id/modify_allow_type"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="10dp"
+            app:name="@string/add_rule" />
+
+        <com.mogujie.tt.ui.widget.LineControllerView
+            android:id="@+id/about_im"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:name="@string/about_im" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/lin_name"
+            <Button
+                android:id="@+id/logout_btn"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:text="@string/result_card_holder"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="3dip"
-                    android:text="Hellow"
-                    android:textColor="#80989898"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@mipmap/ic_next_user" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="#ffe6e6e6" />
-
-            <LinearLayout
-                android:id="@+id/lin_phonenumber"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:text="@string/app_phoneNumber"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-
-                <TextView
-                    android:id="@+id/nickName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="3dip"
-                    android:text="123456789"
-                    android:textColor="#80989898"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@mipmap/ic_next_user" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="#ffe6e6e6" />
-
-            <LinearLayout
-                android:id="@+id/lin_account"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:text="@string/account"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:padding="3dip"
-                    android:text="nchat@xinyi.com"
-                    android:textColor="#80989898"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="#ffe6e6e6" />
-
-            <LinearLayout
-                android:id="@+id/lin_myqrcode"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:text="@string/modify_qrcode"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@mipmap/ic_erwei" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@mipmap/ic_next_user" />
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#fff8f8f8" />
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_bg_grey_stroke_corner4"
+                android:text="@string/exit"
+                android:textColor="@color/negative_text" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

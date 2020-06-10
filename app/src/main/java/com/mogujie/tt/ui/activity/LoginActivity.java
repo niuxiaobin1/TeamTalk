@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.Constants;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.UrlConstant;
 import com.mogujie.tt.imservice.event.LoginEvent;
@@ -34,6 +35,7 @@ import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.SPUtils;
 import com.mogujie.tt.utils.ToastUtil;
 
 import de.greenrobot.event.EventBus;
@@ -425,6 +427,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         logger.i("login#onLoginSuccess");
         loginSuccess = true;
         imService.getLoginManager().getNchatParams();
+        SPUtils.put(getApplicationContext(), Constants.N_OPENID, "2a422f203c17ad09c70ec61666a61038");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         LoginActivity.this.finish();

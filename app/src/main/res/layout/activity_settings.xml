@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff8f8f8"
     android:orientation="vertical"
-    tools:context=".ui.activity.MessageCardInfoActivity">
+    tools:context=".ui.activity.ManageCardInfoActivity">
 
     <View
         android:layout_width="match_parent"

@@ -21,7 +21,7 @@ public class PaySettingActivity extends TTBaseActivity {
         findViewById(R.id.lin_message_card).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PaySettingActivity.this, MessageCardActivity.class);
+                Intent intent = new Intent(PaySettingActivity.this, BankCardListActivity.class);
                 startActivity(intent);
             }
         });

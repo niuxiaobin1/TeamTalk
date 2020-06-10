@@ -104,6 +104,11 @@ public class ScreenUtil {
         return (int) (dp * scale + 0.5f);
     }
 
+    public static int getPxByDp(float dp) {
+        float scale = AppContext.getAppContext().getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
     public static int getNavigationBarHeight() {
         if (navigationBarHeight != 0)
             return navigationBarHeight;

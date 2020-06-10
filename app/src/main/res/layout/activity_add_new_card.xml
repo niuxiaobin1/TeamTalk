@@ -2,26 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
-
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10mm"
         android:background="@drawable/chat_top_line_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50mm"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingLeft="15mm"
+        android:paddingRight="15mm">
 
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="120mm"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@string/result_card_holder"
@@ -29,17 +29,17 @@
             android:textSize="15sp" />
 
         <EditText
+            android:singleLine="true"
+            android:gravity="right"
             android:id="@+id/cardHolderEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15mm"
+            android:layout_marginRight="15mm"
             android:layout_weight="1"
             android:background="@null"
-            android:gravity="right"
             android:hint="@string/required"
             android:maxLines="1"
-            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/color_98"
             android:textSize="15sp" />
@@ -49,21 +49,21 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1mm"
         android:background="@color/chat_title_line_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50mm"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingLeft="15mm"
+        android:paddingRight="15mm">
 
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="120mm"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@string/result_card_no"
@@ -71,42 +71,40 @@
             android:textSize="15sp" />
 
         <EditText
+            android:singleLine="true"
             android:id="@+id/cardNoEt"
+            android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15mm"
+            android:layout_marginRight="15mm"
             android:layout_weight="1"
             android:background="@null"
-            android:gravity="right"
-            android:hint="@string/required"
             android:inputType="number"
+            android:hint="@string/required"
             android:maxLines="1"
-            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/color_98"
-            android:textSize="15sp" />
+            android:textSize="15sp"  />
 
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1mm"
         android:background="@color/chat_title_line_color" />
-
     <LinearLayout
         android:id="@+id/bankNameLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50mm"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingLeft="15mm"
+        android:paddingRight="15mm">
 
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="120mm"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@string/result_bank_name"
@@ -116,11 +114,11 @@
         <TextView
             android:id="@+id/bankNameTv"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
             android:gravity="right"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15mm"
+            android:layout_marginRight="15mm"
+            android:layout_weight="1"
             android:hint="@string/result_card_hint"
             android:maxLines="1"
             android:textColor="@color/black"
@@ -136,23 +134,23 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1mm"
         android:background="@color/chat_title_line_color" />
 
 
     <LinearLayout
         android:id="@+id/bankNoLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="50mm"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingLeft="15mm"
+        android:paddingRight="15mm">
 
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="120mm"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@string/result_bank_no"
@@ -160,13 +158,13 @@
             android:textSize="15sp" />
 
         <TextView
+            android:gravity="right"
             android:id="@+id/bankNoTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15mm"
+            android:layout_marginRight="15mm"
             android:layout_weight="1"
-            android:gravity="right"
             android:hint="@string/required"
             android:maxLines="1"
             android:textColor="@color/black"
@@ -176,13 +174,14 @@
     </LinearLayout>
 
 
+
     <Button
         android:id="@+id/confirm_btn"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="50mm"
+        android:layout_marginLeft="15mm"
+        android:layout_marginTop="25mm"
+        android:layout_marginRight="15mm"
         android:background="@drawable/shape_done_btn"
         android:text="@string/add_card_confirm"
         android:textAllCaps="false"

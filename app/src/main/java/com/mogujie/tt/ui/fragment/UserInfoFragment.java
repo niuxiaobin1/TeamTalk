@@ -17,7 +17,7 @@ import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
-import com.mogujie.tt.ui.activity.EditAliasActivity;
+import com.mogujie.tt.ui.activity.SelectionActivity;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
@@ -99,7 +99,7 @@ public class UserInfoFragment extends MainFragment {
         curView.findViewById(R.id.lin_alisa).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditAliasActivity.class);
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
                 intent.putExtra("title", "Edit Alias");
                 intent.putExtra("hint", "Enter Alias");
                 startActivity(intent);

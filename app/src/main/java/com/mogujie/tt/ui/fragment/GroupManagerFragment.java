@@ -20,7 +20,7 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.ConfigurationSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
-import com.mogujie.tt.ui.activity.EditAliasActivity;
+import com.mogujie.tt.ui.activity.SelectionActivity;
 import com.mogujie.tt.ui.adapter.GroupManagerAdapter;
 import com.mogujie.tt.ui.helper.CheckboxConfigHelper;
 import com.mogujie.tt.imservice.event.GroupEvent;
@@ -82,7 +82,7 @@ public class GroupManagerFragment extends TTBaseFragment{
         curView.findViewById(R.id.group_manager_name).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditAliasActivity.class);
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
                 intent.putExtra("title","Group Name");
                 intent.putExtra("hint","Enter Group Name");
                 startActivity(intent);
@@ -91,7 +91,7 @@ public class GroupManagerFragment extends TTBaseFragment{
         curView.findViewById(R.id.lin_group_notic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditAliasActivity.class);
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
                 intent.putExtra("title","Group Notic");
                 startActivity(intent);
             }
@@ -99,7 +99,7 @@ public class GroupManagerFragment extends TTBaseFragment{
         curView.findViewById(R.id.lin_approva).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditAliasActivity.class);
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
                 intent.putExtra("title","Approva");
                 startActivity(intent);
             }
@@ -107,7 +107,7 @@ public class GroupManagerFragment extends TTBaseFragment{
         curView.findViewById(R.id.lin_my_alia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditAliasActivity.class);
+                Intent intent = new Intent(getActivity(), SelectionActivity.class);
                 intent.putExtra("title","My Alias");
                 intent.putExtra("hint","Enter Alias");
                 startActivity(intent);

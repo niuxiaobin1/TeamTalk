@@ -5,79 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.EditAliasActivity">
+    android:background="@color/color_f6"
+    tools:context=".ui.activity.SelectionActivity">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10mm"
         android:background="@drawable/chat_top_line_bg" />
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        app:hintTextAppearance="@style/hintAppearance">
+
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:maxLength="6"
+            android:inputType="number"
+            android:id="@+id/payPswEt"
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
             android:layout_weight="1"
-            android:background="@null"
             android:hint="@string/pay_psw"
-            android:textColor="@color/black"
+            android:maxLines="1"
+            android:textColor="@color/color_33"
+            android:textColorHint="@color/color_98"
             android:textSize="15sp" />
 
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <View
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="#ffe6e6e6" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        app:hintTextAppearance="@style/hintAppearance">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:maxLength="6"
+            android:inputType="number"
+            android:id="@+id/payPswConfirmEt"
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
             android:layout_weight="1"
-            android:background="@null"
             android:hint="@string/pay_psw_confirm"
-            android:textColor="@color/black"
+            android:maxLines="1"
+            android:textColor="@color/color_33"
+            android:textColorHint="@color/color_98"
             android:textSize="15sp" />
 
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="#ffe6e6e6" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/confirm_btn"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/shape_bg_green_corner5"
+        android:layout_height="50mm"
+        android:layout_marginLeft="15mm"
+        android:layout_marginTop="100mm"
+        android:layout_marginRight="15mm"
+        android:background="@drawable/shape_done_btn"
         android:text="@string/sure"
+        android:onClick="echoClick"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
+        android:textSize="16sp" />
 </LinearLayout>

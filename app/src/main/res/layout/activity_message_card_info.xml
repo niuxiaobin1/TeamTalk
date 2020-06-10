@@ -6,62 +6,35 @@
     android:layout_height="match_parent"
     android:background="@color/color_f6"
     android:orientation="vertical"
-    tools:context=".ui.activity.MessageCardInfoActivity">
+    tools:context=".ui.activity.ManageCardInfoActivity">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10mm"
         android:background="@drawable/chat_top_line_bg" />
 
-    <LinearLayout
+    <com.mogujie.tt.ui.widget.LineControllerView
+        app:isTop="true"
+        android:id="@+id/setDefaultPayCard"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:text="@string/set_card_default"
-            android:textSize="15sp"
-            android:textColor="@color/black"/>
-
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:checked="true"
-            android:thumb="@drawable/thumb_selector"
-            android:track="@drawable/track_selector" />
-
-    </LinearLayout>
+        android:layout_height="55mm"
+        app:isSwitch="true"
+        app:name="@string/set_card_default" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10mm"
         android:background="@color/color_f6" />
 
-    <LinearLayout
+
+    <Button
+        android:id="@+id/delete_btn"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="55mm"
         android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/profile_del"
-            android:textColor="#E53D53"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:text="@string/add_card_delete"
+        android:textAllCaps="false"
+        android:textColor="@color/negative_text"
+        android:textSize="16sp" />
 
 </LinearLayout>

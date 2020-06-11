@@ -100,6 +100,10 @@ public class IMPacketDispatcher {
                 IMBuddy.IMAgreeFriendRsp imAgreeFriendRsp = IMBuddy.IMAgreeFriendRsp.parseFrom(buffer);
                 IMContactManager.instance().onRepApplyActionUsers(imAgreeFriendRsp);
                 return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_AVATAR_RESPONSE_VALUE:
+                IMBuddy.IMChangeAvatarRsp imChangeAvatarRsp = IMBuddy.IMChangeAvatarRsp.parseFrom(buffer);
+                IMContactManager.instance().onRepChangeUserHeader(imChangeAvatarRsp);
+                return;
 
         }
         } catch (IOException e) {

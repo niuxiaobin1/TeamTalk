@@ -1,7 +1,6 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.DBInterface;
@@ -9,10 +8,10 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.LoginEvent;
-import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.protobuf.IMLogin;
+import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.utils.Logger;
 
 import java.io.IOException;
@@ -425,7 +424,6 @@ public class IMLoginManager extends IMManager {
      */
     public void onRepMsgServerLogin(IMLogin.IMLoginRes loginRes) {
         logger.i("login#onRepMsgServerLogin");
-
         if (loginRes == null) {
             logger.e("login#decode LoginResponse failed");
             triggerEvent(LoginEvent.LOGIN_AUTH_FAILED);

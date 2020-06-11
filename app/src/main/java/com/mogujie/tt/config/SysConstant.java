@@ -51,6 +51,7 @@ public interface SysConstant {
      */
     public static final String SETTING_GLOBAL = "Global";
     public static final String UPLOAD_IMAGE_INTENT_PARAMS = "com.mogujie.tt.upload.image.intent";
+    public static final String UPLOAD_HEADER_IMAGE_INTENT_PARAMS = "com.mogujie.tt.upload.header_image.intent";
     /**
      * event 优先级
      */

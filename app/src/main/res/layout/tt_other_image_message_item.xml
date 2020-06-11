@@ -7,7 +7,7 @@
     android:paddingBottom="25dp">
 
     <!--    <com.mogujie.tt.ui.widget.IMBaseImageView-->
-    <ImageView
+    <com.mogujie.tt.ui.widget.IMBaseImageView
         android:id="@+id/user_portrait"
         android:layout_width="41dp"
         android:layout_height="41dp"

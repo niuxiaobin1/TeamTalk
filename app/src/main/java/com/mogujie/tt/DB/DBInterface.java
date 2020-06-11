@@ -3,6 +3,7 @@ package com.mogujie.tt.DB;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.mogujie.tt.DB.dao.ApplyUserDao;
 import com.mogujie.tt.DB.dao.DaoMaster;
@@ -324,7 +325,6 @@ public class DBInterface {
                     .orderDesc(MessageDao.Properties.MsgId)
                     .limit(count)
                     .list();
-
         return formatMessage(listMsg);
     }
 

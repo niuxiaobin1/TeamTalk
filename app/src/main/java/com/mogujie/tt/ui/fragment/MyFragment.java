@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -282,6 +283,8 @@ public class MyFragment extends MainFragment {
         portraitImageView.setDefaultImageRes(R.drawable.tt_round_bg);
         portraitImageView.setCorner(15);
         portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
+        Log.e("nxb111",loginContact.getEmail());
+        Log.e("nxb111",loginContact.getAvatar());
         portraitImageView.setImageUrl(loginContact.getAvatar());
 
         LinearLayout userContainer = (LinearLayout) curView.findViewById(R.id.user_container);

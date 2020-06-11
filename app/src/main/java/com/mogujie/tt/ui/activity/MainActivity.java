@@ -283,7 +283,7 @@ public class MainActivity extends FragmentActivity {
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
-    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION})
+    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION})
     public void getLocation() {
         LocationUtils.getInstance().startLocate();
     }

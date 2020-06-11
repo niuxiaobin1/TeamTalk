@@ -16,6 +16,7 @@ import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.HandlerConstant;
+import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
@@ -26,6 +27,7 @@ import com.mogujie.tt.ui.adapter.ContactAdapter;
 import com.mogujie.tt.ui.adapter.DeptAdapter;
 import com.mogujie.tt.ui.widget.SortSideBar;
 import com.mogujie.tt.ui.widget.SortSideBar.OnTouchingLetterChangedListener;
+import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
@@ -330,4 +332,5 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             showSearchFrameLayout();
         }
     }
+
 }

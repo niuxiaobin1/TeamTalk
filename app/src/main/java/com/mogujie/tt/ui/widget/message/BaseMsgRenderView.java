@@ -13,9 +13,8 @@ import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.MessageConstant;
-import com.mogujie.tt.config.SysConstant;
-import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
+import com.mogujie.tt.utils.IMUIHelper;
 
 /**
  * @author : yingmu on 15-1-9.

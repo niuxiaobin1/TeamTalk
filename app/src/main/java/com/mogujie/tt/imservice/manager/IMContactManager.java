@@ -6,6 +6,7 @@ import android.util.Log;
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.protobuf.IMBaseDefine;
@@ -195,7 +196,7 @@ public class IMContactManager extends IMManager {
     /**
      * yingmu change id from string to int
      *
-     * @param getFriendListRsp 1.请求所有用户的信息,总的版本号version
+     * @param getFriendListRsp 1.请求好友的信息,总的版本号version
      *                         2.匹配总的版本号，返回可能存在变更的
      *                         3.选取存在变更的，请求用户详细信息
      *                         4.更新DB，保存globalVersion 以及用户的信息
@@ -260,6 +261,30 @@ public class IMContactManager extends IMManager {
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_SEARCH_USER_REQUEST_VALUE;
         imSocketManager.sendRequest(imSearchUsersReq, sid, cid);
     }
+
+    /**
+     * 更新用户头像
+     *
+     * @param url
+     */
+    public void reqChangeUsersHeader(String url) {
+        logger.i("contact#contact#reqChangeUsersHeader%s",url);
+        if (TextUtils.isEmpty(url)) {
+            logger.i("contact#contact#reqChangeUsersHeader return,cause by null or empty");
+            return;
+        }
+        int loginId = IMLoginManager.instance().getLoginId();
+        IMBuddy.IMChangeAvatarReq imChangeAvatarReq = IMBuddy.IMChangeAvatarReq.newBuilder()
+                .setUserId(loginId)
+                .setAvatarUrl(url)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_AVATAR_REQUEST_VALUE;
+        imSocketManager.sendRequest(imChangeAvatarReq, sid, cid);
+    }
+
+
 
 
     /**
@@ -370,7 +395,20 @@ public class IMContactManager extends IMManager {
         if (imAgreeFriendRsp == null) {
             return;
         }
-        Log.e("nxb",imAgreeFriendRsp.getResultString());
+        EventBus.getDefault().postSticky(UserApplyInfoEvent.USER_APPLY_INFO_OK);
+    }
+    /**
+     * 更新头像结果返回
+     *
+     * @param imChangeAvatarRsp
+     */
+    public void onRepChangeUserHeader(IMBuddy.IMChangeAvatarRsp imChangeAvatarRsp) {
+        Log.e("nxb","onRepChangeUserHeader");
+        if (imChangeAvatarRsp == null) {
+            EventBus.getDefault().postSticky(ChangeHeaderEvent.USER_CHANGE_HEADER_INFO_FAIL);
+            return;
+        }
+        EventBus.getDefault().postSticky(ChangeHeaderEvent.USER_CHANGE_HEADER_INFO_OK);
 
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +14,22 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.config.TUIKitConstants;
+import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
+import com.mogujie.tt.imservice.event.UploadHeaderEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.imservice.service.LoadImageService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.widget.LineControllerView;
 import com.mogujie.tt.ui.widget.QRCodeDialog;
 import com.mogujie.tt.ui.widget.QrcodeWindow;
+import com.mogujie.tt.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +47,6 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
     private LineControllerView mModifyQrcodeView;
 
     private LineControllerView mModifyAllowTypeView;
-
 
 
     private ArrayList<String> mGenderList = new ArrayList<>();
@@ -113,7 +119,6 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
     }
 
 
-
     public void onEventMainThread(UserInfoEvent event) {
         switch (event) {
             case USER_INFO_OK:
@@ -137,9 +142,9 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
 
 
         mModifyNickNameView.setContent(loginContact.getMainName());
-        if (loginContact.getGender()==1){
+        if (loginContact.getGender() == 1) {
             mModifyGenderView.setContent(mGenderList.get(0));
-        }else{
+        } else {
             mModifyGenderView.setContent(mGenderList.get(1));
         }
         mModifyPhoneView.setContent(loginContact.getPhone());
@@ -218,12 +223,12 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                     updateUserInfo(null);
                 }
             });
-        }else if(v.getId()==R.id.modify_qrcode){
-            if (loginContact==null){
+        } else if (v.getId() == R.id.modify_qrcode) {
+            if (loginContact == null) {
                 return;
             }
-            if (qrcodeWindow==null){
-                qrcodeWindow=new QrcodeWindow(MyProfileActivity.this,loginContact);
+            if (qrcodeWindow == null) {
+                qrcodeWindow = new QrcodeWindow(MyProfileActivity.this, loginContact);
                 qrcodeWindow.setAlignBackground(true);
                 qrcodeWindow.setPopupGravity(Gravity.BOTTOM);
             }
@@ -251,8 +256,45 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
             }
         }
     }
-    private void updateUserInfo(String path) {
 
+    private void updateUserInfo(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            Intent loadImageIntent = new Intent(this, LoadImageService.class);
+            loadImageIntent.putExtra(SysConstant.UPLOAD_HEADER_IMAGE_INTENT_PARAMS, path);
+            startService(loadImageIntent);
+        }
+
+    }
+
+    public void onEventMainThread(UploadHeaderEvent event) {
+        switch (event.getEvent()) {
+            case HEADER_IMAGE_UPLOAD_SUCCESS:
+                mModifyUserIconView.getImageView().setImageUrl(event.getUrl());
+                loginContact.setAvatar(event.getUrl());
+                updateUserHeader(event.getUrl());
+                break;
+            case HEADER_IMAGE_UPLOAD_FAILD:
+                ToastUtil.toastShortMessage("上传失败");
+                break;
+        }
+    }
+
+    private void updateUserHeader(String url) {
+        if (imService!=null){
+            imService.getContactManager().reqChangeUsersHeader(url);
+        }
+    }
+
+    public void onEventMainThread(ChangeHeaderEvent event) {
+        switch (event) {
+            case USER_CHANGE_HEADER_INFO_OK:
+                Log.e("nxb","USER_CHANGE_HEADER_INFO_OK");
+                DBInterface.instance().insertOrUpdateUser(loginContact);
+                break;
+            case USER_CHANGE_HEADER_INFO_FAIL:
+                ToastUtil.toastShortMessage("更新失败");
+                break;
+        }
     }
 
     @Override

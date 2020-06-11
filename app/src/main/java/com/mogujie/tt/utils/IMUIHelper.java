@@ -19,11 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.UrlConstant;
 import com.mogujie.tt.imservice.entity.SearchElement;

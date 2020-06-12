@@ -6,7 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.StrictMode;
 
+import androidx.annotation.NonNull;
+import androidx.camera.camera2.Camera2Config;
+import androidx.camera.core.CameraXConfig;
+
 import com.google.gson.Gson;
+import com.luck.picture.lib.app.IApp;
+import com.luck.picture.lib.app.PictureAppMaster;
+import com.luck.picture.lib.engine.PictureSelectorEngine;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -18,6 +25,7 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.utils.BackgroundTasks;
 import com.mogujie.tt.utils.ImageLoaderUtil;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.PictureSelectorEngineImp;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -27,7 +35,7 @@ import me.jessyan.autosize.unit.Subunits;
 import okhttp3.OkHttpClient;
 
 
-public class IMApplication extends Application {
+public class IMApplication extends Application implements IApp, CameraXConfig.Provider {
 	public static Context sApplicationContext;
 	public static String INSTITUTION_NUMBER = "";
 	public static String API_KEY = "";
@@ -40,7 +48,7 @@ public class IMApplication extends Application {
 		sApplicationContext = getApplicationContext();
 		startIMService();
 		ImageLoaderUtil.initImageLoaderConfig(getApplicationContext());
-
+		PictureAppMaster.getInstance().setApp(this);
 		StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
 		StrictMode.setVmPolicy(builder.build());
 		builder.detectFileUriExposure();
@@ -126,4 +134,20 @@ public class IMApplication extends Application {
 	}
 
     public static boolean gifRunning = true;//gif是否运行
+
+	@Override
+	public Context getAppContext() {
+		return this;
+	}
+
+	@Override
+	public PictureSelectorEngine getPictureSelectorEngine() {
+		return new PictureSelectorEngineImp();
+	}
+
+	@NonNull
+	@Override
+	public CameraXConfig getCameraXConfig() {
+		return Camera2Config.defaultConfig();
+	}
 }

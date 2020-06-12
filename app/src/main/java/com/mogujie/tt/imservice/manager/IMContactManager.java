@@ -1,7 +1,6 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
@@ -268,9 +267,9 @@ public class IMContactManager extends IMManager {
      * @param url
      */
     public void reqChangeUsersHeader(String url) {
-        logger.i("contact#contact#reqChangeUsersHeader%s",url);
+        logger.d("contact#contact#reqChangeUsersHeader%s",url);
         if (TextUtils.isEmpty(url)) {
-            logger.i("contact#contact#reqChangeUsersHeader return,cause by null or empty");
+            logger.d("contact#contact#reqChangeUsersHeader return,cause by null or empty");
             return;
         }
         int loginId = IMLoginManager.instance().getLoginId();
@@ -403,7 +402,6 @@ public class IMContactManager extends IMManager {
      * @param imChangeAvatarRsp
      */
     public void onRepChangeUserHeader(IMBuddy.IMChangeAvatarRsp imChangeAvatarRsp) {
-        Log.e("nxb","onRepChangeUserHeader");
         if (imChangeAvatarRsp == null) {
             EventBus.getDefault().postSticky(ChangeHeaderEvent.USER_CHANGE_HEADER_INFO_FAIL);
             return;

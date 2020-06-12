@@ -95,9 +95,9 @@
 
     <color name="white">#FFFFFF</color>
     <color name="line">#DDDDDD</color>
-
+    <color name="app_color_white_transparent">#E0DBDBDB</color>
     <color name="text_gray1">#777777</color>
-
+    <color name="app_color_grey">#393a3e</color>
     <color name="title_bar_font_color">#016fff</color>
 
     <color name="tab_text_selected_color">#48B464</color>

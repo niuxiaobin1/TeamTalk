@@ -97,13 +97,12 @@ public class LoadImageService extends IntentService {
                         result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), bytes, messageInfo.getPath());
                     }
                 }
-
                 if (TextUtils.isEmpty(result)) {
-                    logger.i("upload image faild,cause by result is empty/null");
+                    logger.d("upload image faild,cause by result is empty/null");
                     EventBus.getDefault().post(new MessageEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILD
                             , messageInfo));
                 } else {
-                    logger.i("upload image succcess,imageUrl is %s", result);
+                    logger.d("upload image succcess,imageUrl is %s", result);
                     String imageUrl = result;
                     messageInfo.setUrl(imageUrl);
                     EventBus.getDefault().post(new MessageEvent(

@@ -1,5 +1,6 @@
 package com.mogujie.tt.ui.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
@@ -290,9 +293,19 @@ public class MyFragment extends MainFragment {
             @Override
             public void onClick(View arg0) {
 //                IMUIHelper.openUserProfileActivity(getActivity(), loginContact.getPeerId());
-                startActivity(new Intent(getActivity(), MyProfileActivity.class));
+                startActivityForResult(new Intent(getActivity(), MyProfileActivity.class), MyProfileActivity.REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == MyProfileActivity.REQUEST_CODE) {
+            if (imServiceConnector != null && imServiceConnector.getIMService() != null) {
+                init(imServiceConnector.getIMService());
+            }
+        }
     }
 
     private void deleteFilesByDirectory(File directory) {

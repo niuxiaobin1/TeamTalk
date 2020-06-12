@@ -1,5 +1,6 @@
 package com.mogujie.tt.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -47,6 +48,8 @@ import de.greenrobot.event.EventBus;
 
 public class MyProfileActivity extends TTBaseActivity implements View.OnClickListener {
 
+    public static final int REQUEST_CODE = 8;
+
     private LineControllerView mModifyUserIconView;
     private LineControllerView mModifyNickNameView;
     private LineControllerView mModifyGenderView;
@@ -66,7 +69,6 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
     private List<LocalMedia> selectList = new ArrayList<>();
     private QrcodeWindow qrcodeWindow;
     private UserEntity loginContact;
-
     private IMService imService;
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
@@ -86,6 +88,8 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
         public void onServiceDisconnected() {
         }
     };
+
+    private boolean isUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +214,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                     //.cameraFileName(System.currentTimeMillis() +".jpg")    // 重命名拍照文件名、如果是相册拍照则内部会自动拼上当前时间戳防止重复，注意这个只在使用相机时可以使用，如果使用相机又开启了压缩或裁剪 需要配合压缩和裁剪文件名api
                     //.renameCompressFile(System.currentTimeMillis() +".jpg")// 重命名压缩文件名、 如果是多张压缩则内部会自动拼上当前时间戳防止重复
                     //.renameCropFileName(System.currentTimeMillis() + ".jpg")// 重命名裁剪文件名、 如果是多张裁剪则内部会自动拼上当前时间戳防止重复
-                    .selectionMode( PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE :
+                    .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE :
                     .isSingleDirectReturn(true)// 单选模式下是否直接返回，PictureConfig.SINGLE模式下有效
                     .isPreviewImage(true)// 是否可预览图片
                     .isPreviewVideo(true)// 是否可预览视频
@@ -328,11 +332,11 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                     // 如果同时开启裁剪和压缩，则取压缩路径为准因为是先裁剪后压缩
                     String iconPath = "";
                     for (LocalMedia media : selectList) {
-                        if (media.isCompressed()){
+                        if (media.isCompressed()) {
                             iconPath = media.getCompressPath();
-                        }else if(media.isCut()){
+                        } else if (media.isCut()) {
                             iconPath = media.getCutPath();
-                        }else{
+                        } else {
                             iconPath = media.getPath();
                         }
                     }
@@ -367,7 +371,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
     }
 
     private void updateUserHeader(String url) {
-        if (imService!=null){
+        if (imService != null) {
             imService.getContactManager().reqChangeUsersHeader(url);
         }
     }
@@ -375,7 +379,9 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
     public void onEventMainThread(ChangeHeaderEvent event) {
         switch (event) {
             case USER_CHANGE_HEADER_INFO_OK:
+                isUpdate = true;
                 DBInterface.instance().insertOrUpdateUser(loginContact);
+                imService.getLoginManager().setLoginInfo(loginContact);
                 break;
             case USER_CHANGE_HEADER_INFO_FAIL:
                 ToastUtil.toastShortMessage("更新失败");
@@ -493,5 +499,13 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 Color.parseColor("#393a3e"),
                 ContextCompat.getColor(this, R.color.white),
                 mPictureParameterStyle.isChangeStatusBarFontColor);
+    }
+
+    @Override
+    public void finish() {
+        if (isUpdate) {
+            setResult(Activity.RESULT_OK);
+        }
+        super.finish();
     }
 }

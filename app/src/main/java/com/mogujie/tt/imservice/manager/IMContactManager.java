@@ -230,6 +230,16 @@ public class IMContactManager extends IMManager {
         triggerEvent(UserInfoEvent.USER_INFO_UPDATE);
     }
 
+    public void onEventMainThread(UserApplyInfoEvent event) {
+        switch (event) {
+            case USER_APPLY_INFO_OK:
+                int updateTime = dbInterface.getUserInfoLastTime();
+                logger.d("contact#loadAllUserInfo req-updateTime:%d", updateTime);
+                reqGetAllFriendsUsers(updateTime);
+                break;
+        }
+    }
+
 
     public UserEntity findContact(int buddyId) {
         if (buddyId > 0 && userMap.containsKey(buddyId)) {

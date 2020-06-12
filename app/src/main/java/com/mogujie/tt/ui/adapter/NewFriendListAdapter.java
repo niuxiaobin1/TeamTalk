@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.protobuf.IMBaseDefine;
@@ -83,6 +84,7 @@ public class NewFriendListAdapter extends ArrayAdapter<UserEntity> {
             public void onClick(View v) {
                 final TextView vv = (TextView) v;
                 vv.setText(getContext().getResources().getString(R.string.request_accepted));
+                DBInterface.instance().insertOrUpdateUser(data);
                 if (agreeClickListener!=null){
                     agreeClickListener.onClick(data.getPeerId());
                 }

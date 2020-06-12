@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
@@ -82,11 +83,19 @@ public class NewFriendsActivity extends TTBaseActivity {
 
     private void initPendency() {
         Map<Integer, UserEntity> applyUsers = imService.getContactManager().getApplyUserMap();
+        List<UserEntity> userlist = DBInterface.instance().loadAllUsers();
         if (applyUsers.size() == 0) {
             mEmptyView.setText(getResources().getString(R.string.no_friend_apply));
             mNewFriendLv.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
             return;
+        } else {
+            for (int i = 0; i < userlist.size(); i++) {
+                if (applyUsers.containsKey(userlist.get(i).getPeerId())) {
+                    applyUsers.remove(userlist.get(i).getPeerId());
+                }
+            }
+
         }
         mNewFriendLv.setVisibility(View.VISIBLE);
         mList.clear();

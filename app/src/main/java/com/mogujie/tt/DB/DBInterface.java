@@ -208,6 +208,8 @@ public class DBInterface {
         applyUserDao.insertOrReplaceInTx(entityList);
     }
 
+
+
     /**update*/
     public int getUserInfoLastTime(){
         UserDao sessionDao =  openReadableDb().getUserDao();

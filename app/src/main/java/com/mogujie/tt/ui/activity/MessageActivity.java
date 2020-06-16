@@ -145,7 +145,7 @@ public class MessageActivity extends TTBaseActivity
     private AlbumHelper albumHelper = null;
 
 
-    private List<ImageBucket> albumList = null;
+    private List<ImageBucket> albumList = new ArrayList<>();
     MGProgressbar progressbar = null;
 
     //private boolean audioReday = false; 语音先关的

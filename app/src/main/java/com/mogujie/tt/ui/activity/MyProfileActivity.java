@@ -355,6 +355,9 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
             startService(loadImageIntent);
         }
 
+
+
+
     }
 
     public void onEventMainThread(UploadHeaderEvent event) {

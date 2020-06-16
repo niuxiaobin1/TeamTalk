@@ -729,6 +729,30 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_GET_APPLY_LIST_RESPONSE = 552;</code>
      */
     CID_BUDDY_GET_APPLY_LIST_RESPONSE(32, 552),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST = 553;</code>
+     *
+     * <pre>
+     *修改个人信息昵称,手机号码
+     * </pre>
+     */
+    CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST(33, 553),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE = 560;</code>
+     */
+    CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE(34, 560),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST = 561;</code>
+     *
+     * <pre>
+     *修改好友备注
+     * </pre>
+     */
+    CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST(35, 561),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE = 562;</code>
+     */
+    CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE(36, 562),
     ;
 
     /**
@@ -908,6 +932,30 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_GET_APPLY_LIST_RESPONSE = 552;</code>
      */
     public static final int CID_BUDDY_GET_APPLY_LIST_RESPONSE_VALUE = 552;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST = 553;</code>
+     *
+     * <pre>
+     *修改个人信息昵称,手机号码
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST_VALUE = 553;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE = 560;</code>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE_VALUE = 560;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST = 561;</code>
+     *
+     * <pre>
+     *修改好友备注
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST_VALUE = 561;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE = 562;</code>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE_VALUE = 562;
 
 
     public final int getNumber() { return value; }
@@ -947,6 +995,10 @@ public final class IMBaseDefine {
         case 550: return CID_BUDDY_DEL_FRIEND_RESPONSE;
         case 551: return CID_BUDDY_GET_APPLY_LIST_REQUEST;
         case 552: return CID_BUDDY_GET_APPLY_LIST_RESPONSE;
+        case 553: return CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST;
+        case 560: return CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE;
+        case 561: return CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST;
+        case 562: return CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE;
         default: return null;
       }
     }

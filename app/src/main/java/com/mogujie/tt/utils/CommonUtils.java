@@ -30,7 +30,7 @@ public class CommonUtils {
     //判断手机格式是否正确
     public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern
-                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+                .compile("^1[3-9]\\d{9}$");
         Matcher m = p.matcher(mobiles);
 
         return m.matches();

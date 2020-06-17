@@ -29,6 +29,7 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.config.TUIKitConstants;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
+import com.mogujie.tt.imservice.event.ChangeUserInfoEvent;
 import com.mogujie.tt.imservice.event.UploadHeaderEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.service.IMService;
@@ -37,6 +38,8 @@ import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.widget.LineControllerView;
 import com.mogujie.tt.ui.widget.QrcodeWindow;
+import com.mogujie.tt.utils.CommonUtil;
+import com.mogujie.tt.utils.CommonUtils;
 import com.mogujie.tt.utils.GlideEngine;
 import com.mogujie.tt.utils.ToastUtil;
 
@@ -272,7 +275,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 @Override
                 public void onReturn(Object text) {
                     mModifyNickNameView.setContent(text.toString());
-                    updateUserInfo(null);
+                    updateUserInfo();
                 }
             });
         } else if (v.getId() == R.id.modify_phone) {
@@ -285,7 +288,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 @Override
                 public void onReturn(Object text) {
                     mModifyPhoneView.setContent(text.toString());
-                    updateUserInfo(null);
+                    updateUserInfo();
                 }
             });
         } else if (v.getId() == R.id.modify_gender) {
@@ -298,7 +301,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 public void onReturn(Object text) {
                     mModifyGenderView.setContent(mGenderList.get((Integer) text));
                     mGenderIndex = (Integer) text;
-                    updateUserInfo(null);
+                    updateUserInfo();
                 }
             });
         } else if (v.getId() == R.id.modify_qrcode) {
@@ -341,23 +344,51 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                         }
                     }
                     if (!TextUtils.isEmpty(iconPath)) {
-                        updateUserInfo(iconPath);
+                        updateUserImage(iconPath);
                     }
                     break;
             }
         }
     }
 
-    private void updateUserInfo(String path) {
+    private void updateUserImage(String path) {
         if (!TextUtils.isEmpty(path)) {
             Intent loadImageIntent = new Intent(this, LoadImageService.class);
             loadImageIntent.putExtra(SysConstant.UPLOAD_HEADER_IMAGE_INTENT_PARAMS, path);
             startService(loadImageIntent);
         }
+    }
+
+    private void updateUserInfo() {
+
+        String nickName = mModifyNickNameView.getContent();
+        String phone = mModifyPhoneView.getContent();
+        if (!CommonUtils.isMobileNO(phone)) {
+            ToastUtil.toastShortMessage("手机号格式不正确");
+            return;
+        }
+
+        if (imService == null) {
+            return;
+        }
+        imService.getContactManager().reqChangeUsersInfo(nickName,phone);
+
+    }
 
 
-
-
+    public void onEventMainThread(ChangeUserInfoEvent event) {
+        switch (event) {
+            case USER_CHANGE_INFO_INFO_OK:
+                loginContact.setMainName(mModifyNickNameView.getContent());
+                loginContact.setPhone(mModifyPhoneView.getContent());
+                isUpdate = true;
+                DBInterface.instance().insertOrUpdateUser(loginContact);
+                imService.getLoginManager().setLoginInfo(loginContact);
+                break;
+            case USER_CHANGE_INFO_INFO_FAIL:
+                ToastUtil.toastShortMessage("上传失败");
+                break;
+        }
     }
 
     public void onEventMainThread(UploadHeaderEvent event) {

@@ -6,6 +6,7 @@ import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
+import com.mogujie.tt.imservice.event.ChangeUserInfoEvent;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.protobuf.IMBaseDefine;
@@ -293,6 +294,26 @@ public class IMContactManager extends IMManager {
         imSocketManager.sendRequest(imChangeAvatarReq, sid, cid);
     }
 
+    /**
+     * 更新用户昵称和电话
+     *
+     * @param nick,phone
+     */
+    public void reqChangeUsersInfo(String nick,String phone) {
+        logger.d("contact#contact#reqChangeUsersInfo----%s---%s",nick,phone);
+
+        int loginId = IMLoginManager.instance().getLoginId();
+        IMBuddy.IMChangeUserinfoReq imChangeUserInfoReq = IMBuddy.IMChangeUserinfoReq.newBuilder()
+                .setUserId(loginId)
+                .setMobile(phone)
+                .setNick(nick)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_USERINFO_REQUEST_VALUE;
+        imSocketManager.sendRequest(imChangeUserInfoReq, sid, cid);
+    }
+
 
 
 
@@ -417,6 +438,19 @@ public class IMContactManager extends IMManager {
             return;
         }
         EventBus.getDefault().postSticky(ChangeHeaderEvent.USER_CHANGE_HEADER_INFO_OK);
+
+    }
+    /**
+     * 更新用户昵称和电话结果返回
+     *
+     * @param imChangeUserinfoRsp
+     */
+    public void onRepChangeUserInfo(IMBuddy.IMChangeUserinfoRsp imChangeUserinfoRsp) {
+        if (imChangeUserinfoRsp == null) {
+            EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_FAIL);
+            return;
+        }
+        EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_OK);
 
     }
 

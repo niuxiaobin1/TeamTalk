@@ -51,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':filepicker')
     def permissions = "4.7.0"
     def androidx = "1.1.0"
 
@@ -87,5 +88,6 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.11.0"
     implementation "androidx.camera:camera-core:1.0.0-beta03"
     implementation "androidx.camera:camera-camera2:1.0.0-beta03"
+
 
 }

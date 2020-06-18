@@ -1,6 +1,8 @@
 
 package com.mogujie.tt.ui.activity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,11 +22,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.Selection;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -56,6 +56,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.animators.AnimationType;
+import com.luck.picture.lib.camera.CustomCameraView;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
@@ -80,15 +81,11 @@ import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
-import com.mogujie.tt.imservice.event.SelectEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMStackManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.adapter.MessageAdapter;
-import com.mogujie.tt.ui.adapter.album.AlbumHelper;
-import com.mogujie.tt.ui.adapter.album.ImageBucket;
-import com.mogujie.tt.ui.adapter.album.ImageItem;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.helper.AudioPlayerHandler;
 import com.mogujie.tt.ui.helper.AudioRecordHandler;
@@ -105,7 +102,7 @@ import com.mogujie.tt.utils.Logger;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
-import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -113,6 +110,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.greenrobot.event.EventBus;
+import droidninja.filepicker.FilePickerBuilder;
+import droidninja.filepicker.FilePickerConst;
+import droidninja.filepicker.models.sort.SortingTypes;
+import droidninja.filepicker.utils.ContentUriUtils;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
 
 import static com.mogujie.tt.config.SysConstant.MAX_SELECT_IMAGE_COUNT;
 
@@ -122,6 +125,7 @@ import static com.mogujie.tt.config.SysConstant.MAX_SELECT_IMAGE_COUNT;
  * @date 2014-7-15
  * <p/>
  */
+@RuntimePermissions
 public class MessageActivity extends TTBaseActivity
         implements
         OnRefreshListener2<ListView>,
@@ -158,10 +162,6 @@ public class MessageActivity extends TTBaseActivity
     private Thread audioRecorderThread = null;
     private Dialog soundVolumeDialog = null;
     private View addOthersPanelView = null;
-//    private AlbumHelper albumHelper = null;
-
-
-//    private List<ImageBucket> albumList = new ArrayList<>();
     MGProgressbar progressbar = null;
 
     //private boolean audioReday = false; 语音先关的
@@ -187,7 +187,7 @@ public class MessageActivity extends TTBaseActivity
 
     private PictureParameterStyle mPictureParameterStyle;
     private PictureCropParameterStyle mCropParameterStyle;
-
+    private ArrayList<Uri> docPaths = new ArrayList<>();
     /**
      * 全局Toast
      */
@@ -241,7 +241,6 @@ public class MessageActivity extends TTBaseActivity
         currentSessionKey = getIntent().getStringExtra(IntentConstant.KEY_SESSION_KEY);
         initSoftInputMethod();
         initEmo();
-        initAlbumHelper();
         initAudioHandler();
         initAudioSensor();
         initView();
@@ -365,14 +364,12 @@ public class MessageActivity extends TTBaseActivity
         if (RESULT_OK != resultCode)
             return;
         switch (requestCode) {
-            case SysConstant.CAMERA_WITH_DATA:
-                handleTakePhotoData(data);
-                break;
             case SysConstant.ALBUM_BACK_DATA:
                 logger.d("pic#ALBUM_BACK_DATA");
                 setIntent(data);
                 break;
             case PictureConfig.CHOOSE_REQUEST:
+            case PictureConfig.REQUEST_CAMERA:
                 // 图片选择结果回调
                 List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                 // 例如 LocalMedia 里面返回五种path
@@ -386,20 +383,27 @@ public class MessageActivity extends TTBaseActivity
                 if (selectList != null || selectList.size() > 0)
                     handleImagePickData(selectList);
                 break;
+            case FilePickerConst.REQUEST_CODE_DOC:
+                if (data != null) {
+                    ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
+                    if (dataList != null) {
+                        docPaths = new ArrayList<>();
+                        docPaths.addAll(dataList);
+                    }
+                    for (int i = 0; i <docPaths.size() ; i++) {
+                        try {
+                            Log.e("nxb",
+                                    ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//    private void handleImagePickData(List<ImageItem> list) {
-//        ArrayList<ImageMessage> listMsg = new ArrayList<>();
-//        ArrayList<ImageItem> itemList = (ArrayList<ImageItem>) list;
-//        for (ImageItem item : itemList) {
-//            ImageMessage imageMessage = ImageMessage.buildForSend(item, loginUser, peerEntity);
-//            listMsg.add(imageMessage);
-//            pushList(imageMessage);
-//        }
-//        imService.getMessageManager().sendImages(listMsg);
-//    }
     private void handleImagePickData(List<LocalMedia> list) {
         ArrayList<ImageMessage> listMsg = new ArrayList<>();
         ArrayList<LocalMedia> itemList = (ArrayList<LocalMedia>) list;
@@ -411,12 +415,21 @@ public class MessageActivity extends TTBaseActivity
         imService.getMessageManager().sendImages(listMsg);
     }
 
-
-    public void onEventMainThread(SelectEvent event) {
-//        List<ImageItem> itemList = event.getList();
-//        if (itemList != null || itemList.size() > 0)
-//            handleImagePickData(itemList);
+    /**
+     * @param data
+     * @Description 处理拍照后的数据
+     * 应该是从某个 activity回来的
+     */
+    private void handleTakePhotoData(Intent data) {
+        ImageMessage imageMessage = ImageMessage.buildForSend(takePhotoSavePath, loginUser, peerEntity);
+        List<ImageMessage> sendList = new ArrayList<>(1);
+        sendList.add(imageMessage);
+        imService.getMessageManager().sendImages(sendList);
+        // 格式有些问题
+        pushList(imageMessage);
+        messageEdt.clearFocus();//消除焦点
     }
+
 
     /**
      * 背景: 1.EventBus的cancelEventDelivery的只能在postThread中运行，而且没有办法绕过这一点
@@ -601,11 +614,6 @@ public class MessageActivity extends TTBaseActivity
     /**
      * @Description 初始化数据（相册,表情,数据库相关）
      */
-    private void initAlbumHelper() {
-//        albumHelper = AlbumHelper.getHelper(MessageActivity.this);
-//        albumList = albumHelper.getImagesBucketList(false);
-    }
-
     private void initEmo() {
         Emoparser.getInstance(MessageActivity.this);
         IMApplication.gifRunning = true;
@@ -686,9 +694,11 @@ public class MessageActivity extends TTBaseActivity
         }
         View takePhotoBtn = findViewById(R.id.take_photo_btn);
         View takeCameraBtn = findViewById(R.id.take_camera_btn);
+        View fileTransferBtn = findViewById(R.id.file_transfer_btn);
         View takeTransferBtn = findViewById(R.id.take_transfer_btn);
         View takeRedPacketBtn = findViewById(R.id.take_red_packet_btn);
         takePhotoBtn.setOnClickListener(this);
+        fileTransferBtn.setOnClickListener(this);
         takeCameraBtn.setOnClickListener(this);
         takeTransferBtn.setOnClickListener(this);
         takeRedPacketBtn.setOnClickListener(this);
@@ -810,20 +820,6 @@ public class MessageActivity extends TTBaseActivity
         super.onConfigurationChanged(config);
     }
 
-    /**
-     * @param data
-     * @Description 处理拍照后的数据
-     * 应该是从某个 activity回来的
-     */
-    private void handleTakePhotoData(Intent data) {
-        ImageMessage imageMessage = ImageMessage.buildForSend(takePhotoSavePath, loginUser, peerEntity);
-        List<ImageMessage> sendList = new ArrayList<>(1);
-        sendList.add(imageMessage);
-        imService.getMessageManager().sendImages(sendList);
-        // 格式有些问题
-        pushList(imageMessage);
-        messageEdt.clearFocus();//消除焦点
-    }
 
     /**
      * @param audioLen
@@ -925,21 +921,6 @@ public class MessageActivity extends TTBaseActivity
             }
             break;
             case R.id.take_photo_btn: {
-//                if (albumList.size() < 1) {
-//                    Toast.makeText(MessageActivity.this,
-//                            getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG)
-//                            .show();
-//                    return;
-//                }
-//                // 选择图片的时候要将session的整个回话 传过来
-//                Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
-//                intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
-//                startActivityForResult(intent, SysConstant.ALBUM_BACK_DATA);
-//
-//                MessageActivity.this.overridePendingTransition(R.anim.tt_album_enter, R.anim.tt_stay);
-//                //addOthersPanelView.setVisibility(View.GONE);
-
-
                 PictureSelector.create(MessageActivity.this)
                         .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                         .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
@@ -950,7 +931,6 @@ public class MessageActivity extends TTBaseActivity
                         .isPageStrategy(true)// 是否开启分页策略 & 每页多少条；默认开启
                         .setPictureStyle(mPictureParameterStyle)// 动态自定义相册主题
                         .setPictureCropStyle(mCropParameterStyle)// 动态自定义裁剪主题
-                        //.setPictureWindowAnimationStyle()// 自定义相册启动退出动画
                         .setRecyclerAnimationMode(AnimationType.SLIDE_IN_BOTTOM_ANIMATION)// 列表动画效果
                         .isWithVideoImage(true)// 图片和视频是否可以同选,只在ofAll模式下有效
                         .isMaxSelectEnabledMask(true)// 选择数到了最大阀值列表是否启用蒙层效果
@@ -1028,12 +1008,30 @@ public class MessageActivity extends TTBaseActivity
             }
             break;
             case R.id.take_camera_btn: {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 takePhotoSavePath = CommonUtil.getImageSavePath(String.valueOf(System
                         .currentTimeMillis())
                         + ".jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
-                startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
+//                startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
+
+                PictureSelector.create(this)
+                        .openCamera(PictureMimeType.ofImage())
+                        .theme(R.style.picture_WeChat_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style v2.3.3后 建议使用setPictureStyle()动态方式
+                        .isWeChatStyle(true)// 是否开启微信图片选择风格
+                        .isUseCustomCamera(true)// 是否使用自定义相机
+                        .setLanguage(LanguageConfig.ENGLISH)// 设置语言，默认中文
+                        .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项 // 请参考Demo GlideEngine.java
+                        .isEnableCrop(false)// 是否裁剪
+                        //.basicUCropConfig()//对外提供所有UCropOptions参数配制，但如果PictureSelector原本支持设置的还是会使用原有的设置
+                        .isCompress(true)// 是否压缩
+                        .compressQuality(80)// 图片压缩后输出质量 0~ 100
+                        .synOrAsy(true)//同步true或异步false 压缩 默认同步
+                        .cutOutQuality(90)// 裁剪输出质量 默认100
+                        .minimumCompressSize(100)// 小于多少kb的图片不压缩
+                        .setOutputCameraPath(takePhotoSavePath)// 自定义相机输出目录，只针对Android Q以下，例如 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) +  File.separator + "Camera" + File.separator;
+                        .setButtonFeatures(CustomCameraView.BUTTON_STATE_ONLY_CAPTURE)// 设置自定义相机按钮状态
+                        .forResult(PictureConfig.REQUEST_CAMERA);
                 //addOthersPanelView.setVisibility(View.GONE);
                 messageEdt.clearFocus();//切记清除焦点
                 scrollToBottomListItem();
@@ -1047,6 +1045,11 @@ public class MessageActivity extends TTBaseActivity
             case R.id.take_red_packet_btn: {
                 Intent intent = new Intent(MessageActivity.this, RedPacketActivity.class);
                 startActivity(intent);
+            }
+            break;
+            case R.id.file_transfer_btn: {
+                MessageActivityPermissionsDispatcher.pickDocClickedWithPermissionCheck(MessageActivity.this
+                );
             }
             break;
             case R.id.show_emo_btn: {
@@ -1472,7 +1475,6 @@ public class MessageActivity extends TTBaseActivity
     }
 
 
-
     private void getWeChatStyle() {
         // 相册主题
         mPictureParameterStyle = new PictureParameterStyle();
@@ -1578,4 +1580,21 @@ public class MessageActivity extends TTBaseActivity
                 mPictureParameterStyle.isChangeStatusBarFontColor);
     }
 
+    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public void pickDocClicked() {
+        String[] zips = {"zip", "rar"};
+        String[] pdfs = {"aac"};
+        FilePickerBuilder.getInstance()
+                .setMaxCount(9)
+                .setSelectedFiles(docPaths)
+                .setActivityTheme(R.style.AppTheme)
+                .setActivityTitle("Please select file")
+                .addFileSupport("ZIP", zips)
+                .addFileSupport("AAC", pdfs, R.mipmap.pdf_blue)
+                .enableDocSupport(true)
+                .enableSelectAll(true)
+                .sortDocumentsBy(SortingTypes.name)
+                .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .pickFile(this);
+    }
 }

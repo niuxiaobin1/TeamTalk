@@ -22,6 +22,7 @@
 
     <!-- login -->
     <color name="default_bk">#ffffff</color>
+    <color name="white">#ffffff</color>
     <color name="half_transparent_dark">#e0000000</color>
     <color name="half_transparent_light">#AA000000</color>
     <color name="login_hint_color">#d4d4d4</color>
@@ -93,7 +94,6 @@
     <color name="dialog_line_bg">#c6c6c6</color>
     <color name="read_dot_bg">#f74c31</color>
 
-    <color name="white">#FFFFFF</color>
     <color name="line">#DDDDDD</color>
     <color name="app_color_white_transparent">#E0DBDBDB</color>
     <color name="text_gray1">#777777</color>

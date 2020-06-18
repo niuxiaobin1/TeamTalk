@@ -1,2 +1,3 @@
+include ':filepicker'
 include ':mgimlibs', ':daogenerator'
 include ':app'

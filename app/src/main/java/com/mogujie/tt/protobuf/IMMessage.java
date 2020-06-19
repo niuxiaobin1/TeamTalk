@@ -9751,6 +9751,1995 @@ public final class IMMessage {
     // @@protoc_insertion_point(class_scope:IM.Message.IMGetMsgByIdRsp)
   }
 
+  public interface IMTransferStatusOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Message.IMTransferStatus)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x030f
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x030f
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *红包发送方
+     * </pre>
+     */
+    boolean hasFromUserId();
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *红包发送方
+     * </pre>
+     */
+    int getFromUserId();
+
+    /**
+     * <code>required uint32 to_user_id = 3;</code>
+     *
+     * <pre>
+     *红包接受方
+     * </pre>
+     */
+    boolean hasToUserId();
+    /**
+     * <code>required uint32 to_user_id = 3;</code>
+     *
+     * <pre>
+     *红包接受方
+     * </pre>
+     */
+    int getToUserId();
+
+    /**
+     * <code>required uint32 msg_id = 4;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    boolean hasMsgId();
+    /**
+     * <code>required uint32 msg_id = 4;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    int getMsgId();
+
+    /**
+     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     *
+     * <pre>
+     *红包或者转账
+     * </pre>
+     */
+    boolean hasMsgType();
+    /**
+     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     *
+     * <pre>
+     *红包或者转账
+     * </pre>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType();
+
+    /**
+     * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+     */
+    boolean hasDoType();
+    /**
+     * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType getDoType();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Message.IMTransferStatus}
+   */
+  public static final class IMTransferStatus extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Message.IMTransferStatus)
+      IMTransferStatusOrBuilder {
+    // Use IMTransferStatus.newBuilder() to construct.
+    private IMTransferStatus(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMTransferStatus(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMTransferStatus defaultInstance;
+    public static IMTransferStatus getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMTransferStatus getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMTransferStatus(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              fromUserId_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              toUserId_ = input.readUInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              msgId_ = input.readUInt32();
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.mogujie.tt.protobuf.IMBaseDefine.MsgType value = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.valueOf(rawValue);
+              if (value == null) {
+                unknownFieldsCodedOutput.writeRawVarint32(tag);
+                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                msgType_ = value;
+              }
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType value = com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType.valueOf(rawValue);
+              if (value == null) {
+                unknownFieldsCodedOutput.writeRawVarint32(tag);
+                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                doType_ = value;
+              }
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000040;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMTransferStatus> PARSER =
+        new com.google.protobuf.AbstractParser<IMTransferStatus>() {
+      public IMTransferStatus parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMTransferStatus(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMTransferStatus> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x030f
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x030f
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int FROM_USER_ID_FIELD_NUMBER = 2;
+    private int fromUserId_;
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *红包发送方
+     * </pre>
+     */
+    public boolean hasFromUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *红包发送方
+     * </pre>
+     */
+    public int getFromUserId() {
+      return fromUserId_;
+    }
+
+    public static final int TO_USER_ID_FIELD_NUMBER = 3;
+    private int toUserId_;
+    /**
+     * <code>required uint32 to_user_id = 3;</code>
+     *
+     * <pre>
+     *红包接受方
+     * </pre>
+     */
+    public boolean hasToUserId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint32 to_user_id = 3;</code>
+     *
+     * <pre>
+     *红包接受方
+     * </pre>
+     */
+    public int getToUserId() {
+      return toUserId_;
+    }
+
+    public static final int MSG_ID_FIELD_NUMBER = 4;
+    private int msgId_;
+    /**
+     * <code>required uint32 msg_id = 4;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    public boolean hasMsgId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 msg_id = 4;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    public int getMsgId() {
+      return msgId_;
+    }
+
+    public static final int MSG_TYPE_FIELD_NUMBER = 5;
+    private com.mogujie.tt.protobuf.IMBaseDefine.MsgType msgType_;
+    /**
+     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     *
+     * <pre>
+     *红包或者转账
+     * </pre>
+     */
+    public boolean hasMsgType() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+     *
+     * <pre>
+     *红包或者转账
+     * </pre>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType() {
+      return msgType_;
+    }
+
+    public static final int DO_TYPE_FIELD_NUMBER = 6;
+    private com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType doType_;
+    /**
+     * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+     */
+    public boolean hasDoType() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType getDoType() {
+      return doType_;
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      fromUserId_ = 0;
+      toUserId_ = 0;
+      msgId_ = 0;
+      msgType_ = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
+      doType_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY;
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFromUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasToUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMsgId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMsgType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDoType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, toUserId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, msgId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, msgType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(6, doType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, toUserId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, msgId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, msgType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, doType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMMessage.IMTransferStatus prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Message.IMTransferStatus}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMMessage.IMTransferStatus, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Message.IMTransferStatus)
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatusOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMMessage.IMTransferStatus.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        toUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        msgId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        msgType_ = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        doType_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatus getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMMessage.IMTransferStatus.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatus build() {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatus result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatus buildPartial() {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatus result = new com.mogujie.tt.protobuf.IMMessage.IMTransferStatus(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.fromUserId_ = fromUserId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.toUserId_ = toUserId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.msgId_ = msgId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.msgType_ = msgType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.doType_ = doType_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMMessage.IMTransferStatus other) {
+        if (other == com.mogujie.tt.protobuf.IMMessage.IMTransferStatus.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasFromUserId()) {
+          setFromUserId(other.getFromUserId());
+        }
+        if (other.hasToUserId()) {
+          setToUserId(other.getToUserId());
+        }
+        if (other.hasMsgId()) {
+          setMsgId(other.getMsgId());
+        }
+        if (other.hasMsgType()) {
+          setMsgType(other.getMsgType());
+        }
+        if (other.hasDoType()) {
+          setDoType(other.getDoType());
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasFromUserId()) {
+          
+          return false;
+        }
+        if (!hasToUserId()) {
+          
+          return false;
+        }
+        if (!hasMsgId()) {
+          
+          return false;
+        }
+        if (!hasMsgType()) {
+          
+          return false;
+        }
+        if (!hasDoType()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatus parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMMessage.IMTransferStatus) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x030f
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x030f
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x030f
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x030f
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int fromUserId_ ;
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *红包发送方
+       * </pre>
+       */
+      public boolean hasFromUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *红包发送方
+       * </pre>
+       */
+      public int getFromUserId() {
+        return fromUserId_;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *红包发送方
+       * </pre>
+       */
+      public Builder setFromUserId(int value) {
+        bitField0_ |= 0x00000002;
+        fromUserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *红包发送方
+       * </pre>
+       */
+      public Builder clearFromUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fromUserId_ = 0;
+        
+        return this;
+      }
+
+      private int toUserId_ ;
+      /**
+       * <code>required uint32 to_user_id = 3;</code>
+       *
+       * <pre>
+       *红包接受方
+       * </pre>
+       */
+      public boolean hasToUserId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint32 to_user_id = 3;</code>
+       *
+       * <pre>
+       *红包接受方
+       * </pre>
+       */
+      public int getToUserId() {
+        return toUserId_;
+      }
+      /**
+       * <code>required uint32 to_user_id = 3;</code>
+       *
+       * <pre>
+       *红包接受方
+       * </pre>
+       */
+      public Builder setToUserId(int value) {
+        bitField0_ |= 0x00000004;
+        toUserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 to_user_id = 3;</code>
+       *
+       * <pre>
+       *红包接受方
+       * </pre>
+       */
+      public Builder clearToUserId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        toUserId_ = 0;
+        
+        return this;
+      }
+
+      private int msgId_ ;
+      /**
+       * <code>required uint32 msg_id = 4;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public boolean hasMsgId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 msg_id = 4;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public int getMsgId() {
+        return msgId_;
+      }
+      /**
+       * <code>required uint32 msg_id = 4;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public Builder setMsgId(int value) {
+        bitField0_ |= 0x00000008;
+        msgId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 msg_id = 4;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public Builder clearMsgId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        msgId_ = 0;
+        
+        return this;
+      }
+
+      private com.mogujie.tt.protobuf.IMBaseDefine.MsgType msgType_ = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
+      /**
+       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       *
+       * <pre>
+       *红包或者转账
+       * </pre>
+       */
+      public boolean hasMsgType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       *
+       * <pre>
+       *红包或者转账
+       * </pre>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.MsgType getMsgType() {
+        return msgType_;
+      }
+      /**
+       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       *
+       * <pre>
+       *红包或者转账
+       * </pre>
+       */
+      public Builder setMsgType(com.mogujie.tt.protobuf.IMBaseDefine.MsgType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        msgType_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .IM.BaseDefine.MsgType msg_type = 5;</code>
+       *
+       * <pre>
+       *红包或者转账
+       * </pre>
+       */
+      public Builder clearMsgType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        msgType_ = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
+        
+        return this;
+      }
+
+      private com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType doType_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY;
+      /**
+       * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+       */
+      public boolean hasDoType() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType getDoType() {
+        return doType_;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+       */
+      public Builder setDoType(com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        doType_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferDoType do_type = 6;</code>
+       */
+      public Builder clearDoType() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        doType_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Message.IMTransferStatus)
+    }
+
+    static {
+      defaultInstance = new IMTransferStatus(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Message.IMTransferStatus)
+  }
+
+  public interface IMTransferStatusAckOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Message.IMTransferStatusAck)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0310
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0310
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 msg_id = 2;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    boolean hasMsgId();
+    /**
+     * <code>required uint32 msg_id = 2;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    int getMsgId();
+
+    /**
+     * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType getStatus();
+
+    /**
+     * <code>required uint32 result_code = 4;</code>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 4;</code>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    boolean hasResultString();
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    java.lang.String getResultString();
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getResultStringBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Message.IMTransferStatusAck}
+   */
+  public static final class IMTransferStatusAck extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Message.IMTransferStatusAck)
+      IMTransferStatusAckOrBuilder {
+    // Use IMTransferStatusAck.newBuilder() to construct.
+    private IMTransferStatusAck(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMTransferStatusAck(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMTransferStatusAck defaultInstance;
+    public static IMTransferStatusAck getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMTransferStatusAck getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMTransferStatusAck(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              msgId_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType value = com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.valueOf(rawValue);
+              if (value == null) {
+                unknownFieldsCodedOutput.writeRawVarint32(tag);
+                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              resultString_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000020;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMTransferStatusAck> PARSER =
+        new com.google.protobuf.AbstractParser<IMTransferStatusAck>() {
+      public IMTransferStatusAck parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMTransferStatusAck(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMTransferStatusAck> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0310
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0310
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int MSG_ID_FIELD_NUMBER = 2;
+    private int msgId_;
+    /**
+     * <code>required uint32 msg_id = 2;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    public boolean hasMsgId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 msg_id = 2;</code>
+     *
+     * <pre>
+     *红包的消息ID
+     * </pre>
+     */
+    public int getMsgId() {
+      return msgId_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType status_;
+    /**
+     * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType getStatus() {
+      return status_;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 4;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 4;</code>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 result_code = 4;</code>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int RESULT_STRING_FIELD_NUMBER = 5;
+    private java.lang.Object resultString_;
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    public boolean hasResultString() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    public java.lang.String getResultString() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          resultString_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string result_string = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getResultStringBytes() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        resultString_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      msgId_ = 0;
+      status_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_WAIT;
+      resultCode_ = 0;
+      resultString_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMsgId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultString()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, msgId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, resultCode_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getResultStringBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, msgId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, resultCode_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getResultStringBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Message.IMTransferStatusAck}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Message.IMTransferStatusAck)
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAckOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        msgId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_WAIT;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        resultString_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck build() {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck buildPartial() {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck result = new com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.msgId_ = msgId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.status_ = status_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.resultString_ = resultString_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck other) {
+        if (other == com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasMsgId()) {
+          setMsgId(other.getMsgId());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasResultString()) {
+          bitField0_ |= 0x00000010;
+          resultString_ = other.resultString_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasMsgId()) {
+          
+          return false;
+        }
+        if (!hasStatus()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasResultString()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMMessage.IMTransferStatusAck) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0310
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0310
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0310
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0310
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int msgId_ ;
+      /**
+       * <code>required uint32 msg_id = 2;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public boolean hasMsgId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 msg_id = 2;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public int getMsgId() {
+        return msgId_;
+      }
+      /**
+       * <code>required uint32 msg_id = 2;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public Builder setMsgId(int value) {
+        bitField0_ |= 0x00000002;
+        msgId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 msg_id = 2;</code>
+       *
+       * <pre>
+       *红包的消息ID
+       * </pre>
+       */
+      public Builder clearMsgId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        msgId_ = 0;
+        
+        return this;
+      }
+
+      private com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType status_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_WAIT;
+      /**
+       * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType getStatus() {
+        return status_;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+       */
+      public Builder setStatus(com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferStatusType status = 3;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_WAIT;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 4;</code>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 result_code = 4;</code>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 4;</code>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000008;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 4;</code>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object resultString_ = "";
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public boolean hasResultString() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public java.lang.String getResultString() {
+        java.lang.Object ref = resultString_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            resultString_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getResultStringBytes() {
+        java.lang.Object ref = resultString_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          resultString_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public Builder setResultString(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        resultString_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public Builder clearResultString() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        resultString_ = getDefaultInstance().getResultString();
+        
+        return this;
+      }
+      /**
+       * <code>required string result_string = 5;</code>
+       */
+      public Builder setResultStringBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        resultString_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Message.IMTransferStatusAck)
+    }
+
+    static {
+      defaultInstance = new IMTransferStatusAck(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Message.IMTransferStatusAck)
+  }
+
 
   static {
   }

@@ -19,6 +19,8 @@ public class Java2ProtoBuf {
                 return IMBaseDefine.MsgType.MSG_TYPE_SINGLE_AUDIO;
             case DBConstant.MSG_TYPE_SINGLE_TEXT:
                 return IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
+            case DBConstant.MSG_TYPE_SINGLE_RED_PACKET:
+                return IMBaseDefine.MsgType.MSG_TYPE_SINGLE_RED_PACK;
             default:
                 throw new IllegalArgumentException("msgType is illegal,cause by #getProtoMsgType#" +msgType);
         }

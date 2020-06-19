@@ -15,6 +15,7 @@ import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
+import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
@@ -271,6 +272,13 @@ public class IMMessageManager extends IMManager {
         long pkId = DBInterface.instance().insertOrUpdateMessage(textMessage);
         sessionManager.updateSession(textMessage);
         sendMessage(textMessage);
+    }
+    public void sendRedPacket(RedPacketMessage redPacketMessage) {
+        logger.i("chat#redPacket#redPacketMessage");
+        redPacketMessage.setStatus(MessageConstant.MSG_SENDING);
+        long pkId = DBInterface.instance().insertOrUpdateMessage(redPacketMessage);
+        sessionManager.updateSession(redPacketMessage);
+        sendMessage(redPacketMessage);
     }
 
     public void sendVoice(AudioMessage audioMessage) {

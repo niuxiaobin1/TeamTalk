@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center_horizontal"
-    android:background="#fff8f8f8"
-    android:orientation="vertical"
-    tools:context=".ui.activity.SelectionActivity">
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10mm"
+        android:background="@drawable/chat_top_line_bg" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginRight="15dp"
+        android:layout_height="57mm"
+        android:layout_marginLeft="15mm"
+        android:layout_marginTop="88mm"
+        android:layout_marginRight="15mm"
         android:background="@drawable/send_red_packet_input_conner_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingLeft="15mm"
+        android:paddingRight="15mm">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,9 +32,9 @@
 
         <EditText
             android:id="@+id/amountEt"
+            android:layout_marginLeft="16mm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_weight="1"
             android:background="@null"
             android:gravity="right"
@@ -45,7 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="15mm"
             android:text="@string/transfer_unit"
             android:textColor="@color/color_33"
             android:textSize="17sp" />
@@ -55,13 +57,13 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="70mm">
 
         <TextView
             android:id="@+id/unitTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="7mm"
             android:text="@string/transfer_unit"
             android:textColor="@color/color_33"
             android:textSize="39sp"
@@ -71,7 +73,7 @@
             android:id="@+id/amountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="3mm"
             android:layout_toRightOf="@id/unitTv"
             android:text="0.00"
             android:textColor="@color/color_33"
@@ -80,18 +82,18 @@
 
     </RelativeLayout>
 
+
+
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_send"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="37.5dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/shape_bg_green_corner5"
-        android:text="@string/send_message"
+        android:layout_height="50mm"
+        android:layout_marginLeft="12mm"
+        android:layout_marginTop="55mm"
+        android:layout_marginRight="12mm"
+        android:background="@drawable/shape_done_btn"
+        android:text="@string/send"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
-
-
+        android:textSize="16sp" />
 </LinearLayout>

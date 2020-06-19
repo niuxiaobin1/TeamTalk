@@ -10586,6 +10586,32 @@ public final class IMLogin {
         getAuthcodeBytes();
 
     /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    boolean hasOpenid();
+    /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    java.lang.String getOpenid();
+    /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getOpenidBytes();
+
+    /**
      * <code>optional bytes attach_data = 20;</code>
      *
      * <pre>
@@ -10674,8 +10700,14 @@ public final class IMLogin {
               authcode_ = bs;
               break;
             }
-            case 162: {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
+              openid_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000010;
               attachData_ = input.readBytes();
               break;
             }
@@ -10875,6 +10907,60 @@ public final class IMLogin {
       }
     }
 
+    public static final int OPENID_FIELD_NUMBER = 4;
+    private java.lang.Object openid_;
+    /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    public boolean hasOpenid() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    public java.lang.String getOpenid() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          openid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string openid = 4;</code>
+     *
+     * <pre>
+     * pay 的openid
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getOpenidBytes() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        openid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
@@ -10885,7 +10971,7 @@ public final class IMLogin {
      * </pre>
      */
     public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional bytes attach_data = 20;</code>
@@ -10902,6 +10988,7 @@ public final class IMLogin {
       email_ = "";
       password_ = "";
       authcode_ = "";
+      openid_ = "";
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -10922,6 +11009,10 @@ public final class IMLogin {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasOpenid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -10939,6 +11030,9 @@ public final class IMLogin {
         output.writeBytes(3, getAuthcodeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(20, attachData_);
       }
       output.writeRawBytes(unknownFields);
@@ -10963,6 +11057,10 @@ public final class IMLogin {
           .computeBytesSize(3, getAuthcodeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -11070,8 +11168,10 @@ public final class IMLogin {
         bitField0_ = (bitField0_ & ~0x00000002);
         authcode_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        openid_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -11110,6 +11210,10 @@ public final class IMLogin {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.openid_ = openid_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.attachData_ = attachData_;
         result.bitField0_ = to_bitField0_;
         return result;
@@ -11132,6 +11236,11 @@ public final class IMLogin {
           authcode_ = other.authcode_;
           
         }
+        if (other.hasOpenid()) {
+          bitField0_ |= 0x00000008;
+          openid_ = other.openid_;
+          
+        }
         if (other.hasAttachData()) {
           setAttachData(other.getAttachData());
         }
@@ -11150,6 +11259,10 @@ public final class IMLogin {
           return false;
         }
         if (!hasAuthcode()) {
+          
+          return false;
+        }
+        if (!hasOpenid()) {
           
           return false;
         }
@@ -11475,6 +11588,106 @@ public final class IMLogin {
         return this;
       }
 
+      private java.lang.Object openid_ = "";
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public boolean hasOpenid() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public java.lang.String getOpenid() {
+        java.lang.Object ref = openid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            openid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getOpenidBytes() {
+        java.lang.Object ref = openid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          openid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public Builder setOpenid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        openid_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public Builder clearOpenid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        openid_ = getDefaultInstance().getOpenid();
+        
+        return this;
+      }
+      /**
+       * <code>required string openid = 4;</code>
+       *
+       * <pre>
+       * pay 的openid
+       * </pre>
+       */
+      public Builder setOpenidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        openid_ = value;
+        
+        return this;
+      }
+
       private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes attach_data = 20;</code>
@@ -11484,7 +11697,7 @@ public final class IMLogin {
        * </pre>
        */
       public boolean hasAttachData() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
@@ -11507,7 +11720,7 @@ public final class IMLogin {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         attachData_ = value;
         
         return this;
@@ -11520,7 +11733,7 @@ public final class IMLogin {
        * </pre>
        */
       public Builder clearAttachData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         attachData_ = getDefaultInstance().getAttachData();
         
         return this;

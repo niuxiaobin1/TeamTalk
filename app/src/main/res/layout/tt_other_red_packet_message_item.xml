@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mogujie.tt.ui.widget.message.RedPacketRenderView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/default_bk"
+    android:paddingLeft="10dp"
+    android:paddingBottom="20dp">
+
+    <com.mogujie.tt.ui.widget.IMBaseImageView
+        android:id="@+id/user_portrait"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tt_round_bg" />
+
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_portrait"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="60dp"
+        android:layout_toRightOf="@id/user_portrait"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="2dp"
+            android:text="小明"
+            android:textSize="11sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:paddingLeft="10mm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/user_portrait"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="199mm"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="199mm"
+                    android:layout_height="51mm"
+                    android:background="@drawable/shape_custome_msg_bg1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="9mm"
+                    android:paddingRight="9mm">
+
+                    <ImageView
+                        android:layout_width="33mm"
+                        android:layout_height="33mm"
+                        android:src="@mipmap/msg_red_packet_icon" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2.5mm"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/titleTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tansfer_title"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/amountTv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/transfer_unit"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:text="@string/chat_redpacket"
+                    android:layout_width="199mm"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_custome_msg_bg2"
+                    android:paddingLeft="15mm"
+                    android:paddingTop="3mm"
+                    android:paddingBottom="2mm"
+                    android:textColor="@color/color_78"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/message_state_failed"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/message_image_desc"
+                android:src="@drawable/tt_msg_tip"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.mogujie.tt.ui.widget.message.RedPacketRenderView>

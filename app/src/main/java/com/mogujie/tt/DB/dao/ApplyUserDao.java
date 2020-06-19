@@ -37,6 +37,7 @@ public class ApplyUserDao extends AbstractDao<UserEntity, Long> {
         public final static Property Status = new Property(10, int.class, "status", false, "STATUS");
         public final static Property Created = new Property(11, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(12, int.class, "updated", false, "UPDATED");
+        public final static Property OpenId = new Property(13, String.class, "openid", false, "OPEN_ID");
     };
 
 
@@ -64,7 +65,8 @@ public class ApplyUserDao extends AbstractDao<UserEntity, Long> {
                 "'DEPARTMENT_ID' INTEGER NOT NULL ," + // 9: departmentId
                 "'STATUS' INTEGER NOT NULL ," + // 10: status
                 "'CREATED' INTEGER NOT NULL ," + // 11: created
-                "'UPDATED' INTEGER NOT NULL );"); // 12: updated
+                "'UPDATED' INTEGER NOT NULL ," +// 12: updated
+                "'OPEN_ID' TEXT NOT NULL);");
         // Add Indexes
         db.execSQL("CREATE INDEX " + constraint + "IDX_ApplyUserInfo_PEER_ID ON ApplyUserInfo" +
                 " (PEER_ID);");
@@ -97,6 +99,7 @@ public class ApplyUserDao extends AbstractDao<UserEntity, Long> {
         stmt.bindLong(11, entity.getStatus());
         stmt.bindLong(12, entity.getCreated());
         stmt.bindLong(13, entity.getUpdated());
+        stmt.bindString(14, entity.getOpenid());
     }
 
     /** @inheritdoc */
@@ -121,7 +124,8 @@ public class ApplyUserDao extends AbstractDao<UserEntity, Long> {
             cursor.getInt(offset + 9), // departmentId
             cursor.getInt(offset + 10), // status
             cursor.getInt(offset + 11), // created
-            cursor.getInt(offset + 12) // updated
+            cursor.getInt(offset + 12), // updated
+            cursor.getString(offset + 13) // updated
         );
         return entity;
     }
@@ -142,6 +146,7 @@ public class ApplyUserDao extends AbstractDao<UserEntity, Long> {
         entity.setStatus(cursor.getInt(offset + 10));
         entity.setCreated(cursor.getInt(offset + 11));
         entity.setUpdated(cursor.getInt(offset + 12));
+        entity.setOpenid(cursor.getString(offset + 13));
      }
     
     /** @inheritdoc */

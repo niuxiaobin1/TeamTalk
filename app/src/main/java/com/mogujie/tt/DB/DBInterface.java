@@ -23,6 +23,7 @@ import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
+import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.utils.Logger;
 
@@ -496,6 +497,9 @@ public class DBInterface {
                     break;
                 case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
                     newList.add(TextMessage.parseFromDB(info));
+                    break;
+                case DBConstant.SHOW_PAY_RED_PACKET:
+                    newList.add(RedPacketMessage.parseFromDB(info));
                     break;
             }
         }

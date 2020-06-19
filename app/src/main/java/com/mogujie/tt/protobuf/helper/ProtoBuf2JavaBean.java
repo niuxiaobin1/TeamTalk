@@ -10,6 +10,7 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.MsgAnalyzeEngine;
+import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMGroup;
@@ -65,6 +66,7 @@ public class ProtoBuf2JavaBean {
         userEntity.setRealName(userInfo.getUserRealName());
         userEntity.setUpdated(timeNow);
         userEntity.setPeerId(userInfo.getUserId());
+        userEntity.setOpenid(userInfo.getOpenid());
 
         PinYin.getPinYin(userEntity.getMainName(), userEntity.getPinyinElement());
         return userEntity;
@@ -169,6 +171,9 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_TEXT:
                 messageEntity = analyzeText(msgInfo);
                 break;
+            case MSG_TYPE_SINGLE_RED_PACK:
+                messageEntity = analyzeRedPacket(msgInfo);
+                break;
             default:
                 throw new RuntimeException("ProtoBuf2JavaBean#getMessageEntity wrong type!");
         }
@@ -177,6 +182,25 @@ public class ProtoBuf2JavaBean {
 
     public static MessageEntity analyzeText(IMBaseDefine.MsgInfo msgInfo){
        return MsgAnalyzeEngine.analyzeMessage(msgInfo);
+    }
+
+    public static RedPacketMessage analyzeRedPacket(IMBaseDefine.MsgInfo msgInfo) {
+        RedPacketMessage redPacketMessage = new RedPacketMessage();
+        redPacketMessage.setFromId(msgInfo.getFromSessionId());
+        redPacketMessage.setMsgId(msgInfo.getMsgId());
+        redPacketMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
+        redPacketMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        redPacketMessage.setDisplayType(DBConstant.SHOW_PAY_RED_PACKET);
+        redPacketMessage.setCreated(msgInfo.getCreateTime());
+        redPacketMessage.setUpdated(msgInfo.getCreateTime());
+
+        /**
+         * 解密文本信息
+         */
+        String desMessage = new String(com.mogujie.tt.Security.getInstance().DecryptMsg(msgInfo.getMsgData().toStringUtf8()));
+        redPacketMessage.setContent(desMessage);
+
+        return redPacketMessage;
     }
 
 
@@ -250,6 +274,9 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_TEXT:
                 messageEntity = analyzeText(msgInfo);
                 break;
+            case MSG_TYPE_SINGLE_RED_PACK:
+                messageEntity = analyzeRedPacket(msgInfo);
+                break;
             default:
                 throw new RuntimeException("ProtoBuf2JavaBean#getMessageEntity wrong type!");
         }
@@ -287,6 +314,8 @@ public class ProtoBuf2JavaBean {
                 return DBConstant.MSG_TYPE_SINGLE_AUDIO;
             case MSG_TYPE_SINGLE_TEXT:
                 return DBConstant.MSG_TYPE_SINGLE_TEXT;
+            case MSG_TYPE_SINGLE_RED_PACK:
+                return DBConstant.MSG_TYPE_SINGLE_RED_PACKET;
             default:
                 throw new IllegalArgumentException("msgType is illegal,cause by #getProtoMsgType#" +msgType);
         }

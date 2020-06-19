@@ -753,6 +753,18 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE = 562;</code>
      */
     CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE(36, 562),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST = 563;</code>
+     *
+     * <pre>
+     *修改验证方式
+     * </pre>
+     */
+    CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST(37, 563),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE = 564;</code>
+     */
+    CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE(38, 564),
     ;
 
     /**
@@ -956,6 +968,18 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE = 562;</code>
      */
     public static final int CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE_VALUE = 562;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST = 563;</code>
+     *
+     * <pre>
+     *修改验证方式
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST_VALUE = 563;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE = 564;</code>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE_VALUE = 564;
 
 
     public final int getNumber() { return value; }
@@ -999,6 +1023,8 @@ public final class IMBaseDefine {
         case 560: return CID_BUDDY_LIST_CHANGE_USERINFO_RESPONSE;
         case 561: return CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST;
         case 562: return CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE;
+        case 563: return CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST;
+        case 564: return CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE;
         default: return null;
       }
     }
@@ -1118,6 +1144,18 @@ public final class IMBaseDefine {
      * <code>CID_MSG_GET_BY_MSG_ID_RES = 782;</code>
      */
     CID_MSG_GET_BY_MSG_ID_RES(13, 782),
+    /**
+     * <code>CID_MSG_TRANSFER_STATUS_REQ = 783;</code>
+     *
+     * <pre>
+     *查询/修改红包或者转账的状态,是否已接受
+     * </pre>
+     */
+    CID_MSG_TRANSFER_STATUS_REQ(14, 783),
+    /**
+     * <code>CID_MSG_TRANSFER_STATUS_RES = 784;</code>
+     */
+    CID_MSG_TRANSFER_STATUS_RES(15, 784),
     ;
 
     /**
@@ -1205,6 +1243,18 @@ public final class IMBaseDefine {
      * <code>CID_MSG_GET_BY_MSG_ID_RES = 782;</code>
      */
     public static final int CID_MSG_GET_BY_MSG_ID_RES_VALUE = 782;
+    /**
+     * <code>CID_MSG_TRANSFER_STATUS_REQ = 783;</code>
+     *
+     * <pre>
+     *查询/修改红包或者转账的状态,是否已接受
+     * </pre>
+     */
+    public static final int CID_MSG_TRANSFER_STATUS_REQ_VALUE = 783;
+    /**
+     * <code>CID_MSG_TRANSFER_STATUS_RES = 784;</code>
+     */
+    public static final int CID_MSG_TRANSFER_STATUS_RES_VALUE = 784;
 
 
     public final int getNumber() { return value; }
@@ -1225,6 +1275,8 @@ public final class IMBaseDefine {
         case 780: return CID_MSG_GET_LATEST_MSG_ID_RSP;
         case 781: return CID_MSG_GET_BY_MSG_ID_REQ;
         case 782: return CID_MSG_GET_BY_MSG_ID_RES;
+        case 783: return CID_MSG_TRANSFER_STATUS_REQ;
+        case 784: return CID_MSG_TRANSFER_STATUS_RES;
         default: return null;
       }
     }
@@ -2204,42 +2256,373 @@ public final class IMBaseDefine {
   }
 
   /**
+   * Protobuf enum {@code IM.BaseDefine.TransferDoType}
+   *
+   * <pre>
+   *查询或者接受红包转账
+   * </pre>
+   */
+  public enum TransferDoType
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>TRANSFER_TYPE_QUERY = 0;</code>
+     *
+     * <pre>
+     *查询红包状态
+     * </pre>
+     */
+    TRANSFER_TYPE_QUERY(0, 0),
+    /**
+     * <code>TRANSFER_TYPE_RECV = 1;</code>
+     *
+     * <pre>
+     *接受红包
+     * </pre>
+     */
+    TRANSFER_TYPE_RECV(1, 1),
+    /**
+     * <code>TRANSFER_TYPE_REFUSE = 2;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    TRANSFER_TYPE_REFUSE(2, 2),
+    ;
+
+    /**
+     * <code>TRANSFER_TYPE_QUERY = 0;</code>
+     *
+     * <pre>
+     *查询红包状态
+     * </pre>
+     */
+    public static final int TRANSFER_TYPE_QUERY_VALUE = 0;
+    /**
+     * <code>TRANSFER_TYPE_RECV = 1;</code>
+     *
+     * <pre>
+     *接受红包
+     * </pre>
+     */
+    public static final int TRANSFER_TYPE_RECV_VALUE = 1;
+    /**
+     * <code>TRANSFER_TYPE_REFUSE = 2;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    public static final int TRANSFER_TYPE_REFUSE_VALUE = 2;
+
+
+    public final int getNumber() { return value; }
+
+    public static TransferDoType valueOf(int value) {
+      switch (value) {
+        case 0: return TRANSFER_TYPE_QUERY;
+        case 1: return TRANSFER_TYPE_RECV;
+        case 2: return TRANSFER_TYPE_REFUSE;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<TransferDoType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<TransferDoType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<TransferDoType>() {
+            public TransferDoType findValueByNumber(int number) {
+              return TransferDoType.valueOf(number);
+            }
+          };
+
+    private final int value;
+
+    private TransferDoType(int index, int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.TransferDoType)
+  }
+
+  /**
+   * Protobuf enum {@code IM.BaseDefine.TransferStatusType}
+   *
+   * <pre>
+   *转账状态
+   * </pre>
+   */
+  public enum TransferStatusType
+      implements com.google.protobuf.Internal.EnumLite {
+    /**
+     * <code>TRANSFER_STATUS_WAIT = 0;</code>
+     *
+     * <pre>
+     *待接受
+     * </pre>
+     */
+    TRANSFER_STATUS_WAIT(0, 0),
+    /**
+     * <code>TRANSFER_STATUS_RECV = 1;</code>
+     *
+     * <pre>
+     *接受红包
+     * </pre>
+     */
+    TRANSFER_STATUS_RECV(1, 1),
+    /**
+     * <code>TRANSFER_STATUS_REFUSE = 2;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    TRANSFER_STATUS_REFUSE(2, 2),
+    /**
+     * <code>TRANSFER_STATUS_TIMEOUT = 3;</code>
+     *
+     * <pre>
+     *超时红包
+     * </pre>
+     */
+    TRANSFER_STATUS_TIMEOUT(3, 3),
+    ;
+
+    /**
+     * <code>TRANSFER_STATUS_WAIT = 0;</code>
+     *
+     * <pre>
+     *待接受
+     * </pre>
+     */
+    public static final int TRANSFER_STATUS_WAIT_VALUE = 0;
+    /**
+     * <code>TRANSFER_STATUS_RECV = 1;</code>
+     *
+     * <pre>
+     *接受红包
+     * </pre>
+     */
+    public static final int TRANSFER_STATUS_RECV_VALUE = 1;
+    /**
+     * <code>TRANSFER_STATUS_REFUSE = 2;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    public static final int TRANSFER_STATUS_REFUSE_VALUE = 2;
+    /**
+     * <code>TRANSFER_STATUS_TIMEOUT = 3;</code>
+     *
+     * <pre>
+     *超时红包
+     * </pre>
+     */
+    public static final int TRANSFER_STATUS_TIMEOUT_VALUE = 3;
+
+
+    public final int getNumber() { return value; }
+
+    public static TransferStatusType valueOf(int value) {
+      switch (value) {
+        case 0: return TRANSFER_STATUS_WAIT;
+        case 1: return TRANSFER_STATUS_RECV;
+        case 2: return TRANSFER_STATUS_REFUSE;
+        case 3: return TRANSFER_STATUS_TIMEOUT;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<TransferStatusType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<TransferStatusType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<TransferStatusType>() {
+            public TransferStatusType findValueByNumber(int number) {
+              return TransferStatusType.valueOf(number);
+            }
+          };
+
+    private final int value;
+
+    private TransferStatusType(int index, int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.TransferStatusType)
+  }
+
+  /**
    * Protobuf enum {@code IM.BaseDefine.MsgType}
    */
   public enum MsgType
       implements com.google.protobuf.Internal.EnumLite {
     /**
      * <code>MSG_TYPE_SINGLE_TEXT = 1;</code>
+     *
+     * <pre>
+     *文本消息
+     * </pre>
      */
     MSG_TYPE_SINGLE_TEXT(0, 1),
     /**
      * <code>MSG_TYPE_SINGLE_AUDIO = 2;</code>
+     *
+     * <pre>
+     *语音消息
+     * </pre>
      */
     MSG_TYPE_SINGLE_AUDIO(1, 2),
     /**
-     * <code>MSG_TYPE_GROUP_TEXT = 17;</code>
+     * <code>MSG_TYPE_SINGLE_RED_PACK = 3;</code>
+     *
+     * <pre>
+     *红包
+     * </pre>
      */
-    MSG_TYPE_GROUP_TEXT(2, 17),
+    MSG_TYPE_SINGLE_RED_PACK(2, 3),
+    /**
+     * <code>MSG_TYPE_SINGLE_TRANSFER = 4;</code>
+     *
+     * <pre>
+     *转账
+     * </pre>
+     */
+    MSG_TYPE_SINGLE_TRANSFER(3, 4),
+    /**
+     * <code>MSG_TYPE_SINGLE_RECV_RED_PACK = 5;</code>
+     *
+     * <pre>
+     *接收红包
+     * </pre>
+     */
+    MSG_TYPE_SINGLE_RECV_RED_PACK(4, 5),
+    /**
+     * <code>MSG_TYPE_SINGLE_RECV_TRANSFER = 6;</code>
+     *
+     * <pre>
+     *接收转账
+     * </pre>
+     */
+    MSG_TYPE_SINGLE_RECV_TRANSFER(5, 6),
+    /**
+     * <code>MSG_TYPE_SINGLE_REFUSE_RED_PACK = 7;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    MSG_TYPE_SINGLE_REFUSE_RED_PACK(6, 7),
+    /**
+     * <code>MSG_TYPE_SINGLE_REFUSE_TRANSFER = 8;</code>
+     *
+     * <pre>
+     *拒绝转账
+     * </pre>
+     */
+    MSG_TYPE_SINGLE_REFUSE_TRANSFER(7, 8),
+    /**
+     * <code>MSG_TYPE_GROUP_TEXT = 17;</code>
+     *
+     * <pre>
+     *组文本消息
+     * </pre>
+     */
+    MSG_TYPE_GROUP_TEXT(8, 17),
     /**
      * <code>MSG_TYPE_GROUP_AUDIO = 18;</code>
+     *
+     * <pre>
+     *组语音消息
+     * </pre>
      */
-    MSG_TYPE_GROUP_AUDIO(3, 18),
+    MSG_TYPE_GROUP_AUDIO(9, 18),
     ;
 
     /**
      * <code>MSG_TYPE_SINGLE_TEXT = 1;</code>
+     *
+     * <pre>
+     *文本消息
+     * </pre>
      */
     public static final int MSG_TYPE_SINGLE_TEXT_VALUE = 1;
     /**
      * <code>MSG_TYPE_SINGLE_AUDIO = 2;</code>
+     *
+     * <pre>
+     *语音消息
+     * </pre>
      */
     public static final int MSG_TYPE_SINGLE_AUDIO_VALUE = 2;
     /**
+     * <code>MSG_TYPE_SINGLE_RED_PACK = 3;</code>
+     *
+     * <pre>
+     *红包
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_RED_PACK_VALUE = 3;
+    /**
+     * <code>MSG_TYPE_SINGLE_TRANSFER = 4;</code>
+     *
+     * <pre>
+     *转账
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_TRANSFER_VALUE = 4;
+    /**
+     * <code>MSG_TYPE_SINGLE_RECV_RED_PACK = 5;</code>
+     *
+     * <pre>
+     *接收红包
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_RECV_RED_PACK_VALUE = 5;
+    /**
+     * <code>MSG_TYPE_SINGLE_RECV_TRANSFER = 6;</code>
+     *
+     * <pre>
+     *接收转账
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_RECV_TRANSFER_VALUE = 6;
+    /**
+     * <code>MSG_TYPE_SINGLE_REFUSE_RED_PACK = 7;</code>
+     *
+     * <pre>
+     *拒绝红包
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_REFUSE_RED_PACK_VALUE = 7;
+    /**
+     * <code>MSG_TYPE_SINGLE_REFUSE_TRANSFER = 8;</code>
+     *
+     * <pre>
+     *拒绝转账
+     * </pre>
+     */
+    public static final int MSG_TYPE_SINGLE_REFUSE_TRANSFER_VALUE = 8;
+    /**
      * <code>MSG_TYPE_GROUP_TEXT = 17;</code>
+     *
+     * <pre>
+     *组文本消息
+     * </pre>
      */
     public static final int MSG_TYPE_GROUP_TEXT_VALUE = 17;
     /**
      * <code>MSG_TYPE_GROUP_AUDIO = 18;</code>
+     *
+     * <pre>
+     *组语音消息
+     * </pre>
      */
     public static final int MSG_TYPE_GROUP_AUDIO_VALUE = 18;
 
@@ -2250,6 +2633,12 @@ public final class IMBaseDefine {
       switch (value) {
         case 1: return MSG_TYPE_SINGLE_TEXT;
         case 2: return MSG_TYPE_SINGLE_AUDIO;
+        case 3: return MSG_TYPE_SINGLE_RED_PACK;
+        case 4: return MSG_TYPE_SINGLE_TRANSFER;
+        case 5: return MSG_TYPE_SINGLE_RECV_RED_PACK;
+        case 6: return MSG_TYPE_SINGLE_RECV_TRANSFER;
+        case 7: return MSG_TYPE_SINGLE_REFUSE_RED_PACK;
+        case 8: return MSG_TYPE_SINGLE_REFUSE_TRANSFER;
         case 17: return MSG_TYPE_GROUP_TEXT;
         case 18: return MSG_TYPE_GROUP_AUDIO;
         default: return null;
@@ -3856,15 +4245,41 @@ public final class IMBaseDefine {
     int getStatus();
 
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
+     */
+    boolean hasOpenid();
+    /**
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
+     */
+    java.lang.String getOpenid();
+    /**
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getOpenidBytes();
+
+    /**
+     * <code>optional string sign_info = 12;</code>
      */
     boolean hasSignInfo();
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>optional string sign_info = 12;</code>
      */
     java.lang.String getSignInfo();
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>optional string sign_info = 12;</code>
      */
     com.google.protobuf.ByteString
         getSignInfoBytes();
@@ -3978,6 +4393,12 @@ public final class IMBaseDefine {
             case 90: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000400;
+              openid_ = bs;
+              break;
+            }
+            case 98: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000800;
               signInfo_ = bs;
               break;
             }
@@ -4379,16 +4800,70 @@ public final class IMBaseDefine {
       return status_;
     }
 
-    public static final int SIGN_INFO_FIELD_NUMBER = 11;
-    private java.lang.Object signInfo_;
+    public static final int OPENID_FIELD_NUMBER = 11;
+    private java.lang.Object openid_;
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
      */
-    public boolean hasSignInfo() {
+    public boolean hasOpenid() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
+     */
+    public java.lang.String getOpenid() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          openid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string openid = 11;</code>
+     *
+     * <pre>
+     *pay openid
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getOpenidBytes() {
+      java.lang.Object ref = openid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        openid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SIGN_INFO_FIELD_NUMBER = 12;
+    private java.lang.Object signInfo_;
+    /**
+     * <code>optional string sign_info = 12;</code>
+     */
+    public boolean hasSignInfo() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional string sign_info = 12;</code>
      */
     public java.lang.String getSignInfo() {
       java.lang.Object ref = signInfo_;
@@ -4405,7 +4880,7 @@ public final class IMBaseDefine {
       }
     }
     /**
-     * <code>optional string sign_info = 11;</code>
+     * <code>optional string sign_info = 12;</code>
      */
     public com.google.protobuf.ByteString
         getSignInfoBytes() {
@@ -4432,6 +4907,7 @@ public final class IMBaseDefine {
       userTel_ = "";
       userDomain_ = "";
       status_ = 0;
+      openid_ = "";
       signInfo_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -4480,6 +4956,10 @@ public final class IMBaseDefine {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasOpenid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -4518,7 +4998,10 @@ public final class IMBaseDefine {
         output.writeUInt32(10, status_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(11, getSignInfoBytes());
+        output.writeBytes(11, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, getSignInfoBytes());
       }
       output.writeRawBytes(unknownFields);
     }
@@ -4571,7 +5054,11 @@ public final class IMBaseDefine {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getSignInfoBytes());
+          .computeBytesSize(11, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, getSignInfoBytes());
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -4687,8 +5174,10 @@ public final class IMBaseDefine {
         bitField0_ = (bitField0_ & ~0x00000100);
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        signInfo_ = "";
+        openid_ = "";
         bitField0_ = (bitField0_ & ~0x00000400);
+        signInfo_ = "";
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -4755,6 +5244,10 @@ public final class IMBaseDefine {
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
+        result.openid_ = openid_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
         result.signInfo_ = signInfo_;
         result.bitField0_ = to_bitField0_;
         return result;
@@ -4804,8 +5297,13 @@ public final class IMBaseDefine {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
-        if (other.hasSignInfo()) {
+        if (other.hasOpenid()) {
           bitField0_ |= 0x00000400;
+          openid_ = other.openid_;
+          
+        }
+        if (other.hasSignInfo()) {
+          bitField0_ |= 0x00000800;
           signInfo_ = other.signInfo_;
           
         }
@@ -4852,6 +5350,10 @@ public final class IMBaseDefine {
           return false;
         }
         if (!hasStatus()) {
+          
+          return false;
+        }
+        if (!hasOpenid()) {
           
           return false;
         }
@@ -5565,15 +6067,115 @@ public final class IMBaseDefine {
         return this;
       }
 
-      private java.lang.Object signInfo_ = "";
+      private java.lang.Object openid_ = "";
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
        */
-      public boolean hasSignInfo() {
+      public boolean hasOpenid() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
+       */
+      public java.lang.String getOpenid() {
+        java.lang.Object ref = openid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            openid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getOpenidBytes() {
+        java.lang.Object ref = openid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          openid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
+       */
+      public Builder setOpenid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        openid_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
+       */
+      public Builder clearOpenid() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        openid_ = getDefaultInstance().getOpenid();
+        
+        return this;
+      }
+      /**
+       * <code>required string openid = 11;</code>
+       *
+       * <pre>
+       *pay openid
+       * </pre>
+       */
+      public Builder setOpenidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        openid_ = value;
+        
+        return this;
+      }
+
+      private java.lang.Object signInfo_ = "";
+      /**
+       * <code>optional string sign_info = 12;</code>
+       */
+      public boolean hasSignInfo() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional string sign_info = 12;</code>
        */
       public java.lang.String getSignInfo() {
         java.lang.Object ref = signInfo_;
@@ -5590,7 +6192,7 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>optional string sign_info = 12;</code>
        */
       public com.google.protobuf.ByteString
           getSignInfoBytes() {
@@ -5606,36 +6208,36 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>optional string sign_info = 12;</code>
        */
       public Builder setSignInfo(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         signInfo_ = value;
         
         return this;
       }
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>optional string sign_info = 12;</code>
        */
       public Builder clearSignInfo() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         signInfo_ = getDefaultInstance().getSignInfo();
         
         return this;
       }
       /**
-       * <code>optional string sign_info = 11;</code>
+       * <code>optional string sign_info = 12;</code>
        */
       public Builder setSignInfoBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         signInfo_ = value;
         
         return this;

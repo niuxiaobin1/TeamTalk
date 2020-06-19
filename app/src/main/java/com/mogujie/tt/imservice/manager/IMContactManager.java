@@ -1,6 +1,7 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
@@ -314,6 +315,24 @@ public class IMContactManager extends IMManager {
         imSocketManager.sendRequest(imChangeUserInfoReq, sid, cid);
     }
 
+    /**
+     * 更新验证方式
+     *
+     * @param validate
+     */
+    public void reqChangeValidate(int validate) {
+        logger.d("contact#contact#reqChangeValidate----%s",validate);
+
+        int loginId = IMLoginManager.instance().getLoginId();
+        IMBuddy.IMChangeValidateReq imChangeValidateReq = IMBuddy.IMChangeValidateReq.newBuilder()
+                .setUserId(loginId)
+                .setValidate(validate)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST_VALUE;
+        imSocketManager.sendRequest(imChangeValidateReq, sid, cid);
+    }
 
 
 
@@ -386,6 +405,18 @@ public class IMContactManager extends IMManager {
             return;
         }
         IMUIHelper.openUserProfileActivity(ctx, searchUsersRsp.getUserInfoListList().get(0));
+    }
+
+    /**
+     * 修改验证方式返回
+     *
+     * @param imChangeValidateRsp
+     */
+    public void onReChangeValidate(IMBuddy.IMChangeValidateRsp imChangeValidateRsp) {
+        if (imChangeValidateRsp== null ) {
+            return;
+        }
+        Log.e("nxb",imChangeValidateRsp.getResultCode()+"");
     }
 
     /**

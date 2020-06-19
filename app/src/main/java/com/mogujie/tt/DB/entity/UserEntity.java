@@ -14,7 +14,7 @@ import com.mogujie.tt.utils.pinyin.PinYin.PinYinElement;
  * Entity mapped to table UserInfo.
  */
 public class UserEntity extends PeerEntity{
-
+    protected String openid;
     private int gender;
     /** Not-null value. */
     private String pinyinName;
@@ -39,7 +39,7 @@ public class UserEntity extends PeerEntity{
         this.id = id;
     }
 
-    public UserEntity(Long id, int peerId, int gender, String mainName, String pinyinName, String realName, String avatar, String phone, String email, int departmentId, int status, int created, int updated) {
+    public UserEntity(Long id, int peerId, int gender, String mainName, String pinyinName, String realName, String avatar, String phone, String email, int departmentId, int status, int created, int updated, String openId) {
         this.id = id;
         this.peerId = peerId;
         this.gender = gender;
@@ -53,6 +53,7 @@ public class UserEntity extends PeerEntity{
         this.status = status;
         this.created = created;
         this.updated = updated;
+        this.openid = openId;
     }
 
     public Long getId() {
@@ -257,4 +258,12 @@ public class UserEntity extends PeerEntity{
 
     // KEEP METHODS END
 
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
 }

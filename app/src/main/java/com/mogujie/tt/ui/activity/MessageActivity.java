@@ -2,7 +2,6 @@
 package com.mogujie.tt.ui.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -71,12 +70,14 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.app.IMApplication;
+import com.mogujie.tt.config.Constants;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
+import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.imservice.event.MessageEvent;
@@ -136,7 +137,8 @@ public class MessageActivity extends TTBaseActivity
 
     private static Handler uiHandler = null;// 处理语音
 
-
+    private static final int REDPACKET_CODE = 12;
+    private static final int TRANSFER_CODE = 13;
     private PullToRefreshListView lvPTR = null;
     private CustomEditView messageEdt = null;
     private TextView sendBtn = null;
@@ -367,6 +369,14 @@ public class MessageActivity extends TTBaseActivity
             case SysConstant.ALBUM_BACK_DATA:
                 logger.d("pic#ALBUM_BACK_DATA");
                 setIntent(data);
+                break;
+            case REDPACKET_CODE:
+                String result = data.getStringExtra("data");
+                RedPacketMessage redPacketMessage = RedPacketMessage.buildForSend(result, loginUser, peerEntity);
+                imService.getMessageManager().sendRedPacket(redPacketMessage);
+                messageEdt.setText("");
+                pushList(redPacketMessage);
+                scrollToBottomListItem();
                 break;
             case PictureConfig.CHOOSE_REQUEST:
             case PictureConfig.REQUEST_CAMERA:
@@ -1044,7 +1054,8 @@ public class MessageActivity extends TTBaseActivity
             break;
             case R.id.take_red_packet_btn: {
                 Intent intent = new Intent(MessageActivity.this, RedPacketActivity.class);
-                startActivity(intent);
+                intent.putExtra(Constants.CHAT_INFO, peerEntity.getPeerId());
+                startActivityForResult(intent, REDPACKET_CODE);
             }
             break;
             case R.id.file_transfer_btn: {

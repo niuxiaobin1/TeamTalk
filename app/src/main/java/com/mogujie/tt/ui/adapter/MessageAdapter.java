@@ -12,43 +12,43 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
-import com.mogujie.tt.config.MessageConstant;
-import com.mogujie.tt.ui.helper.AudioPlayerHandler;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
+import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.activity.PreviewGifActivity;
 import com.mogujie.tt.ui.activity.PreviewMessageImagesActivity;
 import com.mogujie.tt.ui.activity.PreviewTextActivity;
+import com.mogujie.tt.ui.helper.AudioPlayerHandler;
 import com.mogujie.tt.ui.helper.Emoparser;
+import com.mogujie.tt.ui.helper.listener.OnDoubleClickListener;
 import com.mogujie.tt.ui.widget.GifView;
+import com.mogujie.tt.ui.widget.SpeekerToast;
+import com.mogujie.tt.ui.widget.message.AudioRenderView;
+import com.mogujie.tt.ui.widget.message.EmojiRenderView;
 import com.mogujie.tt.ui.widget.message.GifImageRenderView;
+import com.mogujie.tt.ui.widget.message.ImageRenderView;
+import com.mogujie.tt.ui.widget.message.MessageOperatePopup;
+import com.mogujie.tt.ui.widget.message.RedPacketRenderView;
+import com.mogujie.tt.ui.widget.message.RenderType;
+import com.mogujie.tt.ui.widget.message.TextRenderView;
+import com.mogujie.tt.ui.widget.message.TimeRenderView;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.DateUtil;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
-import com.mogujie.tt.ui.widget.SpeekerToast;
-import com.mogujie.tt.ui.widget.message.AudioRenderView;
-import com.mogujie.tt.ui.widget.message.EmojiRenderView;
-import com.mogujie.tt.ui.widget.message.ImageRenderView;
-import com.mogujie.tt.ui.widget.message.MessageOperatePopup;
-import com.mogujie.tt.ui.widget.message.RenderType;
-import com.mogujie.tt.ui.widget.message.TextRenderView;
-import com.mogujie.tt.ui.widget.message.TimeRenderView;
-import com.mogujie.tt.ui.helper.listener.OnDoubleClickListener;
-import com.mogujie.tt.utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,7 +83,7 @@ public class MessageAdapter extends BaseAdapter {
      * ----------------------init 的时候需要设定-----------------
      */
 
-    public void setImService(IMService imService,UserEntity loginUser) {
+    public void setImService(IMService imService, UserEntity loginUser) {
         this.imService = imService;
         this.loginUser = loginUser;
     }
@@ -297,6 +297,10 @@ public class MessageAdapter extends BaseAdapter {
                 MessageEntity info = (MessageEntity) obj;
                 boolean isMine = info.getFromId() == loginUser.getPeerId();
                 switch (info.getDisplayType()) {
+                    case DBConstant.SHOW_PAY_RED_PACKET:
+                        type = isMine ? RenderType.MESSAGE_TYPE_MINE_RED_PACKET
+                                : RenderType.MESSAGE_TYPE_OTHER_RED_PACKET;
+                        break;
                     case DBConstant.SHOW_AUDIO_TYPE:
                         type = isMine ? RenderType.MESSAGE_TYPE_MINE_AUDIO
                                 : RenderType.MESSAGE_TYPE_OTHER_AUDIO;
@@ -384,6 +388,9 @@ public class MessageAdapter extends BaseAdapter {
         ImageRenderView imageRenderView;
         final ImageMessage imageMessage = (ImageMessage) msgObjectList.get(position);
         UserEntity userEntity = imService.getContactManager().findContact(imageMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
 
         /**保存在本地的path*/
         final String imagePath = imageMessage.getPath();
@@ -483,6 +490,10 @@ public class MessageAdapter extends BaseAdapter {
         GifImageRenderView imageRenderView;
         final ImageMessage imageMessage = (ImageMessage) msgObjectList.get(position);
         UserEntity userEntity = imService.getContactManager().findContact(imageMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
         if (null == convertView) {
             imageRenderView = GifImageRenderView.inflater(ctx, parent, isMine);
         } else {
@@ -519,7 +530,11 @@ public class MessageAdapter extends BaseAdapter {
     private View audioMsgRender(final int position, View convertView, final ViewGroup parent, final boolean isMine) {
         AudioRenderView audioRenderView;
         final AudioMessage audioMessage = (AudioMessage) msgObjectList.get(position);
-        UserEntity entity = imService.getContactManager().findContact(audioMessage.getFromId());
+        UserEntity userEntity = imService.getContactManager().findContact(audioMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
         if (null == convertView) {
             audioRenderView = AudioRenderView.inflater(ctx, parent, isMine);
         } else {
@@ -563,7 +578,7 @@ public class MessageAdapter extends BaseAdapter {
             public void onClickReaded() {
             }
         });
-        audioRenderView.render(audioMessage, entity, ctx);
+        audioRenderView.render(audioMessage, userEntity, ctx);
         return audioRenderView;
     }
 
@@ -583,6 +598,9 @@ public class MessageAdapter extends BaseAdapter {
         TextRenderView textRenderView;
         final TextMessage textMessage = (TextMessage) msgObjectList.get(position);
         UserEntity userEntity = imService.getContactManager().findContact(textMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
 
         if (null == convertView) {
             textRenderView = TextRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
@@ -631,6 +649,52 @@ public class MessageAdapter extends BaseAdapter {
         return textRenderView;
     }
 
+
+    /**
+     * 红包类型的: 1. 设定内容Emoparser
+     * 2. 点击事件  单击跳转、 双击方法、长按pop menu
+     * 点击头像的事件 跳转
+     *
+     * @param position
+     * @param convertView
+     * @param viewGroup
+     * @param isMine
+     * @return
+     */
+    private View redPacketMsgRender(final int position, View convertView, final ViewGroup viewGroup, final boolean isMine) {
+        RedPacketRenderView redPacketRenderView;
+        final RedPacketMessage redPacketMessage = (RedPacketMessage) msgObjectList.get(position);
+        UserEntity userEntity = imService.getContactManager().findContact(redPacketMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
+        if (null == convertView) {
+            redPacketRenderView = RedPacketRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
+        } else {
+            redPacketRenderView = (RedPacketRenderView) convertView;
+        }
+
+        redPacketRenderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开红包
+            }
+        });
+
+        // 失败事件添加
+        redPacketRenderView.getMessageFailed().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(redPacketMessage, position));
+                popup.show(redPacketRenderView.getTitleTv(), DBConstant.SHOW_ORIGIN_TEXT_TYPE, true, isMine);
+            }
+        });
+
+        redPacketRenderView.render(redPacketMessage, userEntity, ctx);
+        return redPacketRenderView;
+    }
+
     /**
      * 牙牙表情等gif类型的消息: 1. 设定内容Emoparser
      * 2. 点击事件  单击跳转、 双击方法、长按pop menu
@@ -646,6 +710,10 @@ public class MessageAdapter extends BaseAdapter {
         EmojiRenderView gifRenderView;
         final TextMessage textMessage = (TextMessage) msgObjectList.get(position);
         UserEntity userEntity = imService.getContactManager().findContact(textMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
         if (null == convertView) {
             gifRenderView = EmojiRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
         } else {
@@ -700,11 +768,9 @@ public class MessageAdapter extends BaseAdapter {
                     // 直接返回
                     logger.e("[fatal erro] render type:MESSAGE_TYPE_INVALID");
                     break;
-
                 case MESSAGE_TYPE_TIME_TITLE:
                     convertView = timeBubbleRender(position, convertView, parent);
                     break;
-
                 case MESSAGE_TYPE_MINE_AUDIO:
                     convertView = audioMsgRender(position, convertView, parent, true);
                     break;
@@ -728,6 +794,12 @@ public class MessageAdapter extends BaseAdapter {
                     break;
                 case MESSAGE_TYPE_OTHER_TEXT:
                     convertView = textMsgRender(position, convertView, parent, false);
+                    break;
+                case MESSAGE_TYPE_MINE_RED_PACKET:
+                    convertView = redPacketMsgRender(position, convertView, parent, true);
+                    break;
+                case MESSAGE_TYPE_OTHER_RED_PACKET:
+                    convertView = redPacketMsgRender(position, convertView, parent, false);
                     break;
 
                 case MESSAGE_TYPE_MINE_GIF:

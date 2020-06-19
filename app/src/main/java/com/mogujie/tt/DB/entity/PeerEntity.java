@@ -75,4 +75,5 @@ public abstract class PeerEntity {
     }
 
     public abstract int getType();
+
 }

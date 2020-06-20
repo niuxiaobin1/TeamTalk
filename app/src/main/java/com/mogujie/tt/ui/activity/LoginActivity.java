@@ -1,5 +1,6 @@
 package com.mogujie.tt.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,11 +36,15 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.IMUIHelper;
+import com.mogujie.tt.utils.LocationUtils;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.SPUtils;
 import com.mogujie.tt.utils.ToastUtil;
 
 import de.greenrobot.event.EventBus;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
 
 /**
@@ -51,6 +57,8 @@ import de.greenrobot.event.EventBus;
  * 2. 请求消息服务器地址，链接，验证，触发loginSuccess
  * 3. 保存登陆状态
  */
+
+@RuntimePermissions
 public class LoginActivity extends TTBaseActivity implements View.OnClickListener {
     private static final int SIGN_UP_CODE = 0x11;
 
@@ -259,6 +267,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
             }
         });
         initAutoLogin();
+        LoginActivityPermissionsDispatcher.getPermissionWithPermissionCheck(this);
     }
 
     private void initAutoLogin() {
@@ -480,5 +489,21 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
                 ToastUtil.toastShortMessage(result);
             }
         }
+    }
+
+    @NeedsPermission({Manifest.permission.READ_PHONE_STATE})
+    public void getPermission() {
+
+    }
+
+    @OnPermissionDenied(Manifest.permission.READ_PHONE_STATE)
+    void showRecordDenied() {
+        ToastUtil.toastShortMessage("拒绝权限可能导致注册异常");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        LoginActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 }

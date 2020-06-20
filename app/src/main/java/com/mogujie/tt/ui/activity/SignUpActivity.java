@@ -17,22 +17,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
+import com.mogujie.tt.OkgoCallBack.NigeriaCallBack;
 import com.mogujie.tt.R;
+import com.mogujie.tt.app.IMApplication;
+import com.mogujie.tt.bean.BaseBean;
+import com.mogujie.tt.bean.LoginBean;
+import com.mogujie.tt.config.GeneralConfig;
+import com.mogujie.tt.config.RequestCode;
+import com.mogujie.tt.config.ServerHostConfig;
+import com.mogujie.tt.dto.InstitutionDto;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.ui.base.TTBaseActivity;
+import com.mogujie.tt.utils.AES;
 import com.mogujie.tt.utils.CommonUtils;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.PhoneUtil;
 import com.mogujie.tt.utils.ToastUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.greenrobot.event.EventBus;
+
+import static com.mogujie.tt.app.IMApplication.INSTITUTION_NUMBER;
+import static com.mogujie.tt.config.SysConstant.INSTITUTION_AESKEY;
 
 public class SignUpActivity extends TTBaseActivity {
 
@@ -147,11 +169,13 @@ public class SignUpActivity extends TTBaseActivity {
         if (isForgetPassWord){
             forgetPsw();
         }else{
-            signUp();
+            showDialog();
+            getNchatParams();
         }
     }
 
-    private void signUp(){
+    private void signUp(String openId){
+
         String account = mUserAccountEt.getText().toString().trim();
         String code = userVerifiCodeEt.getText().toString().trim();
         String psw = userPswEt.getText().toString().trim();
@@ -163,8 +187,7 @@ public class SignUpActivity extends TTBaseActivity {
             ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
             return;
         }
-
-        imService.getLoginManager().register(account,psw,code);
+        imService.getLoginManager().register(account,psw,code,openId);
     }
 
 
@@ -301,5 +324,83 @@ public class SignUpActivity extends TTBaseActivity {
         }
     }
 
+    private void getNchatParams(){
+        HttpParams param=new HttpParams();
+        OkGo.<String>post(ServerHostConfig.GET_INSTITUTION_NUMBER).tag(this)
+                .params(param)
+                .execute(new NigeriaCallBack() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        InstitutionDto bean = new Gson().fromJson(response.body(), InstitutionDto.class);
+                        JSONObject jsonObject= null;
+                        try {
+                            jsonObject = new JSONObject(AES.AES_Decrypt(URLDecoder.decode(bean.data.institutionNumber, "utf-8"),INSTITUTION_AESKEY));
+                            INSTITUTION_NUMBER=jsonObject.getString("institution_number");
+                            GeneralConfig.INSTITUTION_NUMBER=jsonObject.getString("institution_number");
+                            IMApplication.API_KEY=jsonObject.getString("api_key");
+                            GeneralConfig.API_KEY=jsonObject.getString("api_key");
+                            NchatSignUp();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissDialog();
+                    }
+                });
+    }
+
+    private void NchatSignUp(){
+        String account = mUserAccountEt.getText().toString().trim();
+        String code = userVerifiCodeEt.getText().toString().trim();
+        String psw = userPswEt.getText().toString().trim();
+        String confirmPsw = userConfirmPswEt.getText().toString().trim();
+        if (TextUtils.isEmpty(account)||TextUtils.isEmpty(code)||TextUtils.isEmpty(psw)) {
+            dismissDialog();
+            return;
+        }
+        if (!psw.equals(confirmPsw)){
+            dismissDialog();
+            ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
+            return;
+        }
+
+        HttpParams param=new HttpParams();
+        param.put("institution_number",INSTITUTION_NUMBER);
+        param.put("user_account",account);
+        param.put("user_password",psw);
+        param.put("user_device_brand", PhoneUtil.getBrand());
+        param.put("user_device_model",PhoneUtil.getModel());
+        param.put("user_device_no",PhoneUtil.getIMEI(this));
+        param.put("timestamp",String.valueOf(System.currentTimeMillis()/1000));
+
+        OkGo.<String>post(ServerHostConfig.CUSTOMER_REGISTER).tag(this)
+                .params(param)
+                .execute(new NigeriaCallBack() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissDialog();
+                        BaseBean bean=new Gson().fromJson(response.body(),BaseBean.class);
+                        if ( RequestCode.SUCCESS.equals(bean.getStatus())){
+                            LoginBean loginBean = new Gson().fromJson(response.body(), LoginBean.class);
+                            signUp(loginBean.getData().getUser_openid());
+                        }else{
+                            ToastUtil.toastShortMessage(bean.getReturn_msg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissDialog();
+                    }
+                });
+    }
 
 }

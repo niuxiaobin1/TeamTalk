@@ -48,6 +48,7 @@ public class IMLoginManager extends IMManager {
     private String loginUserName;
     private String loginPwd;
     private String registerCode;
+    private String openId;
     private int loginId;
     private UserEntity loginInfo;
 
@@ -233,11 +234,12 @@ public class IMLoginManager extends IMManager {
         }
     }
 
-    public void register(String mail, String password, String code) {
+    public void register(String mail, String password, String code,String openId) {
         isRegister = true;
         loginUserName = mail;
         loginPwd = password;
         registerCode = code;
+        this.openId = openId;
         identityChanged = true;
         if (!imSocketManager.isSocketConnect()) {
             imSocketManager.reqMsgServerAddrs();
@@ -389,6 +391,7 @@ public class IMLoginManager extends IMManager {
                 .setEmail(loginUserName)
                 .setPassword(desPwd)
                 .setAuthcode(registerCode)
+                .setOpenid(openId)
                 .build();
 
         int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;

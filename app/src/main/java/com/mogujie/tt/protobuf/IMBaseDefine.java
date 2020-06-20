@@ -4245,7 +4245,24 @@ public final class IMBaseDefine {
     int getStatus();
 
     /**
-     * <code>required string openid = 11;</code>
+     * <code>required uint32 validate_type = 11;</code>
+     *
+     * <pre>
+     *0,用户同意验证, 1, 自动验证通过,2不通过
+     * </pre>
+     */
+    boolean hasValidateType();
+    /**
+     * <code>required uint32 validate_type = 11;</code>
+     *
+     * <pre>
+     *0,用户同意验证, 1, 自动验证通过,2不通过
+     * </pre>
+     */
+    int getValidateType();
+
+    /**
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
@@ -4253,7 +4270,7 @@ public final class IMBaseDefine {
      */
     boolean hasOpenid();
     /**
-     * <code>required string openid = 11;</code>
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
@@ -4261,7 +4278,7 @@ public final class IMBaseDefine {
      */
     java.lang.String getOpenid();
     /**
-     * <code>required string openid = 11;</code>
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
@@ -4271,15 +4288,15 @@ public final class IMBaseDefine {
         getOpenidBytes();
 
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     boolean hasSignInfo();
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     java.lang.String getSignInfo();
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     com.google.protobuf.ByteString
         getSignInfoBytes();
@@ -4390,15 +4407,20 @@ public final class IMBaseDefine {
               status_ = input.readUInt32();
               break;
             }
-            case 90: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 88: {
               bitField0_ |= 0x00000400;
-              openid_ = bs;
+              validateType_ = input.readUInt32();
               break;
             }
             case 98: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000800;
+              openid_ = bs;
+              break;
+            }
+            case 106: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00001000;
               signInfo_ = bs;
               break;
             }
@@ -4800,20 +4822,43 @@ public final class IMBaseDefine {
       return status_;
     }
 
-    public static final int OPENID_FIELD_NUMBER = 11;
+    public static final int VALIDATE_TYPE_FIELD_NUMBER = 11;
+    private int validateType_;
+    /**
+     * <code>required uint32 validate_type = 11;</code>
+     *
+     * <pre>
+     *0,用户同意验证, 1, 自动验证通过,2不通过
+     * </pre>
+     */
+    public boolean hasValidateType() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>required uint32 validate_type = 11;</code>
+     *
+     * <pre>
+     *0,用户同意验证, 1, 自动验证通过,2不通过
+     * </pre>
+     */
+    public int getValidateType() {
+      return validateType_;
+    }
+
+    public static final int OPENID_FIELD_NUMBER = 12;
     private java.lang.Object openid_;
     /**
-     * <code>required string openid = 11;</code>
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
      * </pre>
      */
     public boolean hasOpenid() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>required string openid = 11;</code>
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
@@ -4834,7 +4879,7 @@ public final class IMBaseDefine {
       }
     }
     /**
-     * <code>required string openid = 11;</code>
+     * <code>optional string openid = 12;</code>
      *
      * <pre>
      *pay openid
@@ -4854,16 +4899,16 @@ public final class IMBaseDefine {
       }
     }
 
-    public static final int SIGN_INFO_FIELD_NUMBER = 12;
+    public static final int SIGN_INFO_FIELD_NUMBER = 13;
     private java.lang.Object signInfo_;
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     public boolean hasSignInfo() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     public java.lang.String getSignInfo() {
       java.lang.Object ref = signInfo_;
@@ -4880,7 +4925,7 @@ public final class IMBaseDefine {
       }
     }
     /**
-     * <code>optional string sign_info = 12;</code>
+     * <code>optional string sign_info = 13;</code>
      */
     public com.google.protobuf.ByteString
         getSignInfoBytes() {
@@ -4907,6 +4952,7 @@ public final class IMBaseDefine {
       userTel_ = "";
       userDomain_ = "";
       status_ = 0;
+      validateType_ = 0;
       openid_ = "";
       signInfo_ = "";
     }
@@ -4956,7 +5002,7 @@ public final class IMBaseDefine {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasOpenid()) {
+      if (!hasValidateType()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -4998,10 +5044,13 @@ public final class IMBaseDefine {
         output.writeUInt32(10, status_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(11, getOpenidBytes());
+        output.writeUInt32(11, validateType_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeBytes(12, getSignInfoBytes());
+        output.writeBytes(12, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeBytes(13, getSignInfoBytes());
       }
       output.writeRawBytes(unknownFields);
     }
@@ -5054,11 +5103,15 @@ public final class IMBaseDefine {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getOpenidBytes());
+          .computeUInt32Size(11, validateType_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getSignInfoBytes());
+          .computeBytesSize(12, getOpenidBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(13, getSignInfoBytes());
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -5174,10 +5227,12 @@ public final class IMBaseDefine {
         bitField0_ = (bitField0_ & ~0x00000100);
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        openid_ = "";
+        validateType_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        signInfo_ = "";
+        openid_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
+        signInfo_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -5244,9 +5299,13 @@ public final class IMBaseDefine {
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.openid_ = openid_;
+        result.validateType_ = validateType_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
+        }
+        result.openid_ = openid_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
         }
         result.signInfo_ = signInfo_;
         result.bitField0_ = to_bitField0_;
@@ -5297,13 +5356,16 @@ public final class IMBaseDefine {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
+        if (other.hasValidateType()) {
+          setValidateType(other.getValidateType());
+        }
         if (other.hasOpenid()) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000800;
           openid_ = other.openid_;
           
         }
         if (other.hasSignInfo()) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           signInfo_ = other.signInfo_;
           
         }
@@ -5353,7 +5415,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasOpenid()) {
+        if (!hasValidateType()) {
           
           return false;
         }
@@ -6067,19 +6129,67 @@ public final class IMBaseDefine {
         return this;
       }
 
+      private int validateType_ ;
+      /**
+       * <code>required uint32 validate_type = 11;</code>
+       *
+       * <pre>
+       *0,用户同意验证, 1, 自动验证通过,2不通过
+       * </pre>
+       */
+      public boolean hasValidateType() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>required uint32 validate_type = 11;</code>
+       *
+       * <pre>
+       *0,用户同意验证, 1, 自动验证通过,2不通过
+       * </pre>
+       */
+      public int getValidateType() {
+        return validateType_;
+      }
+      /**
+       * <code>required uint32 validate_type = 11;</code>
+       *
+       * <pre>
+       *0,用户同意验证, 1, 自动验证通过,2不通过
+       * </pre>
+       */
+      public Builder setValidateType(int value) {
+        bitField0_ |= 0x00000400;
+        validateType_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 validate_type = 11;</code>
+       *
+       * <pre>
+       *0,用户同意验证, 1, 自动验证通过,2不通过
+       * </pre>
+       */
+      public Builder clearValidateType() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        validateType_ = 0;
+        
+        return this;
+      }
+
       private java.lang.Object openid_ = "";
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
        * </pre>
        */
       public boolean hasOpenid() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
@@ -6100,7 +6210,7 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
@@ -6120,7 +6230,7 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
@@ -6131,26 +6241,26 @@ public final class IMBaseDefine {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         openid_ = value;
         
         return this;
       }
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
        * </pre>
        */
       public Builder clearOpenid() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         openid_ = getDefaultInstance().getOpenid();
         
         return this;
       }
       /**
-       * <code>required string openid = 11;</code>
+       * <code>optional string openid = 12;</code>
        *
        * <pre>
        *pay openid
@@ -6161,7 +6271,7 @@ public final class IMBaseDefine {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         openid_ = value;
         
         return this;
@@ -6169,13 +6279,13 @@ public final class IMBaseDefine {
 
       private java.lang.Object signInfo_ = "";
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public boolean hasSignInfo() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public java.lang.String getSignInfo() {
         java.lang.Object ref = signInfo_;
@@ -6192,7 +6302,7 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public com.google.protobuf.ByteString
           getSignInfoBytes() {
@@ -6208,36 +6318,36 @@ public final class IMBaseDefine {
         }
       }
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public Builder setSignInfo(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         signInfo_ = value;
         
         return this;
       }
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public Builder clearSignInfo() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         signInfo_ = getDefaultInstance().getSignInfo();
         
         return this;
       }
       /**
-       * <code>optional string sign_info = 12;</code>
+       * <code>optional string sign_info = 13;</code>
        */
       public Builder setSignInfoBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         signInfo_ = value;
         
         return this;

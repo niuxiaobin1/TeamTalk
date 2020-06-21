@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8f000000">
+
+
+    <FrameLayout
+        android:id="@+id/contentFl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="55mm"
+        android:layout_marginRight="55mm"
+        android:background="@mipmap/redpacket_bg">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="78mm"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <com.mogujie.tt.ui.widget.IMBaseImageView
+                android:id="@+id/formUserImage"
+                android:layout_width="40mm"
+                android:layout_height="40mm"
+                android:src="@mipmap/default_user_icon" />
+
+            <TextView
+                android:layout_marginTop="13mm"
+                android:singleLine="true"
+                android:id="@+id/formUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/red_packet_from"
+                android:textColor="@color/color_FFD7B0"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/bestWishTv"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="11mm"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/best_wishes"
+                android:textColor="@color/color_FFD7B0"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/resultTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10mm"
+                android:text="@string/best_wishes"
+                android:textColor="@color/color_FFD7B0"
+                android:textSize="22sp" />
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/red_packet_bottom" />
+
+
+            <TextView
+                android:layout_marginTop="13mm"
+                android:id="@+id/openView"
+                android:layout_width="78mm"
+                android:layout_height="78mm"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/ic_open" />
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/closeImage"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/contentFl"
+        android:src="@mipmap/ic_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+
+</RelativeLayout>

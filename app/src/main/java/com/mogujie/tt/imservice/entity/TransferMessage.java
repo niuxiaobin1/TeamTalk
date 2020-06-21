@@ -14,13 +14,13 @@ import java.io.UnsupportedEncodingException;
  * @author : yingmu on 14-12-31.
  * @email : yingmu@mogujie.com.
  */
-public class RedPacketMessage extends MessageEntity implements Serializable {
+public class TransferMessage extends MessageEntity implements Serializable {
 
-     public RedPacketMessage(){
+     public TransferMessage(){
          msgId = SequenceNumberMaker.getInstance().makelocalUniqueMsgId();
      }
 
-     private RedPacketMessage(MessageEntity entity){
+     private TransferMessage(MessageEntity entity){
          /**父类的id*/
          id =  entity.getId();
          msgId  = entity.getMsgId();
@@ -35,33 +35,33 @@ public class RedPacketMessage extends MessageEntity implements Serializable {
          updated = entity.getUpdated();
      }
 
-     public static RedPacketMessage parseFromNet(MessageEntity entity){
-         RedPacketMessage textMessage = new RedPacketMessage(entity);
+     public static TransferMessage parseFromNet(MessageEntity entity){
+         TransferMessage textMessage = new TransferMessage(entity);
          textMessage.setStatus(MessageConstant.MSG_SUCCESS);
-         textMessage.setDisplayType(DBConstant.SHOW_PAY_RED_PACKET);
+         textMessage.setDisplayType(DBConstant.SHOW_PAY_TRANSFER);
          return textMessage;
      }
 
-    public static RedPacketMessage parseFromDB(MessageEntity entity){
-        if(entity.getDisplayType()!=DBConstant.SHOW_PAY_RED_PACKET&&
-                entity.getDisplayType()!=DBConstant.SHOW_PAY_RED_PACKET_OPEN){
+    public static TransferMessage parseFromDB(MessageEntity entity){
+        if(entity.getDisplayType()!=DBConstant.SHOW_PAY_TRANSFER&&
+                entity.getDisplayType()!=DBConstant.SHOW_PAY_TRANSFER_OPEN){
             throw new RuntimeException("#TextMessage# parseFromDB,not SHOW_ORIGIN_TEXT_TYPE");
         }
-        RedPacketMessage textMessage = new RedPacketMessage(entity);
+        TransferMessage textMessage = new TransferMessage(entity);
         return textMessage;
     }
 
-    public static RedPacketMessage buildForSend(String content, UserEntity fromUser, PeerEntity peerEntity,
-                                                boolean isOpen){
-        RedPacketMessage textMessage = new RedPacketMessage();
+    public static TransferMessage buildForSend(String content, UserEntity fromUser, PeerEntity peerEntity,
+                                               boolean isOpen){
+        TransferMessage textMessage = new TransferMessage();
         int nowTime = (int) (System.currentTimeMillis() / 1000);
         textMessage.setFromId(fromUser.getPeerId());
         textMessage.setToId(peerEntity.getPeerId());
         textMessage.setUpdated(nowTime);
         textMessage.setCreated(nowTime);
-        textMessage.setDisplayType(isOpen?DBConstant.SHOW_PAY_RED_PACKET_OPEN:DBConstant.SHOW_PAY_RED_PACKET);
+        textMessage.setDisplayType(isOpen?DBConstant.SHOW_PAY_TRANSFER_OPEN:DBConstant.SHOW_PAY_TRANSFER);
         textMessage.setGIfEmo(true);
-        textMessage.setMsgType(isOpen?DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN:DBConstant.MSG_TYPE_SINGLE_RED_PACKET);
+        textMessage.setMsgType(isOpen?DBConstant.MSG_TYPE_SINGLE_TRANSFER_OPEN:DBConstant.MSG_TYPE_SINGLE_TRANSFER);
         textMessage.setStatus(MessageConstant.MSG_SENDING);
         // 内容的设定
         textMessage.setContent(content);

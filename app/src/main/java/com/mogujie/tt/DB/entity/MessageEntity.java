@@ -179,6 +179,8 @@ public class MessageEntity implements java.io.Serializable {
                 return DBConstant.DISPLAY_FOR_MIX;
             case DBConstant.SHOW_PAY_RED_PACKET:
                 return DBConstant.DISPLAY_FOR_RED_PACKET;
+            case DBConstant.SHOW_PAY_RED_PACKET_OPEN:
+                return DBConstant.DISPLAY_FOR_RED_PACKET_OPEN;
             case DBConstant.SHOW_PAY_TRANSFER:
                 return DBConstant.DISPLAY_FOR_TRANFER;
             default:

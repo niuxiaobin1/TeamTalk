@@ -436,7 +436,8 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         logger.i("login#onLoginSuccess");
         loginSuccess = true;
         imService.getLoginManager().getNchatParams();
-        SPUtils.put(getApplicationContext(), Constants.N_OPENID, "226bdb573c2a48f3dff7f610fd208721");
+        SPUtils.put(getApplicationContext(), Constants.N_OPENID,
+                imService.getLoginManager().getLoginInfo().getOpenid());
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         LoginActivity.this.finish();

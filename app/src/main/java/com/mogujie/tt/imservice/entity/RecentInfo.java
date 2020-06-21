@@ -1,5 +1,7 @@
 package com.mogujie.tt.imservice.entity;
 
+import android.util.Log;
+
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.SessionEntity;

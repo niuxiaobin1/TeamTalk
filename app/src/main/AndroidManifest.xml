@@ -40,7 +40,8 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.PayResultActivity"></activity>
+        <activity android:name=".ui.activity.OpenRedPacketResultActivity"></activity>
+        <activity android:name=".ui.activity.PayResultActivity" />
         <activity android:name=".ui.activity.SelectBankActivity" />
         <activity android:name=".ui.activity.NewFriendsActivity" />
         <activity android:name=".ui.activity.AddMoreActivity" />

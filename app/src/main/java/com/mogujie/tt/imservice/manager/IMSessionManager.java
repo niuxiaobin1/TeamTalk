@@ -4,32 +4,30 @@ package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
 
-import com.mogujie.tt.DB.entity.PeerEntity;
-import com.mogujie.tt.DB.entity.UserEntity;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.MessageEntity;
+import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.SessionEntity;
+import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.ConfigurationSp;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.imservice.event.SessionEvent;
+import com.mogujie.tt.protobuf.IMBaseDefine;
+import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
 import com.mogujie.tt.protobuf.helper.Java2ProtoBuf;
 import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
-import com.mogujie.tt.protobuf.IMBaseDefine;
-import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import de.greenrobot.event.EventBus;

@@ -79,9 +79,11 @@ import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
+import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
+import com.mogujie.tt.imservice.event.QueryRedPacketEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMStackManager;
 import com.mogujie.tt.imservice.service.IMService;
@@ -95,6 +97,7 @@ import com.mogujie.tt.ui.widget.CustomEditView;
 import com.mogujie.tt.ui.widget.EmoGridView;
 import com.mogujie.tt.ui.widget.EmoGridView.OnEmoGridViewItemClick;
 import com.mogujie.tt.ui.widget.MGProgressbar;
+import com.mogujie.tt.ui.widget.RedPacketWindow;
 import com.mogujie.tt.ui.widget.YayaEmoGridView;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.GlideEngine;
@@ -102,6 +105,8 @@ import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import org.json.JSONException;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -134,6 +139,8 @@ public class MessageActivity extends TTBaseActivity
         OnTouchListener,
         TextWatcher,
         SensorEventListener {
+
+    private RedPacketWindow redPacketWindow;
 
     private static Handler uiHandler = null;// 处理语音
 
@@ -372,10 +379,18 @@ public class MessageActivity extends TTBaseActivity
                 break;
             case REDPACKET_CODE:
                 String result = data.getStringExtra("data");
-                RedPacketMessage redPacketMessage = RedPacketMessage.buildForSend(result, loginUser, peerEntity);
+                RedPacketMessage redPacketMessage = RedPacketMessage.buildForSend(result, loginUser, peerEntity, false);
                 imService.getMessageManager().sendRedPacket(redPacketMessage);
                 messageEdt.setText("");
                 pushList(redPacketMessage);
+                scrollToBottomListItem();
+                break;
+            case TRANSFER_CODE:
+                String result_t = data.getStringExtra("data");
+                TransferMessage transferMessage = TransferMessage.buildForSend(result_t, loginUser, peerEntity, false);
+                imService.getMessageManager().sendTransfer(transferMessage);
+                messageEdt.setText("");
+                pushList(transferMessage);
                 scrollToBottomListItem();
                 break;
             case PictureConfig.CHOOSE_REQUEST:
@@ -400,7 +415,7 @@ public class MessageActivity extends TTBaseActivity
                         docPaths = new ArrayList<>();
                         docPaths.addAll(dataList);
                     }
-                    for (int i = 0; i <docPaths.size() ; i++) {
+                    for (int i = 0; i < docPaths.size(); i++) {
                         try {
                             Log.e("nxb",
                                     ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
@@ -504,6 +519,48 @@ public class MessageActivity extends TTBaseActivity
                 }
             }
             break;
+        }
+    }
+
+
+    public void onEventMainThread(QueryRedPacketEvent event) {
+        QueryRedPacketEvent.Event type = event.getEvent();
+        RedPacketMessage entity = (RedPacketMessage) event.getMessageEntity();
+        switch (type) {
+            case ACK_QUERY_RED_PACKET_NOT_RECEIVE: {
+                if (redPacketWindow != null) {
+                    redPacketWindow = null;
+                }
+                redPacketWindow = new RedPacketWindow(MessageActivity.this, entity);
+                redPacketWindow.setOnOpenReadPacketListener(new RedPacketWindow.OnOpenReadPacketListener() {
+                    @Override
+                    public void onOpen() {
+                        RedPacketMessage applyRedMessage = RedPacketMessage.
+                                buildForSend(entity.getContent(), loginUser, peerEntity, true);
+                        applyRedMessage.setMsgId(entity.getMsgId());
+                        imService.getMessageManager().sendRedPacket(applyRedMessage);
+                        pushList(entity);
+                    }
+                });
+                redPacketWindow.showPopupWindow();
+            }
+            break;
+            case ACK_QUERY_RED_PACKET_RECEIVED: {
+                Intent it = new Intent(MessageActivity.this, OpenRedPacketResultActivity.class);
+                it.putExtra(Constants.CHAT_INFO, entity.getFromId());
+                it.putExtra(Constants.REDPACKET_INFO, entity.getContent());
+                startActivity(it);
+            }
+            break;
+
+            case ACK_QUERY_RED_PACKET_FAILURE:
+                // 失败情况下新添提醒
+                showToast(R.string.message_send_failed);
+            case ACK_QUERY_RED_PACKET_TIME_OUT: {
+                showToast(R.string.message_send_failed);
+            }
+            break;
+
         }
     }
 
@@ -1049,7 +1106,8 @@ public class MessageActivity extends TTBaseActivity
             break;
             case R.id.take_transfer_btn: {
                 Intent intent = new Intent(MessageActivity.this, TransferActivity.class);
-                startActivity(intent);
+                intent.putExtra(Constants.CHAT_INFO, peerEntity.getPeerId());
+                startActivityForResult(intent,TRANSFER_CODE);
             }
             break;
             case R.id.take_red_packet_btn: {

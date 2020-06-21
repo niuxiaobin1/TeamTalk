@@ -11,6 +11,7 @@ import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.MsgAnalyzeEngine;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
+import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMGroup;
@@ -23,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+
+import de.greenrobot.dao.test.DbTest;
 
 /**
  * @author : yingmu on 15-1-5.
@@ -90,6 +93,12 @@ public class ProtoBuf2JavaBean {
         if(msgType == DBConstant.MSG_TYPE_GROUP_TEXT ||
                 msgType ==DBConstant.MSG_TYPE_SINGLE_TEXT){
             desMessage =  MsgAnalyzeEngine.analyzeMessageDisplay(desMessage);
+        }else if(msgType== DBConstant.MSG_TYPE_SINGLE_RED_PACKET){
+            desMessage=DBConstant.DISPLAY_FOR_RED_PACKET;
+        }else if(msgType== DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN){
+            desMessage=DBConstant.DISPLAY_FOR_RED_PACKET_OPEN;
+        }else if(msgType== DBConstant.MSG_TYPE_SINGLE_TRANSFER){
+            desMessage=DBConstant.DISPLAY_FOR_TRANFER;
         }
 
         sessionEntity.setLatestMsgData(desMessage);
@@ -203,6 +212,44 @@ public class ProtoBuf2JavaBean {
         return redPacketMessage;
     }
 
+    public static TransferMessage analyzeTransfer(IMBaseDefine.MsgInfo msgInfo) {
+        TransferMessage transferMessage = new TransferMessage();
+        transferMessage.setFromId(msgInfo.getFromSessionId());
+        transferMessage.setMsgId(msgInfo.getMsgId());
+        transferMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
+        transferMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        transferMessage.setDisplayType(DBConstant.SHOW_PAY_TRANSFER);
+        transferMessage.setCreated(msgInfo.getCreateTime());
+        transferMessage.setUpdated(msgInfo.getCreateTime());
+
+        /**
+         * 解密文本信息
+         */
+        String desMessage = new String(com.mogujie.tt.Security.getInstance().DecryptMsg(msgInfo.getMsgData().toStringUtf8()));
+        transferMessage.setContent(desMessage);
+
+        return transferMessage;
+    }
+
+    public static RedPacketMessage analyzeOpenRedPacket(IMBaseDefine.MsgInfo msgInfo) {
+        RedPacketMessage redPacketMessage = new RedPacketMessage();
+        redPacketMessage.setFromId(msgInfo.getFromSessionId());
+        redPacketMessage.setMsgId(msgInfo.getMsgId());
+        redPacketMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
+        redPacketMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        redPacketMessage.setDisplayType(DBConstant.SHOW_PAY_RED_PACKET_OPEN);
+        redPacketMessage.setCreated(msgInfo.getCreateTime());
+        redPacketMessage.setUpdated(msgInfo.getCreateTime());
+
+        /**
+         * 解密文本信息
+         */
+        String desMessage = new String(com.mogujie.tt.Security.getInstance().DecryptMsg(msgInfo.getMsgData().toStringUtf8()));
+        redPacketMessage.setContent(desMessage);
+
+        return redPacketMessage;
+    }
+
 
     public static AudioMessage analyzeAudio(IMBaseDefine.MsgInfo msgInfo) throws JSONException, UnsupportedEncodingException {
         AudioMessage audioMessage = new AudioMessage();
@@ -277,6 +324,12 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_RED_PACK:
                 messageEntity = analyzeRedPacket(msgInfo);
                 break;
+            case MSG_TYPE_SINGLE_TRANSFER:
+                messageEntity = analyzeTransfer(msgInfo);
+                break;
+            case MSG_TYPE_SINGLE_RECV_RED_PACK:
+                messageEntity = analyzeOpenRedPacket(msgInfo);
+                break;
             default:
                 throw new RuntimeException("ProtoBuf2JavaBean#getMessageEntity wrong type!");
         }
@@ -316,6 +369,10 @@ public class ProtoBuf2JavaBean {
                 return DBConstant.MSG_TYPE_SINGLE_TEXT;
             case MSG_TYPE_SINGLE_RED_PACK:
                 return DBConstant.MSG_TYPE_SINGLE_RED_PACKET;
+            case MSG_TYPE_SINGLE_TRANSFER:
+                return DBConstant.MSG_TYPE_SINGLE_TRANSFER;
+            case MSG_TYPE_SINGLE_RECV_RED_PACK:
+                return DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN;
             default:
                 throw new IllegalArgumentException("msgType is illegal,cause by #getProtoMsgType#" +msgType);
         }

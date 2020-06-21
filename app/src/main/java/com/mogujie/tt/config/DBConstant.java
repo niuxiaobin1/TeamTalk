@@ -19,7 +19,9 @@ public interface DBConstant {
     public final int MSG_TYPE_SINGLE_TEXT = 0x01;
     public final int MSG_TYPE_SINGLE_AUDIO = 0x02;
     public final int MSG_TYPE_SINGLE_RED_PACKET = 0x03;
-    public final int MSG_TYPE_SINGLE_TRANSFER = 0x04;
+    public final int MSG_TYPE_SINGLE_RED_PACKET_OPEN = 0x04;
+    public final int MSG_TYPE_SINGLE_TRANSFER = 0x05;
+    public final int MSG_TYPE_SINGLE_TRANSFER_OPEN= 0x06;
     public final int MSG_TYPE_GROUP_TEXT = 0x11;
     public final int MSG_TYPE_GROUP_AUDIO = 0x12;
 
@@ -37,10 +39,13 @@ public interface DBConstant {
     public final int SHOW_MIX_TEXT = 4;
     public final int SHOW_GIF_TYPE = 5;
     public final int SHOW_PAY_RED_PACKET = 6;
-    public final int SHOW_PAY_TRANSFER = 7;
+    public final int SHOW_PAY_RED_PACKET_OPEN = 7;
+    public final int SHOW_PAY_TRANSFER = 8;
+    public final int SHOW_PAY_TRANSFER_OPEN = 9;
 
 
     public final String DISPLAY_FOR_RED_PACKET = "[红包]";
+    public final String DISPLAY_FOR_RED_PACKET_OPEN = "[红包消息]";
     public final String DISPLAY_FOR_TRANFER = "[转账]";
     public final String DISPLAY_FOR_IMAGE = "[图片]";
     public final String DISPLAY_FOR_MIX = "[图文消息]";

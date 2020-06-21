@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-
+    android:visibility="gone"
         android:id="@+id/payCodeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,6 +97,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/transactionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

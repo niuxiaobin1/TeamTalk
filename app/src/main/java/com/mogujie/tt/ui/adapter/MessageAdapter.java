@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,7 +28,9 @@ import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
+import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.ui.activity.PreviewGifActivity;
 import com.mogujie.tt.ui.activity.PreviewMessageImagesActivity;
 import com.mogujie.tt.ui.activity.PreviewTextActivity;
@@ -41,14 +44,19 @@ import com.mogujie.tt.ui.widget.message.EmojiRenderView;
 import com.mogujie.tt.ui.widget.message.GifImageRenderView;
 import com.mogujie.tt.ui.widget.message.ImageRenderView;
 import com.mogujie.tt.ui.widget.message.MessageOperatePopup;
+import com.mogujie.tt.ui.widget.message.RedPacketOpenRenderView;
 import com.mogujie.tt.ui.widget.message.RedPacketRenderView;
 import com.mogujie.tt.ui.widget.message.RenderType;
 import com.mogujie.tt.ui.widget.message.TextRenderView;
 import com.mogujie.tt.ui.widget.message.TimeRenderView;
+import com.mogujie.tt.ui.widget.message.TransferRenderView;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.DateUtil;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -300,6 +308,14 @@ public class MessageAdapter extends BaseAdapter {
                     case DBConstant.SHOW_PAY_RED_PACKET:
                         type = isMine ? RenderType.MESSAGE_TYPE_MINE_RED_PACKET
                                 : RenderType.MESSAGE_TYPE_OTHER_RED_PACKET;
+                        break;
+                    case DBConstant.SHOW_PAY_TRANSFER:
+                        type = isMine ? RenderType.MESSAGE_TYPE_MINE_TRANSFER
+                                : RenderType.MESSAGE_TYPE_OTHER_TRANSFER;
+                        break;
+                    case DBConstant.SHOW_PAY_RED_PACKET_OPEN:
+                        type = isMine ? RenderType.MESSAGE_TYPE_MINE_RED_PACKET_OPEN
+                                : RenderType.MESSAGE_TYPE_OTHER_RED_PACKET_OPEN;
                         break;
                     case DBConstant.SHOW_AUDIO_TYPE:
                         type = isMine ? RenderType.MESSAGE_TYPE_MINE_AUDIO
@@ -675,10 +691,21 @@ public class MessageAdapter extends BaseAdapter {
             redPacketRenderView = (RedPacketRenderView) convertView;
         }
 
+       final UserEntity peerEntity=userEntity;
         redPacketRenderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //打开红包
+                if (!isMine){
+
+                    imService.getMessageManager().queryRedPacketStatus(
+                            loginUser.getPeerId(),redPacketMessage, IMBaseDefine.MsgType.MSG_TYPE_SINGLE_RED_PACK,
+                            IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY
+                    );
+//
+                }
+
             }
         });
 
@@ -693,6 +720,109 @@ public class MessageAdapter extends BaseAdapter {
 
         redPacketRenderView.render(redPacketMessage, userEntity, ctx);
         return redPacketRenderView;
+    }
+
+
+    /**
+     * 转账类型的: 1. 设定内容Emoparser
+     * 2. 点击事件  单击跳转、 双击方法、长按pop menu
+     * 点击头像的事件 跳转
+     *
+     * @param position
+     * @param convertView
+     * @param viewGroup
+     * @param isMine
+     * @return
+     */
+    private View transferMsgRender(final int position, View convertView, final ViewGroup viewGroup, final boolean isMine) {
+        TransferRenderView transferRenderView;
+        final TransferMessage transferMessage = (TransferMessage) msgObjectList.get(position);
+        UserEntity userEntity = imService.getContactManager().findContact(transferMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
+        if (null == convertView) {
+            transferRenderView = TransferRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
+        } else {
+            transferRenderView = (TransferRenderView) convertView;
+        }
+
+        final UserEntity peerEntity=userEntity;
+        transferRenderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //打开红包
+                if (!isMine){
+
+//                    imService.getMessageManager().queryRedPacketStatus(
+//                            loginUser.getPeerId(),redPacketMessage, IMBaseDefine.MsgType.MSG_TYPE_SINGLE_RED_PACK,
+//                            IMBaseDefine.TransferDoType.TRANSFER_TYPE_QUERY
+//                    );
+                }
+
+            }
+        });
+
+        // 失败事件添加
+        transferRenderView.getMessageFailed().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(transferMessage, position));
+                popup.show(transferRenderView.getTitleTv(), DBConstant.SHOW_ORIGIN_TEXT_TYPE, true, isMine);
+            }
+        });
+
+        transferRenderView.render(transferMessage, userEntity, ctx);
+        return transferRenderView;
+    }
+
+
+    /**
+     * 红包已打开类型的: 1. 设定内容Emoparser
+     * 2. 点击事件  单击跳转、 双击方法、长按pop menu
+     * 点击头像的事件 跳转
+     *
+     * @param position
+     * @param convertView
+     * @param viewGroup
+     * @param isMine
+     * @return
+     */
+    private View redPacketMsgOpenRender(final int position, View convertView, final ViewGroup viewGroup, final boolean isMine) {
+        RedPacketOpenRenderView redPacketOpenRenderView;
+        final RedPacketMessage redPacketMessage = (RedPacketMessage) msgObjectList.get(position);
+        UserEntity userEntity = imService.getContactManager().findContact(redPacketMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
+        if (null == convertView) {
+            redPacketOpenRenderView = RedPacketOpenRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
+        } else {
+            redPacketOpenRenderView = (RedPacketOpenRenderView) convertView;
+        }
+
+       final UserEntity peerEntity=userEntity;
+        redPacketOpenRenderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // 失败事件添加
+        redPacketOpenRenderView.getMessageFailed().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(redPacketMessage, position));
+                popup.show(redPacketOpenRenderView.getTitleTv(), DBConstant.SHOW_ORIGIN_TEXT_TYPE, true, isMine);
+            }
+        });
+
+        redPacketOpenRenderView.render(redPacketMessage, userEntity, ctx);
+        return redPacketOpenRenderView;
     }
 
     /**
@@ -800,6 +930,18 @@ public class MessageAdapter extends BaseAdapter {
                     break;
                 case MESSAGE_TYPE_OTHER_RED_PACKET:
                     convertView = redPacketMsgRender(position, convertView, parent, false);
+                    break;
+                case MESSAGE_TYPE_MINE_TRANSFER:
+                    convertView = transferMsgRender(position, convertView, parent, true);
+                    break;
+                case MESSAGE_TYPE_OTHER_TRANSFER:
+                    convertView = transferMsgRender(position, convertView, parent, false);
+                    break;
+                case MESSAGE_TYPE_MINE_RED_PACKET_OPEN:
+                    convertView = redPacketMsgOpenRender(position, convertView, parent, true);
+                    break;
+                case MESSAGE_TYPE_OTHER_RED_PACKET_OPEN:
+                    convertView = redPacketMsgOpenRender(position, convertView, parent, false);
                     break;
 
                 case MESSAGE_TYPE_MINE_GIF:

@@ -2,6 +2,7 @@ package com.mogujie.tt.imservice.manager;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
@@ -17,8 +18,10 @@ import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
+import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
+import com.mogujie.tt.imservice.event.QueryRedPacketEvent;
 import com.mogujie.tt.imservice.event.RefreshHistoryMsgEvent;
 import com.mogujie.tt.imservice.service.LoadImageService;
 import com.mogujie.tt.imservice.support.SequenceNumberMaker;
@@ -37,6 +40,9 @@ import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+
+import static com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_RECV;
+import static com.mogujie.tt.protobuf.IMBaseDefine.TransferStatusType.TRANSFER_STATUS_WAIT;
 
 /**
  * 消息的处理
@@ -152,6 +158,54 @@ public class IMMessageManager extends IMManager {
         doRefreshLocalMsg(historyMsgEvent);
     }
 
+    public void queryRedPacketStatus(int userId,MessageEntity msgEntity, IMBaseDefine.MsgType msg_type,
+                                     IMBaseDefine.TransferDoType do_type){
+        IMMessage.IMTransferStatus imTransferStatus = IMMessage.IMTransferStatus.newBuilder()
+                .setFromUserId(msgEntity.getFromId())
+                .setToUserId(msgEntity.getToId())
+                .setUserId(userId)
+                .setMsgId(msgEntity.getMsgId())
+                .setDoType(do_type)
+                .setMsgType(msg_type)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
+        int cid = IMBaseDefine.MessageCmdID.CID_MSG_TRANSFER_STATUS_REQ_VALUE;
+
+        imSocketManager.sendRequest(imTransferStatus, sid, cid, new Packetlistener(getTimeoutTolerance(msgEntity)) {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMMessage.IMTransferStatusAck imTransferStatusAck = IMMessage.IMTransferStatusAck.parseFrom((CodedInputStream) response);
+                    if (imTransferStatusAck.getStatus()==TRANSFER_STATUS_WAIT){
+                        Log.e("nxb","1");
+                        triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_NOT_RECEIVE,
+                                msgEntity));
+                    }else if(imTransferStatusAck.getStatus()==TRANSFER_STATUS_RECV){
+                        Log.e("nxb","2");
+                        triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_RECEIVED,
+                                msgEntity));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFaild() {
+                Log.e("nxb","3");
+                triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_FAILURE,
+                        msgEntity));
+            }
+
+            @Override
+            public void onTimeout() {
+                Log.e("nxb","4");
+                triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_TIME_OUT,
+                        msgEntity));
+            }
+        });
+    }
+
 
     /**----------------------底层的接口-------------------------------------*/
     /**
@@ -164,7 +218,8 @@ public class IMMessageManager extends IMManager {
         logger.d("chat#sendMessage, msg:%s", msgEntity);
         // 发送情况下 msg_id 都是0
         // 服务端是从1开始计数的
-        if (!SequenceNumberMaker.getInstance().isFailure(msgEntity.getMsgId())) {
+        if (!SequenceNumberMaker.getInstance().isFailure(msgEntity.getMsgId())
+                && msgEntity.getMsgType() != DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN) {
             throw new RuntimeException("#sendMessage# msgId is wrong,cause by 0!");
         }
 
@@ -175,7 +230,7 @@ public class IMMessageManager extends IMManager {
         IMMessage.IMMsgData msgData = IMMessage.IMMsgData.newBuilder()
                 .setFromUserId(msgEntity.getFromId())
                 .setToSessionId(msgEntity.getToId())
-                .setMsgId(0)
+                .setMsgId(msgEntity.getMsgType() != DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN?0:msgEntity.getMsgId())
                 .setCreateTime(msgEntity.getCreated())
                 .setMsgType(msgType)
                 .setMsgData(ByteString.copyFrom(sendContent))  // 这个点要特别注意 todo ByteString.copyFrom
@@ -273,12 +328,20 @@ public class IMMessageManager extends IMManager {
         sessionManager.updateSession(textMessage);
         sendMessage(textMessage);
     }
+
     public void sendRedPacket(RedPacketMessage redPacketMessage) {
         logger.i("chat#redPacket#redPacketMessage");
         redPacketMessage.setStatus(MessageConstant.MSG_SENDING);
         long pkId = DBInterface.instance().insertOrUpdateMessage(redPacketMessage);
         sessionManager.updateSession(redPacketMessage);
         sendMessage(redPacketMessage);
+    }
+    public void sendTransfer(TransferMessage transferMessage) {
+        logger.i("chat#transfer#transferMessage");
+        transferMessage.setStatus(MessageConstant.MSG_SENDING);
+        long pkId = DBInterface.instance().insertOrUpdateMessage(transferMessage);
+        sessionManager.updateSession(transferMessage);
+        sendMessage(transferMessage);
     }
 
     public void sendVoice(AudioMessage audioMessage) {

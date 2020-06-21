@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mogujie.tt.ui.widget.message.TransferRenderView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/default_bk"
+    android:paddingRight="15dp"
+    android:paddingBottom="20dp">
+
+    <com.mogujie.tt.ui.widget.IMBaseImageView
+        android:id="@+id/user_portrait"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tt_round_bg" />
+
+    <LinearLayout
+        android:paddingRight="10mm"
+        android:id="@+id/content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_portrait"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="13dp"
+        android:layout_toLeftOf="@id/user_portrait"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/message_state_failed"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/message_image_desc"
+            android:src="@drawable/tt_msg_tip"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="199mm"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="199mm"
+                android:layout_height="51mm"
+                android:background="@drawable/shape_custome_msg_bg1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="9mm"
+                android:paddingRight="9mm">
+
+                <ImageView
+                    android:layout_width="33mm"
+                    android:layout_height="33mm"
+                    android:src="@mipmap/msg_transfer_icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2.5mm"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titleTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tansfer_title"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/amountTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transfer_unit"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:text="@string/chat_transfer"
+                android:layout_width="199mm"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_custome_msg_bg2"
+                android:paddingLeft="15mm"
+                android:paddingTop="3mm"
+                android:paddingBottom="2mm"
+                android:textColor="@color/color_78"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.mogujie.tt.ui.widget.message.TransferRenderView>

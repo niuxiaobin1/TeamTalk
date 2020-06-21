@@ -52,7 +52,6 @@ public class RedPacketActivity extends TTBaseActivity {
         super.onCreate(savedInstanceState);
         LayoutInflater.from(this).inflate(R.layout.activity_red_packet, topContentView);
         mChatInfo = IMContactManager.instance().findContact(getIntent().getIntExtra(Constants.CHAT_INFO,0)) ;
-        mChatInfo.setOpenid("2a422f203c17ad09c70ec61666a61038");
         setLeftButton(R.mipmap.ic_back_black);
         setTitle(getResources().getString(R.string.red_packet_title));
         setRightText(getResources().getString(R.string.cancel), new View.OnClickListener() {
@@ -72,49 +71,49 @@ public class RedPacketActivity extends TTBaseActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                final String money = amountEt.getText().toString().trim();
-//                if (!TextUtils.isEmpty(money)) {
-//                    SoftKeyBoardUtil.hideKeyBoard(amountEt.getWindowToken());
-//                    if (inputPasswordWindow != null) {
-//                        inputPasswordWindow = null;
-//                    }
-//                    inputPasswordWindow = new InputPasswordWindow(RedPacketActivity.this,
-//                            mChatInfo.getMainName(), money, new InputPasswordWindow.OnInputFinishCallBack() {
-//                        @Override
-//                        public void onFinish(String psw, String cardId) {
-////                            showDialog();
-////                            verifyPsw(money, psw, cardId);
-//
-//                        }
-//                    });
-//                    inputPasswordWindow.setAlignBackground(true);
-//                    inputPasswordWindow.setPopupGravity(Gravity.BOTTOM);
-//                    if (!inputPasswordWindow.isShowing()) {
-//                        inputPasswordWindow.showPopupWindow();
-//                    }
-//
-//                }
+                final String money = amountEt.getText().toString().trim();
+                if (!TextUtils.isEmpty(money)) {
+                    SoftKeyBoardUtil.hideKeyBoard(amountEt.getWindowToken());
+                    if (inputPasswordWindow != null) {
+                        inputPasswordWindow = null;
+                    }
+                    inputPasswordWindow = new InputPasswordWindow(RedPacketActivity.this,
+                            mChatInfo.getMainName(), money, new InputPasswordWindow.OnInputFinishCallBack() {
+                        @Override
+                        public void onFinish(String psw, String cardId) {
+                            showDialog();
+                            verifyPsw(money, psw, cardId);
 
-                try {
-                    JSONObject param = new JSONObject();
-                    param.put("institution_number", INSTITUTION_NUMBER);
-                    param.put("channel", "1");
-                    param.put("payer_user_openid", "226bdb573c2a48f3dff7f610fd208721");
-                    param.put("payee_user_openid", mChatInfo.getOpenid());
-                    param.put("user_gps", "");
-                    param.put("amount", "66");
-                    param.put("order_type", "5");
-                    param.put("payer_card_id", "1");
-                    param.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
-                    param.put("result", "result");
-                    param.put("type", CUSTOM_MSG_RED_PACKET);
-                    Intent it = new Intent();
-                    it.putExtra("data", param.toString());
-                    setResult(Activity.RESULT_OK, it);
-                    finish();
-                } catch (JSONException e) {
+                        }
+                    });
+                    inputPasswordWindow.setAlignBackground(true);
+                    inputPasswordWindow.setPopupGravity(Gravity.BOTTOM);
+                    if (!inputPasswordWindow.isShowing()) {
+                        inputPasswordWindow.showPopupWindow();
+                    }
 
                 }
+
+//                try {
+//                    JSONObject param = new JSONObject();
+//                    param.put("institution_number", INSTITUTION_NUMBER);
+//                    param.put("channel", "1");
+//                    param.put("payer_user_openid", "226bdb573c2a48f3dff7f610fd208721");
+//                    param.put("payee_user_openid", mChatInfo.getOpenid());
+//                    param.put("user_gps", "");
+//                    param.put("amount", "66");
+//                    param.put("order_type", "5");
+//                    param.put("payer_card_id", "1");
+//                    param.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+//                    param.put("result", "result");
+//                    param.put("type", CUSTOM_MSG_RED_PACKET);
+//                    Intent it = new Intent();
+//                    it.putExtra("data", param.toString());
+//                    setResult(Activity.RESULT_OK, it);
+//                    finish();
+//                } catch (JSONException e) {
+//
+//                }
             }
         });
 

@@ -1,86 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".ui.activity.SelectionActivity">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/tt_round_bg" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:text="Mabel Curti"
-        android:textColor="#333333"
-        android:textSize="16sp" />
-
-    <TextView
+    <View
+        android:background="@drawable/chat_top_line_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="49dp"
-        android:text="@string/transfer_amount"
-        android:textColor="#333333"
-        android:textSize="16sp" />
+        android:layout_height="10mm"/>
 
     <LinearLayout
-        android:id="@+id/edit_content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginRight="33dp"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <com.mogujie.tt.ui.widget.IMBaseImageView
+            android:layout_marginTop="20mm"
+            android:layout_marginBottom="20mm"
+            android:id="@+id/userImage"
+            android:layout_width="70mm"
+            android:layout_height="70mm"
+            android:scaleType="fitXY" />
 
         <TextView
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="₦"
-            android:textSize="40sp" />
-
-        <EditText
-            android:id="@+id/edit_content_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:paddingLeft="7dp"
-            android:singleLine="true"
             android:textColor="@color/color_33"
-            android:textColorHint="@color/color_98"
-            android:textSize="40sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>
 
-    <View
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/edit_content_et"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginRight="22dp"
-        android:background="@color/color_E6" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50mm"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="37.5dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/shape_bg_green_corner5"
-        android:text="@string/chat_transfer"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_marginRight="18.5mm"
+            android:layout_marginLeft="18.5mm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_amount"
+            android:textColor="@color/color_33"
+            android:textSize="15sp" />
 
 
+        <RelativeLayout
+            android:layout_marginTop="20mm"
+            android:layout_marginRight="18.5mm"
+            android:layout_marginLeft="18.5mm"
+            android:layout_width="match_parent"
+            android:layout_height="77mm">
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/unitTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/transfer_unit"
+                android:textSize="39sp"
+                />
+
+            <EditText
+                android:id="@+id/amountEt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/unitTv"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10mm"
+                android:textColor="@color/color_33"
+                android:textSize="55sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="10mm"
+            android:layout_marginRight="18.5mm"
+            android:layout_marginLeft="18.5mm"
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:background="@color/text_tips_color" />
+
+        <Button
+            android:id="@+id/btn_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="50mm"
+            android:layout_marginLeft="12mm"
+            android:layout_marginTop="55mm"
+            android:layout_marginRight="12mm"
+            android:background="@drawable/shape_done_btn"
+            android:text="@string/chat_transfer"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
 </LinearLayout>

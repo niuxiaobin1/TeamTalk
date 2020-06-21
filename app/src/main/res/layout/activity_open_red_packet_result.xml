@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:background="@mipmap/r_p_top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="100mm">
+
+        <ImageView
+            android:layout_marginTop="10mm"
+            android:id="@+id/backImage"
+            android:layout_marginLeft="15mm"
+            android:src="@mipmap/back_white_0428"
+            android:layout_width="17mm"
+            android:layout_height="17mm" />
+
+
+    </RelativeLayout>
+
+
+    <com.mogujie.tt.ui.widget.IMBaseImageView
+        android:scaleType="centerInside"
+        android:id="@+id/sendUserImage"
+        android:layout_marginTop="40mm"
+        android:src="@mipmap/default_user_icon"
+        android:layout_width="40mm"
+        android:layout_height="40mm" />
+
+    <TextView
+        android:id="@+id/sendUserTv"
+        android:layout_marginTop="15mm"
+        android:textColor="@color/color_33"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:gravity="center"
+        android:background="@drawable/shape_bg_f8_corner4"
+        android:text="@string/best_wishes"
+        android:layout_marginTop="14mm"
+        android:textColor="@color/color_D0AB77"
+        android:textSize="16sp"
+        android:layout_width="148mm"
+        android:layout_height="45mm" />
+
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/receiverList"
+        android:layout_marginTop="70mm"
+        android:layout_marginLeft="15mm"
+        android:layout_marginRight="15mm"
+        android:layout_width="match_parent"
+        android:layout_height="50mm">
+
+        <com.mogujie.tt.ui.widget.IMBaseImageView
+            android:scaleType="centerInside"
+            android:id="@+id/receiverUserImage"
+            android:src="@mipmap/default_user_icon"
+            android:layout_width="50mm"
+            android:layout_height="50mm" />
+
+
+        <LinearLayout
+            android:layout_marginLeft="20mm"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_marginTop="3mm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/receiverUserTv"
+                    android:textColor="@color/color_33"
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_alignBottom="@id/receiverUserTv"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/receiverAmountTv"
+                    android:textColor="@color/color_33"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="2mm"
+                android:id="@+id/receiverTimeTv"
+                android:textColor="@color/color_98"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_gravity="bottom"
+                android:background="@color/color_ED"
+                android:layout_width="match_parent"
+                android:layout_height="1mm"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

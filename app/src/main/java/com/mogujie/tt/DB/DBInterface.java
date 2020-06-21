@@ -25,6 +25,7 @@ import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
+import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.utils.Logger;
 
 import org.json.JSONException;
@@ -499,7 +500,11 @@ public class DBInterface {
                     newList.add(TextMessage.parseFromDB(info));
                     break;
                 case DBConstant.SHOW_PAY_RED_PACKET:
+                case DBConstant.SHOW_PAY_RED_PACKET_OPEN:
                     newList.add(RedPacketMessage.parseFromDB(info));
+                    break;
+                case DBConstant.SHOW_PAY_TRANSFER:
+                    newList.add(TransferMessage.parseFromDB(info));
                     break;
             }
         }

@@ -3,7 +3,6 @@ package com.mogujie.tt.DB;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.mogujie.tt.DB.dao.ApplyUserDao;
 import com.mogujie.tt.DB.dao.DaoMaster;
@@ -469,6 +468,13 @@ public class DBInterface {
                     break;
                 case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
                     messageEntity = TextMessage.parseFromDB(msg);
+                    break;
+                case DBConstant.SHOW_PAY_RED_PACKET:
+                case DBConstant.SHOW_PAY_RED_PACKET_OPEN:
+                    messageEntity=RedPacketMessage.parseFromDB(msg);
+                    break;
+                case DBConstant.SHOW_PAY_TRANSFER:
+                    messageEntity=TransferMessage.parseFromDB(msg);
                     break;
             }
         return messageEntity;

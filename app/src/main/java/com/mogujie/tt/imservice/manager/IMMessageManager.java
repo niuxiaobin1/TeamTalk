@@ -2,7 +2,6 @@ package com.mogujie.tt.imservice.manager;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
@@ -177,11 +176,9 @@ public class IMMessageManager extends IMManager {
                 try {
                     IMMessage.IMTransferStatusAck imTransferStatusAck = IMMessage.IMTransferStatusAck.parseFrom((CodedInputStream) response);
                     if (imTransferStatusAck.getStatus()==TRANSFER_STATUS_WAIT){
-                        Log.e("nxb","1");
                         triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_NOT_RECEIVE,
                                 msgEntity));
                     }else if(imTransferStatusAck.getStatus()==TRANSFER_STATUS_RECV){
-                        Log.e("nxb","2");
                         triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_RECEIVED,
                                 msgEntity));
                     }
@@ -192,14 +189,12 @@ public class IMMessageManager extends IMManager {
 
             @Override
             public void onFaild() {
-                Log.e("nxb","3");
                 triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_FAILURE,
                         msgEntity));
             }
 
             @Override
             public void onTimeout() {
-                Log.e("nxb","4");
                 triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_TIME_OUT,
                         msgEntity));
             }

@@ -409,6 +409,7 @@ public class IMContactManager extends IMManager {
         if (imChangeValidateRsp== null ) {
             return;
         }
+//        Log.e("nxb",imChangeValidateRsp.getResultCode()+"");
     }
 
     /**

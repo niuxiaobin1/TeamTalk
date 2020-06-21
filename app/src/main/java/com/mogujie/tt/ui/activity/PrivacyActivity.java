@@ -30,6 +30,14 @@ public class PrivacyActivity extends TTBaseActivity {
         @Override
         public void onIMServiceConnected() {
             imService = imServiceConnector.getIMService();
+            for (int i = 0; i < mJoinTypeIdList.size(); i++) {
+                if (imService.getLoginManager().getLoginInfo().getValidateType()==mJoinTypeIdList.get(i)){
+                    mJoinTypeIndex=i;
+                    break;
+                }
+            }
+
+            friendRequestView.setContent(mJoinTypeTextList.get(mJoinTypeIndex));
 
         }
     };
@@ -75,17 +83,7 @@ public class PrivacyActivity extends TTBaseActivity {
         mJoinTypeIdList.add(0);
 
 
-//        if (TextUtils.equals(TIMFriendAllowType.TIM_FRIEND_ALLOW_ANY, profile.getAllowType())) {
-//            mJoinTypeIndex = 0;
-//        } else if (TextUtils.equals(TIMFriendAllowType.TIM_FRIEND_DENY_ANY, profile.getAllowType())) {
-//            mJoinTypeIndex = 1;
-//        } else if (TextUtils.equals(TIMFriendAllowType.TIM_FRIEND_NEED_CONFIRM, profile.getAllowType())) {
-//            mJoinTypeIndex = 2;
-//        } else {
-//            mJoinTypeIndex = 0;
-//        }
-//
-//        friendRequestView.setContent(mJoinTypeTextList.get(mJoinTypeIndex));
+
     }
 
     @Override

@@ -1,12 +1,14 @@
 package com.mogujie.tt.protobuf.helper;
 
+import android.util.Log;
+
 import com.google.protobuf.ByteString;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.SessionEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.MsgAnalyzeEngine;
@@ -24,8 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-
-import de.greenrobot.dao.test.DbTest;
 
 /**
  * @author : yingmu on 15-1-5.
@@ -70,6 +70,7 @@ public class ProtoBuf2JavaBean {
         userEntity.setUpdated(timeNow);
         userEntity.setPeerId(userInfo.getUserId());
         userEntity.setOpenid(userInfo.getOpenid());
+        userEntity.setValidateType(userInfo.getValidateType());
 
         PinYin.getPinYin(userEntity.getMainName(), userEntity.getPinyinElement());
         return userEntity;
@@ -183,6 +184,12 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_RED_PACK:
                 messageEntity = analyzeRedPacket(msgInfo);
                 break;
+            case MSG_TYPE_SINGLE_RECV_RED_PACK:
+                messageEntity = analyzeRedPacketReceived(msgInfo);
+                break;
+            case MSG_TYPE_SINGLE_TRANSFER:
+                messageEntity = analyzeTransfer(msgInfo);
+                break;
             default:
                 throw new RuntimeException("ProtoBuf2JavaBean#getMessageEntity wrong type!");
         }
@@ -200,6 +207,24 @@ public class ProtoBuf2JavaBean {
         redPacketMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
         redPacketMessage.setStatus(MessageConstant.MSG_SUCCESS);
         redPacketMessage.setDisplayType(DBConstant.SHOW_PAY_RED_PACKET);
+        redPacketMessage.setCreated(msgInfo.getCreateTime());
+        redPacketMessage.setUpdated(msgInfo.getCreateTime());
+
+        /**
+         * 解密文本信息
+         */
+        String desMessage = new String(com.mogujie.tt.Security.getInstance().DecryptMsg(msgInfo.getMsgData().toStringUtf8()));
+        redPacketMessage.setContent(desMessage);
+
+        return redPacketMessage;
+    }
+    public static RedPacketMessage analyzeRedPacketReceived(IMBaseDefine.MsgInfo msgInfo) {
+        RedPacketMessage redPacketMessage = new RedPacketMessage();
+        redPacketMessage.setFromId(msgInfo.getFromSessionId());
+        redPacketMessage.setMsgId(msgInfo.getMsgId());
+        redPacketMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
+        redPacketMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        redPacketMessage.setDisplayType(DBConstant.SHOW_PAY_RED_PACKET_OPEN);
         redPacketMessage.setCreated(msgInfo.getCreateTime());
         redPacketMessage.setUpdated(msgInfo.getCreateTime());
 

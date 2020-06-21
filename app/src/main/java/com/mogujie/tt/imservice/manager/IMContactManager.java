@@ -15,6 +15,7 @@ import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
 import com.mogujie.tt.utils.pinyin.PinYin;
 
 import java.util.ArrayList;
@@ -232,15 +233,6 @@ public class IMContactManager extends IMManager {
         triggerEvent(UserInfoEvent.USER_INFO_UPDATE);
     }
 
-    public void onEventMainThread(UserApplyInfoEvent event) {
-        switch (event) {
-            case USER_APPLY_INFO_OK:
-                int updateTime = dbInterface.getUserInfoLastTime();
-                logger.d("contact#loadAllUserInfo req-updateTime:%d", updateTime);
-                reqGetAllFriendsUsers(updateTime);
-                break;
-        }
-    }
 
 
     public UserEntity findContact(int buddyId) {
@@ -402,6 +394,7 @@ public class IMContactManager extends IMManager {
      */
     public void onRepSearchDetailUsers(IMBuddy.IMSearchUsersRsp searchUsersRsp) {
         if (searchUsersRsp.getUserInfoListList() == null || searchUsersRsp.getUserInfoListList().size() == 0) {
+            ToastUtil.toastShortMessage("user not exit");
             return;
         }
         IMUIHelper.openUserProfileActivity(ctx, searchUsersRsp.getUserInfoListList().get(0));
@@ -416,7 +409,6 @@ public class IMContactManager extends IMManager {
         if (imChangeValidateRsp== null ) {
             return;
         }
-        Log.e("nxb",imChangeValidateRsp.getResultCode()+"");
     }
 
     /**
@@ -456,6 +448,9 @@ public class IMContactManager extends IMManager {
         if (imAgreeFriendRsp == null) {
             return;
         }
+        int updateTime = dbInterface.getUserInfoLastTime();
+        logger.d("contact#loadAllUserInfo req-updateTime:%d", updateTime);
+        reqGetAllFriendsUsers(updateTime);
         EventBus.getDefault().postSticky(UserApplyInfoEvent.USER_APPLY_INFO_OK);
     }
     /**
@@ -495,6 +490,7 @@ public class IMContactManager extends IMManager {
         if (imAddFriendRsp == null) {
             return;
         }
+
     }
 
 

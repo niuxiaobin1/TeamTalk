@@ -193,6 +193,7 @@ public class UserInfoFragment extends MainFragment {
                         IMUIHelper.openChatActivity(getActivity(), currentUser.getSessionKey());
                         getActivity().finish();
                     }
+                    getActivity().finish();
 
                 }
             });

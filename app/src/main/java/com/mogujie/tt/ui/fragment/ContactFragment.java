@@ -1,6 +1,7 @@
 package com.mogujie.tt.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.GroupEntity;
@@ -52,6 +55,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     private IMService imService;
     private IMContactManager contactMgr;
     private int curTabIndex = 0;
+    private static final int REQUEST_CODE=0x1;
 
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
@@ -180,7 +184,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), NewFriendsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE);
             }
         });
 
@@ -333,4 +337,12 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==Activity.RESULT_OK){
+
+
+        }
+    }
 }

@@ -1,11 +1,15 @@
 
 package com.mogujie.tt.ui.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +23,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
@@ -41,25 +48,32 @@ import com.mogujie.tt.ui.activity.MainActivity;
 import com.mogujie.tt.ui.adapter.ChatAdapter;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.NetworkUtil;
+import com.mogujie.tt.utils.ToastUtil;
 import com.mogujie.tt.utils.menu.Menu;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  * @author Nana
  * @Description 最近联系人Fragment页
  * @date 2014-7-24
  */
+@RuntimePermissions
 public class ChatFragment extends MainFragment
         implements
         OnItemSelectedListener,
         OnItemClickListener,
         OnItemLongClickListener {
-
+    private final static int REQUEST_CODE = 01;
     private ChatAdapter contactAdapter;
     private ListView contactListView;
     private View curView = null;
@@ -121,6 +135,20 @@ public class ChatFragment extends MainFragment
         }
         curView = inflater.inflate(R.layout.tt_fragment_chat, topContentView);
         mMenu = new Menu(getActivity(), getTitleBar(), Menu.MENU_TYPE_CONTACT);
+        mMenu.addOnOpenZXingScanListener(new Menu.OnOpenZXingScanListener() {
+            @Override
+            public void onOpenZXing() {
+                String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDMyIn0";
+                byte[] encrypted1= Base64.decode(result,Base64.DEFAULT);
+                try {
+                    String originalString = new String(encrypted1, "utf-8");
+                    Log.e("nxb",originalString);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+//                    ChatFragmentPermissionsDispatcher.openCameraScanWithPermissionCheck(ChatFragment.this);
+            }
+        });
         // 多端登陆也在用这个view
         noNetworkView = curView.findViewById(R.id.layout_no_network);
         noChatView = curView.findViewById(R.id.layout_no_chat);
@@ -604,6 +632,39 @@ public class ChatFragment extends MainFragment
             // 下面这个不管用!!
             //contactListView.smoothScrollToPosition(needPosition);
             contactListView.setSelection(needPosition);
+        }
+    }
+
+
+    @NeedsPermission({Manifest.permission.CAMERA})
+    public void openCameraScan() {
+        Intent intent = new Intent(getActivity(), CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ChatFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+//                    doResult(result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtil.toastShortMessage( "scan fail");
+                }
+            }
         }
     }
 }

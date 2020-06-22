@@ -7,4 +7,5 @@ public interface ScanResultCallBack {
     void bScCallBack();
     void cSbCallBack1(String url);
     void cSbCallBack2(String order_sn);
+    void cSbCallBack3(String qr_cate,String sub_no);
 }

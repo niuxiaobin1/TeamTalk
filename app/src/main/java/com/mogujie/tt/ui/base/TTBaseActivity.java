@@ -142,12 +142,12 @@ public abstract class TTBaseActivity extends AppCompatActivity {
         topBar.setBackgroundResource(resID);
     }
 
-    protected void showDialog() {
+    public void showDialog() {
         WaitDialog.show(TTBaseActivity.this, getResources()
                 .getString(R.string.transfer_wait));
     }
 
-    protected void dismissDialog() {
+    public void dismissDialog() {
         WaitDialog.dismiss();
     }
 

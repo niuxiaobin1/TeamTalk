@@ -65,4 +65,6 @@ public class ServerHostConfig {
     public static final String CUSTOMER_QUERY_RECEIVE=NigeriaHost + "customer/query_receive";
     //红包状态更新
     public static final String CUSTOMER_UPDATE_RECEIVE=NigeriaHost + "customer/update_receive";
+    //商户信息查询接口
+    public static final String GATEWAY_QUERY_MER=NigeriaHost + "gateway/query_mer";
 }

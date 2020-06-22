@@ -27,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.JsonObject;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
@@ -44,6 +45,9 @@ import com.mogujie.tt.imservice.manager.IMReconnectManager;
 import com.mogujie.tt.imservice.manager.IMUnreadMsgManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.scanResult.ScanResultCallBack;
+import com.mogujie.tt.scanResult.ScanResultUtil;
+import com.mogujie.tt.ui.activity.AddMoreActivity;
 import com.mogujie.tt.ui.activity.MainActivity;
 import com.mogujie.tt.ui.adapter.ChatAdapter;
 import com.mogujie.tt.utils.IMUIHelper;
@@ -54,6 +58,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -139,13 +146,7 @@ public class ChatFragment extends MainFragment
             @Override
             public void onOpenZXing() {
                 String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDMyIn0";
-                byte[] encrypted1= Base64.decode(result,Base64.DEFAULT);
-                try {
-                    String originalString = new String(encrypted1, "utf-8");
-                    Log.e("nxb",originalString);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                doResult(result);
 //                    ChatFragmentPermissionsDispatcher.openCameraScanWithPermissionCheck(ChatFragment.this);
             }
         });
@@ -666,5 +667,47 @@ public class ChatFragment extends MainFragment
                 }
             }
         }
+    }
+
+    private void doResult(String result) {
+        ScanResultUtil.doResult(result, new ScanResultCallBack() {
+            @Override
+            public void addCallBack(String openId) {
+                if (imService != null) {
+                    imService.getContactManager().reqSearchUsers(openId);
+                }
+            }
+
+            @Override
+            public void payCallBack(String payCode) {
+
+            }
+
+            @Override
+            public void bScCallBack() {
+
+            }
+
+            @Override
+            public void cSbCallBack1(String url) {
+
+//                Intent it = new Intent(AddMoreActivity.this, WebViewActivity.class);
+//                it.putExtra(WebViewActivity.WEB_TITLE, "");
+//                it.putExtra(WebViewActivity.WEB_URL, url);
+//                startActivity(it);
+            }
+
+            @Override
+            public void cSbCallBack2(String order_sn) {
+//                Intent it = new Intent(AddMoreActivity.this, ScanPayActivity.class);
+//                it.putExtra(ScanPayActivity.ORDER, order_sn);
+//                startActivity(it);
+            }
+
+            @Override
+            public void cSbCallBack3(String qr_cate, String sub_no) {
+                ScanResultUtil.queryMer((MainActivity)getActivity(),qr_cate,sub_no);
+            }
+        });
     }
 }

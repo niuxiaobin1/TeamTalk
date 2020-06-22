@@ -8,24 +8,23 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.UnreadEvent;
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.fragment.ChatFragment;
 import com.mogujie.tt.ui.fragment.ContactFragment;
-import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.ui.widget.NaviTabButton;
 import com.mogujie.tt.utils.LocationUtils;
 import com.mogujie.tt.utils.Logger;
-import com.mogujie.tt.ui.widget.NaviTabButton;
 import com.mogujie.tt.utils.ToastUtil;
 
 import de.greenrobot.event.EventBus;
@@ -36,7 +35,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends TTBaseActivity {
     private Fragment[] mFragments;
     private NaviTabButton[] mTabButtons;
     private Logger logger = Logger.getLogger(MainActivity.class);
@@ -68,7 +67,7 @@ public class MainActivity extends FragmentActivity {
         EventBus.getDefault().register(this);
         imServiceConnector.connect(this);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.tt_activity_main);
 
         initTab();

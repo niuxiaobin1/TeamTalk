@@ -272,6 +272,11 @@ public class AddMoreActivity extends TTBaseActivity {
 //                it.putExtra(ScanPayActivity.ORDER, order_sn);
 //                startActivity(it);
             }
+
+            @Override
+            public void cSbCallBack3(String qr_cate, String sub_no) {
+                ScanResultUtil.queryMer(AddMoreActivity.this,qr_cate,sub_no);
+            }
         });
     }
 }

@@ -6,10 +6,12 @@ import android.view.View;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.TUIKitConstants;
+import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.widget.LineControllerView;
+import com.mogujie.tt.utils.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -65,9 +67,31 @@ public class PrivacyActivity extends TTBaseActivity {
                     @Override
                     public void onReturn(Object text) {
                         mJoinTypeIndex=(Integer)text;
-                        friendRequestView.setContent(mJoinTypeTextList.get(mJoinTypeIndex));
                         if (imService!=null){
-                            imService.getContactManager().reqChangeValidate(mJoinTypeIdList.get(mJoinTypeIndex));
+                            imService.getContactManager().
+                                    reqChangeValidate(mJoinTypeIdList.get(mJoinTypeIndex)
+                                            , new Packetlistener() {
+                                                @Override
+                                                public void onSuccess(Object response) {
+                                                    runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            imService.getLoginManager().getLoginInfo().setValidateType(mJoinTypeIdList.get(mJoinTypeIndex));
+                                                            friendRequestView.setContent(mJoinTypeTextList.get(mJoinTypeIndex));
+                                                        }
+                                                    });
+                                                }
+
+                                                @Override
+                                                public void onFaild() {
+                                                    ToastUtil.toastShortMessage("modify fail");
+                                                }
+
+                                                @Override
+                                                public void onTimeout() {
+                                                    ToastUtil.toastShortMessage("modify onTimeout");
+                                                }
+                                            });
                         }
                     }
                 });

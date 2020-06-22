@@ -21,6 +21,7 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.GroupEvent;
+import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
 import com.mogujie.tt.imservice.service.IMService;
@@ -343,6 +344,21 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         if (resultCode==Activity.RESULT_OK){
 
 
+        }
+    }
+
+    public void onEventMainThread(OtherUserInfoUpdateEvent event) {
+        switch (event.updateEvent) {
+            case USER_UPDATE_INFO_OK:
+                if (contactAdapter != null && contactAdapter.getCount() != 0) {
+                    contactAdapter.updateRecentInfoByRemake(event.userEntity);
+                }
+                break;
+            case USER_DELETE_INFO_OK:
+                if (contactAdapter != null && contactAdapter.getCount() != 0) {
+                    contactAdapter.deleteRecentInfo(event.userEntity);
+                }
+                break;
         }
     }
 }

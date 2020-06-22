@@ -13,11 +13,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mogujie.tools.ScreenTools;
+import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
+import com.mogujie.tt.imservice.manager.IMContactManager;
 import com.mogujie.tt.utils.DateUtil;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
@@ -82,6 +84,27 @@ public class ChatAdapter extends BaseAdapter {
         }
     }
 
+    /**用戶备注的更新  not use now*/
+    public void updateRecentInfoByRemake(UserEntity userEntity){
+        for(RecentInfo recentInfo:recentSessionList){
+            if(recentInfo.getSessionKey().equals(userEntity.getSessionKey())){
+                recentInfo.setName(userEntity.getMainName());
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    /**删除用户会话 not use now*/
+    public void deleteRecentInfo(UserEntity userEntity){
+        for(RecentInfo recentInfo:recentSessionList){
+            if(recentInfo.getSessionKey().equals(userEntity.getSessionKey())){
+                recentSessionList.remove(recentInfo);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
 
     public int getUnreadPositionOnView(int currentPostion){
         int nextIndex = currentPostion +1;

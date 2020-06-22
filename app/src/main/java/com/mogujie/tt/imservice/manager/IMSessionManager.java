@@ -364,6 +364,7 @@ public class IMSessionManager extends IMManager {
             default:
                 throw new IllegalArgumentException("findPeerEntity#peerType is illegal,cause by " +peerType);
         }
+
         return peerEntity;
     }
 

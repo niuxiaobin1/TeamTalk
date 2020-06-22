@@ -57,6 +57,8 @@ public class RecentInfo {
             ArrayList<String> avatarList = new ArrayList<>();
             avatarList.add(entity.getAvatar());
             avatar = avatarList;
+        }else{
+            name = sessionEntity.getSessionKey();
         }
     }
 

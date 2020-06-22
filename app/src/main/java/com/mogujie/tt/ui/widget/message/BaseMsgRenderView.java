@@ -101,7 +101,7 @@ public abstract class BaseMsgRenderView extends RelativeLayout{
         portrait.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IMUIHelper.openUserProfileActivity(getContext(),userId);
+                IMUIHelper.openUserProfileActivity(getContext(),userId,true);
             }
         });
         /**头像事件 end*/

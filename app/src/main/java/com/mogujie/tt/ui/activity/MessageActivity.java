@@ -82,6 +82,7 @@ import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
 import com.mogujie.tt.imservice.event.MessageEvent;
+import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
 import com.mogujie.tt.imservice.event.QueryRedPacketEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
@@ -103,6 +104,7 @@ import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.GlideEngine;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
@@ -266,6 +268,12 @@ public class MessageActivity extends TTBaseActivity
         ImageMessage.clearImageMessageList();
         loginUser = imService.getLoginManager().getLoginInfo();
         peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
+        if (peerEntity==null){
+            ToastUtil.toastShortMessage("好友不存在....");
+            finish();
+            return;
+
+        }
         // 头像、历史消息加载、取消通知
         setTitleByUser();
         reqHistoryMsg();
@@ -321,7 +329,13 @@ public class MessageActivity extends TTBaseActivity
         if (imService != null) {
             // 处理session的未读信息
             handleUnreadMsgs();
+            if (imService.getContactManager().findContact(peerEntity.getPeerId())==null){
+                ToastUtil.toastShortMessage("好友已删除");
+                finish();
+            }
         }
+
+
     }
 
     @Override
@@ -337,6 +351,16 @@ public class MessageActivity extends TTBaseActivity
         unregisterReceiver(receiver);
         super.onDestroy();
     }
+
+    public void onEventMainThread(OtherUserInfoUpdateEvent event) {
+        switch (event.updateEvent) {
+            case USER_UPDATE_INFO_OK:
+                peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
+                setTitle(peerEntity.getMainName());
+                break;
+        }
+    }
+
 
     /**
      * 设定聊天名称
@@ -951,7 +975,7 @@ public class MessageActivity extends TTBaseActivity
                     }
                     break;
                     case DBConstant.SESSION_TYPE_SINGLE: {
-                        IMUIHelper.openUserProfileActivity(MessageActivity.this, peerEntity.getPeerId());
+                        IMUIHelper.openUserProfileActivity(MessageActivity.this, peerEntity.getPeerId(), true);
                     }
                     break;
                 }
@@ -1107,7 +1131,7 @@ public class MessageActivity extends TTBaseActivity
             case R.id.take_transfer_btn: {
                 Intent intent = new Intent(MessageActivity.this, TransferActivity.class);
                 intent.putExtra(Constants.CHAT_INFO, peerEntity.getPeerId());
-                startActivityForResult(intent,TRANSFER_CODE);
+                startActivityForResult(intent, TRANSFER_CODE);
             }
             break;
             case R.id.take_red_packet_btn: {

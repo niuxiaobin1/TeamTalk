@@ -116,8 +116,17 @@ public class IMUIHelper {
         intent.putExtra(IntentConstant.KEY_PEERID, contactId);
         ctx.startActivity(intent);
     }
+    //跳转到用户信息页面 是否是会话详情
+    public static void openUserProfileActivity(Context ctx, int contactId,boolean isChat) {
+        Intent intent = new Intent(ctx, UserInfoActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(IntentConstant.KEY_PEERID, contactId);
+        //只要是调用这个方法，进去的就可以置顶聊天
+        intent.putExtra(IntentConstant.KEY_USER_PIN_TOP, true);
+        ctx.startActivity(intent);
+    }
 
-    //跳转到用户信息页面
+    //搜索结果跳转到用户信息页面
     public static void openUserProfileActivity(Context ctx, IMBaseDefine.UserInfo info) {
         Intent intent = new Intent(ctx, UserInfoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -26,6 +26,7 @@ import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.LoginEvent;
+import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.ReconnectEvent;
 import com.mogujie.tt.imservice.event.SessionEvent;
 import com.mogujie.tt.imservice.event.SocketEvent;
@@ -267,6 +268,21 @@ public class ChatFragment extends MainFragment
             case USER_INFO_OK:
                 onRecentContactDataReady();
                 searchDataReady();
+                break;
+        }
+    }
+
+    public void onEventMainThread(OtherUserInfoUpdateEvent event) {
+        switch (event.updateEvent) {
+            case USER_UPDATE_INFO_OK:
+                if (contactAdapter != null && contactAdapter.getCount() != 0) {
+                    contactAdapter.updateRecentInfoByRemake(event.userEntity);
+                }
+                break;
+            case USER_DELETE_INFO_OK:
+                if (contactAdapter != null && contactAdapter.getCount() != 0) {
+                    contactAdapter.deleteRecentInfo(event.userEntity);
+                }
                 break;
         }
     }
@@ -516,7 +532,7 @@ public class ChatFragment extends MainFragment
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        IMUIHelper.openUserProfileActivity(ctx, recentInfo.getPeerId());
+                        IMUIHelper.openUserProfileActivity(ctx, recentInfo.getPeerId(), true);
                         break;
                     case 1:
                         imService.getSessionManager().reqRemoveSession(recentInfo);

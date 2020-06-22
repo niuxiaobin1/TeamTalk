@@ -194,6 +194,12 @@ public class DBInterface {
         long rowId = userDao.insertOrReplace(entity);
     }
 
+    public void delUser(UserEntity entity){
+        UserDao userDao =  openWritableDb().getUserDao();
+        userDao.delete(entity);
+    }
+
+
     public void  batchInsertOrUpdateUser(List<UserEntity> entityList){
         if(entityList.size() <=0){
             return ;

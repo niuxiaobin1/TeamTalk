@@ -8884,6 +8884,5619 @@ public final class IMGroup {
     // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeMemberNotify)
   }
 
+  public interface IMGroupChangeGroupNameReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupChangeGroupNameReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    boolean hasGroupId();
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    boolean hasGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    java.lang.String getGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupNameBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupChangeGroupNameReq}
+   */
+  public static final class IMGroupChangeGroupNameReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupChangeGroupNameReq)
+      IMGroupChangeGroupNameReqOrBuilder {
+    // Use IMGroupChangeGroupNameReq.newBuilder() to construct.
+    private IMGroupChangeGroupNameReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupChangeGroupNameReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupChangeGroupNameReq defaultInstance;
+    public static IMGroupChangeGroupNameReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupChangeGroupNameReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupChangeGroupNameReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              groupId_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              groupName_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupChangeGroupNameReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupChangeGroupNameReq>() {
+      public IMGroupChangeGroupNameReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupChangeGroupNameReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupChangeGroupNameReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public boolean hasGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int GROUP_NAME_FIELD_NUMBER = 3;
+    private java.lang.Object groupName_;
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public boolean hasGroupName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public java.lang.String getGroupName() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          groupName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupNameBytes() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      groupId_ = 0;
+      groupName_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupChangeGroupNameReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupChangeGroupNameReq)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq result = new com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupId_ = groupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.groupName_ = groupName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasGroupId()) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.hasGroupName()) {
+          bitField0_ |= 0x00000004;
+          groupName_ = other.groupName_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasGroupId()) {
+          
+          return false;
+        }
+        if (!hasGroupName()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public boolean hasGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        groupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object groupName_ = "";
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public boolean hasGroupName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public java.lang.String getGroupName() {
+        java.lang.Object ref = groupName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            groupName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupNameBytes() {
+        java.lang.Object ref = groupName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder clearGroupName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        groupName_ = getDefaultInstance().getGroupName();
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupChangeGroupNameReq)
+    }
+
+    static {
+      defaultInstance = new IMGroupChangeGroupNameReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeGroupNameReq)
+  }
+
+  public interface IMGroupChangeGroupNameRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupChangeGroupNameRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040d
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040d
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    boolean hasGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    java.lang.String getGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupNameBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupChangeGroupNameRsp}
+   */
+  public static final class IMGroupChangeGroupNameRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupChangeGroupNameRsp)
+      IMGroupChangeGroupNameRspOrBuilder {
+    // Use IMGroupChangeGroupNameRsp.newBuilder() to construct.
+    private IMGroupChangeGroupNameRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupChangeGroupNameRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupChangeGroupNameRsp defaultInstance;
+    public static IMGroupChangeGroupNameRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupChangeGroupNameRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupChangeGroupNameRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              groupName_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupChangeGroupNameRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupChangeGroupNameRsp>() {
+      public IMGroupChangeGroupNameRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupChangeGroupNameRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupChangeGroupNameRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040d
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040d
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 2;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int GROUP_NAME_FIELD_NUMBER = 3;
+    private java.lang.Object groupName_;
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public boolean hasGroupName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public java.lang.String getGroupName() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          groupName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupNameBytes() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      resultCode_ = 0;
+      groupName_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupChangeGroupNameRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupChangeGroupNameRsp)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp result = new com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.groupName_ = groupName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasGroupName()) {
+          bitField0_ |= 0x00000004;
+          groupName_ = other.groupName_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasGroupName()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupChangeGroupNameRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040d
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040d
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040d
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040d
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000002;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object groupName_ = "";
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public boolean hasGroupName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public java.lang.String getGroupName() {
+        java.lang.Object ref = groupName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            groupName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupNameBytes() {
+        java.lang.Object ref = groupName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder clearGroupName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        groupName_ = getDefaultInstance().getGroupName();
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupChangeGroupNameRsp)
+    }
+
+    static {
+      defaultInstance = new IMGroupChangeGroupNameRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeGroupNameRsp)
+  }
+
+  public interface IMGroupPublishBoardReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupPublishBoardReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    boolean hasGroupId();
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>required string info = 3;</code>
+     */
+    boolean hasInfo();
+    /**
+     * <code>required string info = 3;</code>
+     */
+    java.lang.String getInfo();
+    /**
+     * <code>required string info = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getInfoBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupPublishBoardReq}
+   */
+  public static final class IMGroupPublishBoardReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupPublishBoardReq)
+      IMGroupPublishBoardReqOrBuilder {
+    // Use IMGroupPublishBoardReq.newBuilder() to construct.
+    private IMGroupPublishBoardReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupPublishBoardReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupPublishBoardReq defaultInstance;
+    public static IMGroupPublishBoardReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupPublishBoardReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupPublishBoardReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              groupId_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              info_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupPublishBoardReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupPublishBoardReq>() {
+      public IMGroupPublishBoardReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupPublishBoardReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupPublishBoardReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040c
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public boolean hasGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int INFO_FIELD_NUMBER = 3;
+    private java.lang.Object info_;
+    /**
+     * <code>required string info = 3;</code>
+     */
+    public boolean hasInfo() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string info = 3;</code>
+     */
+    public java.lang.String getInfo() {
+      java.lang.Object ref = info_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          info_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string info = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getInfoBytes() {
+      java.lang.Object ref = info_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        info_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      groupId_ = 0;
+      info_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasInfo()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getInfoBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getInfoBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupPublishBoardReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupPublishBoardReq)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        info_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq result = new com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupId_ = groupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.info_ = info_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasGroupId()) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.hasInfo()) {
+          bitField0_ |= 0x00000004;
+          info_ = other.info_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasGroupId()) {
+          
+          return false;
+        }
+        if (!hasInfo()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040c
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public boolean hasGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        groupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object info_ = "";
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public boolean hasInfo() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public java.lang.String getInfo() {
+        java.lang.Object ref = info_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            info_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getInfoBytes() {
+        java.lang.Object ref = info_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          info_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public Builder setInfo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        info_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public Builder clearInfo() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        info_ = getDefaultInstance().getInfo();
+        
+        return this;
+      }
+      /**
+       * <code>required string info = 3;</code>
+       */
+      public Builder setInfoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        info_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupPublishBoardReq)
+    }
+
+    static {
+      defaultInstance = new IMGroupPublishBoardReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupPublishBoardReq)
+  }
+
+  public interface IMGroupPublishBoardRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupPublishBoardRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040e
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040e
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    boolean hasGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    java.lang.String getGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupNameBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupPublishBoardRsp}
+   */
+  public static final class IMGroupPublishBoardRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupPublishBoardRsp)
+      IMGroupPublishBoardRspOrBuilder {
+    // Use IMGroupPublishBoardRsp.newBuilder() to construct.
+    private IMGroupPublishBoardRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupPublishBoardRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupPublishBoardRsp defaultInstance;
+    public static IMGroupPublishBoardRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupPublishBoardRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupPublishBoardRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              groupName_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupPublishBoardRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupPublishBoardRsp>() {
+      public IMGroupPublishBoardRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupPublishBoardRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupPublishBoardRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040e
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x040e
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 2;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int GROUP_NAME_FIELD_NUMBER = 3;
+    private java.lang.Object groupName_;
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public boolean hasGroupName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public java.lang.String getGroupName() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          groupName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupNameBytes() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      resultCode_ = 0;
+      groupName_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupPublishBoardRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupPublishBoardRsp)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp result = new com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.groupName_ = groupName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasGroupName()) {
+          bitField0_ |= 0x00000004;
+          groupName_ = other.groupName_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasGroupName()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupPublishBoardRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040e
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040e
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040e
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x040e
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000002;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object groupName_ = "";
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public boolean hasGroupName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public java.lang.String getGroupName() {
+        java.lang.Object ref = groupName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            groupName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupNameBytes() {
+        java.lang.Object ref = groupName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder clearGroupName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        groupName_ = getDefaultInstance().getGroupName();
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupPublishBoardRsp)
+    }
+
+    static {
+      defaultInstance = new IMGroupPublishBoardRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupPublishBoardRsp)
+  }
+
+  public interface IMGroupDeleteBoardReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupDeleteBoardReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0410
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0410
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    boolean hasGroupId();
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>required uint32 board_id = 3;</code>
+     */
+    boolean hasBoardId();
+    /**
+     * <code>required uint32 board_id = 3;</code>
+     */
+    int getBoardId();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupDeleteBoardReq}
+   */
+  public static final class IMGroupDeleteBoardReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupDeleteBoardReq)
+      IMGroupDeleteBoardReqOrBuilder {
+    // Use IMGroupDeleteBoardReq.newBuilder() to construct.
+    private IMGroupDeleteBoardReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupDeleteBoardReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupDeleteBoardReq defaultInstance;
+    public static IMGroupDeleteBoardReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupDeleteBoardReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupDeleteBoardReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              groupId_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              boardId_ = input.readUInt32();
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupDeleteBoardReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupDeleteBoardReq>() {
+      public IMGroupDeleteBoardReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupDeleteBoardReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupDeleteBoardReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0410
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0410
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public boolean hasGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int BOARD_ID_FIELD_NUMBER = 3;
+    private int boardId_;
+    /**
+     * <code>required uint32 board_id = 3;</code>
+     */
+    public boolean hasBoardId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint32 board_id = 3;</code>
+     */
+    public int getBoardId() {
+      return boardId_;
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      groupId_ = 0;
+      boardId_ = 0;
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBoardId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, boardId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, boardId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupDeleteBoardReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupDeleteBoardReq)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        boardId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq result = new com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupId_ = groupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.boardId_ = boardId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasGroupId()) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.hasBoardId()) {
+          setBoardId(other.getBoardId());
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasGroupId()) {
+          
+          return false;
+        }
+        if (!hasBoardId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0410
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0410
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0410
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0410
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public boolean hasGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        groupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupId_ = 0;
+        
+        return this;
+      }
+
+      private int boardId_ ;
+      /**
+       * <code>required uint32 board_id = 3;</code>
+       */
+      public boolean hasBoardId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint32 board_id = 3;</code>
+       */
+      public int getBoardId() {
+        return boardId_;
+      }
+      /**
+       * <code>required uint32 board_id = 3;</code>
+       */
+      public Builder setBoardId(int value) {
+        bitField0_ |= 0x00000004;
+        boardId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 board_id = 3;</code>
+       */
+      public Builder clearBoardId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        boardId_ = 0;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupDeleteBoardReq)
+    }
+
+    static {
+      defaultInstance = new IMGroupDeleteBoardReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupDeleteBoardReq)
+  }
+
+  public interface IMGroupDeleteBoardRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupDeleteBoardRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0411
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0411
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    boolean hasGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    java.lang.String getGroupName();
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupNameBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupDeleteBoardRsp}
+   */
+  public static final class IMGroupDeleteBoardRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupDeleteBoardRsp)
+      IMGroupDeleteBoardRspOrBuilder {
+    // Use IMGroupDeleteBoardRsp.newBuilder() to construct.
+    private IMGroupDeleteBoardRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupDeleteBoardRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupDeleteBoardRsp defaultInstance;
+    public static IMGroupDeleteBoardRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupDeleteBoardRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupDeleteBoardRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              groupName_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupDeleteBoardRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupDeleteBoardRsp>() {
+      public IMGroupDeleteBoardRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupDeleteBoardRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupDeleteBoardRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0411
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0411
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 2;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int GROUP_NAME_FIELD_NUMBER = 3;
+    private java.lang.Object groupName_;
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public boolean hasGroupName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public java.lang.String getGroupName() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          groupName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string group_name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupNameBytes() {
+      java.lang.Object ref = groupName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      resultCode_ = 0;
+      groupName_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getGroupNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupDeleteBoardRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupDeleteBoardRsp)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp result = new com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.groupName_ = groupName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasGroupName()) {
+          bitField0_ |= 0x00000004;
+          groupName_ = other.groupName_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasGroupName()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupDeleteBoardRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0411
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0411
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0411
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0411
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000002;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object groupName_ = "";
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public boolean hasGroupName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public java.lang.String getGroupName() {
+        java.lang.Object ref = groupName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            groupName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupNameBytes() {
+        java.lang.Object ref = groupName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder clearGroupName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        groupName_ = getDefaultInstance().getGroupName();
+        
+        return this;
+      }
+      /**
+       * <code>required string group_name = 3;</code>
+       */
+      public Builder setGroupNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        groupName_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupDeleteBoardRsp)
+    }
+
+    static {
+      defaultInstance = new IMGroupDeleteBoardRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupDeleteBoardRsp)
+  }
+
+  public interface IMGroupListBoardReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupListBoardReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0412
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0412
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    boolean hasGroupId();
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupListBoardReq}
+   */
+  public static final class IMGroupListBoardReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupListBoardReq)
+      IMGroupListBoardReqOrBuilder {
+    // Use IMGroupListBoardReq.newBuilder() to construct.
+    private IMGroupListBoardReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupListBoardReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupListBoardReq defaultInstance;
+    public static IMGroupListBoardReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupListBoardReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupListBoardReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              groupId_ = input.readUInt32();
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000004;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupListBoardReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupListBoardReq>() {
+      public IMGroupListBoardReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupListBoardReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupListBoardReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0412
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0412
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public boolean hasGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      groupId_ = 0;
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupListBoardReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupListBoardReq)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq result = new com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupId_ = groupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasGroupId()) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasGroupId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0412
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0412
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0412
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0412
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public boolean hasGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        groupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupId_ = 0;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupListBoardReq)
+    }
+
+    static {
+      defaultInstance = new IMGroupListBoardReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupListBoardReq)
+  }
+
+  public interface IMGroupListBoardRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupListBoardRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0413
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0413
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 total_cnt = 2;</code>
+     */
+    boolean hasTotalCnt();
+    /**
+     * <code>required uint32 total_cnt = 2;</code>
+     */
+    int getTotalCnt();
+
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> 
+        getGroupinfoListList();
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo getGroupinfoList(int index);
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    int getGroupinfoListCount();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupListBoardRsp}
+   *
+   * <pre>
+   *最近20条
+   * </pre>
+   */
+  public static final class IMGroupListBoardRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupListBoardRsp)
+      IMGroupListBoardRspOrBuilder {
+    // Use IMGroupListBoardRsp.newBuilder() to construct.
+    private IMGroupListBoardRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupListBoardRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupListBoardRsp defaultInstance;
+    public static IMGroupListBoardRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupListBoardRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupListBoardRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              totalCnt_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                groupinfoList_ = new java.util.ArrayList<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              groupinfoList_.add(input.readMessage(com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo.PARSER, extensionRegistry));
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000004;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          groupinfoList_ = java.util.Collections.unmodifiableList(groupinfoList_);
+        }
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupListBoardRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupListBoardRsp>() {
+      public IMGroupListBoardRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupListBoardRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupListBoardRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0413
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			0x0413
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int TOTAL_CNT_FIELD_NUMBER = 2;
+    private int totalCnt_;
+    /**
+     * <code>required uint32 total_cnt = 2;</code>
+     */
+    public boolean hasTotalCnt() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 total_cnt = 2;</code>
+     */
+    public int getTotalCnt() {
+      return totalCnt_;
+    }
+
+    public static final int GROUPINFO_LIST_FIELD_NUMBER = 3;
+    private java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> groupinfoList_;
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    public java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> getGroupinfoListList() {
+      return groupinfoList_;
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    public java.util.List<? extends com.mogujie.tt.protobuf.IMBaseDefine.GroupInfoOrBuilder> 
+        getGroupinfoListOrBuilderList() {
+      return groupinfoList_;
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    public int getGroupinfoListCount() {
+      return groupinfoList_.size();
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo getGroupinfoList(int index) {
+      return groupinfoList_.get(index);
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.GroupInfoOrBuilder getGroupinfoListOrBuilder(
+        int index) {
+      return groupinfoList_.get(index);
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      totalCnt_ = 0;
+      groupinfoList_ = java.util.Collections.emptyList();
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTotalCnt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getGroupinfoListCount(); i++) {
+        if (!getGroupinfoList(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, totalCnt_);
+      }
+      for (int i = 0; i < groupinfoList_.size(); i++) {
+        output.writeMessage(3, groupinfoList_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, totalCnt_);
+      }
+      for (int i = 0; i < groupinfoList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, groupinfoList_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupListBoardRsp}
+     *
+     * <pre>
+     *最近20条
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupListBoardRsp)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        totalCnt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupinfoList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp result = new com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.totalCnt_ = totalCnt_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          groupinfoList_ = java.util.Collections.unmodifiableList(groupinfoList_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.groupinfoList_ = groupinfoList_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasTotalCnt()) {
+          setTotalCnt(other.getTotalCnt());
+        }
+        if (!other.groupinfoList_.isEmpty()) {
+          if (groupinfoList_.isEmpty()) {
+            groupinfoList_ = other.groupinfoList_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureGroupinfoListIsMutable();
+            groupinfoList_.addAll(other.groupinfoList_);
+          }
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasTotalCnt()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getGroupinfoListCount(); i++) {
+          if (!getGroupinfoList(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupListBoardRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0413
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0413
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0413
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			0x0413
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int totalCnt_ ;
+      /**
+       * <code>required uint32 total_cnt = 2;</code>
+       */
+      public boolean hasTotalCnt() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 total_cnt = 2;</code>
+       */
+      public int getTotalCnt() {
+        return totalCnt_;
+      }
+      /**
+       * <code>required uint32 total_cnt = 2;</code>
+       */
+      public Builder setTotalCnt(int value) {
+        bitField0_ |= 0x00000002;
+        totalCnt_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 total_cnt = 2;</code>
+       */
+      public Builder clearTotalCnt() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        totalCnt_ = 0;
+        
+        return this;
+      }
+
+      private java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> groupinfoList_ =
+        java.util.Collections.emptyList();
+      private void ensureGroupinfoListIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          groupinfoList_ = new java.util.ArrayList<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo>(groupinfoList_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> getGroupinfoListList() {
+        return java.util.Collections.unmodifiableList(groupinfoList_);
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public int getGroupinfoListCount() {
+        return groupinfoList_.size();
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo getGroupinfoList(int index) {
+        return groupinfoList_.get(index);
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder setGroupinfoList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder setGroupinfoList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo.Builder builderForValue) {
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder addGroupinfoList(com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.add(value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder addGroupinfoList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.add(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder addGroupinfoList(
+          com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo.Builder builderForValue) {
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder addGroupinfoList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo.Builder builderForValue) {
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder addAllGroupinfoList(
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.IMBaseDefine.GroupInfo> values) {
+        ensureGroupinfoListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, groupinfoList_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder clearGroupinfoList() {
+        groupinfoList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.GroupInfo groupinfo_list = 3;</code>
+       */
+      public Builder removeGroupinfoList(int index) {
+        ensureGroupinfoListIsMutable();
+        groupinfoList_.remove(index);
+
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupListBoardRsp)
+    }
+
+    static {
+      defaultInstance = new IMGroupListBoardRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupListBoardRsp)
+  }
+
 
   static {
   }

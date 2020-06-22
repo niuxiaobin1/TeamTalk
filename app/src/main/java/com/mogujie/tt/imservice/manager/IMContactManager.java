@@ -1,13 +1,14 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.ChangeUserInfoEvent;
+import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.protobuf.IMBaseDefine;
@@ -27,6 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import de.greenrobot.event.EventBus;
 
+import static com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent.UpdateEvent.USER_DELETE_INFO_OK;
 import static com.mogujie.tt.protobuf.IMBaseDefine.AddFriendResourceType.SEARCH_RES;
 import static com.mogujie.tt.protobuf.IMBaseDefine.SearchUsersType.EMAIL_SEARCH;
 
@@ -234,6 +236,20 @@ public class IMContactManager extends IMManager {
     }
 
 
+    public void updateRemake(UserEntity userEntity) {
+        if (userMap.containsKey(userEntity.getPeerId())) {
+            userMap.put(userEntity.getPeerId(), userEntity);
+            dbInterface.insertOrUpdateUser(userEntity);
+        }
+    }
+
+    public void deleteContact(UserEntity userEntity) {
+        if (userMap.containsKey(userEntity.getPeerId())) {
+            userMap.remove(userEntity.getPeerId());
+            dbInterface.delUser(userEntity);
+        }
+        EventBus.getDefault().post(new OtherUserInfoUpdateEvent(USER_DELETE_INFO_OK, userEntity));
+    }
 
     public UserEntity findContact(int buddyId) {
         if (buddyId > 0 && userMap.containsKey(buddyId)) {
@@ -266,12 +282,58 @@ public class IMContactManager extends IMManager {
     }
 
     /**
+     * 更改备注
+     *
+     * @param remake
+     */
+    public void reqModifyUserRemake(String remake, int id, Packetlistener packetlistener) {
+        logger.i("contact#contact#reqModifyUserRemake");
+        if (id == 0) {
+            logger.i("contact#contact#reqModifyUserRemake return,cause by null or empty");
+            return;
+        }
+        int loginId = IMLoginManager.instance().getLoginId();
+        IMBuddy.IMChangeFriendRemarkReq imChangeFriendRemarkReq = IMBuddy.IMChangeFriendRemarkReq.newBuilder()
+                .setUserId(loginId)
+                .setFuserId(id)
+                .setRemark(remake)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_REQUEST_VALUE;
+        imSocketManager.sendRequest(imChangeFriendRemarkReq, sid, cid, packetlistener);
+    }
+
+
+    /**
+     * 删除好友
+     *
+     * @param id
+     */
+    public void reqDeleteUser(int id, Packetlistener packetlistener) {
+        logger.i("contact#contact#reqDeleteUser");
+        if (id == 0) {
+            logger.i("contact#contact#reqDeleteUser return,cause by null or empty");
+            return;
+        }
+        int loginId = IMLoginManager.instance().getLoginId();
+        IMBuddy.IMDelFriendReq imDelFriendReq = IMBuddy.IMDelFriendReq.newBuilder()
+                .setUserId(loginId)
+                .setFuserId(id)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_DEL_FRIEND_REQUEST_VALUE;
+        imSocketManager.sendRequest(imDelFriendReq, sid, cid, packetlistener);
+    }
+
+
+    /**
      * 更新用户头像
      *
      * @param url
      */
     public void reqChangeUsersHeader(String url) {
-        logger.d("contact#contact#reqChangeUsersHeader%s",url);
+        logger.d("contact#contact#reqChangeUsersHeader%s", url);
         if (TextUtils.isEmpty(url)) {
             logger.d("contact#contact#reqChangeUsersHeader return,cause by null or empty");
             return;
@@ -292,8 +354,8 @@ public class IMContactManager extends IMManager {
      *
      * @param nick,phone
      */
-    public void reqChangeUsersInfo(String nick,String phone) {
-        logger.d("contact#contact#reqChangeUsersInfo----%s---%s",nick,phone);
+    public void reqChangeUsersInfo(String nick, String phone) {
+        logger.d("contact#contact#reqChangeUsersInfo----%s---%s", nick, phone);
 
         int loginId = IMLoginManager.instance().getLoginId();
         IMBuddy.IMChangeUserinfoReq imChangeUserInfoReq = IMBuddy.IMChangeUserinfoReq.newBuilder()
@@ -312,8 +374,8 @@ public class IMContactManager extends IMManager {
      *
      * @param validate
      */
-    public void reqChangeValidate(int validate) {
-        logger.d("contact#contact#reqChangeValidate----%s",validate);
+    public void reqChangeValidate(int validate,Packetlistener packetlistener) {
+        logger.d("contact#contact#reqChangeValidate----%s", validate);
 
         int loginId = IMLoginManager.instance().getLoginId();
         IMBuddy.IMChangeValidateReq imChangeValidateReq = IMBuddy.IMChangeValidateReq.newBuilder()
@@ -323,9 +385,8 @@ public class IMContactManager extends IMManager {
 
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST_VALUE;
-        imSocketManager.sendRequest(imChangeValidateReq, sid, cid);
+        imSocketManager.sendRequest(imChangeValidateReq, sid, cid,packetlistener);
     }
-
 
 
     /**
@@ -400,17 +461,6 @@ public class IMContactManager extends IMManager {
         IMUIHelper.openUserProfileActivity(ctx, searchUsersRsp.getUserInfoListList().get(0));
     }
 
-    /**
-     * 修改验证方式返回
-     *
-     * @param imChangeValidateRsp
-     */
-    public void onReChangeValidate(IMBuddy.IMChangeValidateRsp imChangeValidateRsp) {
-        if (imChangeValidateRsp== null ) {
-            return;
-        }
-//        Log.e("nxb",imChangeValidateRsp.getResultCode()+"");
-    }
 
     /**
      * 获取好友申请列表
@@ -454,6 +504,7 @@ public class IMContactManager extends IMManager {
         reqGetAllFriendsUsers(updateTime);
         EventBus.getDefault().postSticky(UserApplyInfoEvent.USER_APPLY_INFO_OK);
     }
+
     /**
      * 更新头像结果返回
      *
@@ -467,6 +518,7 @@ public class IMContactManager extends IMManager {
         EventBus.getDefault().postSticky(ChangeHeaderEvent.USER_CHANGE_HEADER_INFO_OK);
 
     }
+
     /**
      * 更新用户昵称和电话结果返回
      *
@@ -725,6 +777,7 @@ public class IMContactManager extends IMManager {
     public Map<Integer, UserEntity> getUserMap() {
         return userMap;
     }
+
     public Map<Integer, UserEntity> getApplyUserMap() {
         return applyUserMap;
     }

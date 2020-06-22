@@ -18,7 +18,7 @@ public class UserEntity extends PeerEntity{
     protected String openid;
     private int gender;
     /** Not-null value. */
-    private String pinyinName;
+    private String pinyinName;//临时存放备注
     /** Not-null value. */
     private String realName;
     /** Not-null value. */
@@ -87,6 +87,9 @@ public class UserEntity extends PeerEntity{
 
     /** Not-null value. */
     public String getMainName() {
+        if (!TextUtils.isEmpty(pinyinName)){
+            return pinyinName;
+        }
         return mainName;
     }
 

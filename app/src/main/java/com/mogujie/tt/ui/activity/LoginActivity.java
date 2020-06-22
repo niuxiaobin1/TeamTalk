@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,7 +37,6 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.IMUIHelper;
-import com.mogujie.tt.utils.LocationUtils;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.SPUtils;
 import com.mogujie.tt.utils.ToastUtil;
@@ -82,6 +82,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onServiceDisconnected() {
+            Log.e("","onServiceDisconnected");
         }
 
         @Override
@@ -117,7 +118,6 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
                     if (autoLogin == false) {
                         break;
                     }
-
                     handleGotLoginIdentity(loginIdentity);
                     return;
                 } while (false);
@@ -137,6 +137,9 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
      * 跳转到登陆的页面
      */
     private void handleNoLoginIdentity() {
+        if (!autoLogin){
+            return;
+        }
         logger.i("login#handleNoLoginIdentity");
         uiHandler.postDelayed(new Runnable() {
             @Override
@@ -198,7 +201,6 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         if (TextUtils.isEmpty(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER))) {
             SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, UrlConstant.ACCESS_MSG_ADDRESS);
         }
-
         imServiceConnector.connect(LoginActivity.this);
         EventBus.getDefault().register(this);
 
@@ -272,7 +274,6 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
 
     private void initAutoLogin() {
         logger.i("login#initAutoLogin");
-
         splashPage = findViewById(R.id.splash_page);
         loginPage = findViewById(R.id.login_page);
         autoLogin = shouldAutoLogin();
@@ -325,7 +326,6 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         imServiceConnector.disconnect(LoginActivity.this);
         EventBus.getDefault().unregister(this);
         splashPage = null;

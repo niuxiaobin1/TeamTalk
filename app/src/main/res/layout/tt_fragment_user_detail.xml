@@ -166,6 +166,7 @@
 
 
                     <Switch
+                        android:id="@+id/pin_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"

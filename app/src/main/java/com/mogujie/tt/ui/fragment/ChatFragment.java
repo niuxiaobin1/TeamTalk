@@ -180,6 +180,12 @@ public class ChatFragment extends MainFragment
             }
         });
         showTopSearchBar();
+        topSearchTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchView();
+            }
+        });
     }
 
     private void initContactListView() {

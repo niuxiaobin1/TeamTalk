@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import com.mogujie.tt.R;
 
-public class SearchEditText extends EditText implements  
+public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText implements
         OnFocusChangeListener, TextWatcher { 
     private Drawable clearWordsImage; 
  

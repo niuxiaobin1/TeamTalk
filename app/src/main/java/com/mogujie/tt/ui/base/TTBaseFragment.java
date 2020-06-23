@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.activity.SearchActivity;
+import com.mogujie.tt.ui.widget.SearchEditText;
 import com.mogujie.tt.utils.Logger;
 
 public abstract class TTBaseFragment extends Fragment {
@@ -28,6 +29,7 @@ public abstract class TTBaseFragment extends Fragment {
      */
 
     protected TextView topSearchTv;
+    protected SearchEditText searchEt;
     protected TextView tvCancel;
     protected LinearLayout mLinSearchEdit;
 
@@ -48,6 +50,7 @@ public abstract class TTBaseFragment extends Fragment {
         topSearchTv = topContentView.findViewById(R.id.chat_title_search);
         tvCancel = topContentView.findViewById(R.id.tv_cancel);
         mLinSearchEdit = topContentView.findViewById(R.id.lin_Search_edit);
+        searchEt = topContentView.findViewById(R.id.searchEt);
 
         topTitleTxt.setVisibility(View.GONE);
         topRightBtn.setVisibility(View.GONE);

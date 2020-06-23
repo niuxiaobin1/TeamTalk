@@ -1,5 +1,6 @@
 package com.mogujie.tt.scanResult;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -17,6 +18,10 @@ import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.RequestCode;
 import com.mogujie.tt.config.ServerHostConfig;
 import com.mogujie.tt.config.SysConstant;
+import com.mogujie.tt.ui.activity.QrType0Activity;
+import com.mogujie.tt.ui.activity.QrType1Activity;
+import com.mogujie.tt.ui.activity.ScanPayActivity;
+import com.mogujie.tt.ui.activity.WebViewActivity;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.utils.PhoneUtil;
 import com.mogujie.tt.utils.ToastUtil;
@@ -43,11 +48,17 @@ public class ScanResultUtil {
             byte[] encrypted1 = Base64.decode(result, Base64.DEFAULT);
             try {
                 String originalString = new String(encrypted1, "utf-8");
+                Log.e("nxb", originalString);
                 JSONObject jsonObject = new JSONObject(originalString);
                 String qr_cate = jsonObject.getString("qr_cate");
                 String sub_no = jsonObject.getString("sub_no");
+                if ("2".equals(qr_cate)) {
+                    String order_sn = jsonObject.getString("order_sn");
+                    callBack.cSbCallBack2(order_sn);
+                } else {
+                    callBack.cSbCallBack3(qr_cate, sub_no);
+                }
 
-                callBack.cSbCallBack3(qr_cate, sub_no);
             } catch (UnsupportedEncodingException | JSONException e) {
                 e.printStackTrace();
             }
@@ -79,18 +90,26 @@ public class ScanResultUtil {
                         BaseBean bean = new Gson().fromJson(response.body(), BaseBean.class);
                         if (RequestCode.SUCCESS.equals(bean.getStatus())) {
                             QrType0Bean qrType0Bean = new Gson().fromJson(response.body(), QrType0Bean.class);
+                            Intent it;
                             if (qr_cate.equals("1")) {
-                               // qr_cate=1是静态码（QrType=0是无金额静态码，QrType=1是有金额静态码）
-                                if (qrType0Bean.getData().getQrType().equals("0")) {
-
-                                } else if (qrType0Bean.getData().getQrType().equals("1")) {
-
+                                // qr_cate=1是静态码（QrType=0是无金额静态码，QrType=1是有金额静态码）
+                                //qr_cate=2是动态码 在callBack2里直接返回
+                                if ("0".equals(qrType0Bean.getData().getQrType())) {
+                                    it = new Intent(activity, QrType0Activity.class);
+                                    it.putExtra(QrType0Activity.QR_TYPE_BEAN, qrType0Bean.getData());
+                                    activity.startActivity(it);
+                                } else if ("1".equals(qrType0Bean.getData().getQrType())) {
+                                    it = new Intent(activity, QrType1Activity.class);
+                                    it.putExtra(QrType1Activity.QR_TYPE_BEAN, qrType0Bean.getData());
+                                    activity.startActivity(it);
+                                } else {
+                                    if ("NullCode".equals(qrType0Bean.getData().getReturnCode())) {
+                                        it = new Intent(activity, WebViewActivity.class);
+                                        it.putExtra(WebViewActivity.WEB_URL, qrType0Bean.getData().getMerUrl());
+                                        activity.startActivity(it);
+                                    }
                                 }
-                            } else if (qr_cate.equals("2")) {
-                                //qr_cate=2是动态码
-
                             }
-
                         } else {
                             ToastUtil.toastShortMessage(bean.getReturn_msg());
                         }

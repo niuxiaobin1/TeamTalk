@@ -24,6 +24,7 @@ import com.mogujie.tt.utils.BackgroundTasks;
 import com.mogujie.tt.utils.ImageLoaderUtil;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.PictureSelectorEngineImp;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -53,6 +54,7 @@ public class IMApplication extends Application implements IApp, CameraXConfig.Pr
 		configUnits();
 		initOkgoConfiger();
 		BackgroundTasks.initInstance();
+		ZXingLibrary.initDisplayOpinion(this);
 	}
 
 

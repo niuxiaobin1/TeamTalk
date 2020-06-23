@@ -391,4 +391,5 @@
     <string name="permission_camera_never_ask">你需要在设置中开启照相机使用权限</string>
     <string name="permission_read_storage_denied">需要读取存储信息权限</string>
     <string name="permission_read_storage_never_ask">你需要在设置中开启读取存储信息权限</string>
+    <string name="amount0623">消费金额</string>
 </resources>

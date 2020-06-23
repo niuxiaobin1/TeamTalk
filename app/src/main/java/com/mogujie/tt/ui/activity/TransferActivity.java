@@ -69,27 +69,26 @@ public class TransferActivity extends TTBaseActivity {
         btn_transfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backData("66","");
-//                final String money = amountEt.getText().toString().trim();
-//                if (!TextUtils.isEmpty(money)) {
-//                    SoftKeyBoardUtil.hideKeyBoard(amountEt.getWindowToken());
-//                    if (inputPasswordWindow != null) {
-//                        inputPasswordWindow = null;
-//                    }
-//                    inputPasswordWindow = new InputPasswordWindow(TransferActivity.this,
-//                            mChatInfo.getMainName(), money, new InputPasswordWindow.OnInputFinishCallBack() {
-//                        @Override
-//                        public void onFinish(String psw, String cardId) {
-//                            verifyPsw(money, psw, cardId);
-//                        }
-//                    });
-//                    inputPasswordWindow.setAlignBackground(true);
-//                    inputPasswordWindow.setPopupGravity(Gravity.BOTTOM);
-//                    if (!inputPasswordWindow.isShowing()) {
-//                        inputPasswordWindow.showPopupWindow();
-//                    }
-//
-//                }
+                final String money = amountEt.getText().toString().trim();
+                if (!TextUtils.isEmpty(money)) {
+                    SoftKeyBoardUtil.hideKeyBoard(amountEt.getWindowToken());
+                    if (inputPasswordWindow != null) {
+                        inputPasswordWindow = null;
+                    }
+                    inputPasswordWindow = new InputPasswordWindow(TransferActivity.this,
+                            mChatInfo.getMainName(), money, new InputPasswordWindow.OnInputFinishCallBack() {
+                        @Override
+                        public void onFinish(String psw, String cardId) {
+                            verifyPsw(money, psw, cardId);
+                        }
+                    });
+                    inputPasswordWindow.setAlignBackground(true);
+                    inputPasswordWindow.setPopupGravity(Gravity.BOTTOM);
+                    if (!inputPasswordWindow.isShowing()) {
+                        inputPasswordWindow.showPopupWindow();
+                    }
+
+                }
             }
         });
         userImage.setImageUrl(mChatInfo.getAvatar());
@@ -131,9 +130,7 @@ public class TransferActivity extends TTBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (inputPasswordWindow != null && inputPasswordWindow.isShowing()) {
-            inputPasswordWindow.dismiss();
-        }
+
     }
 
 
@@ -159,12 +156,6 @@ public class TransferActivity extends TTBaseActivity {
                         dismissDialog();
                         PayOrderListBean bean = new Gson().fromJson(response.body(), PayOrderListBean.class);
                         if (RequestCode.SUCCESS.equals(bean.getStatus())) {
-//                            Intent it = new Intent(TransferActivity.this, PayResultActivity.class);
-//                            it.putExtra(PayResultActivity.TRANSFOR_NAME, mChatInfo.getChatName());
-//                            it.putExtra(PayResultActivity.TRANSFOR_AMOUNT, amount);
-//                            it.putExtra(PayResultActivity.TRANSFOR_RESULT, true);
-//                            startActivity(it);
-//                            finish();
                             backData(amount,cardId);
                         } else {
                             ToastUtil.toastShortMessage(bean.getReturn_msg());

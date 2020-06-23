@@ -21,11 +21,14 @@ public abstract class TTBaseFragment extends Fragment {
     protected ImageView topRightBtn;
     protected TextView topTitleTxt;
     protected TextView topRightTitleTxt;
-
     protected ViewGroup topBar;
-    protected TextView topSearchEdt;
-    protected TextView tvCancel;
     protected ViewGroup topContentView;
+    /**
+     * 搜索相关
+     */
+
+    protected TextView topSearchTv;
+    protected TextView tvCancel;
     protected LinearLayout mLinSearchEdit;
 
     protected float x1, y1, x2, y2 = 0;
@@ -42,7 +45,7 @@ public abstract class TTBaseFragment extends Fragment {
         topRightTitleTxt = (TextView) topContentView.findViewById(R.id.right_txt);
         topLeftBtn = (ImageView) topContentView.findViewById(R.id.left_btn);
         topRightBtn = (ImageView) topContentView.findViewById(R.id.right_btn);
-        topSearchEdt = topContentView.findViewById(R.id.chat_title_search);
+        topSearchTv = topContentView.findViewById(R.id.chat_title_search);
         tvCancel = topContentView.findViewById(R.id.tv_cancel);
         mLinSearchEdit = topContentView.findViewById(R.id.lin_Search_edit);
 
@@ -50,7 +53,7 @@ public abstract class TTBaseFragment extends Fragment {
         topRightBtn.setVisibility(View.GONE);
         topLeftBtn.setVisibility(View.GONE);
         topRightTitleTxt.setVisibility(View.INVISIBLE);
-        topSearchEdt.setVisibility(View.GONE);
+        topSearchTv.setVisibility(View.GONE);
 
         topLeftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +65,7 @@ public abstract class TTBaseFragment extends Fragment {
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                topSearchEdt.setVisibility(View.VISIBLE);
+                topSearchTv.setVisibility(View.VISIBLE);
                 mLinSearchEdit.setVisibility(View.GONE);
             }
         });
@@ -158,18 +161,18 @@ public abstract class TTBaseFragment extends Fragment {
     }
 
     protected void showTopSearchBar() {
-        topSearchEdt.setVisibility(View.VISIBLE);
-        topSearchEdt.setOnClickListener(new View.OnClickListener() {
+        topSearchTv.setVisibility(View.VISIBLE);
+        topSearchTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                topSearchEdt.setVisibility(View.GONE);
+                topSearchTv.setVisibility(View.GONE);
                 mLinSearchEdit.setVisibility(View.VISIBLE);
             }
         });
     }
 
     protected void hideTopSearchBar() {
-        topSearchEdt.setVisibility(View.GONE);
+        topSearchTv.setVisibility(View.GONE);
     }
 
     protected void showSearchFrameLayout() {

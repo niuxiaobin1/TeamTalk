@@ -1,6 +1,7 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
@@ -530,6 +531,23 @@ public class IMContactManager extends IMManager {
             return;
         }
         EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_OK);
+
+    }
+
+    /**
+     * 同意或者拒绝你的申请通知（广播）
+     *
+     * @param imAgreeFirendNotify
+     */
+    public void imChangeUserInfoBroadCast(IMBuddy.IMAgreeFirendNotify imAgreeFirendNotify) {
+        if (imAgreeFirendNotify == null) {
+            EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_FAIL);
+            return;
+        }
+        Log.e("nxb-self",IMLoginManager.instance().getLoginId()+"");
+        Log.e("nxb",imAgreeFirendNotify.getStatus()+"");
+        Log.e("nxb",imAgreeFirendNotify.getFromUserId()+"");
+        Log.e("nxb",imAgreeFirendNotify.getToUserId()+"");
 
     }
 

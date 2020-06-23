@@ -26,15 +26,13 @@
 
         <TextView
             android:id="@+id/tab_unread_notify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="-5dp"
             android:layout_toRightOf="@id/tab_btn_default"
-            android:background="@drawable/tt_message_notify"
+            android:background="@mipmap/msg_un_read"
             android:gravity="center"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
             android:text="99+"
             android:textColor="@android:color/white"
             android:textSize="10sp"

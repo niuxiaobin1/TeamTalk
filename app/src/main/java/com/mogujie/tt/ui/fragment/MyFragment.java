@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.ServerHostConfig;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
@@ -32,6 +33,7 @@ import com.mogujie.tt.ui.activity.NChatPayActivity;
 import com.mogujie.tt.ui.activity.PrivacyActivity;
 import com.mogujie.tt.ui.activity.SettingActivity;
 import com.mogujie.tt.ui.activity.SettingsActivity;
+import com.mogujie.tt.ui.activity.WebViewActivity;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.mogujie.tt.utils.FileUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,6 +53,7 @@ public class MyFragment extends MainFragment {
     private LinearLayout mShanghuLayout;
     private LinearLayout mNigeriaPrivacyLayout;
     private LinearLayout mNigeriaSettingsLayout;
+    private LinearLayout mNigeriaAboutLayout;
 
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
@@ -107,6 +110,7 @@ public class MyFragment extends MainFragment {
         mShanghuLayout = curView.findViewById(R.id.shanghuLayout);
         mNigeriaPrivacyLayout = curView.findViewById(R.id.nigeriaPrivacyLayout);
         mNigeriaSettingsLayout = curView.findViewById(R.id.nigeriaSettingsLayout);
+        mNigeriaAboutLayout = curView.findViewById(R.id.about_layout);
 
         clearView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +218,17 @@ public class MyFragment extends MainFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        mNigeriaAboutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getContext(), WebViewActivity.class);
+//                it.putExtra(WebViewActivity.WEB_TITLE, getContext().getResources().getString(
+//                        R.string.app_about_nchat));
+                it.putExtra(WebViewActivity.WEB_URL, ServerHostConfig.HTML_ABOUT);
+                getContext().startActivity(it);
             }
         });
 

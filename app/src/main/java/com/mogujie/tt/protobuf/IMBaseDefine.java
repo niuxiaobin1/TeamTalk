@@ -765,6 +765,14 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE = 564;</code>
      */
     CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE(38, 564),
+    /**
+     * <code>CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY = 565;</code>
+     *
+     * <pre>
+     *对方同意或者拒绝通知
+     * </pre>
+     */
+    CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY(39, 565),
     ;
 
     /**
@@ -980,6 +988,14 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE = 564;</code>
      */
     public static final int CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE_VALUE = 564;
+    /**
+     * <code>CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY = 565;</code>
+     *
+     * <pre>
+     *对方同意或者拒绝通知
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY_VALUE = 565;
 
 
     public final int getNumber() { return value; }
@@ -1025,6 +1041,7 @@ public final class IMBaseDefine {
         case 562: return CID_BUDDY_LIST_CHANGE_FRIEND_REMARK_RESPONSE;
         case 563: return CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST;
         case 564: return CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE;
+        case 565: return CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY;
         default: return null;
       }
     }
@@ -1357,6 +1374,10 @@ public final class IMBaseDefine {
     CID_GROUP_CHANGE_MEMBER_NOTIFY(10, 1035),
     /**
      * <code>CID_GROUP_CHANGE_GROUP_NAME_REQUEST = 1036;</code>
+     *
+     * <pre>
+     *修改群名称
+     * </pre>
      */
     CID_GROUP_CHANGE_GROUP_NAME_REQUEST(11, 1036),
     /**
@@ -1365,6 +1386,10 @@ public final class IMBaseDefine {
     CID_GROUP_CHANGE_GROUP_NAME_RESPONSE(12, 1037),
     /**
      * <code>CID_GROUP_PUBLISH_BOARD_REQUEST = 1038;</code>
+     *
+     * <pre>
+     *发布群公告
+     * </pre>
      */
     CID_GROUP_PUBLISH_BOARD_REQUEST(13, 1038),
     /**
@@ -1373,6 +1398,10 @@ public final class IMBaseDefine {
     CID_GROUP_PUBLISH_BOARD_RESPONSE(14, 1039),
     /**
      * <code>CID_GROUP_DELETE_BOARD_REQUEST = 1040;</code>
+     *
+     * <pre>
+     *删除群公告
+     * </pre>
      */
     CID_GROUP_DELETE_BOARD_REQUEST(15, 1040),
     /**
@@ -1381,6 +1410,10 @@ public final class IMBaseDefine {
     CID_GROUP_DELETE_BOARD_RESPONSE(16, 1041),
     /**
      * <code>CID_GROUP_LIST_BOARD_REQUEST = 1042;</code>
+     *
+     * <pre>
+     *查看群公告最近20条
+     * </pre>
      */
     CID_GROUP_LIST_BOARD_REQUEST(17, 1042),
     /**
@@ -1435,6 +1468,10 @@ public final class IMBaseDefine {
     public static final int CID_GROUP_CHANGE_MEMBER_NOTIFY_VALUE = 1035;
     /**
      * <code>CID_GROUP_CHANGE_GROUP_NAME_REQUEST = 1036;</code>
+     *
+     * <pre>
+     *修改群名称
+     * </pre>
      */
     public static final int CID_GROUP_CHANGE_GROUP_NAME_REQUEST_VALUE = 1036;
     /**
@@ -1443,6 +1480,10 @@ public final class IMBaseDefine {
     public static final int CID_GROUP_CHANGE_GROUP_NAME_RESPONSE_VALUE = 1037;
     /**
      * <code>CID_GROUP_PUBLISH_BOARD_REQUEST = 1038;</code>
+     *
+     * <pre>
+     *发布群公告
+     * </pre>
      */
     public static final int CID_GROUP_PUBLISH_BOARD_REQUEST_VALUE = 1038;
     /**
@@ -1451,6 +1492,10 @@ public final class IMBaseDefine {
     public static final int CID_GROUP_PUBLISH_BOARD_RESPONSE_VALUE = 1039;
     /**
      * <code>CID_GROUP_DELETE_BOARD_REQUEST = 1040;</code>
+     *
+     * <pre>
+     *删除群公告
+     * </pre>
      */
     public static final int CID_GROUP_DELETE_BOARD_REQUEST_VALUE = 1040;
     /**
@@ -1459,6 +1504,10 @@ public final class IMBaseDefine {
     public static final int CID_GROUP_DELETE_BOARD_RESPONSE_VALUE = 1041;
     /**
      * <code>CID_GROUP_LIST_BOARD_REQUEST = 1042;</code>
+     *
+     * <pre>
+     *查看群公告最近20条
+     * </pre>
      */
     public static final int CID_GROUP_LIST_BOARD_REQUEST_VALUE = 1042;
     /**
@@ -15647,703 +15696,6 @@ public final class IMBaseDefine {
     }
 
     // @@protoc_insertion_point(class_scope:IM.BaseDefine.OfflineFileInfo)
-  }
-
-  public interface GroupBoardInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:IM.BaseDefine.GroupBoardInfo)
-      com.google.protobuf.MessageLiteOrBuilder {
-
-    /**
-     * <code>required uint32 id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>required uint32 id = 1;</code>
-     */
-    int getId();
-
-    /**
-     * <code>required uint32 create_time = 2;</code>
-     */
-    boolean hasCreateTime();
-    /**
-     * <code>required uint32 create_time = 2;</code>
-     */
-    int getCreateTime();
-
-    /**
-     * <code>required uint32 publish_user_id = 3;</code>
-     */
-    boolean hasPublishUserId();
-    /**
-     * <code>required uint32 publish_user_id = 3;</code>
-     */
-    int getPublishUserId();
-
-    /**
-     * <code>required string info = 4;</code>
-     */
-    boolean hasInfo();
-    /**
-     * <code>required string info = 4;</code>
-     */
-    java.lang.String getInfo();
-    /**
-     * <code>required string info = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getInfoBytes();
-  }
-  /**
-   * Protobuf type {@code IM.BaseDefine.GroupBoardInfo}
-   */
-  public static final class GroupBoardInfo extends
-      com.google.protobuf.GeneratedMessageLite implements
-      // @@protoc_insertion_point(message_implements:IM.BaseDefine.GroupBoardInfo)
-      GroupBoardInfoOrBuilder {
-    // Use GroupBoardInfo.newBuilder() to construct.
-    private GroupBoardInfo(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private GroupBoardInfo(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final GroupBoardInfo defaultInstance;
-    public static GroupBoardInfo getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public GroupBoardInfo getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private GroupBoardInfo(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              id_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              createTime_ = input.readUInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              publishUserId_ = input.readUInt32();
-              break;
-            }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              info_ = bs;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<GroupBoardInfo> PARSER =
-        new com.google.protobuf.AbstractParser<GroupBoardInfo>() {
-      public GroupBoardInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GroupBoardInfo(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GroupBoardInfo> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>required uint32 id = 1;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-
-    public static final int CREATE_TIME_FIELD_NUMBER = 2;
-    private int createTime_;
-    /**
-     * <code>required uint32 create_time = 2;</code>
-     */
-    public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 create_time = 2;</code>
-     */
-    public int getCreateTime() {
-      return createTime_;
-    }
-
-    public static final int PUBLISH_USER_ID_FIELD_NUMBER = 3;
-    private int publishUserId_;
-    /**
-     * <code>required uint32 publish_user_id = 3;</code>
-     */
-    public boolean hasPublishUserId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint32 publish_user_id = 3;</code>
-     */
-    public int getPublishUserId() {
-      return publishUserId_;
-    }
-
-    public static final int INFO_FIELD_NUMBER = 4;
-    private java.lang.Object info_;
-    /**
-     * <code>required string info = 4;</code>
-     */
-    public boolean hasInfo() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required string info = 4;</code>
-     */
-    public java.lang.String getInfo() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          info_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string info = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getInfoBytes() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        info_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private void initFields() {
-      id_ = 0;
-      createTime_ = 0;
-      publishUserId_ = 0;
-      info_ = "";
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasCreateTime()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPublishUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasInfo()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, id_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, createTime_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(3, publishUserId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getInfoBytes());
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, createTime_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, publishUserId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getInfoBytes());
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    /**
-     * Protobuf type {@code IM.BaseDefine.GroupBoardInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo, Builder>
-        implements
-        // @@protoc_insertion_point(builder_implements:IM.BaseDefine.GroupBoardInfo)
-        com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfoOrBuilder {
-      // Construct using com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        id_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        createTime_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        publishUserId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        info_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo build() {
-        com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo buildPartial() {
-        com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo result = new com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.createTime_ = createTime_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.publishUserId_ = publishUserId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.info_ = info_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo other) {
-        if (other == com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
-        }
-        if (other.hasCreateTime()) {
-          setCreateTime(other.getCreateTime());
-        }
-        if (other.hasPublishUserId()) {
-          setPublishUserId(other.getPublishUserId());
-        }
-        if (other.hasInfo()) {
-          bitField0_ |= 0x00000008;
-          info_ = other.info_;
-          
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasId()) {
-          
-          return false;
-        }
-        if (!hasCreateTime()) {
-          
-          return false;
-        }
-        if (!hasPublishUserId()) {
-          
-          return false;
-        }
-        if (!hasInfo()) {
-          
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMBaseDefine.GroupBoardInfo) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int id_ ;
-      /**
-       * <code>required uint32 id = 1;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>required uint32 id = 1;</code>
-       */
-      public Builder setId(int value) {
-        bitField0_ |= 0x00000001;
-        id_ = value;
-        
-        return this;
-      }
-      /**
-       * <code>required uint32 id = 1;</code>
-       */
-      public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = 0;
-        
-        return this;
-      }
-
-      private int createTime_ ;
-      /**
-       * <code>required uint32 create_time = 2;</code>
-       */
-      public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 create_time = 2;</code>
-       */
-      public int getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>required uint32 create_time = 2;</code>
-       */
-      public Builder setCreateTime(int value) {
-        bitField0_ |= 0x00000002;
-        createTime_ = value;
-        
-        return this;
-      }
-      /**
-       * <code>required uint32 create_time = 2;</code>
-       */
-      public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        createTime_ = 0;
-        
-        return this;
-      }
-
-      private int publishUserId_ ;
-      /**
-       * <code>required uint32 publish_user_id = 3;</code>
-       */
-      public boolean hasPublishUserId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required uint32 publish_user_id = 3;</code>
-       */
-      public int getPublishUserId() {
-        return publishUserId_;
-      }
-      /**
-       * <code>required uint32 publish_user_id = 3;</code>
-       */
-      public Builder setPublishUserId(int value) {
-        bitField0_ |= 0x00000004;
-        publishUserId_ = value;
-        
-        return this;
-      }
-      /**
-       * <code>required uint32 publish_user_id = 3;</code>
-       */
-      public Builder clearPublishUserId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        publishUserId_ = 0;
-        
-        return this;
-      }
-
-      private java.lang.Object info_ = "";
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public boolean hasInfo() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public java.lang.String getInfo() {
-        java.lang.Object ref = info_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            info_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getInfoBytes() {
-        java.lang.Object ref = info_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          info_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public Builder setInfo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        info_ = value;
-        
-        return this;
-      }
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public Builder clearInfo() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        info_ = getDefaultInstance().getInfo();
-        
-        return this;
-      }
-      /**
-       * <code>required string info = 4;</code>
-       */
-      public Builder setInfoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        info_ = value;
-        
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:IM.BaseDefine.GroupBoardInfo)
-    }
-
-    static {
-      defaultInstance = new GroupBoardInfo(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:IM.BaseDefine.GroupBoardInfo)
   }
 
   public interface DepartInfoOrBuilder extends

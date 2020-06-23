@@ -70,8 +70,7 @@ public class NChatPayActivity extends TTBaseActivity {
     private List<PayOrderInfoData1> payOrderInfoData = new ArrayList<>();
     private List<CardInfo> cardInfos = new ArrayList<>();
     private String defaultId;
-
-
+    private boolean isSkip=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,10 +193,11 @@ public class NChatPayActivity extends TTBaseActivity {
                     public void onSuccess(Response<String> response) {
                         QueryPswBean bean = new Gson().fromJson(response.body(), QueryPswBean.class);
                         if (RequestCode.SUCCESS.equals(bean.getStatus())) {
-                            if (!"1".equals(bean.getData().is_pay_password())){
+                            if (!"1".equals(bean.getData().is_pay_password())&&!isSkip){
                                 Intent it=new Intent(NChatPayActivity.this,SetPINActivity.class);
                                 startActivity(it);
                             }
+                            isSkip=false;
                         } else {
                             ToastUtil.toastShortMessage(bean.getReturn_msg());
                         }
@@ -241,15 +241,17 @@ public class NChatPayActivity extends TTBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
-                CardInfo info = (CardInfo) data.getSerializableExtra("card");
-                cardInfos.add(info);
-                getUserAuthCode(info);
-                getOrderList();
+//                CardInfo info = (CardInfo) data.getSerializableExtra("card");
+//                cardInfos.add(info);
+//                getUserAuthCode(info);
+//                getOrderList();
                 String is_pay_password=data.getStringExtra("is_pay_password");
                 if (!"1".equals(is_pay_password)){
                     Intent it=new Intent(NChatPayActivity.this,SetPINActivity.class);
                     startActivity(it);
+                    isSkip=true;
                 }
+
             }
         }
     }

@@ -3,7 +3,6 @@ package com.mogujie.tt.ui.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mogujie.tools.ScreenTools;
-import com.mogujie.tt.DB.entity.UserEntity;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
+import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
-import com.mogujie.tt.imservice.manager.IMContactManager;
-import com.mogujie.tt.utils.DateUtil;
-import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.mogujie.tt.ui.widget.IMGroupAvatar;
+import com.mogujie.tt.utils.DateUtil;
+import com.mogujie.tt.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +82,7 @@ public class ChatAdapter extends BaseAdapter {
         }
     }
 
-    /**用戶备注的更新  not use now*/
+    /**用戶备注的更新*/
     public void updateRecentInfoByRemake(UserEntity userEntity){
         for(RecentInfo recentInfo:recentSessionList){
             if(recentInfo.getSessionKey().equals(userEntity.getSessionKey())){
@@ -95,7 +93,7 @@ public class ChatAdapter extends BaseAdapter {
         }
     }
 
-    /**删除用户会话 not use now*/
+    /**删除用户会话 */
     public void deleteRecentInfo(UserEntity userEntity){
         for(RecentInfo recentInfo:recentSessionList){
             if(recentInfo.getSessionKey().equals(userEntity.getSessionKey())){

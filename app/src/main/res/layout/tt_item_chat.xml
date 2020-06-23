@@ -50,13 +50,10 @@
 
                 <TextView
                     android:id="@+id/message_count_notify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:background="@drawable/tt_message_notify"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/msg_un_read"
                     android:gravity="center"
-                    android:minWidth="18dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp" />
 

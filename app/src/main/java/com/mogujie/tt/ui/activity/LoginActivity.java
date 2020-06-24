@@ -69,7 +69,6 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
     private View loginPage;
     private View splashPage;
     private View mLoginStatusView;
-    private ImageView mSwitchLoginServer;
     private InputMethodManager intputManager;
 
     private TextInputLayout emailInputLayout;
@@ -216,40 +215,9 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         findViewById(R.id.tv_forget_password).setOnClickListener(this);
         mLoginStatusView = findViewById(R.id.login_status);
 
-        mSwitchLoginServer = findViewById(R.id.sign_switch_login_server);
-//        mSwitchLoginServer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog));
-//                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-//                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
-//                editText.setText(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER));
-//                TextView textText = dialog_view.findViewById(R.id.dialog_title);
-//                textText.setText(R.string.switch_login_server_title);
-//                builder.setView(dialog_view);
-//                builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        if (!TextUtils.isEmpty(editText.getText().toString().trim())) {
-//                            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, editText.getText().toString().trim());
-//                            dialog.dismiss();
-//                        }
-//                    }
-//                });
-//                builder.setNegativeButton(getString(R.string.tt_cancel), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
 
-        mNameView = findViewById(R.id.name);
-        mPasswordView = findViewById(R.id.password);
+        mNameView = findViewById(R.id.login_user);
+        mPasswordView = findViewById(R.id.edit_password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -261,7 +229,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
                 return false;
             }
         });
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);

@@ -8,18 +8,18 @@
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        android:layout_marginLeft="17.5dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="17mm"
+        android:layout_height="17mm"
+        android:layout_marginLeft="17.5mm"
+        android:layout_marginTop="10mm"
         android:src="@mipmap/title_bar_back" />
 
     <TextView
         android:id="@+id/titleTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginLeft="35mm"
+        android:layout_marginTop="52mm"
         android:gravity="left"
         android:text="@string/app_sign_up"
         android:textColor="@color/black"
@@ -30,15 +30,15 @@
         android:id="@+id/emailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37.5dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginTop="37.5mm"
+        android:layout_marginLeft="40mm"
+        android:layout_marginRight="40mm"
         app:hintTextAppearance="@style/hintAppearance">
 
         <EditText
             android:id="@+id/userAccount"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="50mm"
             android:gravity="center_vertical"
             android:hint="@string/app_Email"
             android:textColor="@color/color_33"
@@ -50,13 +50,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp">
+        android:layout_marginTop="23mm">
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/codeInputLayout"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40mm"
+            android:layout_marginRight="40mm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintTextAppearance="@style/hintAppearance">
@@ -64,7 +64,7 @@
             <EditText
                 android:id="@+id/userVerifiCodeEt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="50mm"
                 android:gravity="center_vertical"
                 android:hint="@string/app_EmailCode"
                 android:inputType="number"
@@ -80,15 +80,15 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/codeInputLayout"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginRight="40mm"
+            android:layout_marginBottom="13mm"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
             <View
-                android:layout_width="0.5dp"
-                android:layout_height="12.5dp"
+                android:layout_width="0.5mm"
+                android:layout_height="12.5mm"
                 android:background="@color/color_48B464" />
 
             <TextView
@@ -96,8 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingLeft="11.5dp"
-                android:paddingRight="11.5dp"
+                android:paddingLeft="11.5mm"
+                android:paddingRight="11.5mm"
                 android:text="@string/app_receiver"
                 android:textColor="@color/color_48B464" />
 
@@ -108,12 +108,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp">
+        android:layout_marginTop="23mm">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pswInputLayout"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40mm"
+            android:layout_marginRight="40mm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintTextAppearance="@style/hintAppearance">
@@ -121,7 +121,7 @@
             <EditText
                 android:id="@+id/userPswEt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="50mm"
                 android:gravity="center_vertical"
                 android:hint="@string/password"
                 android:textColor="@color/color_33"
@@ -134,21 +134,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp">
+        android:layout_marginTop="23mm">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPswInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="23dp"
+            android:layout_marginLeft="40mm"
+            android:layout_marginRight="40mm"
+            android:layout_marginBottom="23mm"
             app:hintTextAppearance="@style/hintAppearance">
 
             <EditText
                 android:id="@+id/userConfirmPswEt"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="50mm"
                 android:gravity="center_vertical"
                 android:hint="@string/ConfirmPassword"
                 android:textColor="@color/color_33"
@@ -161,10 +161,10 @@
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="37.5dp"
-        android:layout_marginRight="50dp"
+        android:layout_height="52mm"
+        android:layout_marginLeft="50mm"
+        android:layout_marginTop="37.5mm"
+        android:layout_marginRight="50mm"
         android:background="@drawable/shape_bg_green_corner4"
         android:onClick="onClickNext"
         android:text="@string/sure"

@@ -123,7 +123,7 @@ public class AddNewCardActivity extends TTBaseActivity {
 
 
     private void addCard(final String cardName, final String cardNo) {
-
+        showDialog();
         String user_openid = (String) SPUtils.get(getApplicationContext(), Constants.N_OPENID, "");
         HttpParams param = new HttpParams();
         param.put("institution_number", INSTITUTION_NUMBER);
@@ -151,6 +151,12 @@ public class AddNewCardActivity extends TTBaseActivity {
                         } else {
                             ToastUtil.toastShortMessage(bean.getReturn_msg());
                         }
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                        dismissDialog();
                     }
                 });
     }

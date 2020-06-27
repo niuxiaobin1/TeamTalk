@@ -82,7 +82,7 @@ public class SearchFragment extends TTBaseFragment {
             }
         });
 
-		topSearchEdt.addTextChangedListener(new TextWatcher() {
+        searchEt.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {

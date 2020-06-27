@@ -12,6 +12,7 @@ data class QrType0Data(var ReturnCode:String,
                      var Mch_no:String,
                      var Sub_mch_no:String,
                      var Amount:String,
+                     var MerUrl:String,
                      var MerchantName:String
                      ):Serializable{
     companion object {

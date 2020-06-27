@@ -49,10 +49,10 @@
                 android:background="@mipmap/chat_other_content_bg_copy"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="21dp"
-                android:paddingTop="13dp"
-                android:paddingRight="13dp"
-                android:paddingBottom="13dp">
+                android:paddingLeft="15dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp">
 
                 <View
                     android:id="@+id/audio_antt_view"
@@ -61,6 +61,7 @@
                     android:background="@drawable/tt_voice_play_other" />
 
                 <TextView
+                    android:maxLines="1"
                     android:id="@+id/audio_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,10 +75,11 @@
             </LinearLayout>
 
             <View
+                android:layout_centerVertical="true"
                 android:id="@+id/audio_unread_notify"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:layout_marginLeft="-4dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/message_layout"
                 android:background="@drawable/tt_unread_message_notify_bg"
                 android:visibility="gone" />

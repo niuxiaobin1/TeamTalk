@@ -232,7 +232,7 @@ public class AddMoreActivity extends TTBaseActivity {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     doResult(result);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    ToastUtil.toastShortMessage( "scan fail");
+                    ToastUtil.toastShortMessage("scan fail");
                 }
             }
         }
@@ -260,22 +260,18 @@ public class AddMoreActivity extends TTBaseActivity {
             @Override
             public void cSbCallBack1(String url) {
 
-//                Intent it = new Intent(AddMoreActivity.this, WebViewActivity.class);
-//                it.putExtra(WebViewActivity.WEB_TITLE, "");
-//                it.putExtra(WebViewActivity.WEB_URL, url);
-//                startActivity(it);
             }
 
             @Override
             public void cSbCallBack2(String order_sn) {
-//                Intent it = new Intent(AddMoreActivity.this, ScanPayActivity.class);
-//                it.putExtra(ScanPayActivity.ORDER, order_sn);
-//                startActivity(it);
+                Intent it = new Intent(AddMoreActivity.this, ScanPayActivity.class);
+                it.putExtra(ScanPayActivity.ORDER, order_sn);
+                startActivity(it);
             }
 
             @Override
             public void cSbCallBack3(String qr_cate, String sub_no) {
-                ScanResultUtil.queryMer(AddMoreActivity.this,qr_cate,sub_no);
+                ScanResultUtil.queryMer(AddMoreActivity.this, qr_cate, sub_no);
             }
         });
     }

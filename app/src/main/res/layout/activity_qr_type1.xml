@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f7"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="10mm"
+            android:text=""
+            android:id="@+id/payToTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10mm"
+            android:textColor="@color/color_33"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50mm">
+
+            <TextView
+                android:layout_marginLeft="15mm"
+                android:layout_centerVertical="true"
+                android:text="@string/amount0623"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_33"
+                android:textSize="16sp" />
+
+            <TextView
+                android:maxWidth="150mm"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginRight="15mm"
+                android:hint="0.00"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/amountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_11"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_marginRight="15mm"
+                android:layout_toLeftOf="@id/amountTv"
+                android:layout_centerVertical="true"
+                android:text="@string/transfer_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_33"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="10mm"
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="50mm"
+        android:background="@color/color_48B464"
+        android:text="@string/app_pay"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>

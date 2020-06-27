@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.JsonObject;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
@@ -47,8 +44,8 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.scanResult.ScanResultCallBack;
 import com.mogujie.tt.scanResult.ScanResultUtil;
-import com.mogujie.tt.ui.activity.AddMoreActivity;
 import com.mogujie.tt.ui.activity.MainActivity;
+import com.mogujie.tt.ui.activity.ScanPayActivity;
 import com.mogujie.tt.ui.adapter.ChatAdapter;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.NetworkUtil;
@@ -59,10 +56,6 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -145,9 +138,13 @@ public class ChatFragment extends MainFragment
         mMenu.addOnOpenZXingScanListener(new Menu.OnOpenZXingScanListener() {
             @Override
             public void onOpenZXing() {
-                String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDMyIn0";
-                doResult(result);
-//                    ChatFragmentPermissionsDispatcher.openCameraScanWithPermissionCheck(ChatFragment.this);
+//                String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDAyIn0";//固定有金额
+//                String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDE4In0";//固定空码
+//                String result="eyJxcl9jYXRlIjoiMSIsInN1Yl9ubyI6IlMwMDAwMDAwMDMyIn0";//固定无金额
+//                String result = "eyJxcl9jYXRlIjoiMiIsInN1Yl9ubyI6" +
+//                        "IlMwMDAwMDAwMDAxIiwib3JkZXJfc24iOiI5OTkxN" +
+//                        "jYyMDA2MjMxMDU4MTc2NDAyNDc0MzUyODgiLCJhbW91bnQiOiIxMC4wMCJ9";//动态
+                ChatFragmentPermissionsDispatcher.openCameraScanWithPermissionCheck(ChatFragment.this);
             }
         });
         // 多端登陆也在用这个view
@@ -183,6 +180,12 @@ public class ChatFragment extends MainFragment
             }
         });
         showTopSearchBar();
+        topSearchTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchView();
+            }
+        });
     }
 
     private void initContactListView() {
@@ -661,9 +664,9 @@ public class ChatFragment extends MainFragment
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
-//                    doResult(result);
+                    doResult(result);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    ToastUtil.toastShortMessage( "scan fail");
+                    ToastUtil.toastShortMessage("scan fail");
                 }
             }
         }
@@ -691,22 +694,18 @@ public class ChatFragment extends MainFragment
             @Override
             public void cSbCallBack1(String url) {
 
-//                Intent it = new Intent(AddMoreActivity.this, WebViewActivity.class);
-//                it.putExtra(WebViewActivity.WEB_TITLE, "");
-//                it.putExtra(WebViewActivity.WEB_URL, url);
-//                startActivity(it);
             }
 
             @Override
             public void cSbCallBack2(String order_sn) {
-//                Intent it = new Intent(AddMoreActivity.this, ScanPayActivity.class);
-//                it.putExtra(ScanPayActivity.ORDER, order_sn);
-//                startActivity(it);
+                Intent it = new Intent(getActivity(), ScanPayActivity.class);
+                it.putExtra(ScanPayActivity.ORDER, order_sn);
+                startActivity(it);
             }
 
             @Override
             public void cSbCallBack3(String qr_cate, String sub_no) {
-                ScanResultUtil.queryMer((MainActivity)getActivity(),qr_cate,sub_no);
+                ScanResultUtil.queryMer((MainActivity) getActivity(), qr_cate, sub_no);
             }
         });
     }

@@ -108,6 +108,10 @@ public class IMPacketDispatcher {
                 IMBuddy.IMChangeUserinfoRsp imChangeUserinfoRsp = IMBuddy.IMChangeUserinfoRsp.parseFrom(buffer);
                 IMContactManager.instance().onRepChangeUserInfo(imChangeUserinfoRsp);
                 return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY_VALUE:
+                IMBuddy.IMAgreeFirendNotify imAgreeFirendNotify = IMBuddy.IMAgreeFirendNotify.parseFrom(buffer);
+                IMContactManager.instance().imChangeUserInfoBroadCast(imAgreeFirendNotify);
+                return;
 
         }
         } catch (IOException e) {

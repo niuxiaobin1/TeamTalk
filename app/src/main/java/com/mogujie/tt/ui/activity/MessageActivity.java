@@ -329,6 +329,9 @@ public class MessageActivity extends TTBaseActivity
         if (imService != null) {
             // 处理session的未读信息
             handleUnreadMsgs();
+            if (peerEntity.getType()!=DBConstant.SESSION_TYPE_SINGLE){
+                return;
+            }
             if (imService.getContactManager().findContact(peerEntity.getPeerId())==null){
                 ToastUtil.toastShortMessage("好友已删除");
                 finish();

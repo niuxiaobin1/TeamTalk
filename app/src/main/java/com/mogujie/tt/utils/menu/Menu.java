@@ -1,6 +1,7 @@
 package com.mogujie.tt.utils.menu;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -13,7 +14,12 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.ui.activity.AddMoreActivity;
+import com.mogujie.tt.ui.activity.GroupManagermentActivity;
+import com.mogujie.tt.ui.activity.MessageActivity;
+import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.ScreenUtil;
 import com.mogujie.tt.utils.menu.action.PopActionClickListener;
 import com.mogujie.tt.utils.menu.action.PopMenuAction;
@@ -60,16 +66,13 @@ public class Menu {
                     }
                 }
                 if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.start_conversation))) {
-//                    Intent intent = new Intent(NigeriaApplication.instance(), StartC2CChatActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    mActivity.startActivity(intent);
+
                 }
 
                 if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_private_group))) {
-//                    Intent intent = new Intent(NigeriaApplication.instance(), StartGroupChatActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
-//                    mActivity.startActivity(intent);
+                    IMUIHelper.openGroupMemberSelectActivity(mActivity,
+                            IMLoginManager.instance().getLoginInfo().getSessionKey()
+                    );
                 }
                 if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_group_chat))) {
 //                    Intent intent = new Intent(NigeriaApplication.instance(), StartGroupChatActivity.class);

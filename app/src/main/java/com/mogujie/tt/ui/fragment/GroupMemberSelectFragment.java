@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,7 +144,11 @@ public class GroupMemberSelectFragment extends MainFragment
             imService = imServiceConnector.getIMService();
             Intent intent = getActivity().getIntent();
             curSessionKey = intent.getStringExtra(IntentConstant.KEY_SESSION_KEY);
-            peerEntity = imService.getSessionManager().findPeerEntity(curSessionKey);
+            if (curSessionKey.equals(imService.getLoginManager().getLoginInfo().getSessionKey())){
+                peerEntity=imService.getLoginManager().getLoginInfo();
+            }else{
+                peerEntity = imService.getSessionManager().findPeerEntity(curSessionKey);
+            }
             /**已经处于选中状态的list*/
             Set<Integer> alreadyList = getAlreadyCheckList();
             initContactList(alreadyList);

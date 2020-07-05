@@ -54,6 +54,7 @@
 
 
             <TextView
+                android:text="11111111111"
                 android:id="@+id/group_manager_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,6 +173,17 @@
                 android:layout_weight="1"
                 android:text="@string/in_group_nick_name"
                 android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/group_alisa_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="3dip"
+                android:textColor="#80989898"
                 android:textSize="15sp" />
 
             <ImageView

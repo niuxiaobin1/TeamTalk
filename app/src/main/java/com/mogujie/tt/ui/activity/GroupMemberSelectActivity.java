@@ -7,8 +7,9 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
 import com.mogujie.tt.R;
+import com.mogujie.tt.ui.base.TTBaseActivity;
 
-public class GroupMemberSelectActivity extends FragmentActivity {
+public class GroupMemberSelectActivity extends TTBaseActivity {
 
     @Override
     protected void onCreate(Bundle bundle) {

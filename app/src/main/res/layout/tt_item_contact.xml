@@ -42,7 +42,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:button="@color/checkbox_background"
+            android:button="@drawable/checkbox_background"
             android:clickable="false"
             android:focusable="false"
             android:visibility="gone" />

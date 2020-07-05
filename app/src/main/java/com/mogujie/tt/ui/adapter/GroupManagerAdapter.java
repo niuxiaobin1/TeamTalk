@@ -16,6 +16,7 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.manager.IMContactManager;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.mogujie.tt.utils.IMUIHelper;
@@ -74,6 +75,9 @@ public class GroupManagerAdapter extends BaseAdapter {
         IMContactManager manager = imService.getContactManager();
         for(Integer memId:entity.getlistGroupMemberIds()){
            UserEntity user =  manager.findContact(memId);
+           if (memId== IMLoginManager.instance().getLoginId()){
+               user=IMLoginManager.instance().getLoginInfo();
+           }
            if(user!=null){
                if(ownerId == user.getPeerId()){
                    // 群主放在第一个
@@ -191,7 +195,7 @@ public class GroupManagerAdapter extends BaseAdapter {
         }
 
         holder.role.setVisibility(View.GONE);
-		if (position >= 0 && memberList.size() > position) {
+            if (position >= 0 && memberList.size() > position) {
 			logger.d("groupmgr#in mebers area");
 			final UserEntity userEntity = memberList.get(position);
 			setHolder(holder, position, userEntity.getAvatar(), 0, userEntity.getMainName(), userEntity);

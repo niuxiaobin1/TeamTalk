@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
@@ -20,6 +21,10 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.ConfigurationSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.config.TUIKitConstants;
+import com.mogujie.tt.imservice.callback.Packetlistener;
+import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
+import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.ui.activity.SelectionActivity;
 import com.mogujie.tt.ui.adapter.GroupManagerAdapter;
 import com.mogujie.tt.ui.helper.CheckboxConfigHelper;
@@ -27,13 +32,17 @@ import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.base.TTBaseFragment;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+
+import static com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent.UpdateEvent.USER_UPDATE_INFO_OK;
 
 
 /**
@@ -99,18 +108,60 @@ public class GroupManagerFragment extends TTBaseFragment{
         curView.findViewById(R.id.lin_approva).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                intent.putExtra("title","Approva");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), SelectionActivity.class);
+//                intent.putExtra("title","Approva");
+//                startActivity(intent);
             }
         });
         curView.findViewById(R.id.lin_my_alia).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                intent.putExtra("title","My Alias");
-                intent.putExtra("hint","Enter Alias");
-                startActivity(intent);
+                TextView groupAlias = curView.findViewById(R.id.group_alisa_tv);
+                Bundle bundle = new Bundle();
+                bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.profile_remark_edit));
+                bundle.putString(TUIKitConstants.Selection.INIT_HINT, getResources().getString(R.string.profile_remark_hint));
+                bundle.putString(TUIKitConstants.Selection.INIT_CONTENT, groupAlias.getText().toString());
+                SelectionActivity.startTextSelection(getActivity(), bundle, new SelectionActivity.OnResultReturnListener() {
+                    @Override
+                    public void onReturn(Object text) {
+
+                        // update remake
+//                        if (imService != null) {
+//                            imService.getContactManager().reqModifyUserRemake(text.toString(),
+//                                    currentUserId, new Packetlistener() {
+//                                        @Override
+//                                        public void onSuccess(Object response) {
+//                                            getActivity().runOnUiThread(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    try {
+//                                                        IMBuddy.IMChangeFriendRemarkRsp imChangeFriendRemarkRsp = IMBuddy.IMChangeFriendRemarkRsp.parseFrom((CodedInputStream) response);
+//                                                        nickName.setText(imChangeFriendRemarkRsp.getRemark());
+//                                                        currentUser.setPinyinName(imChangeFriendRemarkRsp.getRemark());
+//                                                        imService.getContactManager().updateRemake(currentUser);
+//                                                        EventBus.getDefault().post(new OtherUserInfoUpdateEvent(USER_UPDATE_INFO_OK, currentUser));
+//                                                    } catch (IOException e) {
+//                                                        ToastUtil.toastShortMessage(e.getMessage());
+//                                                    }
+//                                                }
+//                                            });
+//
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onFaild() {
+//                                            ToastUtil.toastShortMessage("remake fail");
+//                                        }
+//
+//                                        @Override
+//                                        public void onTimeout() {
+//                                            ToastUtil.toastShortMessage("remake timeout");
+//                                        }
+//                                    });
+//                        }
+                    }
+                });
             }
         });
 

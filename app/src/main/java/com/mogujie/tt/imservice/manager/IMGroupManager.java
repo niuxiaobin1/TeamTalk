@@ -1,19 +1,21 @@
 package com.mogujie.tt.imservice.manager;
 
 
+import android.text.TextUtils;
+
 import com.google.protobuf.CodedInputStream;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.SessionEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.SessionEvent;
-import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
-import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMGroup;
+import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
+import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.pinyin.PinYin;
@@ -253,6 +255,32 @@ public class IMGroupManager extends IMManager {
        }
 
 
+
+    /**
+     * 更改群组昵称
+     */
+    public void reqChangeGroupNick(String nick,int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqChangeGroupNick");
+        if(group_id==0 || TextUtils.isEmpty(nick)){
+            logger.e("group#reqChangeGroupNick# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupChangeGroupNickReq  imGroupChangeGroupNickReq = IMGroup.IMGroupChangeGroupNickReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .setNick(nick)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_NICK_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupChangeGroupNickReq,sid,cid,packetlistener);
+    }
+
+
+
+
+
+
     /**
      * 创建群
      * 默认是创建临时群，且客户端只能创建临时群
@@ -489,7 +517,7 @@ public class IMGroupManager extends IMManager {
 			if (group == null) {
 				continue;
 			}
-			if (group.getGroupType() == DBConstant.GROUP_TYPE_NORMAL) {
+			if (group.getGroupType() == DBConstant.GROUP_TYPE_TEMP) {
 				normalGroupList.add(group);
 			}
 		}

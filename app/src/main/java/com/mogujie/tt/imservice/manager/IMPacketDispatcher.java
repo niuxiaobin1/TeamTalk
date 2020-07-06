@@ -185,6 +185,7 @@ public class IMPacketDispatcher {
                 case IMBaseDefine.GroupCmdID.CID_GROUP_SHIELD_GROUP_RESPONSE_VALUE:
                     //todo
                     return;
+
             }
         }catch(IOException e){
             logger.e("groupPacketDispatcher# error,cid:%d",commandId);

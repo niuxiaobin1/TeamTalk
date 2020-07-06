@@ -26,6 +26,7 @@ import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.ui.activity.GroupListActivity;
 import com.mogujie.tt.ui.activity.NewFriendsActivity;
 import com.mogujie.tt.ui.adapter.ContactAdapter;
 import com.mogujie.tt.ui.adapter.DeptAdapter;
@@ -188,6 +189,13 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
                 startActivityForResult(intent,REQUEST_CODE);
             }
         });
+        headView.findViewById(R.id.group_list).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GroupListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         allContactListView.addHeaderView(headView);
 
@@ -273,11 +281,11 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
 
     private void renderGroupList() {
         logger.d("group#onGroupReady");
-        List<GroupEntity> originList = imService.getGroupManager().getNormalGroupSortedList();
-        if (originList.size() <= 0) {
-            return;
-        }
-        contactAdapter.putGroupList(originList);
+//        List<GroupEntity> originList = imService.getGroupManager().getNormalGroupSortedList();
+//        if (originList.size() <= 0) {
+//            return;
+//        }
+//        contactAdapter.putGroupList(originList);
     }
 
     private ListView getCurListView() {

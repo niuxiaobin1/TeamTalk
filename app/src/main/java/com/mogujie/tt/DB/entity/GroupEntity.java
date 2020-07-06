@@ -201,6 +201,14 @@ public class GroupEntity extends PeerEntity {
         this.pinyinElement = pinyinElement;
     }
 
+    public String getSectionName() {
+        if (TextUtils.isEmpty(pinyinElement.pinyin)) {
+            return "";
+        }
+        return pinyinElement.pinyin.substring(0, 1);
+    }
+
+
     public SearchElement getSearchElement() {
         return searchElement;
     }

@@ -39,6 +39,8 @@ public abstract class TTBaseActivity extends AppCompatActivity {
     protected LinearLayout baseRoot;
     protected float x1, y1, x2, y2 = 0;
 
+    protected TextView topSearchTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public abstract class TTBaseActivity extends AppCompatActivity {
         topRightBtn = (ImageView) topContentView.findViewById(R.id.right_btn);
         topRightTxt = topContentView.findViewById(R.id.right_txt);
         baseRoot = (LinearLayout) topContentView.findViewById(R.id.act_base_root);
-
+        topSearchTv = topContentView.findViewById(R.id.chat_title_search);
         topTitleTxt.setVisibility(View.GONE);
         topRightBtn.setVisibility(View.INVISIBLE);
         topLeftBtn.setVisibility(View.GONE);

@@ -329,11 +329,24 @@ public class ContactAdapter extends BaseAdapter implements
 
         groupHolder.nameView.setText(groupEntity.getMainName());
         groupHolder.sectionView.setVisibility(View.GONE);
-
+        String sectionName = groupEntity.getSectionName();
         // 分割线的处理【位于控件的最上面】
-        groupHolder.divider.setVisibility(View.VISIBLE);
+
         if (position == 0) {
+            groupHolder.sectionView.setVisibility(View.VISIBLE);
+            groupHolder.sectionView.setText(sectionName);
             groupHolder.divider.setVisibility(View.GONE);
+        } else {
+            // 获取上一个实体的preSectionName
+            GroupEntity preUser = (GroupEntity) getItem(position - 1);
+            String preSectionName = preUser.getSectionName();
+            if (TextUtils.isEmpty(preSectionName) || !preSectionName.equals(sectionName)) {
+                groupHolder.sectionView.setVisibility(View.VISIBLE);
+                groupHolder.sectionView.setText(sectionName);
+                groupHolder.divider.setVisibility(View.GONE);
+            } else {
+                groupHolder.divider.setVisibility(View.VISIBLE);
+            }
         }
 
         groupHolder.avatar.setVisibility(View.VISIBLE);

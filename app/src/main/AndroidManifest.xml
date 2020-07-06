@@ -40,7 +40,8 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.ScanPayActivity"></activity>
+        <activity android:name=".ui.activity.GroupListActivity"></activity>
+        <activity android:name=".ui.activity.ScanPayActivity" />
         <activity android:name=".ui.activity.WebViewActivity" />
         <activity android:name=".ui.activity.QrType1Activity" />
         <activity android:name=".ui.activity.QrType0Activity" />

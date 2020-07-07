@@ -92,6 +92,11 @@ public class UserEntity extends PeerEntity{
         }
         return mainName;
     }
+    /** Not-null value. */
+    public String getMainName1() {
+
+        return mainName;
+    }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setMainName(String mainName) {

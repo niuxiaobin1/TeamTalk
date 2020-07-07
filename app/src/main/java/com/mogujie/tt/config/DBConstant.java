@@ -49,7 +49,7 @@ public interface DBConstant {
     public final String DISPLAY_FOR_TRANFER = "[转账]";
     public final String DISPLAY_FOR_IMAGE = "[图片]";
     public final String DISPLAY_FOR_MIX = "[图文消息]";
-    public final String DISPLAY_FOR_AUDIO = "[语音]";
+    public final String DISPLAY_FOR_AUDIO = "[Voice]";
     public final String DISPLAY_FOR_ERROR = "[未知消息]";
 
 

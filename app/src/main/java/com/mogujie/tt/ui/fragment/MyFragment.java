@@ -294,7 +294,7 @@ public class MyFragment extends MainFragment {
         TextView userNameView = (TextView) curView.findViewById(R.id.userName);
         IMBaseImageView portraitImageView = (IMBaseImageView) curView.findViewById(R.id.user_portrait);
 
-        nickNameView.setText(loginContact.getMainName());
+        nickNameView.setText(loginContact.getMainName1());
         userNameView.setText(loginContact.getRealName());
 
         //头像设置

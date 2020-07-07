@@ -203,7 +203,9 @@ public class GroupMemberSelectFragment extends MainFragment
                     checkListSet.add(loginId);
                     checkListSet.add(peerEntity.getPeerId());
                     logger.d("tempgroup#memberList size:%d", checkListSet.size());
-                    ShowDialogForTempGroupname(groupMgr, checkListSet);
+//                    ShowDialogForTempGroupname(groupMgr, checkListSet);
+                    showProgressBar();
+                    groupMgr.reqCreateTempGroup("Group",checkListSet);
                 } else if (sessionType == DBConstant.SESSION_TYPE_GROUP) {
                     showProgressBar();
                     imService.getGroupManager().reqAddGroupMember(peerEntity.getPeerId(),checkListSet);

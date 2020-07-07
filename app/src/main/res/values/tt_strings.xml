@@ -9,7 +9,7 @@
     <string name="send_message">Send</string>
     <string name="title_activity_pick_photo">PickPhotoActivity</string>
     <string name="preview">预览</string>
-    <string name="confirm">确定</string>
+    <string name="confirm">Done</string>
     <string name="thumb_remove">清理图片缓存</string>
     <string name="notify_setting">通知设置</string>
     <string name="thumb_remove_finish">清理完成</string>
@@ -28,7 +28,7 @@
     <string name="chat_failed_search">未搜索到匹配的结果</string>
     <string name="save">保存</string>
     <string name="chat_detail">聊天详情</string>
-    <string name="choose_contact">选择联系人</string>
+    <string name="choose_contact">Choose Contact</string>
     <string name="switch_login_server">切换登陆服务器</string>
     <string name="switch_login_server_title">输入登陆服务器地址</string>
 

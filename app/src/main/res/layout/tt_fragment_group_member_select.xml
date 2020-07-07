@@ -20,7 +20,7 @@
             android:drawableLeft="@mipmap/ic_sousuo"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
-            android:hint="@string/menu_search"
+            android:hint="@string/tuikit_search"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:singleLine="true"

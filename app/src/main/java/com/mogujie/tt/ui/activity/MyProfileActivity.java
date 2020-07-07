@@ -171,7 +171,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
         mModifyUserIconView.getImageView().setImageUrl(loginContact.getAvatar());
 
 
-        mModifyNickNameView.setContent(loginContact.getMainName());
+        mModifyNickNameView.setContent(loginContact.getMainName1());
         if (loginContact.getGender() == 1) {
             mModifyGenderView.setContent(mGenderList.get(0));
         } else {

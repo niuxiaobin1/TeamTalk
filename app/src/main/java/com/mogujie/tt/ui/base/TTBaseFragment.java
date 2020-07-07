@@ -92,7 +92,7 @@ public abstract class TTBaseFragment extends Fragment {
         if (title == null) {
             return;
         }
-        if (title.length() > 12) {
+        if (title.length() > 20) {
             title = title.substring(0, 11) + "...";
         }
         // 设置字体为加粗

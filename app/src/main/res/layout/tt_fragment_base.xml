@@ -27,6 +27,7 @@
                 android:src="@drawable/tt_back_btn" />
 
             <TextView
+                android:text=""
                 android:id="@+id/base_fragment_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

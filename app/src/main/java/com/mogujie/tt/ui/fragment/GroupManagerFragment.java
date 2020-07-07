@@ -33,6 +33,7 @@ import com.mogujie.tt.ui.activity.SelectionActivity;
 import com.mogujie.tt.ui.adapter.GroupManagerAdapter;
 import com.mogujie.tt.ui.base.TTBaseFragment;
 import com.mogujie.tt.ui.helper.CheckboxConfigHelper;
+import com.mogujie.tt.ui.widget.TUIKitDialog;
 import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -165,19 +166,19 @@ public class GroupManagerFragment extends TTBaseFragment {
                                     @Override
                                     public void onSuccess(Object response) {
 
-                                            try {
-                                                IMGroup.IMGroupPublishBoardRsp imGroupPublishBoardRsp = IMGroup.IMGroupPublishBoardRsp.parseFrom((CodedInputStream) response);
-                                                getActivity().runOnUiThread(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        groupNotice.setText(text.toString());
+                                        try {
+                                            IMGroup.IMGroupPublishBoardRsp imGroupPublishBoardRsp = IMGroup.IMGroupPublishBoardRsp.parseFrom((CodedInputStream) response);
+                                            getActivity().runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    groupNotice.setText(text.toString());
 
-                                                    }
-                                                });
+                                                }
+                                            });
 
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
 
                                     }
 
@@ -379,8 +380,7 @@ public class GroupManagerFragment extends TTBaseFragment {
                 try {
 
                     IMGroup.IMGroupListBoardRsp imGroupListBoardRsp = IMGroup.IMGroupListBoardRsp.parseFrom((CodedInputStream) response);
-                    Log.e("nxb",imGroupListBoardRsp.getInfoListCount()+"");
-                    if (imGroupListBoardRsp.getInfoListCount()>0){
+                    if (imGroupListBoardRsp.getInfoListCount() > 0) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -434,13 +434,120 @@ public class GroupManagerFragment extends TTBaseFragment {
         deleteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (peerEntity.getType() == DBConstant.SESSION_TYPE_GROUP) {
+                    GroupEntity groupEntity = (GroupEntity) peerEntity;
+                    if (imService.getLoginManager().getLoginId() == groupEntity.getCreatorId()) {
+                        //解散
+                        new TUIKitDialog(getContext())
+                                .builder()
+                                .setCancelable(true)
+                                .setCancelOutside(true)
+                                .setTitle(getContext().getString(R.string.tuikit_confirmDisbandGroup))
+                                .setDialogWidth(0.75f)
+                                .setPositiveButton(getContext().getString(R.string.sure), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        disCoverGroup();
+                                    }
+                                })
+                                .setNegativeButton(getContext().getString(R.string.cancel), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
+                                    }
+                                })
+                                .show();
+
+                    } else {
+                        new TUIKitDialog(getContext())
+                                .builder()
+                                .setCancelable(true)
+                                .setCancelOutside(true)
+                                .setTitle(getContext().getString(R.string.tuikit_confirmDisbandGroup))
+                                .setDialogWidth(0.75f)
+                                .setPositiveButton(getContext().getString(R.string.sure), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        deleteAndQuiteGroup();
+                                    }
+                                })
+                                .setNegativeButton(getContext().getString(R.string.cancel), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                    }
+                                })
+                                .show();
+
+                    }
+                }
             }
         });
+    }
 
 
+    private void deleteAndQuiteGroup() {
+        imService.getGroupManager().reqIMGroupOut(imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMGroup.IMGroupOutRsp imGroupOutRsp = IMGroup.IMGroupOutRsp.parseFrom((CodedInputStream) response);
+                    if (0 == imGroupOutRsp.getResultCode()) {
+                        imService.getGroupManager().removeGroup(peerEntity.getPeerId());
+                        EventBus.getDefault().post(new GroupEvent(GroupEvent.Event.GROUP_INFO_UPDATED));
+                        getActivity().finish();
+                    }
 
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("group out fail");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("group out timeout");
+            }
+        });
+    }
+
+    private void disCoverGroup() {
+        imService.getGroupManager().reqIMGroupRemove(imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMGroup.IMGroupRemoveRsp imGroupRemoveRsp = IMGroup.IMGroupRemoveRsp.parseFrom((CodedInputStream) response);
+                    if (0 == imGroupRemoveRsp.getResultCode()) {
+                        imService.getGroupManager().removeGroup(peerEntity.getPeerId());
+                        EventBus.getDefault().post(new GroupEvent(GroupEvent.Event.GROUP_INFO_UPDATED));
+                        getActivity().finish();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("group discover fail");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("group discover timeout");
+            }
+        });
     }
 
     private void initAdapter() {

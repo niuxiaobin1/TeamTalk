@@ -1444,6 +1444,30 @@ public final class IMBaseDefine {
      * <code>CID_GROUP_GET_USER_INFO_RESPONSE = 1047;</code>
      */
     CID_GROUP_GET_USER_INFO_RESPONSE(22, 1047),
+    /**
+     * <code>CID_GROUP_REMOVE_REQUEST = 1048;</code>
+     *
+     * <pre>
+     *删除群
+     * </pre>
+     */
+    CID_GROUP_REMOVE_REQUEST(23, 1048),
+    /**
+     * <code>CID_GROUP_REMOVE_RESPONSE = 1049;</code>
+     */
+    CID_GROUP_REMOVE_RESPONSE(24, 1049),
+    /**
+     * <code>CID_GROUP_OUT_REQUEST = 1056;</code>
+     *
+     * <pre>
+     *退出群
+     * </pre>
+     */
+    CID_GROUP_OUT_REQUEST(25, 1056),
+    /**
+     * <code>CID_GROUP_OUT_RESPONSE = 1057;</code>
+     */
+    CID_GROUP_OUT_RESPONSE(26, 1057),
     ;
 
     /**
@@ -1562,6 +1586,30 @@ public final class IMBaseDefine {
      * <code>CID_GROUP_GET_USER_INFO_RESPONSE = 1047;</code>
      */
     public static final int CID_GROUP_GET_USER_INFO_RESPONSE_VALUE = 1047;
+    /**
+     * <code>CID_GROUP_REMOVE_REQUEST = 1048;</code>
+     *
+     * <pre>
+     *删除群
+     * </pre>
+     */
+    public static final int CID_GROUP_REMOVE_REQUEST_VALUE = 1048;
+    /**
+     * <code>CID_GROUP_REMOVE_RESPONSE = 1049;</code>
+     */
+    public static final int CID_GROUP_REMOVE_RESPONSE_VALUE = 1049;
+    /**
+     * <code>CID_GROUP_OUT_REQUEST = 1056;</code>
+     *
+     * <pre>
+     *退出群
+     * </pre>
+     */
+    public static final int CID_GROUP_OUT_REQUEST_VALUE = 1056;
+    /**
+     * <code>CID_GROUP_OUT_RESPONSE = 1057;</code>
+     */
+    public static final int CID_GROUP_OUT_RESPONSE_VALUE = 1057;
 
 
     public final int getNumber() { return value; }
@@ -1591,6 +1639,10 @@ public final class IMBaseDefine {
         case 1045: return CID_GROUP_CHANGE_NICK_RESPONSE;
         case 1046: return CID_GROUP_GET_USER_INFO_REQUEST;
         case 1047: return CID_GROUP_GET_USER_INFO_RESPONSE;
+        case 1048: return CID_GROUP_REMOVE_REQUEST;
+        case 1049: return CID_GROUP_REMOVE_RESPONSE;
+        case 1056: return CID_GROUP_OUT_REQUEST;
+        case 1057: return CID_GROUP_OUT_RESPONSE;
         default: return null;
       }
     }

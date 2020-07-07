@@ -330,7 +330,10 @@ public class MessageActivity extends TTBaseActivity
         if (imService != null) {
             // 处理session的未读信息
             handleUnreadMsgs();
-            if (peerEntity.getType() != DBConstant.SESSION_TYPE_SINGLE) {
+            if (peerEntity.getType() == DBConstant.SESSION_TYPE_GROUP) {
+                if (imService.getGroupManager().findGroup(peerEntity.getPeerId()) == null) {
+                    finish();
+                }
                 return;
             }
             if (imService.getContactManager().findContact(peerEntity.getPeerId()) == null) {

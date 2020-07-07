@@ -337,6 +337,45 @@ public class IMGroupManager extends IMManager {
     }
 
     /**
+     * 解散群
+     */
+    public void reqIMGroupRemove(int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqIMGroupRemove");
+        if(group_id==0 || group_id==0){
+            logger.e("group#reqIMGroupRemove# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupRemoveReq  imGroupRemoveReq = IMGroup.IMGroupRemoveReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_REMOVE_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupRemoveReq,sid,cid,packetlistener);
+    }
+
+    /**
+     * 退出群
+     */
+    public void reqIMGroupOut(int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqIMGroupOut");
+        if(group_id==0 || group_id==0){
+            logger.e("group#reqIMGroupOut# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupOutReq  imGroupOutReq = IMGroup.IMGroupOutReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_OUT_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupOutReq,sid,cid,packetlistener);
+    }
+
+
+    /**
      * 修改群名
      */
     public void reqGroupChangeGroupName(String group_name,int user_id,int group_id,Packetlistener packetlistener){
@@ -635,6 +674,13 @@ public class IMGroupManager extends IMManager {
         entity.setMainName(groupName);
         dbInterface.insertOrUpdateGroup(entity);
     }
+
+    public void removeGroup(int groupId){
+        GroupEntity entity = groupMap.get(groupId);
+        groupMap.remove(groupId);
+        dbInterface.deleteGroup(entity);
+    }
+
 
     public List<GroupEntity>  getSearchAllGroupList(String key){
         List<GroupEntity> searchList = new ArrayList<>();

@@ -880,7 +880,7 @@ public class MessageActivity extends TTBaseActivity
                 }
                 recordAudioBtn.setBackgroundResource(R.drawable.message_text_bg);
                 recordAudioBtn.setText(MessageActivity.this.getResources().getString(
-                        R.string.tuikit_clickToTalk));
+                        R.string.tip_for_voice_forward));
                 if (audioRecorderInstance.getRecordTime() >= 0.5) {
                     if (audioRecorderInstance.getRecordTime() < SysConstant.MAX_SOUND_RECORD_TIME) {
                         Message msg = uiHandler.obtainMessage();

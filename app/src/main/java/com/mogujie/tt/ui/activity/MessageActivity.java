@@ -5,6 +5,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -268,7 +269,7 @@ public class MessageActivity extends TTBaseActivity
         ImageMessage.clearImageMessageList();
         loginUser = imService.getLoginManager().getLoginInfo();
         peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
-        if (peerEntity==null){
+        if (peerEntity == null) {
             ToastUtil.toastShortMessage("好友不存在....");
             finish();
             return;
@@ -329,10 +330,10 @@ public class MessageActivity extends TTBaseActivity
         if (imService != null) {
             // 处理session的未读信息
             handleUnreadMsgs();
-            if (peerEntity.getType()!=DBConstant.SESSION_TYPE_SINGLE){
+            if (peerEntity.getType() != DBConstant.SESSION_TYPE_SINGLE) {
                 return;
             }
-            if (imService.getContactManager().findContact(peerEntity.getPeerId())==null){
+            if (imService.getContactManager().findContact(peerEntity.getPeerId()) == null) {
                 ToastUtil.toastShortMessage("好友已删除");
                 finish();
             }
@@ -775,7 +776,34 @@ public class MessageActivity extends TTBaseActivity
         addEmoBtn.setOnClickListener(this);
         keyboardInputImg.setOnClickListener(this);
         audioInputImg.setOnClickListener(this);
-        recordAudioBtn.setOnTouchListener(this);
+//        recordAudioBtn.setOnTouchListener(this);
+        recordAudioBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollToBottomListItem();
+                if (AudioPlayerHandler.getInstance().isPlaying())
+                    AudioPlayerHandler.getInstance().stopPlayer();
+                recordAudioBtn.setBackgroundResource(R.drawable.message_push_text_bg);
+                recordAudioBtn.setText(MessageActivity.this.getResources().getString(
+                        R.string.tuikit_clickToEnd));
+
+                soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_01);
+                soundVolumeImg.setVisibility(View.VISIBLE);
+                soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_default_bk);
+                soundVolumeDialog.show();
+                audioSavePath = CommonUtil
+                        .getAudioSavePath(IMLoginManager.instance().getLoginId());
+
+                // 这个callback很蛋疼，发送消息从MotionEvent.ACTION_UP 判断
+                audioRecorderInstance = new AudioRecordHandler(audioSavePath);
+
+                audioRecorderThread = new Thread(audioRecorderInstance);
+                audioRecorderInstance.setRecording(true);
+                logger.d("message_activity#audio#audio record thread starts");
+                audioRecorderThread.start();
+            }
+        });
+
         sendBtn.setOnClickListener(this);
         initSoundVolumeDlg();
 
@@ -839,6 +867,44 @@ public class MessageActivity extends TTBaseActivity
         soundVolumeDialog.setCanceledOnTouchOutside(true);
         soundVolumeImg = (ImageView) soundVolumeDialog.findViewById(R.id.sound_volume_img);
         soundVolumeLayout = (LinearLayout) soundVolumeDialog.findViewById(R.id.sound_volume_bk);
+
+
+        soundVolumeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (audioRecorderInstance.isRecording()) {
+                    audioRecorderInstance.setRecording(false);
+                }
+                if (soundVolumeDialog.isShowing()) {
+                    soundVolumeDialog.dismiss();
+                }
+                recordAudioBtn.setBackgroundResource(R.drawable.message_text_bg);
+                recordAudioBtn.setText(MessageActivity.this.getResources().getString(
+                        R.string.tuikit_clickToTalk));
+                if (audioRecorderInstance.getRecordTime() >= 0.5) {
+                    if (audioRecorderInstance.getRecordTime() < SysConstant.MAX_SOUND_RECORD_TIME) {
+                        Message msg = uiHandler.obtainMessage();
+                        msg.what = HandlerConstant.HANDLER_RECORD_FINISHED;
+                        msg.obj = audioRecorderInstance.getRecordTime();
+                        uiHandler.sendMessage(msg);
+                    }
+                } else {
+                    soundVolumeImg.setVisibility(View.GONE);
+                    soundVolumeLayout
+                            .setBackgroundResource(R.drawable.tt_sound_volume_short_tip_bk);
+                    soundVolumeDialog.show();
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        public void run() {
+                            if (soundVolumeDialog.isShowing())
+                                soundVolumeDialog.dismiss();
+                            this.cancel();
+                        }
+                    }, 700);
+                }
+
+            }
+        });
     }
 
     /**

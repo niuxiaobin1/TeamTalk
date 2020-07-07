@@ -7,6 +7,8 @@ import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.SessionEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.imservice.manager.IMContactManager;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
+import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.utils.pinyin.PinYin;
 
 import java.util.ArrayList;
@@ -17,7 +19,9 @@ import java.util.List;
  * @email : yingmu@mogujie.com.
  */
 public class RecentInfo {
-    /**sessionEntity*/
+    /**
+     * sessionEntity
+     */
     private String sessionKey;
     private int peerId;
     private int sessionType;
@@ -26,21 +30,31 @@ public class RecentInfo {
     private String latestMsgData;
     private int updateTime;
 
-    /**unreadEntity*/
+    /**
+     * unreadEntity
+     */
     private int unReadCnt;
 
-    /**group/userEntity*/
+    /**
+     * group/userEntity
+     */
     private String name;
     private List<String> avatar;
 
-    /**是否置顶*/
+    /**
+     * 是否置顶
+     */
     private boolean isTop = false;
-    /**是否屏蔽信息*/
+    /**
+     * 是否屏蔽信息
+     */
     private boolean isForbidden = false;
 
 
-    public RecentInfo(){}
-    public RecentInfo(SessionEntity sessionEntity,UserEntity entity,UnreadEntity unreadEntity){
+    public RecentInfo() {
+    }
+
+    public RecentInfo(SessionEntity sessionEntity, UserEntity entity, UnreadEntity unreadEntity) {
         sessionKey = sessionEntity.getSessionKey();
         peerId = sessionEntity.getPeerId();
         sessionType = DBConstant.SESSION_TYPE_SINGLE;
@@ -49,22 +63,22 @@ public class RecentInfo {
         latestMsgData = sessionEntity.getLatestMsgData();
         updateTime = sessionEntity.getUpdated();
 
-        if(unreadEntity !=null)
-        unReadCnt = unreadEntity.getUnReadCnt();
+        if (unreadEntity != null)
+            unReadCnt = unreadEntity.getUnReadCnt();
 
-        if(entity != null){
+        if (entity != null) {
             name = entity.getMainName();
             ArrayList<String> avatarList = new ArrayList<>();
             avatarList.add(entity.getAvatar());
             avatar = avatarList;
-        }else{
+        } else {
             name = sessionEntity.getSessionKey();
         }
     }
 
 
-    public RecentInfo(SessionEntity sessionEntity,GroupEntity groupEntity,UnreadEntity unreadEntity){
-        sessionKey =  sessionEntity.getSessionKey();
+    public RecentInfo(SessionEntity sessionEntity, GroupEntity groupEntity, UnreadEntity unreadEntity) {
+        sessionKey = sessionEntity.getSessionKey();
         peerId = sessionEntity.getPeerId();
         sessionType = DBConstant.SESSION_TYPE_GROUP;
         latestMsgType = sessionEntity.getLatestMsgType();
@@ -72,28 +86,32 @@ public class RecentInfo {
         latestMsgData = sessionEntity.getLatestMsgData();
         updateTime = sessionEntity.getUpdated();
 
-        if(unreadEntity !=null)
-        unReadCnt = unreadEntity.getUnReadCnt();
+        if (unreadEntity != null)
+            unReadCnt = unreadEntity.getUnReadCnt();
 
-        if(groupEntity !=null) {
-            ArrayList<String>  avatarList = new ArrayList<>();
+        if (groupEntity != null) {
+            ArrayList<String> avatarList = new ArrayList<>();
             name = groupEntity.getMainName();
 
             // 免打扰的设定
             int status = groupEntity.getStatus();
-            if (status == DBConstant.GROUP_STATUS_SHIELD){
+            if (status == DBConstant.GROUP_STATUS_SHIELD) {
                 isForbidden = true;
             }
 
-            ArrayList<Integer> list =  new ArrayList<>();
+            ArrayList<Integer> list = new ArrayList<>();
             list.addAll(groupEntity.getlistGroupMemberIds());
 
-            for(Integer userId:list){
+            for (Integer userId : list) {
                 UserEntity entity = IMContactManager.instance().findContact(userId);
-                if(entity!=null){
+
+                if (userId == IMLoginManager.instance().getLoginId()) {
+                    entity = IMLoginManager.instance().getLoginInfo();
+                }
+                if (entity != null) {
                     avatarList.add(entity.getAvatar());
                 }
-                if(avatarList.size()>=4){
+                if (avatarList.size() >= 4) {
                     break;
                 }
             }
@@ -185,8 +203,8 @@ public class RecentInfo {
     public boolean isTop() {
         return isTop;
     }
-    public boolean isForbidden()
-    {
+
+    public boolean isForbidden() {
         return isForbidden;
     }
 
@@ -194,8 +212,7 @@ public class RecentInfo {
         this.isTop = isTop;
     }
 
-    public void setForbidden(boolean isForbidden)
-    {
+    public void setForbidden(boolean isForbidden) {
         this.isForbidden = isForbidden;
     }
 }

@@ -54,7 +54,7 @@
 
 
             <TextView
-                android:text="11111111111"
+                android:text=""
                 android:id="@+id/group_manager_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,6 +90,8 @@
             android:visibility="gone">
 
             <TextView
+                android:minWidth="50dp"
+                android:maxLines="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -98,6 +100,17 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
+            <TextView
+                android:maxLines="1"
+                android:text=""
+                android:id="@+id/group_notice_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="3dip"
+                android:textColor="#80989898"
+                android:textSize="15sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -219,6 +232,7 @@
 
 
             <Switch
+                android:id="@+id/pin_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -242,6 +256,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/deleteTv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

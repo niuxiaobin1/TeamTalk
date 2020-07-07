@@ -276,9 +276,85 @@ public class IMGroupManager extends IMManager {
         imSocketManager.sendRequest(imGroupChangeGroupNickReq,sid,cid,packetlistener);
     }
 
+    /**
+     * 更改群公告
+     */
+    public void reqGroupPublishBoardReq(String title,int user_id,int group_id,Packetlistener packetlistener){
 
+        logger.i("group#reqGroupPublishBoardReq");
+        if(group_id==0 || TextUtils.isEmpty(title)){
+            logger.e("group#reqGroupPublishBoardReq# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupPublishBoardReq  imGroupPublishBoardReq = IMGroup.IMGroupPublishBoardReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .setTitle(title)
+                .setInfo(title)
+                .build();
 
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_PUBLISH_BOARD_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupPublishBoardReq,sid,cid,packetlistener);
+    }
 
+    /**
+     * 获取群成员列表，带昵称
+     */
+    public void reqIMGetGroupUserList(int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqIMGetGroupUserList");
+        if(group_id==0 || group_id==0){
+            logger.e("group#reqIMGetGroupUserList# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGetGroupUserListReq  imGetGroupUserListReq = IMGroup.IMGetGroupUserListReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_GET_USER_INFO_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGetGroupUserListReq,sid,cid,packetlistener);
+    }
+
+    /**
+     * 获取群公告
+     */
+    public void reqIMGroupListBoard(int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqIMGroupListBoard");
+        if(group_id==0 || group_id==0){
+            logger.e("group#reqIMGroupListBoard# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupListBoardReq  imGroupListBoardReq = IMGroup.IMGroupListBoardReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_LIST_BOARD_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupListBoardReq,sid,cid,packetlistener);
+    }
+
+    /**
+     * 修改群名
+     */
+    public void reqGroupChangeGroupName(String group_name,int user_id,int group_id,Packetlistener packetlistener){
+        logger.i("group#reqGroupChangeGroupName");
+        if(group_id==0 || group_id==0||TextUtils.isEmpty(group_name)){
+            logger.e("group#reqGroupChangeGroupName# please check your params,cause by empty/null");
+            return ;
+        }
+        IMGroup.IMGroupChangeGroupNameReq  imGroupChangeGroupNameReq = IMGroup.IMGroupChangeGroupNameReq.newBuilder()
+                .setUserId(user_id)
+                .setGroupId(group_id)
+                .setGroupName(group_name)
+                .build();
+
+        int sid = IMBaseDefine.ServiceID.SID_GROUP_VALUE;
+        int cid = IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_GROUP_NAME_REQUEST_VALUE;
+        imSocketManager.sendRequest(imGroupChangeGroupNameReq,sid,cid,packetlistener);
+    }
 
 
     /**
@@ -553,6 +629,12 @@ public class IMGroupManager extends IMManager {
         }
         return null;
 	}
+
+	public void updateGroupName(int groupId,String groupName){
+        GroupEntity entity = groupMap.get(groupId);
+        entity.setMainName(groupName);
+        dbInterface.insertOrUpdateGroup(entity);
+    }
 
     public List<GroupEntity>  getSearchAllGroupList(String key){
         List<GroupEntity> searchList = new ArrayList<>();

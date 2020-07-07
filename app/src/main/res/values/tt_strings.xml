@@ -317,14 +317,14 @@
     <string name="app_coming_soon">Coming Soon...</string>
     <string name="app_tap_toview_code">Tap to view payment code</string>
     <string name="app_balance">Balance</string>
-    <string name="app_addCard">Add a Card</string>
-    <string name="app_addCardTitle">Add Card</string>
+    <string name="app_addCard">Add Account</string>
+    <string name="app_addCardTitle">Add Account</string>
     <string name="app_cards">Cards</string>
     <string name="app_default_method">Default payment method</string>
     <string name="app_payment_method">Payment Method</string>
     <string name="app_transactions">Transactions</string>
     <string name="app_select_default_method">Select Default payment method</string>
-    <string name="app_select_card">Select Card</string>
+    <string name="app_select_card">Select Account</string>
 
     <string name="app_emailFormat_error">Email Format Error</string>
     <string name="app_emailFormat_null">Email can not be null</string>
@@ -336,8 +336,8 @@
     <string name="result_alias">Alias:</string>
     <string name="result_bank_name">Bank Name</string>
     <string name="result_bank_no">Bank Code</string>
-    <string name="result_card_holder">Name</string>
-    <string name="result_card_no">Number</string>
+    <string name="result_card_holder">Account Name</string>
+    <string name="result_card_no">Account Number</string>
     <string name="result_card_hint">Select Bank</string>
     <string name="result_card_hint_required">Select Bank(Required)</string>
     <string name="add_card_confirm">Confirm</string>
@@ -359,7 +359,7 @@
     <string name="group_qrcode">Group QRCode</string>
     <string name="pay_setting">Pay Setting</string>
     <string name="pay_set_psw">Set PIN</string>
-    <string name="card_manager">Manage Card</string>
+    <string name="card_manager">Manage Account</string>
     <string name="pay_psw">Pin</string>
     <string name="pay_psw_hint">Input PIN of 6 numbers</string>
     <string name="pay_psw_confirm">Confirm Pin</string>
@@ -392,4 +392,5 @@
     <string name="permission_read_storage_denied">需要读取存储信息权限</string>
     <string name="permission_read_storage_never_ask">你需要在设置中开启读取存储信息权限</string>
     <string name="amount0623">消费金额</string>
+
 </resources>

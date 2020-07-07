@@ -1,48 +1,48 @@
 package com.mogujie.tt.ui.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.protobuf.CodedInputStream;
-import com.mogujie.tt.DB.entity.PeerEntity;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.GroupEntity;
+import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.ConfigurationSp;
 import com.mogujie.tt.R;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.TUIKitConstants;
 import com.mogujie.tt.imservice.callback.Packetlistener;
-import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
-import com.mogujie.tt.protobuf.IMBuddy;
-import com.mogujie.tt.ui.activity.SelectionActivity;
-import com.mogujie.tt.ui.adapter.GroupManagerAdapter;
-import com.mogujie.tt.ui.helper.CheckboxConfigHelper;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.service.IMService;
-import com.mogujie.tt.ui.base.TTBaseFragment;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.IMGroup;
+import com.mogujie.tt.ui.activity.SelectionActivity;
+import com.mogujie.tt.ui.adapter.GroupManagerAdapter;
+import com.mogujie.tt.ui.base.TTBaseFragment;
+import com.mogujie.tt.ui.helper.CheckboxConfigHelper;
 import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-
-import static com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent.UpdateEvent.USER_UPDATE_INFO_OK;
 
 
 /**
@@ -59,6 +59,8 @@ public class GroupManagerFragment extends TTBaseFragment {
     private GridView gridView;
     private GroupManagerAdapter adapter;
 
+    private Switch pin_switch;
+    private TextView deleteTv;
 
     /**
      * 详情的配置  勿扰以及指定聊天
@@ -73,7 +75,7 @@ public class GroupManagerFragment extends TTBaseFragment {
     private IMService imService;
     private String curSessionKey;
     private PeerEntity peerEntity;
-
+    private String nickName = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,30 +94,113 @@ public class GroupManagerFragment extends TTBaseFragment {
         curView = inflater.inflate(R.layout.tt_fragment_group_manage, topContentView);
         noDisturbCheckbox = (CheckBox) curView.findViewById(R.id.NotificationNoDisturbCheckbox);
         topSessionCheckBox = (CheckBox) curView.findViewById(R.id.NotificationTopMessageCheckbox);
-
+        pin_switch = curView.findViewById(R.id.pin_switch);
+        deleteTv = curView.findViewById(R.id.deleteTv);
         curView.findViewById(R.id.group_manager_name).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                intent.putExtra("title", "Group Name");
-                intent.putExtra("hint", "Enter Group Name");
-                startActivity(intent);
+                TextView groupName = curView.findViewById(R.id.group_manager_title);
+                Bundle bundle = new Bundle();
+                bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.modify_group_name));
+                bundle.putString(TUIKitConstants.Selection.INIT_HINT, getResources().getString(R.string.modify_group_name_hint));
+                bundle.putString(TUIKitConstants.Selection.INIT_CONTENT, groupName.getText().toString());
+                SelectionActivity.startTextSelection(getActivity(), bundle, new SelectionActivity.OnResultReturnListener() {
+                    @Override
+                    public void onReturn(Object text) {
+                        // update remake
+                        if (imService != null) {
+                            imService.getGroupManager().reqGroupChangeGroupName(text.toString(),
+                                    imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+                                        @Override
+                                        public void onSuccess(Object response) {
+                                            try {
+                                                IMGroup.IMGroupChangeGroupNameRsp imGroupChangeGroupNameRsp = IMGroup.IMGroupChangeGroupNameRsp.parseFrom((CodedInputStream) response);
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        groupName.setText(imGroupChangeGroupNameRsp.getGroupName());
+                                                        imService.getGroupManager().updateGroupName(peerEntity.getPeerId(), imGroupChangeGroupNameRsp.getGroupName());
+                                                        EventBus.getDefault().post(new GroupEvent(GroupEvent.Event.GROUP_INFO_UPDATED));
+
+                                                    }
+                                                });
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onFaild() {
+                                            ToastUtil.toastShortMessage("group reName fail");
+                                        }
+
+                                        @Override
+                                        public void onTimeout() {
+                                            ToastUtil.toastShortMessage("group reName timeout");
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+
             }
         });
         curView.findViewById(R.id.lin_group_notic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-                intent.putExtra("title", "Group Notic");
-                startActivity(intent);
+                TextView groupNotice = curView.findViewById(R.id.group_notice_tv);
+                Bundle bundle = new Bundle();
+                bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.modify_group_notice));
+                bundle.putString(TUIKitConstants.Selection.INIT_HINT, getResources().getString(R.string.modify_group_notice_hint));
+                bundle.putString(TUIKitConstants.Selection.INIT_CONTENT, groupNotice.getText().toString());
+                SelectionActivity.startTextSelection(getActivity(), bundle, text -> {
+                    // update remake
+                    if (imService != null) {
+                        imService.getGroupManager().reqGroupPublishBoardReq(text.toString(),
+                                imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+                                    @Override
+                                    public void onSuccess(Object response) {
+
+                                            try {
+                                                IMGroup.IMGroupPublishBoardRsp imGroupPublishBoardRsp = IMGroup.IMGroupPublishBoardRsp.parseFrom((CodedInputStream) response);
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        groupNotice.setText(text.toString());
+
+                                                    }
+                                                });
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                    }
+
+                                    @Override
+                                    public void onFaild() {
+                                        ToastUtil.toastShortMessage("group publish Notice fail");
+                                    }
+
+                                    @Override
+                                    public void onTimeout() {
+                                        ToastUtil.toastShortMessage("group publish Notice timeout");
+                                    }
+                                });
+
+
+                    }
+                });
             }
         });
+
         curView.findViewById(R.id.lin_approva).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), SelectionActivity.class);
-//                intent.putExtra("title","Approva");
-//                startActivity(intent);
             }
         });
         curView.findViewById(R.id.lin_my_alia).setOnClickListener(new View.OnClickListener() {
@@ -248,6 +333,114 @@ public class GroupManagerFragment extends TTBaseFragment {
         }
         // 初始化配置checkBox
         initCheckbox();
+
+        imService.getGroupManager().reqIMGetGroupUserList(imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMGroup.IMGetGroupUserListRsp imChangeFriendRemarkRsp = IMGroup.IMGetGroupUserListRsp.parseFrom((CodedInputStream) response);
+                    for (int i = 0; i < imChangeFriendRemarkRsp.getUserListCount(); i++) {
+                        if (imChangeFriendRemarkRsp.getUserListList().get(i).getUserId() == imService.getLoginManager().getLoginId()) {
+                            nickName = imChangeFriendRemarkRsp.getUserListList().get(i).getUserDomain();
+                            break;
+                        }
+                    }
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((TextView) curView.findViewById(R.id.group_alisa_tv)).setText(nickName);
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("group getUserInfo fail");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("group getUserInfo timeout");
+            }
+        });
+
+
+        imService.getGroupManager().reqIMGroupListBoard(imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMGroup.IMGroupListBoardRsp imGroupListBoardRsp = IMGroup.IMGroupListBoardRsp.parseFrom((CodedInputStream) response);
+                    Log.e("nxb",imGroupListBoardRsp.getInfoListCount()+"");
+                    if (imGroupListBoardRsp.getInfoListCount()>0){
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((TextView) curView.findViewById(R.id.group_notice_tv)).setText(imGroupListBoardRsp.
+                                        getInfoListList().get(0).getInfo());
+                            }
+                        });
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("group noticeList fail");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("group noticeList timeout");
+            }
+        });
+
+
+        //置顶操作
+        boolean shouldCheck = false;
+        HashSet<String> topList = imService.getConfigSp().getSessionTopList();
+        if (topList != null && topList.size() > 0) {
+            shouldCheck = topList.contains(peerEntity.getSessionKey());
+        }
+        pin_switch.setChecked(shouldCheck);
+
+        pin_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                imService.getConfigSp().setSessionTop(peerEntity.getSessionKey(), pin_switch.isChecked());
+            }
+        });
+        if (peerEntity.getType() == DBConstant.SESSION_TYPE_GROUP) {
+            GroupEntity groupEntity = (GroupEntity) peerEntity;
+            if (imService.getLoginManager().getLoginId() == groupEntity.getCreatorId()) {
+                curView.findViewById(R.id.lin_group_notic).setVisibility(View.VISIBLE);
+                deleteTv.setText(R.string.dissolve);
+            }
+        }
+
+        deleteTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+
     }
 
     private void initAdapter() {

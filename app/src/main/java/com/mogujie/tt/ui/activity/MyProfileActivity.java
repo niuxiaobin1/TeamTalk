@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.animators.AnimationType;
 import com.luck.picture.lib.config.PictureConfig;
@@ -23,9 +25,17 @@ import com.luck.picture.lib.style.PictureCropParameterStyle;
 import com.luck.picture.lib.style.PictureParameterStyle;
 import com.luck.picture.lib.style.PictureWindowAnimationStyle;
 import com.luck.picture.lib.tools.SdkVersionUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.OkgoCallBack.NigeriaCallBack;
 import com.mogujie.tt.R;
+import com.mogujie.tt.bean.UserInfo;
+import com.mogujie.tt.config.Constants;
+import com.mogujie.tt.config.RequestCode;
+import com.mogujie.tt.config.ServerHostConfig;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.config.TUIKitConstants;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
@@ -41,6 +51,7 @@ import com.mogujie.tt.ui.widget.QrcodeWindow;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.CommonUtils;
 import com.mogujie.tt.utils.GlideEngine;
+import com.mogujie.tt.utils.SPUtils;
 import com.mogujie.tt.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -48,6 +59,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+
+import static com.mogujie.tt.app.IMApplication.INSTITUTION_NUMBER;
 
 public class MyProfileActivity extends TTBaseActivity implements View.OnClickListener {
 
@@ -276,6 +289,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 public void onReturn(Object text) {
                     mModifyNickNameView.setContent(text.toString());
                     updateUserInfo();
+                    updatePayUserInfo(null);
                 }
             });
         } else if (v.getId() == R.id.modify_phone) {
@@ -289,6 +303,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 public void onReturn(Object text) {
                     mModifyPhoneView.setContent(text.toString());
                     updateUserInfo();
+                    updatePayUserInfo(null);
                 }
             });
         } else if (v.getId() == R.id.modify_gender) {
@@ -302,6 +317,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                     mModifyGenderView.setContent(mGenderList.get((Integer) text));
                     mGenderIndex = (Integer) text;
                     updateUserInfo();
+                    updatePayUserInfo(null);
                 }
             });
         } else if (v.getId() == R.id.modify_qrcode) {
@@ -345,6 +361,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                     }
                     if (!TextUtils.isEmpty(iconPath)) {
                         updateUserImage(iconPath);
+                        updatePayUserInfo(iconPath);
                     }
                     break;
             }
@@ -371,7 +388,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
         if (imService == null) {
             return;
         }
-        imService.getContactManager().reqChangeUsersInfo(nickName,phone);
+        imService.getContactManager().reqChangeUsersInfo(nickName, phone);
 
     }
 
@@ -542,4 +559,29 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
         }
         super.finish();
     }
+
+
+    private void updatePayUserInfo(String path) {
+        String user_openid = (String) SPUtils.get(getApplicationContext(), Constants.N_OPENID, "");
+        HttpParams param = new HttpParams();
+        param.put("institution_number", INSTITUTION_NUMBER);
+        param.put("user_openid", user_openid);
+        param.put("user_nickname", mModifyNickNameView.getContent());
+        param.put("user_gender", mModifyGenderView.getContent());
+        if (!TextUtils.isEmpty(path)) {
+            param.put("user_head", CommonUtils.fileToBase64(path));
+        }
+        param.put("user_phone_number", mModifyPhoneView.getContent());
+        param.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+
+        OkGo.<String>post(ServerHostConfig.CUSTOMER_USER_UPDATE).tag(this)
+                .params(param)
+                .execute(new NigeriaCallBack() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                    }
+                });
+    }
+
 }

@@ -355,8 +355,10 @@ public class ContactAdapter extends BaseAdapter implements
         int i = 0;
         for (Integer buddyId : userIds) {
             UserEntity entity = imService.getContactManager().findContact(buddyId);
+            if (buddyId==imService.getLoginManager().getLoginId()){
+                entity=imService.getLoginManager().getLoginInfo();
+            }
             if (entity == null) {
-                //logger.d("已经离职。userId:%d", buddyId);
                 continue;
             }
             avatarUrlList.add(entity.getAvatar());

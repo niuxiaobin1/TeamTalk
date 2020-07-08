@@ -90,6 +90,7 @@ import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMStackManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
 import com.mogujie.tt.ui.adapter.MessageAdapter;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.helper.AudioPlayerHandler;
@@ -108,8 +109,6 @@ import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
-
-import org.json.JSONException;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -270,10 +269,20 @@ public class MessageActivity extends TTBaseActivity
         loginUser = imService.getLoginManager().getLoginInfo();
         peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
         if (peerEntity == null) {
-            ToastUtil.toastShortMessage("好友不存在....");
+            String[] sessionInfo = EntityChangeEngine.spiltSessionKey(currentSessionKey);
+            int peerType = Integer.parseInt(sessionInfo[0]);
+            switch (peerType) {
+                case DBConstant.SESSION_TYPE_SINGLE: {
+                    ToastUtil.toastShortMessage("好友不存在....");
+                }
+                break;
+                case DBConstant.SESSION_TYPE_GROUP: {
+                    ToastUtil.toastShortMessage("您已退出该群或群组已解散....");
+                }
+                break;
+            }
             finish();
             return;
-
         }
         // 头像、历史消息加载、取消通知
         setTitleByUser();

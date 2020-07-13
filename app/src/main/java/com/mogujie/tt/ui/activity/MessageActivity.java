@@ -77,6 +77,7 @@ import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
@@ -110,6 +111,8 @@ import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -457,8 +460,13 @@ public class MessageActivity extends TTBaseActivity
                     }
                     for (int i = 0; i < docPaths.size(); i++) {
                         try {
+                            Log.e("nxb",   docPaths.get(i).getAuthority());
+                            Log.e("nxb",   docPaths.get(i).getLastPathSegment());
+
                             Log.e("nxb",
                                     ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
+                            handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
+
                         } catch (URISyntaxException e) {
                             e.printStackTrace();
                         }
@@ -478,6 +486,17 @@ public class MessageActivity extends TTBaseActivity
             pushList(imageMessage);
         }
         imService.getMessageManager().sendImages(listMsg);
+    }
+
+    private void handleFilePickData(String filePath) {
+        FileMessage fileMessage = null;
+        try {
+            fileMessage = FileMessage.buildForSend(filePath, loginUser, peerEntity);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pushList(fileMessage);
+        imService.getMessageManager().sendFile(fileMessage);
     }
 
     /**
@@ -1760,7 +1779,7 @@ public class MessageActivity extends TTBaseActivity
         String[] pdfs = {"aac"};
         FilePickerBuilder.getInstance()
                 .setMaxCount(9)
-                .setSelectedFiles(docPaths)
+                .setSelectedFiles(new ArrayList<>())
                 .setActivityTheme(R.style.AppTheme)
                 .setActivityTitle("Please select file")
                 .addFileSupport("ZIP", zips)

@@ -21,6 +21,7 @@ import com.mogujie.tt.config.SysConstant;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,12 +29,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonUtil {
-    private  static Logger logger = Logger.getLogger(CommonUtil.class);
+    private static Logger logger = Logger.getLogger(CommonUtil.class);
+
     /**
-     * @Description 判断是否是顶部activity
      * @param context
      * @param activityName
      * @return
+     * @Description 判断是否是顶部activity
      */
     public static boolean isTopActivy(Context context, String activityName) {
         ActivityManager am = (ActivityManager) context
@@ -47,8 +49,8 @@ public class CommonUtil {
     }
 
     /**
-     * @Description 判断存储卡是否存在
      * @return
+     * @Description 判断存储卡是否存在
      */
     public static boolean checkSDCard() {
         if (android.os.Environment.getExternalStorageState().equals(
@@ -60,8 +62,8 @@ public class CommonUtil {
     }
 
     /**
-     * @Description 获取sdcard可用空间的大小
      * @return
+     * @Description 获取sdcard可用空间的大小
      */
     @SuppressWarnings("deprecation")
     public static long getSDFreeSize() {
@@ -75,8 +77,8 @@ public class CommonUtil {
     }
 
     /**
-     * @Description 获取sdcard容量
      * @return
+     * @Description 获取sdcard容量
      */
     @SuppressWarnings({
             "deprecation", "unused"
@@ -130,7 +132,7 @@ public class CommonUtil {
 
     /**
      * 将byte数组转换为int数据
-     * 
+     *
      * @param b 字节数组
      * @return 生成的int数据
      */
@@ -140,9 +142,9 @@ public class CommonUtil {
     }
 
     /**
-     * @Description 判断是否是url
      * @param text
      * @return
+     * @Description 判断是否是url
      */
     public static String matchUrl(String text) {
         if (TextUtils.isEmpty(text)) {
@@ -193,6 +195,37 @@ public class CommonUtil {
     }
 
     /**
+     * 获取文件名及后缀
+     */
+    public static String getFileNameWithSuffix(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return "";
+        }
+        int start = path.lastIndexOf("/");
+        if (start != -1) {
+            return path.substring(start + 1);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * 读取文件的大小
+     */
+
+    public static long getFileSize(File f) throws IOException {
+        long l = 0;
+        if (f.exists()) {
+            FileInputStream mFIS = new FileInputStream(f);
+            l = mFIS.available();
+        } else {
+
+        }
+        return l;
+    }
+
+
+    /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
@@ -231,15 +264,15 @@ public class CommonUtil {
     /**
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
-     * 
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
     public static String getDataColumn(Context context, Uri uri,
-            String selection, String[] selectionArgs) {
+                                       String selection, String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
@@ -353,8 +386,8 @@ public class CommonUtil {
     }
 
     /**
-     * @Description 隐藏软键盘
      * @param activity
+     * @Description 隐藏软键盘
      */
     public static void hideInput(Activity activity) {
         View view = activity.getWindow().peekDecorView();
@@ -364,7 +397,6 @@ public class CommonUtil {
             inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
 
 
     public static long getmem_TOLAL() {
@@ -403,10 +435,9 @@ public class CommonUtil {
         return mTotal;
     }
 
-    public static boolean gifCheck(String url)
-    {
-       boolean isGif = !TextUtils.isEmpty(url) && url.equals(CommonUtil.matchUrl(url)) && url.toLowerCase().substring(url.length() - 4, url.length()).equals(".gif");
-       return isGif;
+    public static boolean gifCheck(String url) {
+        boolean isGif = !TextUtils.isEmpty(url) && url.equals(CommonUtil.matchUrl(url)) && url.toLowerCase().substring(url.length() - 4, url.length()).equals(".gif");
+        return isGif;
     }
 
 }

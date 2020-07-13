@@ -24,6 +24,8 @@ public interface DBConstant {
     public final int MSG_TYPE_SINGLE_TRANSFER_OPEN= 0x06;
     public final int MSG_TYPE_GROUP_TEXT = 0x11;
     public final int MSG_TYPE_GROUP_AUDIO = 0x12;
+    public final int MSG_TYPE_GROUP_FILE= 0x14;
+    public final int MSG_TYPE_SINGLE_FILE= 0x15;
 
     /**
      * msgDisplayType
@@ -42,6 +44,7 @@ public interface DBConstant {
     public final int SHOW_PAY_RED_PACKET_OPEN = 7;
     public final int SHOW_PAY_TRANSFER = 8;
     public final int SHOW_PAY_TRANSFER_OPEN = 9;
+    public final int SHOW_FILE_TYPE = 10;
 
 
     public final String DISPLAY_FOR_RED_PACKET = "[红包]";

@@ -24,6 +24,7 @@ import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
@@ -41,6 +42,7 @@ import com.mogujie.tt.ui.widget.GifView;
 import com.mogujie.tt.ui.widget.SpeekerToast;
 import com.mogujie.tt.ui.widget.message.AudioRenderView;
 import com.mogujie.tt.ui.widget.message.EmojiRenderView;
+import com.mogujie.tt.ui.widget.message.FileRenderView;
 import com.mogujie.tt.ui.widget.message.GifImageRenderView;
 import com.mogujie.tt.ui.widget.message.ImageRenderView;
 import com.mogujie.tt.ui.widget.message.MessageOperatePopup;
@@ -305,6 +307,10 @@ public class MessageAdapter extends BaseAdapter {
                 MessageEntity info = (MessageEntity) obj;
                 boolean isMine = info.getFromId() == loginUser.getPeerId();
                 switch (info.getDisplayType()) {
+                    case DBConstant.SHOW_FILE_TYPE:
+                        type = isMine ? RenderType.MESSAGE_TYPE_MINE_FILE
+                                : RenderType.MESSAGE_TYPE_OTHER_FILE;
+                        break;
                     case DBConstant.SHOW_PAY_RED_PACKET:
                         type = isMine ? RenderType.MESSAGE_TYPE_MINE_RED_PACKET
                                 : RenderType.MESSAGE_TYPE_OTHER_RED_PACKET;
@@ -500,6 +506,41 @@ public class MessageAdapter extends BaseAdapter {
         imageRenderView.render(imageMessage, userEntity, ctx);
 
         return imageRenderView;
+    }
+
+
+    private View fileMsgRender(final int position, View convertView, final ViewGroup parent, final boolean isMine) {
+        FileRenderView fileRenderView;
+        final FileMessage fileMessage = (FileMessage) msgObjectList.get(position);
+        UserEntity userEntity = imService.getContactManager().findContact(fileMessage.getFromId());
+        if (isMine) {
+            userEntity = imService.getLoginManager().getLoginInfo();
+        }
+
+        final String filePath = fileMessage.getPath();
+
+        if (null == convertView) {
+            fileRenderView = FileRenderView.inflater(ctx, parent, isMine);
+        } else {
+            fileRenderView = (FileRenderView) convertView;
+        }
+
+        final ImageView messageImage = fileRenderView.getMessageImage();
+        final int msgId = fileMessage.getMsgId();
+
+        fileRenderView.setBtnFileListener(new FileRenderView.BtnFileListener() {
+            @Override
+            public void onMsgSuccess() {
+
+            }
+
+            @Override
+            public void onMsgFailure() {
+
+            }
+        });
+        fileRenderView.render(fileMessage,userEntity,ctx);
+        return fileRenderView;
     }
 
     private View GifImageMsgRender(final int position, View convertView, final ViewGroup parent, final boolean isMine) {
@@ -900,6 +941,12 @@ public class MessageAdapter extends BaseAdapter {
                     break;
                 case MESSAGE_TYPE_TIME_TITLE:
                     convertView = timeBubbleRender(position, convertView, parent);
+                    break;
+                case MESSAGE_TYPE_MINE_FILE:
+                    convertView = fileMsgRender(position, convertView, parent, true);
+                    break;
+                case MESSAGE_TYPE_OTHER_FILE:
+                    convertView = fileMsgRender(position, convertView, parent, false);
                     break;
                 case MESSAGE_TYPE_MINE_AUDIO:
                     convertView = audioMsgRender(position, convertView, parent, true);

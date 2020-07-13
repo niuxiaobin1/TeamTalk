@@ -2,7 +2,9 @@ package com.mogujie.tt.imservice.manager;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.DBInterface;
@@ -14,6 +16,7 @@ import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.entity.AudioMessage;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
@@ -25,11 +28,14 @@ import com.mogujie.tt.imservice.event.RefreshHistoryMsgEvent;
 import com.mogujie.tt.imservice.service.LoadImageService;
 import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 import com.mogujie.tt.protobuf.IMBaseDefine;
+import com.mogujie.tt.protobuf.IMFile;
 import com.mogujie.tt.protobuf.IMMessage;
 import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
 import com.mogujie.tt.protobuf.helper.Java2ProtoBuf;
 import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
+import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -62,6 +68,8 @@ public class IMMessageManager extends IMManager {
     // todo eric, after testing ok, make it a longer value
     private final long TIMEOUT_MILLISECONDS = 6 * 1000;
     private final long IMAGE_TIMEOUT_MILLISECONDS = 4 * 60 * 1000;
+
+    private static final List<FileMessage> fileList = new ArrayList<>();
 
 
     private long getTimeoutTolerance(MessageEntity msg) {
@@ -157,8 +165,8 @@ public class IMMessageManager extends IMManager {
         doRefreshLocalMsg(historyMsgEvent);
     }
 
-    public void queryRedPacketStatus(int userId,MessageEntity msgEntity, IMBaseDefine.MsgType msg_type,
-                                     IMBaseDefine.TransferDoType do_type){
+    public void queryRedPacketStatus(int userId, MessageEntity msgEntity, IMBaseDefine.MsgType msg_type,
+                                     IMBaseDefine.TransferDoType do_type) {
         IMMessage.IMTransferStatus imTransferStatus = IMMessage.IMTransferStatus.newBuilder()
                 .setFromUserId(msgEntity.getFromId())
                 .setToUserId(msgEntity.getToId())
@@ -175,10 +183,10 @@ public class IMMessageManager extends IMManager {
             public void onSuccess(Object response) {
                 try {
                     IMMessage.IMTransferStatusAck imTransferStatusAck = IMMessage.IMTransferStatusAck.parseFrom((CodedInputStream) response);
-                    if (imTransferStatusAck.getStatus()==TRANSFER_STATUS_WAIT){
+                    if (imTransferStatusAck.getStatus() == TRANSFER_STATUS_WAIT) {
                         triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_NOT_RECEIVE,
                                 msgEntity));
-                    }else if(imTransferStatusAck.getStatus()==TRANSFER_STATUS_RECV){
+                    } else if (imTransferStatusAck.getStatus() == TRANSFER_STATUS_RECV) {
                         triggerEvent(new QueryRedPacketEvent(QueryRedPacketEvent.Event.ACK_QUERY_RED_PACKET_RECEIVED,
                                 msgEntity));
                     }
@@ -225,7 +233,7 @@ public class IMMessageManager extends IMManager {
         IMMessage.IMMsgData msgData = IMMessage.IMMsgData.newBuilder()
                 .setFromUserId(msgEntity.getFromId())
                 .setToSessionId(msgEntity.getToId())
-                .setMsgId(msgEntity.getMsgType() != DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN?0:msgEntity.getMsgId())
+                .setMsgId(msgEntity.getMsgType() != DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN ? 0 : msgEntity.getMsgId())
                 .setCreateTime(msgEntity.getCreated())
                 .setMsgType(msgType)
                 .setMsgData(ByteString.copyFrom(sendContent))  // 这个点要特别注意 todo ByteString.copyFrom
@@ -268,6 +276,87 @@ public class IMMessageManager extends IMManager {
                 messageEntity.setStatus(MessageConstant.MSG_FAILURE);
                 dbInterface.insertOrUpdateMessage(messageEntity);
                 triggerEvent(new MessageEvent(MessageEvent.Event.ACK_SEND_MESSAGE_TIME_OUT, messageEntity));
+            }
+        });
+    }
+
+
+    private void sendFileMsg(FileMessage fileMessage) {
+        String fileName = CommonUtil.getFileNameWithSuffix(fileMessage.getPath());
+        IMFile.IMFileReq msgData = IMFile.IMFileReq.newBuilder()
+                .setFromUserId(fileMessage.getFromId())
+                .setToUserId(fileMessage.getToId())
+                .setFileName(fileName)
+                .setFileSize((int) fileMessage.getSize())
+                .setTransMode(IMBaseDefine.TransferFileType.FILE_TYPE_OFFLINE)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+        int cid = IMBaseDefine.FileCmdID.CID_FILE_REQUEST_VALUE;
+
+
+        final MessageEntity messageEntity = fileMessage;
+        imSocketManager.sendRequest(msgData, sid, cid, new Packetlistener(getTimeoutTolerance(messageEntity)) {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMFile.IMFileRsp imFileRsp = IMFile.IMFileRsp.parseFrom((CodedInputStream) response);
+                    for (int i = 0; i < fileList.size(); i++) {
+                        if (fileMessage == fileList.get(i)) {
+                            fileList.get(i).setIp(imFileRsp.getIpAddrList(0).getIp());
+                        }
+                    }
+                    loginFileServer(fileMessage.getFromId(), imFileRsp.getTaskId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFaild() {
+            }
+
+            @Override
+            public void onTimeout() {
+            }
+        });
+
+    }
+
+    private void loginFileServer(int userId, String taskId) {
+        Log.e("nxb","loginFileServer");
+        IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
+                .setUserId(userId)
+                .setTaskId(taskId)
+                .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_UPLOAD)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+        int cid = IMBaseDefine.FileCmdID.CID_FILE_LOGIN_REQ_VALUE;
+
+
+        imSocketManager.sendRequest(imFileLoginReq, sid, cid, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMFile.IMFileLoginRsp imFileLoginRsp = IMFile.IMFileLoginRsp.parseFrom((CodedInputStream) response);
+                    if (imFileLoginRsp.getResultCode() != 0) {
+                        ToastUtil.toastShortMessage("login file server error");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFaild() {
+                Log.e("nxb","loginFileServer--onFaild");
+            }
+
+            @Override
+            public void onTimeout() {
+                Log.e("nxb","loginFileServer--onTimeout");
             }
         });
     }
@@ -331,6 +420,16 @@ public class IMMessageManager extends IMManager {
         sessionManager.updateSession(redPacketMessage);
         sendMessage(redPacketMessage);
     }
+
+    public void sendFile(FileMessage fileMessage) {
+        logger.i("chat#sendFile#fileMessage");
+        fileMessage.setStatus(MessageConstant.MSG_SENDING);
+        long pkId = DBInterface.instance().insertOrUpdateMessage(fileMessage);
+        sessionManager.updateSession(fileMessage);
+        fileList.add(fileMessage);
+        sendFileMsg(fileMessage);
+    }
+
     public void sendTransfer(TransferMessage transferMessage) {
         logger.i("chat#transfer#transferMessage");
         transferMessage.setStatus(MessageConstant.MSG_SENDING);

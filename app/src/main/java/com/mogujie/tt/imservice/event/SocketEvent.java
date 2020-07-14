@@ -16,5 +16,12 @@ public enum SocketEvent {
     CONNECTING_MSG_SERVER,
     CONNECT_MSG_SERVER_SUCCESS,
     CONNECT_MSG_SERVER_FAILED,
-    MSG_SERVER_DISCONNECTED    //channel disconnect 会触发，再应用开启内，要重连【可能是服务端、客户端断掉】
+    MSG_SERVER_DISCONNECTED,   //channel disconnect 会触发，再应用开启内，要重连【可能是服务端、客户端断掉】
+
+
+    /**请求文件服务器登陆的过程*/
+    CONNECTING_FILE_SERVER,
+    CONNECT_FILE_SERVER_SUCCESS,
+    CONNECT_FILE_SERVER_FAILED,
+    FILE_SERVER_DISCONNECTED    //channel disconnect 会触发，再应用开启内，要重连【可能是服务端、客户端断掉】
 }

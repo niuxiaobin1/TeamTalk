@@ -23,6 +23,7 @@ import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
+import com.mogujie.tt.imservice.manager.IMFileSocketManager;
 import com.mogujie.tt.imservice.manager.IMGroupManager;
 import com.mogujie.tt.imservice.manager.IMHeartBeatManager;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
@@ -62,6 +63,7 @@ public class IMService extends Service {
 
 	//所有的管理类
     private IMSocketManager socketMgr = IMSocketManager.instance();
+    private IMFileSocketManager fileSocketManager = IMFileSocketManager.instance();
 	private IMLoginManager loginMgr = IMLoginManager.instance();
 	private IMContactManager contactMgr = IMContactManager.instance();
 	private IMGroupManager groupMgr = IMGroupManager.instance();
@@ -161,6 +163,7 @@ public class IMService extends Service {
         loginSp.init(ctx);
         // 放在这里还有些问题 todo
         socketMgr.onStartIMManager(ctx);
+        fileSocketManager.onStartIMManager(ctx);
         loginMgr.onStartIMManager(ctx);
         contactMgr.onStartIMManager(ctx);
         messageMgr.onStartIMManager(ctx);
@@ -244,6 +247,7 @@ public class IMService extends Service {
 
         // login需要监听socket的变化,在这个地方不能释放，设计上的不合理?
         socketMgr.reset();
+        fileSocketManager.reset();
         loginMgr.reset();
         contactMgr.reset();
         messageMgr.reset();

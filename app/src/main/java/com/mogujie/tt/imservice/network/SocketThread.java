@@ -16,12 +16,9 @@ import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.SimpleChannelHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder;
-import org.jboss.netty.handler.timeout.IdleStateHandler;
-import org.jboss.netty.util.HashedWheelTimer;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class SocketThread extends Thread {
 	private ClientBootstrap clientBootstrap = null;

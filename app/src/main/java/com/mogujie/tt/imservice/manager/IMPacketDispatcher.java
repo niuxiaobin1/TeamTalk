@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
+import com.mogujie.tt.protobuf.IMFile;
 import com.mogujie.tt.protobuf.IMGroup;
 import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.protobuf.IMMessage;
@@ -191,4 +192,19 @@ public class IMPacketDispatcher {
             logger.e("groupPacketDispatcher# error,cid:%d",commandId);
             }
         }
+
+
+    public static void filePacketDispatcher(int commandId,CodedInputStream buffer){
+        try {
+            switch (commandId) {
+                case IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_REQ_VALUE:
+                    IMFile.IMFilePullDataReq imFilePullDataReq =IMFile.IMFilePullDataReq.parseFrom(buffer);
+                    IMMessageManager.instance().onPullFileDataReq(imFilePullDataReq);
+                    return;
+
+            }
+        }catch(IOException e){
+            logger.e("groupPacketDispatcher# error,cid:%d",commandId);
+        }
+    }
 }

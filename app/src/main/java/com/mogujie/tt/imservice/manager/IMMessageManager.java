@@ -62,6 +62,7 @@ public class IMMessageManager extends IMManager {
 
     private IMSocketManager imSocketManager = IMSocketManager.instance();
     private IMSessionManager sessionManager = IMSessionManager.instance();
+    private IMFileSocketManager fileSocketManager = IMFileSocketManager.instance();
     private DBInterface dbInterface = DBInterface.instance();
 
     // 消息发送超时时间爱你设定
@@ -300,12 +301,17 @@ public class IMMessageManager extends IMManager {
             public void onSuccess(Object response) {
                 try {
                     IMFile.IMFileRsp imFileRsp = IMFile.IMFileRsp.parseFrom((CodedInputStream) response);
-                    for (int i = 0; i < fileList.size(); i++) {
-                        if (fileMessage == fileList.get(i)) {
-                            fileList.get(i).setIp(imFileRsp.getIpAddrList(0).getIp());
+                    if (imFileRsp.getResultCode()==0){
+
+                        for (int i = 0; i < fileList.size(); i++) {
+                            if (fileMessage == fileList.get(i)) {
+                                fileList.get(i).setTaskId(imFileRsp.getTaskId());
+                            }
                         }
+                        fileSocketManager.reqFileServer(imFileRsp);
                     }
-                    loginFileServer(fileMessage.getFromId(), imFileRsp.getTaskId());
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -323,18 +329,28 @@ public class IMMessageManager extends IMManager {
 
     }
 
-    private void loginFileServer(int userId, String taskId) {
-        Log.e("nxb","loginFileServer");
+    public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq){
+        Log.e("nxb",imFilePullDataReq.getDataSize()+"");
+        Log.e("nxb",imFilePullDataReq.getOffset()+"");
+    }
+
+
+    public void loginFileServer(){
+        loginFileServer(fileList.get(0));
+    }
+
+
+    private void loginFileServer(FileMessage fileMessage) {
         IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
-                .setUserId(userId)
-                .setTaskId(taskId)
+                .setUserId(IMLoginManager.instance().getLoginId())
+                .setTaskId(fileMessage.getTaskId())
                 .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_UPLOAD)
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
         int cid = IMBaseDefine.FileCmdID.CID_FILE_LOGIN_REQ_VALUE;
 
 
-        imSocketManager.sendRequest(imFileLoginReq, sid, cid, new Packetlistener() {
+        fileSocketManager.sendRequest(imFileLoginReq, sid, cid, new Packetlistener() {
             @Override
             public void onSuccess(Object response) {
                 try {

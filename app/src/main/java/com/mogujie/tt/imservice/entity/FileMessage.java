@@ -32,7 +32,7 @@ public class FileMessage extends MessageEntity implements Serializable {
      */
     private String path = "";
     private long  size = 0;
-    private String ip="";
+    private String taskId="";
 
     private int loadStatus;
 
@@ -169,11 +169,11 @@ public class FileMessage extends MessageEntity implements Serializable {
         this.size = size;
     }
 
-    public String getIp() {
-        return ip;
+    public String getTaskId() {
+        return taskId;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 }

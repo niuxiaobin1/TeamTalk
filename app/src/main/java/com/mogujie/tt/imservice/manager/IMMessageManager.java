@@ -37,7 +37,10 @@ import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.ToastUtil;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -301,7 +304,7 @@ public class IMMessageManager extends IMManager {
             public void onSuccess(Object response) {
                 try {
                     IMFile.IMFileRsp imFileRsp = IMFile.IMFileRsp.parseFrom((CodedInputStream) response);
-                    if (imFileRsp.getResultCode()==0){
+                    if (imFileRsp.getResultCode() == 0) {
 
                         for (int i = 0; i < fileList.size(); i++) {
                             if (fileMessage == fileList.get(i)) {
@@ -329,13 +332,77 @@ public class IMMessageManager extends IMManager {
 
     }
 
-    public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq){
-        Log.e("nxb",imFilePullDataReq.getDataSize()+"");
-        Log.e("nxb",imFilePullDataReq.getOffset()+"");
+    public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq) {
+        FileMessage msg = getFileMsgByTask(imFilePullDataReq.getTaskId());
+        if (msg == null) {
+            return;
+        }
+        try {
+            int offset = imFilePullDataReq.getOffset();
+            RandomAccessFile raf = new RandomAccessFile(new File(msg.getPath()), "r");
+            raf.seek(offset);
+            byte[] buff = new byte[32 * 1024];
+            int result = raf.read(buff);
+            if (result != -1) {
+                IMFile.IMFilePullDataRsp imFilePullDataRsp = IMFile.IMFilePullDataRsp.newBuilder()
+                        .setResultCode(0)
+                        .setTaskId(imFilePullDataReq.getTaskId())
+                        .setUserId(imFilePullDataReq.getUserId())
+                        .setOffset(imFilePullDataReq.getOffset())
+                        .setFileData(ByteString.copyFrom(buff))
+                        .build();
+                int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_RSP_VALUE;
+                fileSocketManager.sendRequest(imFilePullDataRsp, sid, cid);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private FileMessage getFileMsgByTask(String taskId) {
+        FileMessage msg = null;
+        for (int i = 0; i < fileList.size(); i++) {
+            if (fileList.get(i).getTaskId().equals(taskId)) {
+                msg = fileList.get(i);
+                break;
+            }
+        }
+        return msg;
+    }
+
+    public void onRspFileStatus(IMFile.IMFileState imFileState) {
+        if (imFileState.getState().getNumber() == IMBaseDefine.ClientFileState.CLIENT_FILE_DONE_VALUE) {
+            //传输完成
+            FileMessage msg = getFileMsgByTask(imFileState.getTaskId());
+            if (msg == null) {
+                return;
+            }
+            String fileName = CommonUtil.getFileNameWithSuffix(msg.getPath());
+            IMFile.IMFileAddOfflineReq imFileAddOfflineReq = IMFile.IMFileAddOfflineReq.newBuilder()
+                    .setFromUserId(msg.getFromId())
+                    .setToUserId(msg.getToId())
+                    .setTaskId(imFileState.getTaskId())
+                    .setFileName(fileName)
+                    .setFileSize((int) msg.getSize())
+                    .build();
+            int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+            int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
+            fileSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
+            fileList.remove(msg);
+        }
+
+    }
+
+    public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
+//        fileSocketManager.reqFileServer(imFileNotify);
     }
 
 
-    public void loginFileServer(){
+    public void loginFileServer() {
         loginFileServer(fileList.get(0));
     }
 
@@ -367,12 +434,12 @@ public class IMMessageManager extends IMManager {
 
             @Override
             public void onFaild() {
-                Log.e("nxb","loginFileServer--onFaild");
+                Log.e("nxb", "loginFileServer--onFaild");
             }
 
             @Override
             public void onTimeout() {
-                Log.e("nxb","loginFileServer--onTimeout");
+                Log.e("nxb", "loginFileServer--onTimeout");
             }
         });
     }

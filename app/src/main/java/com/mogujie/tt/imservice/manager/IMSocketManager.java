@@ -169,6 +169,9 @@ public class IMSocketManager extends IMManager {
             case IMBaseDefine.ServiceID.SID_GROUP_VALUE:
                 IMPacketDispatcher.groupPacketDispatcher(commandId, codedInputStream);
                 break;
+            case IMBaseDefine.ServiceID.SID_FILE_VALUE:
+                IMPacketDispatcher.filePacketDispatcher(commandId, codedInputStream);
+                break;
             default:
                 logger.e("packet#unhandled serviceId:%d, commandId:%d", serviceId,
                         commandId);

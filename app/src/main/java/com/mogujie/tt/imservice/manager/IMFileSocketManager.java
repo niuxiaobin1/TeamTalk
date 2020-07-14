@@ -177,6 +177,14 @@ public class IMFileSocketManager extends IMManager {
             connectFileServer(addrsEntity);
         }
     }
+    public void reqFileServer(IMFile.IMFileNotify imFileNotify){
+        if (imFileNotify.getIpAddrListCount()!=0){
+            FileServerAddrsEntity addrsEntity = new FileServerAddrsEntity();
+            addrsEntity.priorIP = imFileNotify.getIpAddrList(0).getIp();
+            addrsEntity.port = imFileNotify.getIpAddrList(0).getPort();
+            connectFileServer(addrsEntity);
+        }
+    }
 
     /**
      * 与登陆login是强耦合的关系

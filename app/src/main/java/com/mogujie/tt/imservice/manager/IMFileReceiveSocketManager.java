@@ -1,64 +1,46 @@
 package com.mogujie.tt.imservice.manager;
 
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.GeneratedMessageLite;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.mogujie.tt.DB.sp.SystemConfigSp;
-import com.mogujie.tt.app.IMApplication;
-import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.SysConstant;
-import com.mogujie.tt.dto.InstitutionDto;
 import com.mogujie.tt.imservice.callback.ListenerQueue;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.SocketEvent;
+import com.mogujie.tt.imservice.network.FileReceiveServerHandler;
 import com.mogujie.tt.imservice.network.FileServerHandler;
-import com.mogujie.tt.imservice.network.MsgServerHandler;
 import com.mogujie.tt.imservice.network.SocketThread;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMFile;
-import com.mogujie.tt.protobuf.IMMessage;
 import com.mogujie.tt.protobuf.base.DataBuffer;
 import com.mogujie.tt.protobuf.base.DefaultHeader;
-import com.mogujie.tt.utils.AES;
 import com.mogujie.tt.utils.Logger;
 
-import org.apache.http.Header;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferInputStream;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URLDecoder;
 
 import de.greenrobot.event.EventBus;
-
-import static com.mogujie.tt.config.ServerHostConfig.GET_INSTITUTION_NUMBER;
-import static com.mogujie.tt.config.SysConstant.INSTITUTION_AESKEY;
 
 
 /**
  * @author : yingmu on 14-12-30.
  * @email : yingmu@mogujie.com.
  * <p>
- * 业务层面:文件
+ * 业务层面:接收文件
  * 长连接建立成功之后，就要发送登陆信息，否则15s之内就会断开
  * 所以connMsg 与 login是强耦合的关系
  */
-public class IMFileSocketManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMFileSocketManager.class);
-    private static IMFileSocketManager inst = new IMFileSocketManager();
+public class IMFileReceiveSocketManager extends IMManager {
+    private Logger logger = Logger.getLogger(IMFileReceiveSocketManager.class);
+    private static IMFileReceiveSocketManager inst = new IMFileReceiveSocketManager();
 
-    public static IMFileSocketManager instance() {
+    public static IMFileReceiveSocketManager instance() {
         return inst;
     }
 
-    public IMFileSocketManager() {
+    public IMFileReceiveSocketManager() {
         logger.d("login#creating IMSocketManager");
     }
 
@@ -169,26 +151,24 @@ public class IMFileSocketManager extends IMManager {
         }
     }
 
-    public void reqFileServer(IMFile.IMFileRsp imFileRsp) {
-        if (imFileRsp.getIpAddrListCount() != 0) {
+    public void reqFileServer(IMFile.IMFileNotify imFileNotify){
+        if (imFileNotify.getIpAddrListCount()!=0){
             FileServerAddrsEntity addrsEntity = new FileServerAddrsEntity();
-            addrsEntity.priorIP = imFileRsp.getIpAddrList(0).getIp();
-            addrsEntity.port = imFileRsp.getIpAddrList(0).getPort();
+            addrsEntity.priorIP = imFileNotify.getIpAddrList(0).getIp();
+            addrsEntity.port = imFileNotify.getIpAddrList(0).getPort();
             connectFileServer(addrsEntity);
         }
     }
-
 
     /**
      * 与登陆login是强耦合的关系
      */
     private void connectFileServer(FileServerAddrsEntity currentFileAddress) {
-
         triggerEvent(SocketEvent.CONNECT_FILE_SERVER_FAILED);
         this.currentFileAddress = currentFileAddress;
 
         String priorIP = currentFileAddress.priorIP;
-        Log.e("nxb", "send---connect server" + priorIP);
+        Log.e("nxb", "receive---connect server" + priorIP);
         int port = currentFileAddress.port;
         logger.i("login#connectFileServer -> (%s:%d)", priorIP, port);
 
@@ -198,12 +178,12 @@ public class IMFileSocketManager extends IMManager {
             fileServerThread = null;
         }
 
-        fileServerThread = new SocketThread(priorIP, port, new FileServerHandler());
+        fileServerThread = new SocketThread(priorIP, port, new FileReceiveServerHandler());
         fileServerThread.start();
     }
 
     public void reconnectFile() {
-        synchronized (IMFileSocketManager.class) {
+        synchronized (IMFileReceiveSocketManager.class) {
             if (currentFileAddress != null) {
                 connectFileServer(currentFileAddress);
             } else {
@@ -236,11 +216,11 @@ public class IMFileSocketManager extends IMManager {
     }
 
     public void onFileServerConnected() {
+        Log.e("nxb", "receive---connect onFileServerConnected" );
         logger.i("login#onFileServerConnected");
-        Log.e("nxb", "send---onFileServerConnected");
         listenerQueue.onStart();
         triggerEvent(SocketEvent.CONNECT_FILE_SERVER_SUCCESS);
-        IMMessageManager.instance().loginFileServer();
+        IMMessageManager.instance().loginFileReceiveServer();
     }
 
     /**
@@ -291,6 +271,7 @@ public class IMFileSocketManager extends IMManager {
     }
 
 
+
     /**
      * ------------get/set----------------------------
      */
@@ -301,6 +282,8 @@ public class IMFileSocketManager extends IMManager {
     public void setSocketStatus(SocketEvent socketStatus) {
         this.socketStatus = socketStatus;
     }
+
+
 
 
 }

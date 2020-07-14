@@ -460,11 +460,6 @@ public class MessageActivity extends TTBaseActivity
                     }
                     for (int i = 0; i < docPaths.size(); i++) {
                         try {
-                            Log.e("nxb",   docPaths.get(i).getAuthority());
-                            Log.e("nxb",   docPaths.get(i).getLastPathSegment());
-
-                            Log.e("nxb",
-                                    ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
                             handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
 
                         } catch (URISyntaxException e) {

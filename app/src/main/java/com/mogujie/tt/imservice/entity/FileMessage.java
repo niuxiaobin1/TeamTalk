@@ -1,13 +1,20 @@
 package com.mogujie.tt.imservice.entity;
 
+import android.os.Environment;
+
 import com.luck.picture.lib.entity.LocalMedia;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.app.IMApplication;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.MessageConstant;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
+import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.SequenceNumberMaker;
+import com.mogujie.tt.protobuf.IMLogin;
 import com.mogujie.tt.ui.adapter.album.ImageItem;
+import com.mogujie.tt.utils.AppContext;
 import com.mogujie.tt.utils.CommonUtil;
 
 import org.json.JSONException;
@@ -31,8 +38,8 @@ public class FileMessage extends MessageEntity implements Serializable {
      * 本地保存的path
      */
     private String path = "";
-    private long  size = 0;
-    private String taskId="";
+    private long size = 0;
+    private String taskId = "";
 
     private int loadStatus;
 
@@ -58,8 +65,6 @@ public class FileMessage extends MessageEntity implements Serializable {
         created = entity.getCreated();
         updated = entity.getUpdated();
     }
-
-
 
 
     public static FileMessage parseFromDB(MessageEntity entity) {
@@ -114,8 +119,39 @@ public class FileMessage extends MessageEntity implements Serializable {
         return msg;
     }
 
+    // 消息页面，接收文件消息
+    public static FileMessage buildForSend(String fileName, int fromId,int size) throws IOException {
+        FileMessage msg = new FileMessage();
+        String receivePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            receivePath = IMApplication.sApplicationContext.getExternalCacheDir().getPath();
+        } else {
+            receivePath = IMApplication.sApplicationContext.getFilesDir().getPath();
+        }
+        msg.setPath(receivePath+File.separator+fileName);
+        if (!new File(msg.getPath()).exists()){
+            new File(msg.getPath()).createNewFile();
+        }
+        msg.setSize(size);
+        // 将文件发送至服务器
+        int nowTime = (int) (System.currentTimeMillis() / 1000);
 
 
+        msg.setFromId(fromId);
+        msg.setToId(IMLoginManager.instance().getLoginId());
+        msg.setCreated(nowTime);
+        msg.setUpdated(nowTime);
+        msg.setDisplayType(DBConstant.SHOW_FILE_TYPE);
+        // content 自动生成的
+        int msgType = DBConstant.MSG_TYPE_SINGLE_FILE;
+        msg.setMsgType(msgType);
+
+        msg.setStatus(MessageConstant.MSG_SENDING);
+        msg.setLoadStatus(MessageConstant.FILE_UNLOAD);
+        msg.buildSessionKey(true);
+        return msg;
+    }
 
 
     /**

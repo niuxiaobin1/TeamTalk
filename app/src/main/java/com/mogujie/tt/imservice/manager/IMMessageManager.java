@@ -66,6 +66,7 @@ public class IMMessageManager extends IMManager {
     private IMSocketManager imSocketManager = IMSocketManager.instance();
     private IMSessionManager sessionManager = IMSessionManager.instance();
     private IMFileSocketManager fileSocketManager = IMFileSocketManager.instance();
+    private IMFileReceiveSocketManager imFileReceiveSocketManager = IMFileReceiveSocketManager.instance();
     private DBInterface dbInterface = DBInterface.instance();
 
     // 消息发送超时时间爱你设定
@@ -74,6 +75,7 @@ public class IMMessageManager extends IMManager {
     private final long IMAGE_TIMEOUT_MILLISECONDS = 4 * 60 * 1000;
 
     private static final List<FileMessage> fileList = new ArrayList<>();
+    private static final List<FileMessage> fileReceiveList = new ArrayList<>();
 
 
     private long getTimeoutTolerance(MessageEntity msg) {
@@ -333,6 +335,7 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq) {
+        Log.e("nxb", "send---发送文件 " + imFilePullDataReq.getOffset());
         FileMessage msg = getFileMsgByTask(imFilePullDataReq.getTaskId());
         if (msg == null) {
             return;
@@ -363,6 +366,41 @@ public class IMMessageManager extends IMManager {
 
     }
 
+    public void onPullFileDataRsq(IMFile.IMFilePullDataRsp imFilePullDataRsp) {
+        Log.e("nxb", "receive--- 存储文件" +imFilePullDataRsp.getOffset());
+        FileMessage msg = getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId());
+        if (msg == null) {
+            return;
+        }
+        try {
+            int offset = imFilePullDataRsp.getOffset();
+            RandomAccessFile raf = new RandomAccessFile(new File(msg.getPath()), "w");
+            raf.seek(offset);
+            raf.write(imFilePullDataRsp.getFileData().toByteArray());
+
+            if (msg.getSize() != raf.length()) {
+                IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
+                        .setUserId(IMLoginManager.instance().getLoginId())
+                        .setTaskId(imFilePullDataRsp.getTaskId())
+                        .setTransMode(IMBaseDefine.TransferFileType.FILE_TYPE_OFFLINE)
+                        .setOffset((int) raf.length())
+                        .setDataSize(32 * 1024)
+                        .build();
+                int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_REQ_VALUE;
+                fileSocketManager.sendRequest(imFilePullDataReq, sid, cid);
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     private FileMessage getFileMsgByTask(String taskId) {
         FileMessage msg = null;
         for (int i = 0; i < fileList.size(); i++) {
@@ -374,36 +412,81 @@ public class IMMessageManager extends IMManager {
         return msg;
     }
 
+    private FileMessage getFileReceiveMsgByTask(String taskId) {
+        FileMessage msg = null;
+        for (int i = 0; i < fileReceiveList.size(); i++) {
+            if (fileReceiveList.get(i).getTaskId().equals(taskId)) {
+                msg = fileReceiveList.get(i);
+                break;
+            }
+        }
+        return msg;
+    }
+
     public void onRspFileStatus(IMFile.IMFileState imFileState) {
         if (imFileState.getState().getNumber() == IMBaseDefine.ClientFileState.CLIENT_FILE_DONE_VALUE) {
-            //传输完成
-            FileMessage msg = getFileMsgByTask(imFileState.getTaskId());
-            if (msg == null) {
-                return;
+            Log.e("nxb", "CLIENT_FILE_DONE_VALUE");
+            if (imFileState.getUserId() == IMLoginManager.instance().getLoginId()) {
+                //传输完成
+                Log.e("nxb", "send  发送成功");
+                FileMessage msg = getFileMsgByTask(imFileState.getTaskId());
+                if (msg == null) {
+                    return;
+                }
+                String fileName = CommonUtil.getFileNameWithSuffix(msg.getPath());
+                IMFile.IMFileAddOfflineReq imFileAddOfflineReq = IMFile.IMFileAddOfflineReq.newBuilder()
+                        .setFromUserId(msg.getFromId())
+                        .setToUserId(msg.getToId())
+                        .setTaskId(imFileState.getTaskId())
+                        .setFileName(fileName)
+                        .setFileSize((int) msg.getSize())
+                        .build();
+                int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
+                fileSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
+                fileList.remove(msg);
+                ToastUtil.toastShortMessage("发送文件成功");
+            } else {
+                //接收完成
+                Log.e("nxb", "receive--- 接收成功");
+                FileMessage msg = getFileReceiveMsgByTask(imFileState.getTaskId());
+                if (msg == null) {
+                    return;
+                }
+                IMFile.IMFileDelOfflineReq imFileDelOfflineReq = IMFile.IMFileDelOfflineReq.newBuilder()
+                        .setFromUserId(msg.getFromId())
+                        .setToUserId(msg.getToId())
+                        .setTaskId(imFileState.getTaskId())
+                        .build();
+                int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
+                imFileReceiveSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                fileReceiveList.remove(msg);
+                ToastUtil.toastShortMessage("接收文件成功");
             }
-            String fileName = CommonUtil.getFileNameWithSuffix(msg.getPath());
-            IMFile.IMFileAddOfflineReq imFileAddOfflineReq = IMFile.IMFileAddOfflineReq.newBuilder()
-                    .setFromUserId(msg.getFromId())
-                    .setToUserId(msg.getToId())
-                    .setTaskId(imFileState.getTaskId())
-                    .setFileName(fileName)
-                    .setFileSize((int) msg.getSize())
-                    .build();
-            int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
-            int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
-            fileSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
-            fileList.remove(msg);
+
         }
 
     }
 
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
-//        fileSocketManager.reqFileServer(imFileNotify);
+        try {
+            fileReceiveList.add(FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
+                    imFileNotify.getFileSize()));
+            imFileReceiveSocketManager.reqFileServer(imFileNotify);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
     public void loginFileServer() {
         loginFileServer(fileList.get(0));
+    }
+
+    public void loginFileReceiveServer() {
+        loginFileReceiveServer(fileReceiveList.get(0));
     }
 
 
@@ -424,6 +507,58 @@ public class IMMessageManager extends IMManager {
                     IMFile.IMFileLoginRsp imFileLoginRsp = IMFile.IMFileLoginRsp.parseFrom((CodedInputStream) response);
                     if (imFileLoginRsp.getResultCode() != 0) {
                         ToastUtil.toastShortMessage("login file server error");
+                    } else {
+                        Log.e("nxb", "send---login file server success");
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFaild() {
+                Log.e("nxb", "loginFileServer--onFaild");
+            }
+
+            @Override
+            public void onTimeout() {
+                Log.e("nxb", "loginFileServer--onTimeout");
+            }
+        });
+    }
+
+    private void loginFileReceiveServer(FileMessage fileMessage) {
+        IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
+                .setUserId(IMLoginManager.instance().getLoginId())
+                .setTaskId(fileMessage.getTaskId())
+                .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_UPLOAD)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+        int cid = IMBaseDefine.FileCmdID.CID_FILE_LOGIN_REQ_VALUE;
+
+
+        fileSocketManager.sendRequest(imFileLoginReq, sid, cid, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMFile.IMFileLoginRsp imFileLoginRsp = IMFile.IMFileLoginRsp.parseFrom((CodedInputStream) response);
+                    if (imFileLoginRsp.getResultCode() != 0) {
+                        ToastUtil.toastShortMessage("login receive file server error");
+                    } else {
+                        Log.e("nxb", "receive---login file server success" );
+                        Log.e("nxb", "receive--- 发起文件传输请求" );
+                        IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
+                                .setUserId(IMLoginManager.instance().getLoginId())
+                                .setTaskId(fileMessage.getTaskId())
+                                .setTransMode(IMBaseDefine.TransferFileType.FILE_TYPE_OFFLINE)
+                                .setOffset(0)
+                                .setDataSize(32 * 1024)
+                                .build();
+                        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                        int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_REQ_VALUE;
+                        fileSocketManager.sendRequest(imFilePullDataReq, sid, cid);
                     }
 
                 } catch (IOException e) {

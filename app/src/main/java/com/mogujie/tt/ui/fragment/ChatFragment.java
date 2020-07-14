@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
+import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.entity.RecentInfo;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.LoginEvent;
@@ -39,9 +42,13 @@ import com.mogujie.tt.imservice.event.UnreadEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMReconnectManager;
+import com.mogujie.tt.imservice.manager.IMSocketManager;
 import com.mogujie.tt.imservice.manager.IMUnreadMsgManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.IMBaseDefine;
+import com.mogujie.tt.protobuf.IMFile;
+import com.mogujie.tt.protobuf.IMGroup;
 import com.mogujie.tt.scanResult.ScanResultCallBack;
 import com.mogujie.tt.scanResult.ScanResultUtil;
 import com.mogujie.tt.ui.activity.MainActivity;
@@ -56,6 +63,7 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -115,8 +123,41 @@ public class ChatFragment extends MainFragment
             // 依赖联系人回话、未读消息、用户的信息三者的状态
             onRecentContactDataReady();
             EventBus.getDefault().registerSticky(ChatFragment.this);
+            test();
         }
     };
+
+    private void test(){
+        IMFile.IMFileHasOfflineReq imFileHasOfflineReq = IMFile.IMFileHasOfflineReq.newBuilder()
+                .setUserId(IMLoginManager.instance().getLoginId())
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+        int cid = IMBaseDefine.FileCmdID.CID_FILE_HAS_OFFLINE_REQ_VALUE;
+        IMSocketManager.instance().sendRequest(imFileHasOfflineReq, sid, cid, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMFile.IMFileHasOfflineRsp imFileHasOfflineRsp = IMFile.IMFileHasOfflineRsp.parseFrom((CodedInputStream) response);
+                    Log.e("nxb23",imFileHasOfflineRsp.getOfflineFileListCount()+"");
+                    Log.e("nxb234",imFileHasOfflineRsp.getIpAddrListCount()+"");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFaild() {
+
+            }
+
+            @Override
+            public void onTimeout() {
+
+            }
+        });
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

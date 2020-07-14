@@ -201,6 +201,10 @@ public class IMPacketDispatcher {
                     IMFile.IMFilePullDataReq imFilePullDataReq =IMFile.IMFilePullDataReq.parseFrom(buffer);
                     IMMessageManager.instance().onPullFileDataReq(imFilePullDataReq);
                     return;
+                case IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_RSP_VALUE:
+                    IMFile.IMFilePullDataRsp imFilePullDataRsp =IMFile.IMFilePullDataRsp.parseFrom(buffer);
+                    IMMessageManager.instance().onPullFileDataRsq(imFilePullDataRsp);
+                    return;
                 case IMBaseDefine.FileCmdID.CID_FILE_STATE_VALUE:
                     IMFile.IMFileState imFileState =IMFile.IMFileState.parseFrom(buffer);
                     IMMessageManager.instance().onRspFileStatus(imFileState);

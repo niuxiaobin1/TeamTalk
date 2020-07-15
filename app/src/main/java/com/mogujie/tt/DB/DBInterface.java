@@ -20,6 +20,7 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
@@ -541,6 +542,8 @@ public class DBInterface {
                     break;
                 case DBConstant.SHOW_PAY_TRANSFER:
                     newList.add(TransferMessage.parseFromDB(info));
+                case DBConstant.SHOW_FILE_TYPE:
+                    newList.add(FileMessage.parseFromDB(info));
                     break;
             }
         }

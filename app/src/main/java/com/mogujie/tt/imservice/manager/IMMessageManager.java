@@ -299,7 +299,6 @@ public class IMMessageManager extends IMManager {
         int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
         int cid = IMBaseDefine.FileCmdID.CID_FILE_REQUEST_VALUE;
 
-
         final MessageEntity messageEntity = fileMessage;
         imSocketManager.sendRequest(msgData, sid, cid, new Packetlistener(getTimeoutTolerance(messageEntity)) {
             @Override
@@ -311,6 +310,8 @@ public class IMMessageManager extends IMManager {
                         for (int i = 0; i < fileList.size(); i++) {
                             if (fileMessage == fileList.get(i)) {
                                 fileList.get(i).setTaskId(imFileRsp.getTaskId());
+                                fileList.get(i).setIp(imFileRsp.getIpAddrList(0).getIp());
+                                fileList.get(i).setPort(imFileRsp.getIpAddrList(0).getPort());
                             }
                         }
                         fileSocketManager.reqFileServer(imFileRsp);
@@ -367,7 +368,7 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onPullFileDataRsq(IMFile.IMFilePullDataRsp imFilePullDataRsp) {
-        Log.e("nxb", "receive--- 存储文件" +imFilePullDataRsp.getOffset());
+        Log.e("nxb", "receive--- 存储文件" + imFilePullDataRsp.getOffset());
         FileMessage msg = getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId());
         if (msg == null) {
             return;
@@ -443,7 +444,8 @@ public class IMMessageManager extends IMManager {
                         .build();
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
-                fileSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
+                imSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
+                long pkId = DBInterface.instance().insertOrUpdateMessage(msg);
                 fileList.remove(msg);
                 ToastUtil.toastShortMessage("发送文件成功");
             } else {
@@ -460,7 +462,7 @@ public class IMMessageManager extends IMManager {
                         .build();
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
-                imFileReceiveSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
                 fileReceiveList.remove(msg);
                 ToastUtil.toastShortMessage("接收文件成功");
             }
@@ -470,13 +472,14 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
-        try {
-            fileReceiveList.add(FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
-                    imFileNotify.getFileSize()));
-            imFileReceiveSocketManager.reqFileServer(imFileNotify);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Log.e("nxb", "onRsqFileNotify");
+//        try {
+//            fileReceiveList.add(FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
+//                    imFileNotify.getFileSize()));
+//            imFileReceiveSocketManager.reqFileServer(imFileNotify);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -547,8 +550,8 @@ public class IMMessageManager extends IMManager {
                     if (imFileLoginRsp.getResultCode() != 0) {
                         ToastUtil.toastShortMessage("login receive file server error");
                     } else {
-                        Log.e("nxb", "receive---login file server success" );
-                        Log.e("nxb", "receive--- 发起文件传输请求" );
+                        Log.e("nxb", "receive---login file server success");
+                        Log.e("nxb", "receive--- 发起文件传输请求");
                         IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
                                 .setUserId(IMLoginManager.instance().getLoginId())
                                 .setTaskId(fileMessage.getTaskId())
@@ -642,7 +645,6 @@ public class IMMessageManager extends IMManager {
     public void sendFile(FileMessage fileMessage) {
         logger.i("chat#sendFile#fileMessage");
         fileMessage.setStatus(MessageConstant.MSG_SENDING);
-        long pkId = DBInterface.instance().insertOrUpdateMessage(fileMessage);
         sessionManager.updateSession(fileMessage);
         fileList.add(fileMessage);
         sendFileMsg(fileMessage);

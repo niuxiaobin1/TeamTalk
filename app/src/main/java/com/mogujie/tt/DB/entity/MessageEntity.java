@@ -183,6 +183,8 @@ public class MessageEntity implements java.io.Serializable {
                 return DBConstant.DISPLAY_FOR_RED_PACKET_OPEN;
             case DBConstant.SHOW_PAY_TRANSFER:
                 return DBConstant.DISPLAY_FOR_TRANFER;
+            case DBConstant.SHOW_FILE_TYPE:
+                return DBConstant.DISPLAY_FILE_DATA;
             default:
                 return DBConstant.DISPLAY_FOR_ERROR;
         }

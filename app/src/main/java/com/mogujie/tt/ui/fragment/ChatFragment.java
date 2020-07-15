@@ -123,11 +123,11 @@ public class ChatFragment extends MainFragment
             // 依赖联系人回话、未读消息、用户的信息三者的状态
             onRecentContactDataReady();
             EventBus.getDefault().registerSticky(ChatFragment.this);
-//            test();
+            test();
         }
     };
 
-    private void test(){
+    private void test() {
         IMFile.IMFileHasOfflineReq imFileHasOfflineReq = IMFile.IMFileHasOfflineReq.newBuilder()
                 .setUserId(IMLoginManager.instance().getLoginId())
                 .build();
@@ -139,8 +139,11 @@ public class ChatFragment extends MainFragment
                 try {
 
                     IMFile.IMFileHasOfflineRsp imFileHasOfflineRsp = IMFile.IMFileHasOfflineRsp.parseFrom((CodedInputStream) response);
-                    Log.e("nxb23",imFileHasOfflineRsp.getOfflineFileListCount()+"");
-                    Log.e("nxb234",imFileHasOfflineRsp.getIpAddrListCount()+"");
+                    Log.e("nxb23", imFileHasOfflineRsp.getOfflineFileListCount() + "");
+                    Log.e("nxb234", imFileHasOfflineRsp.getIpAddrListCount() + "");
+                    for (int i = 0; i < imFileHasOfflineRsp.getOfflineFileListCount(); i++) {
+                        Log.e("nxb2345", imFileHasOfflineRsp.getOfflineFileList(i).getFileName() + "");
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

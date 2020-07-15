@@ -40,6 +40,8 @@ public class FileMessage extends MessageEntity implements Serializable {
     private String path = "";
     private long size = 0;
     private String taskId = "";
+    private String ip = "";
+    private int port = 0;
 
     private int loadStatus;
 
@@ -71,24 +73,29 @@ public class FileMessage extends MessageEntity implements Serializable {
         if (entity.getDisplayType() != DBConstant.SHOW_FILE_TYPE) {
             throw new RuntimeException("#ImageMessage# parseFromDB,not SHOW_FILE_TYPE");
         }
-        FileMessage imageMessage = new FileMessage(entity);
+        FileMessage fileMessage = new FileMessage(entity);
         String originContent = entity.getContent();
         JSONObject extraContent;
         try {
             extraContent = new JSONObject(originContent);
-            imageMessage.setPath(extraContent.getString("path"));
+            fileMessage.setPath(extraContent.getString("path"));
+            fileMessage.setSize(extraContent.getLong("size"));
+            fileMessage.setTaskId(extraContent.getString("taskId"));
+            fileMessage.setIp(extraContent.getString("ip"));
+            fileMessage.setPort(extraContent.getInt("port"));
+
             int loadStatus = extraContent.getInt("loadStatus");
 
             //todo temp solution
             if (loadStatus == MessageConstant.IFILE_LOADING) {
                 loadStatus = MessageConstant.FILE_UNLOAD;
             }
-            imageMessage.setLoadStatus(loadStatus);
+            fileMessage.setLoadStatus(loadStatus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return imageMessage;
+        return fileMessage;
     }
 
     // 消息页面，发送文件消息
@@ -163,8 +170,12 @@ public class FileMessage extends MessageEntity implements Serializable {
         try {
             extraContent.put("path", path);
             extraContent.put("loadStatus", loadStatus);
-            String imageContent = extraContent.toString();
-            return imageContent;
+            extraContent.put("taskId", taskId);
+            extraContent.put("ip", ip);
+            extraContent.put("port", port);
+            extraContent.put("size", size);
+            String fileContent = extraContent.toString();
+            return fileContent;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -211,5 +222,21 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }

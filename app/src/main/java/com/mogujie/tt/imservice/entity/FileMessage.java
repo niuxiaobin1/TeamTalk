@@ -136,7 +136,11 @@ public class FileMessage extends MessageEntity implements Serializable {
         } else {
             receivePath = IMApplication.sApplicationContext.getFilesDir().getPath();
         }
+
         msg.setPath(receivePath+File.separator+fileName);
+        if (new File(msg.getPath()).exists()){
+            msg.setPath(receivePath+File.separator+System.currentTimeMillis()+fileName);
+        }
         if (!new File(msg.getPath()).exists()){
             new File(msg.getPath()).createNewFile();
         }

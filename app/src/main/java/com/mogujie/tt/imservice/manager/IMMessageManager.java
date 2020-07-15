@@ -446,7 +446,7 @@ public class IMMessageManager extends IMManager {
         }
         try {
             int offset = imFilePullDataRsp.getOffset();
-            RandomAccessFile raf = new RandomAccessFile(new File(msg.getPath()), "w");
+            RandomAccessFile raf = new RandomAccessFile(new File(msg.getPath()), "rw");
             raf.seek(offset);
             raf.write(imFilePullDataRsp.getFileData().toByteArray());
 
@@ -533,11 +533,12 @@ public class IMMessageManager extends IMManager {
                         .build();
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
-                imFileReceiveSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                ToastUtil.toastShortMessage("接收文件成功--"+msg.getPath());
                 fileReceiveList.remove(msg);
                 fileTransIngList.clear();
                 startReqFileServer();
-                ToastUtil.toastShortMessage("接收文件成功");
+
             }
 
         }
@@ -558,8 +559,11 @@ public class IMMessageManager extends IMManager {
 
     public void startSaveFile(String taskId){
         if (getFileReceiveMsgByTask(taskId)!=null){
-            fileTransWaitList.add(getFileReceiveMsgByTask(taskId));
-            startReqFileServer();
+            if (!fileTransWaitList.contains(getFileReceiveMsgByTask(taskId))){
+                fileTransWaitList.add(getFileReceiveMsgByTask(taskId));
+                startReqFileServer();
+            }
+
         }
     }
 
@@ -628,11 +632,10 @@ public class IMMessageManager extends IMManager {
     }
 
     public void loginFileReceiveServer(FileMessage fileMessage) {
-        Log.e("nxb",fileMessage.getTaskId()+"");
         IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
                 .setUserId(IMLoginManager.instance().getLoginId())
                 .setTaskId(fileMessage.getTaskId())
-                .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_UPLOAD)
+                .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_DOWNLOAD)
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
         int cid = IMBaseDefine.FileCmdID.CID_FILE_LOGIN_REQ_VALUE;

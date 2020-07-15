@@ -16,6 +16,7 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
+import com.mogujie.tt.imservice.manager.IMMessageManager;
 import com.mogujie.tt.ui.widget.BubbleImageView;
 import com.mogujie.tt.ui.widget.MGProgressbar;
 import com.mogujie.tt.utils.FileUtil;
@@ -82,6 +83,11 @@ public class FileRenderView extends BaseMsgRenderView {
     @Override
     public void render(final MessageEntity messageEntity, final UserEntity userEntity, Context ctx) {
         super.render(messageEntity, userEntity, ctx);
+        FileMessage fileMessage= (FileMessage) messageEntity;
+        if (fileMessage.getLoadStatus()==MessageConstant.FILE_UNLOAD){
+            //下载
+            IMMessageManager.instance().startSaveFile(fileMessage.getTaskId());
+        }
     }
 
 

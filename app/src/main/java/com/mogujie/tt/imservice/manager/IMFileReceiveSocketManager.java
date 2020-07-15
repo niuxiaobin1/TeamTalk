@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.callback.ListenerQueue;
 import com.mogujie.tt.imservice.callback.Packetlistener;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.network.FileReceiveServerHandler;
 import com.mogujie.tt.imservice.network.FileServerHandler;
@@ -72,6 +73,7 @@ public class IMFileReceiveSocketManager extends IMManager {
         socketStatus = SocketEvent.NONE;
     }
 
+    private FileMessage mReceiveFileMessage = null;
 
     //todo check
     @Override
@@ -151,14 +153,25 @@ public class IMFileReceiveSocketManager extends IMManager {
         }
     }
 
-    public void reqFileServer(IMFile.IMFileNotify imFileNotify){
-        if (imFileNotify.getIpAddrListCount()!=0){
+    public void reqFileServer(IMFile.IMFileNotify imFileNotify) {
+        if (imFileNotify.getIpAddrListCount() != 0) {
             FileServerAddrsEntity addrsEntity = new FileServerAddrsEntity();
             addrsEntity.priorIP = imFileNotify.getIpAddrList(0).getIp();
             addrsEntity.port = imFileNotify.getIpAddrList(0).getPort();
             connectFileServer(addrsEntity);
         }
     }
+
+    public void reqFileServer(FileMessage fileMessage) {
+        if (fileMessage != null) {
+            mReceiveFileMessage = fileMessage;
+            FileServerAddrsEntity addrsEntity = new FileServerAddrsEntity();
+            addrsEntity.priorIP = fileMessage.getIp();
+            addrsEntity.port = fileMessage.getPort();
+            connectFileServer(addrsEntity);
+        }
+    }
+
 
     /**
      * 与登陆login是强耦合的关系
@@ -216,11 +229,14 @@ public class IMFileReceiveSocketManager extends IMManager {
     }
 
     public void onFileServerConnected() {
-        Log.e("nxb", "receive---connect onFileServerConnected" );
+        Log.e("nxb", "receive---connect onFileServerConnected");
         logger.i("login#onFileServerConnected");
         listenerQueue.onStart();
         triggerEvent(SocketEvent.CONNECT_FILE_SERVER_SUCCESS);
-        IMMessageManager.instance().loginFileReceiveServer();
+        if (mReceiveFileMessage != null) {
+            IMMessageManager.instance().loginFileReceiveServer(mReceiveFileMessage);
+        }
+
     }
 
     /**
@@ -271,7 +287,6 @@ public class IMFileReceiveSocketManager extends IMManager {
     }
 
 
-
     /**
      * ------------get/set----------------------------
      */
@@ -282,8 +297,6 @@ public class IMFileReceiveSocketManager extends IMManager {
     public void setSocketStatus(SocketEvent socketStatus) {
         this.socketStatus = socketStatus;
     }
-
-
 
 
 }

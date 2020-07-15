@@ -128,38 +128,7 @@ public class ChatFragment extends MainFragment
     };
 
     private void test() {
-        IMFile.IMFileHasOfflineReq imFileHasOfflineReq = IMFile.IMFileHasOfflineReq.newBuilder()
-                .setUserId(IMLoginManager.instance().getLoginId())
-                .build();
-        int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
-        int cid = IMBaseDefine.FileCmdID.CID_FILE_HAS_OFFLINE_REQ_VALUE;
-        IMSocketManager.instance().sendRequest(imFileHasOfflineReq, sid, cid, new Packetlistener() {
-            @Override
-            public void onSuccess(Object response) {
-                try {
 
-                    IMFile.IMFileHasOfflineRsp imFileHasOfflineRsp = IMFile.IMFileHasOfflineRsp.parseFrom((CodedInputStream) response);
-                    Log.e("nxb23", imFileHasOfflineRsp.getOfflineFileListCount() + "");
-                    Log.e("nxb234", imFileHasOfflineRsp.getIpAddrListCount() + "");
-                    for (int i = 0; i < imFileHasOfflineRsp.getOfflineFileListCount(); i++) {
-                        Log.e("nxb2345", imFileHasOfflineRsp.getOfflineFileList(i).getFileName() + "");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFaild() {
-
-            }
-
-            @Override
-            public void onTimeout() {
-
-            }
-        });
     }
 
     @Override

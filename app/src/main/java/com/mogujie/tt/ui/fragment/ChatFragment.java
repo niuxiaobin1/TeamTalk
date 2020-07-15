@@ -123,7 +123,7 @@ public class ChatFragment extends MainFragment
             // 依赖联系人回话、未读消息、用户的信息三者的状态
             onRecentContactDataReady();
             EventBus.getDefault().registerSticky(ChatFragment.this);
-            test();
+//            test();
         }
     };
 
@@ -244,19 +244,16 @@ public class ChatFragment extends MainFragment
 
     @Override
     public void onStart() {
-        logger.d("chatfragment#onStart");
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        logger.d("chatfragment#onStop");
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        logger.d("chatfragment#onPause");
         super.onPause();
     }
 
@@ -306,10 +303,6 @@ public class ChatFragment extends MainFragment
         switch (event.getEvent()) {
             case GROUP_INFO_OK:
             case CHANGE_GROUP_MEMBER_SUCCESS:
-                onRecentContactDataReady();
-                searchDataReady();
-                break;
-
             case GROUP_INFO_UPDATED:
                 onRecentContactDataReady();
                 searchDataReady();

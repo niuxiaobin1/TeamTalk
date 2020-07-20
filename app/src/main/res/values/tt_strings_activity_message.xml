@@ -37,7 +37,7 @@
     <string name="refresh_over">Refreshed</string>
     <string name="refresh">Refresh</string>
     <string name="notfound_audio_file">Audio Not Found</string>
-    <string name="audio_in_speeker">Speeker Mode</string>
+    <string name="audio_in_speeker">Speaker Mode</string>
     <string name="audio_in_call">Call Mode</string>
     <string name="unavailable_image_file">File Unavailable</string>
     <string name="block_chat">Block</string>

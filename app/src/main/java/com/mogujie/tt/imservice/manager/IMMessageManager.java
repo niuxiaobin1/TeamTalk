@@ -518,7 +518,7 @@ public class IMMessageManager extends IMManager {
                 imSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
                 long pkId = DBInterface.instance().insertOrUpdateMessage(msg);
                 fileList.remove(msg);
-                ToastUtil.toastShortMessage("send file success");
+                ToastUtil.toastShortMessage("Send File Success");
             } else {
                 //接收完成
                 Log.e("nxb", "receive--- 接收成功");

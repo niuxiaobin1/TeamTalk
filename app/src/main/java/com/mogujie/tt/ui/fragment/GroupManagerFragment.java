@@ -364,12 +364,12 @@ public class GroupManagerFragment extends TTBaseFragment {
 
             @Override
             public void onFaild() {
-                ToastUtil.toastShortMessage("group getUserInfo fail");
+                ToastUtil.toastShortMessage("UserInfo Failed");
             }
 
             @Override
             public void onTimeout() {
-                ToastUtil.toastShortMessage("group getUserInfo timeout");
+                ToastUtil.toastShortMessage("UserInfo Timeout");
             }
         });
 
@@ -399,12 +399,12 @@ public class GroupManagerFragment extends TTBaseFragment {
 
             @Override
             public void onFaild() {
-                ToastUtil.toastShortMessage("group noticeList fail");
+                ToastUtil.toastShortMessage("NoticeList Failed");
             }
 
             @Override
             public void onTimeout() {
-                ToastUtil.toastShortMessage("group noticeList timeout");
+                ToastUtil.toastShortMessage("NoticeList Timeout");
             }
         });
 
@@ -508,12 +508,12 @@ public class GroupManagerFragment extends TTBaseFragment {
 
             @Override
             public void onFaild() {
-                ToastUtil.toastShortMessage("group out fail");
+                ToastUtil.toastShortMessage("Out Failed");
             }
 
             @Override
             public void onTimeout() {
-                ToastUtil.toastShortMessage("group out timeout");
+                ToastUtil.toastShortMessage("Out Timeout");
             }
         });
     }
@@ -540,12 +540,12 @@ public class GroupManagerFragment extends TTBaseFragment {
 
             @Override
             public void onFaild() {
-                ToastUtil.toastShortMessage("group discover fail");
+                ToastUtil.toastShortMessage("Discover Failed");
             }
 
             @Override
             public void onTimeout() {
-                ToastUtil.toastShortMessage("group discover timeout");
+                ToastUtil.toastShortMessage("Discover Timeout");
             }
         });
     }

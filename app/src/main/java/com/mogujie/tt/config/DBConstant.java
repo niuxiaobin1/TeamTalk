@@ -47,14 +47,14 @@ public interface DBConstant {
     public final int SHOW_FILE_TYPE = 10;
 
 
-    public final String DISPLAY_FOR_RED_PACKET = "[红包]";
-    public final String DISPLAY_FOR_RED_PACKET_OPEN = "[红包消息]";
-    public final String DISPLAY_FOR_TRANFER = "[转账]";
-    public final String DISPLAY_FOR_IMAGE = "[图片]";
-    public final String DISPLAY_FOR_MIX = "[图文消息]";
-    public final String DISPLAY_FILE_DATA = "[文件]";
+    public final String DISPLAY_FOR_RED_PACKET = "[RedPacket]";
+    public final String DISPLAY_FOR_RED_PACKET_OPEN = "[RedPacket]";
+    public final String DISPLAY_FOR_TRANFER = "[Transfer]";
+    public final String DISPLAY_FOR_IMAGE = "[Image]";
+    public final String DISPLAY_FOR_MIX = "[Mix]";
+    public final String DISPLAY_FILE_DATA = "[File]";
     public final String DISPLAY_FOR_AUDIO = "[Voice]";
-    public final String DISPLAY_FOR_ERROR = "[未知消息]";
+    public final String DISPLAY_FOR_ERROR = "[Error]";
 
 
     /**

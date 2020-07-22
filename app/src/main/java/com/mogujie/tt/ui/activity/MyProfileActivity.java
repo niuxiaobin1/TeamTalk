@@ -381,7 +381,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
         String nickName = mModifyNickNameView.getContent();
         String phone = mModifyPhoneView.getContent();
         if (!CommonUtils.isMobileNO(phone)) {
-            ToastUtil.toastShortMessage("手机号格式不正确");
+            ToastUtil.toastShortMessage("Telephone Format Error");
             return;
         }
 
@@ -403,7 +403,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 imService.getLoginManager().setLoginInfo(loginContact);
                 break;
             case USER_CHANGE_INFO_INFO_FAIL:
-                ToastUtil.toastShortMessage("上传失败");
+                ToastUtil.toastShortMessage("Upload Error");
                 break;
         }
     }
@@ -416,7 +416,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 updateUserHeader(event.getUrl());
                 break;
             case HEADER_IMAGE_UPLOAD_FAILD:
-                ToastUtil.toastShortMessage("上传失败");
+                ToastUtil.toastShortMessage("Upload Error");
                 break;
         }
     }
@@ -435,7 +435,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                 imService.getLoginManager().setLoginInfo(loginContact);
                 break;
             case USER_CHANGE_HEADER_INFO_FAIL:
-                ToastUtil.toastShortMessage("更新失败");
+                ToastUtil.toastShortMessage("Update Error");
                 break;
         }
     }

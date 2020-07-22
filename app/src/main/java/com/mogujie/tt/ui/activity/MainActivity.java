@@ -289,27 +289,27 @@ public class MainActivity extends TTBaseActivity {
 
     @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
     void showRecordDenied() {
-        ToastUtil.toastShortMessage("拒绝定位权限无法获取门店位置");
+        ToastUtil.toastShortMessage("Please allow location permission");
     }
 
 
     @OnShowRationale(Manifest.permission.ACCESS_FINE_LOCATION)
     void showRationaleForRecord(final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("不给", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         request.cancel();
                     }
                 })
                 .setCancelable(false)
-                .setMessage("使用APP需要定位信息")
+                .setMessage("Please allow location permission")
                 .show();
     }
 }

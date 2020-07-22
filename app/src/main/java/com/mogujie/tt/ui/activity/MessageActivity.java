@@ -277,11 +277,11 @@ public class MessageActivity extends TTBaseActivity
             int peerType = Integer.parseInt(sessionInfo[0]);
             switch (peerType) {
                 case DBConstant.SESSION_TYPE_SINGLE: {
-                    ToastUtil.toastShortMessage("好友不存在....");
+                    ToastUtil.toastShortMessage("Contact not exist");
                 }
                 break;
                 case DBConstant.SESSION_TYPE_GROUP: {
-                    ToastUtil.toastShortMessage("您已退出该群或群组已解散....");
+                    ToastUtil.toastShortMessage("You have left the group");
                 }
                 break;
             }
@@ -350,7 +350,7 @@ public class MessageActivity extends TTBaseActivity
                 return;
             }
             if (imService.getContactManager().findContact(peerEntity.getPeerId()) == null) {
-                ToastUtil.toastShortMessage("好友已删除");
+                ToastUtil.toastShortMessage("Contact deleted");
                 finish();
             }
         }

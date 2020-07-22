@@ -81,7 +81,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
             switch (msg.what) {
                 case 0:
                     Toast.makeText(ImageGridActivity.this,
-                            "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
+                            "Max select" + SysConstant.MAX_SELECT_IMAGE_COUNT + "image",
                             Toast.LENGTH_LONG).show();
                     break;
                 default:

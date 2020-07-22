@@ -8,7 +8,7 @@
     <string name="action_sign_in_register"><b>Sign in</b></string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_forgot_password">Forgot Password</string>
-    <string name="login_progress_signing_in">Singing</string>
+    <string name="login_progress_signing_in">Sign in</string>
     <string name="error_invalid_email">Invalid Username</string>
     <string name="error_invalid_password">Invalid Password</string>
     <string name="error_incorrect_user">Incorrect Username</string>

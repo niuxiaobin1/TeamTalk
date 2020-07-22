@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -350,18 +351,18 @@ public class ChatAdapter extends BaseAdapter {
                 groupViewHolder.msgCount.setBackgroundResource(R.drawable.tt_message_botify_no_disturb);
                 groupViewHolder.msgCount.setVisibility(View.VISIBLE);
                 groupViewHolder.msgCount.setText("");
-                ((RelativeLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).leftMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(-7);
-                ((RelativeLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).topMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(6);
+                ((LinearLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).leftMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(-7);
+                ((LinearLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).topMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(6);
                 groupViewHolder.msgCount.getLayoutParams().width = ScreenTools.instance(this.mInflater.getContext()).dip2px(10);
                 groupViewHolder.msgCount.getLayoutParams().height = ScreenTools.instance(this.mInflater.getContext()).dip2px(10);
 
             }
             else
             {
-                groupViewHolder.msgCount.setBackgroundResource(R.drawable.tt_message_notify);
+                groupViewHolder.msgCount.setBackgroundResource(R.drawable.msg_unread_bg);
                 groupViewHolder.msgCount.setVisibility(View.VISIBLE);
-                ((RelativeLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).leftMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(-10);
-                ((RelativeLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).topMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(3);
+                ((LinearLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).leftMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(-10);
+                ((LinearLayout.LayoutParams)groupViewHolder.msgCount.getLayoutParams()).topMargin=ScreenTools.instance(this.mInflater.getContext()).dip2px(3);
                 groupViewHolder.msgCount.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
                 groupViewHolder.msgCount.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
                 groupViewHolder.msgCount.setPadding(ScreenTools.instance(this.mInflater.getContext()).dip2px(3),0,ScreenTools.instance(this.mInflater.getContext()).dip2px(3),0);

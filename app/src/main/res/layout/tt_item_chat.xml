@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -52,7 +52,7 @@
                     android:id="@+id/message_count_notify"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:background="@mipmap/msg_un_read"
+                    android:background="@drawable/msg_unread_bg"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp" />
@@ -67,7 +67,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView

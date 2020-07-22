@@ -10,7 +10,7 @@ import com.mogujie.tt.app.IMApplication;
  **/
 public class LocationUtils {
     private static LocationUtils sInstance;
-    private String location = "定位中...";
+    private String location = "Location...";
 
     private LocationUtils() {
     }

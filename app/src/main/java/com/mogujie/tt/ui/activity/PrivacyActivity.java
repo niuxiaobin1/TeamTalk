@@ -84,12 +84,12 @@ public class PrivacyActivity extends TTBaseActivity {
 
                                                 @Override
                                                 public void onFaild() {
-                                                    ToastUtil.toastShortMessage("modify fail");
+                                                    ToastUtil.toastShortMessage("Update Error");
                                                 }
 
                                                 @Override
                                                 public void onTimeout() {
-                                                    ToastUtil.toastShortMessage("modify onTimeout");
+                                                    ToastUtil.toastShortMessage("Timeout");
                                                 }
                                             });
                         }

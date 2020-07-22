@@ -467,7 +467,7 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
 
     @OnPermissionDenied(Manifest.permission.READ_PHONE_STATE)
     void showRecordDenied() {
-        ToastUtil.toastShortMessage("拒绝权限可能导致注册异常");
+        ToastUtil.toastShortMessage("Please allow permission");
     }
 
     @Override

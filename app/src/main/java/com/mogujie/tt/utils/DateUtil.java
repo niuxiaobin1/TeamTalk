@@ -1,6 +1,8 @@
 
 package com.mogujie.tt.utils;
 
+import android.content.Intent;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -222,7 +224,10 @@ public class DateUtil {
         return strDesc;
     }
 
-
+    public static String getTime(Date t){
+        SimpleDateFormat format=new SimpleDateFormat("yy/MM/dd HH:mm");
+        return format.format(t);
+    }
 
 
 }

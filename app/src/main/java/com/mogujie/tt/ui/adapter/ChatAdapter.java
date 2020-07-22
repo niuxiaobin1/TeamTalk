@@ -24,6 +24,7 @@ import com.mogujie.tt.utils.DateUtil;
 import com.mogujie.tt.utils.Logger;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -295,7 +296,8 @@ public class ChatAdapter extends BaseAdapter {
         userName = recentInfo.getName();
         lastContent = recentInfo.getLatestMsgData();
         // todo 是不是每次都需要计算
-        lastTime = DateUtil.getSessionTime(recentInfo.getUpdateTime());
+//        lastTime = DateUtil.getSessionTime(recentInfo.getUpdateTime());
+        lastTime = DateUtil.getTime(new Date(((long)recentInfo.getUpdateTime())*1000));
         unReadCount = recentInfo.getUnReadCnt();
         if(null!=recentInfo.getAvatar()&&recentInfo.getAvatar().size()>0)
         {
@@ -336,7 +338,8 @@ public class ChatAdapter extends BaseAdapter {
         userName = recentInfo.getName();
         lastContent = recentInfo.getLatestMsgData();
         // todo 是不是每次都需要计算
-        lastTime = DateUtil.getSessionTime(recentInfo.getUpdateTime());
+//        lastTime = DateUtil.getSessionTime(recentInfo.getUpdateTime());
+        lastTime = DateUtil.getTime(new Date(((long)recentInfo.getUpdateTime())*1000));
         unReadCount = recentInfo.getUnReadCnt();
 //        sessionType = recentInfo.getSessionType();
         // 设置未读消息计数 只有群组有的

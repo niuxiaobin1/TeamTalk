@@ -518,7 +518,7 @@ public class IMMessageManager extends IMManager {
                 imSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
                 long pkId = DBInterface.instance().insertOrUpdateMessage(msg);
                 fileList.remove(msg);
-                ToastUtil.toastShortMessage("发送文件成功");
+                ToastUtil.toastShortMessage("send file success");
             } else {
                 //接收完成
                 Log.e("nxb", "receive--- 接收成功");
@@ -534,7 +534,7 @@ public class IMMessageManager extends IMManager {
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
                 imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
-                ToastUtil.toastShortMessage("接收文件成功--"+msg.getPath());
+                ToastUtil.toastShortMessage("Receive file--"+msg.getPath());
                 fileReceiveList.remove(msg);
                 fileTransIngList.clear();
                 startReqFileServer();

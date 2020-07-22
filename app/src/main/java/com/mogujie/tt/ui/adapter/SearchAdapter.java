@@ -247,7 +247,7 @@ public class SearchAdapter extends BaseAdapter implements
             userHolder.divider.setVisibility(View.VISIBLE);
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.tt_round_bg);
+        userHolder.avatar.setDefaultImageRes(R.mipmap.default_user_icon);
         userHolder.avatar.setCorner(0);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
 

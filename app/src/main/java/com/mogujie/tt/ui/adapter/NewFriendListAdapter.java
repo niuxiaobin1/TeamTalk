@@ -73,7 +73,7 @@ public class NewFriendListAdapter extends ArrayAdapter<UserEntity> {
             mViewHolder.agree = mView.findViewById(R.id.agree);
             mView.setTag(mViewHolder);
         }
-        mViewHolder.avatar.setDefaultImageRes(R.drawable.tt_round_bg);
+        mViewHolder.avatar.setDefaultImageRes(R.mipmap.default_user_icon);
         mViewHolder.avatar.setCorner(15);
         mViewHolder.avatar.setImageUrl(data.getAvatar());
         mViewHolder.name.setText(data.getMainName());

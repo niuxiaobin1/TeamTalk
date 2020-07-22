@@ -269,7 +269,7 @@ public class ContactAdapter extends BaseAdapter implements
 
         /***reset-- 控件的默认值*/
         userHolder.nameView.setText(userEntity.getMainName());
-        userHolder.avatar.setImageResource(R.drawable.tt_round_bg);
+        userHolder.avatar.setImageResource(R.mipmap.default_user_icon);
         userHolder.divider.setVisibility(View.VISIBLE);
         userHolder.sectionView.setVisibility(View.GONE);
 
@@ -298,7 +298,7 @@ public class ContactAdapter extends BaseAdapter implements
             }
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.tt_round_bg);
+        userHolder.avatar.setDefaultImageRes(R.mipmap.default_user_icon);
         userHolder.avatar.setCorner(0);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
 

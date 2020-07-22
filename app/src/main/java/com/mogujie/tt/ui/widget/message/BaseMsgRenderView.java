@@ -86,7 +86,7 @@ public abstract class BaseMsgRenderView extends RelativeLayout{
         int msgStatus = messageEntity.getStatus();
 
         //头像设置
-        portrait.setDefaultImageRes(R.drawable.tt_round_bg);
+        portrait.setDefaultImageRes(R.mipmap.default_user_icon);
         portrait.setCorner(5);
         portrait.setImageUrl(avatar);
         // 设定姓名 应该消息都是有的

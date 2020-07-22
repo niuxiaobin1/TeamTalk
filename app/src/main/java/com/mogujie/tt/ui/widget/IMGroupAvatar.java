@@ -25,8 +25,8 @@ public class IMGroupAvatar extends LinearLayout {
     private int rowCnt = 0;
     private int parentPadding = 0;
     private int childCorner =0;
-    private int defaultChildAvatarRes = R.drawable.tt_round_bg;
-    private int defaultParentAvatarBk = R.drawable.group_avatar_bk;
+    private int defaultChildAvatarRes = R.mipmap.default_user_icon;
+    private int defaultParentAvatarBk = R.drawable.group_header_bg;
     private ArrayList<ImageView> mAvatarImages = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<String>();
 
@@ -49,7 +49,7 @@ public class IMGroupAvatar extends LinearLayout {
         parentPadding = ScreenUtil.instance(getContext()).dip2px(DEFAULT_PADDING_DIP);
         childMargin = ScreenUtil.instance(getContext()).dip2px(DEFAULT_MARGIN_DIP);
         parentAvatarSize = ScreenUtil.instance(getContext()).dip2px(DEFAULT_VIEW_SIZE_DIP);
-        setPadding(parentPadding, parentPadding, parentPadding, parentPadding);
+//        setPadding(parentPadding, parentPadding, parentPadding, parentPadding);
     }
 
     public void setParentPadding(int padding){

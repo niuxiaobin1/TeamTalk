@@ -46,20 +46,73 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
+                <LinearLayout
+                    android:background="@mipmap/chat_other_content_bg_copy"
+                    android:layout_width="199mm"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <!--BubbleImageView:bubble_angle="5dp"-->
-                <!--BubbleImageView:bubble_arrowHeight="10dp"-->
-                <!--BubbleImageView:bubble_arrowLocation="left"-->
-                <!--BubbleImageView:bubble_arrowOffset="-5dp"-->
-                <!--BubbleImageView:bubble_arrowTop="15dp"-->
-                <!--BubbleImageView:bubble_arrowWidth="5dp" />-->
+                    <LinearLayout
+                        android:layout_width="199mm"
+                        android:layout_height="51mm"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="9mm"
+                        android:paddingRight="9mm">
 
-                <ImageView
-                    android:id="@+id/file_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:padding="0dp"
-                    android:scaleType="centerCrop" />
+
+
+                        <ImageView
+                            android:id="@+id/file_image"
+                            android:layout_marginRight="15mm"
+                            android:layout_width="26mm"
+                            android:layout_height="29mm"
+                            android:src="@mipmap/msg_file_icon" />
+
+                        <LinearLayout
+                            android:layout_marginRight="10mm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/titleTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_33"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/sizeTv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/msg_file_size_color"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_marginLeft="10mm"
+                        android:layout_marginRight="10mm"
+                        android:background="@color/status_bar_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="1mm"/>
+
+                    <TextView
+                        android:text="@string/chat_file_transfer"
+                        android:layout_width="199mm"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15mm"
+                        android:paddingTop="3mm"
+                        android:paddingBottom="2mm"
+                        android:textColor="@color/color_78"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
 
                 <com.mogujie.tt.ui.widget.MGProgressbar
                     android:id="@+id/tt_image_progress"

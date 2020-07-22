@@ -166,7 +166,7 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
             return;
         }
 
-        mModifyUserIconView.getImageView().setDefaultImageRes(R.drawable.tt_round_bg);
+        mModifyUserIconView.getImageView().setDefaultImageRes(R.mipmap.default_user_icon);
         mModifyUserIconView.getImageView().setCorner(8);
         mModifyUserIconView.getImageView().setImageUrl(loginContact.getAvatar());
 

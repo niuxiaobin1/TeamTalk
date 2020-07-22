@@ -229,7 +229,7 @@ public class UserInfoFragment extends MainFragment {
         setTextViewContent(R.id.nickName, currentUser.getPinyinName());
         setTextViewContent(R.id.userName, currentUser.getMainName());
         //头像设置
-        portraitImageView.setDefaultImageRes(R.drawable.tt_round_bg);
+        portraitImageView.setDefaultImageRes(R.mipmap.default_user_icon);
         portraitImageView.setCorner(8);
         portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
         portraitImageView.setImageUrl(currentUser.getAvatar());

@@ -547,13 +547,35 @@ public class IMMessageManager extends IMManager {
 
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
         Log.e("nxb", "onRsqFileNotify");
-//        try {
-//            fileReceiveList.add(FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
-//                    imFileNotify.getFileSize()));
-//            imFileReceiveSocketManager.reqFileServer(imFileNotify);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        FileMessage fileMessage = null;
+        try {
+            fileMessage = FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
+                    imFileNotify.getFileSize());
+            fileMessage.setIp(imFileNotify.getIpAddrList(0).getIp());
+            fileMessage.setPort(imFileNotify.getIpAddrList(0).getPort());
+            fileMessage.setTaskId(imFileNotify.getTaskId());
+
+            fileMessage.buildSessionKey(false);
+            fileMessage.setStatus(MessageConstant.MSG_SUCCESS);
+            /**对于混合消息，未读消息计数还是1,session已经更新*/
+            if (!fileReceiveList.contains(fileMessage)){
+                fileReceiveList.add(fileMessage);
+            }
+            dbInterface.insertOrUpdateMessage(fileMessage);
+            sessionManager.updateSession(fileMessage);
+
+            /**
+             *  发送已读确认由上层的activity处理 特殊处理
+             *  1. 未读计数、 通知、session页面
+             *  2. 当前会话
+             * */
+            PriorityEvent notifyEvent = new PriorityEvent();
+            notifyEvent.event = PriorityEvent.Event.MSG_RECEIVED_MESSAGE;
+            notifyEvent.object = fileMessage;
+            triggerEvent(notifyEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -587,9 +609,6 @@ public class IMMessageManager extends IMManager {
         loginFileServer(fileList.get(0));
     }
 
-    public void loginFileReceiveServer() {
-        loginFileReceiveServer(fileReceiveList.get(0));
-    }
 
 
     private void loginFileServer(FileMessage fileMessage) {

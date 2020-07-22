@@ -298,7 +298,7 @@ public class MyFragment extends MainFragment {
         userNameView.setText(loginContact.getRealName());
 
         //头像设置
-        portraitImageView.setDefaultImageRes(R.drawable.tt_round_bg);
+        portraitImageView.setDefaultImageRes(R.mipmap.default_user_icon);
         portraitImageView.setCorner(15);
         portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
         portraitImageView.setImageUrl(loginContact.getAvatar());

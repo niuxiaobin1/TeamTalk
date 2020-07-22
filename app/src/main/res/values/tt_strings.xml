@@ -353,6 +353,7 @@
     <string name="changepsw_new_confirm">Confirm New Password</string>
     <string name="chat_transfer">Transfer</string>
     <string name="chat_redpacket">Red Packet</string>
+    <string name="chat_file_transfer">File Transfer</string>
     <string name="chat_msg_redpacket">[Red Packet]</string>
     <string name="chat_msg_transfer">[Transfer]</string>
     <string name="chat_friedn_request">Friend Request</string>

@@ -32,7 +32,7 @@ public class QrcodeWindow extends BasePopupWindow implements View.OnClickListene
         idTv = findViewById(R.id.idTv);
         closeImg = findViewById(R.id.closeImg);
 
-        imageView.setDefaultImageRes(R.drawable.tt_round_bg);
+        imageView.setDefaultImageRes(R.mipmap.default_user_icon);
         imageView.setCorner(8);
         imageView.setImageUrl(userEntity.getAvatar());
         idTv.setText(userEntity.getEmail());

@@ -151,6 +151,7 @@ public class MessageActivity extends TTBaseActivity
 
     private static final int REDPACKET_CODE = 12;
     private static final int TRANSFER_CODE = 13;
+    private static final int REQUEST_CODE_FILE = 1011;
     private PullToRefreshListView lvPTR = null;
     private CustomEditView messageEdt = null;
     private TextView sendBtn = null;
@@ -452,22 +453,31 @@ public class MessageActivity extends TTBaseActivity
                     handleImagePickData(selectList);
                 break;
             case FilePickerConst.REQUEST_CODE_DOC:
-                if (data != null) {
-                    ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
-                    if (dataList != null) {
-                        docPaths = new ArrayList<>();
-                        docPaths.addAll(dataList);
-                    }
-                    for (int i = 0; i < docPaths.size(); i++) {
-                        try {
-                            handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
-
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-                    }
+//                if (data != null) {
+//                    ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS);
+//                    if (dataList != null) {
+//                        docPaths = new ArrayList<>();
+//                        docPaths.addAll(dataList);
+//                    }
+//                    for (int i = 0; i < docPaths.size(); i++) {
+//                        try {
+//                            handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, docPaths.get(i)));
+//
+//                        } catch (URISyntaxException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+                break;
+            case REQUEST_CODE_FILE:
+                Uri uri = data.getData();
+                try {
+                    handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
                 }
                 break;
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -1770,19 +1780,9 @@ public class MessageActivity extends TTBaseActivity
 
     @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void pickDocClicked() {
-        String[] zips = {"zip", "rar"};
-        String[] pdfs = {"aac"};
-        FilePickerBuilder.getInstance()
-                .setMaxCount(9)
-                .setSelectedFiles(new ArrayList<>())
-                .setActivityTheme(R.style.AppTheme)
-                .setActivityTitle("Please select file")
-                .addFileSupport("ZIP", zips)
-                .addFileSupport("AAC", pdfs, R.mipmap.pdf_blue)
-                .enableDocSupport(true)
-                .enableSelectAll(true)
-                .sortDocumentsBy(SortingTypes.name)
-                .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                .pickFile(this);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, REQUEST_CODE_FILE);
     }
 }

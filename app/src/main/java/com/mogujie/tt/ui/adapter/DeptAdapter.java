@@ -210,7 +210,7 @@ public class DeptAdapter extends BaseAdapter implements SectionIndexer,
             userHolder.sectionView.setVisibility(View.GONE);
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.tt_round_bg);
+        userHolder.avatar.setDefaultImageRes(R.mipmap.default_user_icon);
         userHolder.avatar.setCorner(0);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
 

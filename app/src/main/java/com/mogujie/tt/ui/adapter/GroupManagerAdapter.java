@@ -186,7 +186,7 @@ public class GroupManagerAdapter extends BaseAdapter {
             holder.userTitle = (TextView) convertView.findViewById(R.id.group_manager_user_title);
             holder.role = (ImageView)convertView.findViewById(R.id.grid_item_image_role);
             holder.deleteImg = convertView.findViewById(R.id.deleteLayout);
-            holder.imageView.setDefaultImageRes(R.drawable.tt_round_bg);
+            holder.imageView.setDefaultImageRes(R.mipmap.default_user_icon);
             convertView.setTag(holder);
         }
         else
@@ -257,7 +257,7 @@ public class GroupManagerAdapter extends BaseAdapter {
 			// holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			if (avatarUrl != null) {
                 //头像设置
-                holder.imageView.setDefaultImageRes(R.drawable.tt_round_bg);
+                holder.imageView.setDefaultImageRes(R.mipmap.default_user_icon);
                 holder.imageView.setCorner(8);
                 holder.imageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
                 holder.imageView.setImageUrl(avatarUrl);

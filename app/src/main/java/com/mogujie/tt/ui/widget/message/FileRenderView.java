@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
@@ -19,6 +21,7 @@ import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.manager.IMMessageManager;
 import com.mogujie.tt.ui.widget.BubbleImageView;
 import com.mogujie.tt.ui.widget.MGProgressbar;
+import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
 
@@ -40,6 +43,9 @@ public class FileRenderView extends BaseMsgRenderView {
      * file消息体
      */
     private ImageView messageImage;
+
+    private TextView titleTv;
+    private TextView sizeTv;
     /**
      * 图片状态指示
      */
@@ -62,6 +68,9 @@ public class FileRenderView extends BaseMsgRenderView {
         super.onFinishInflate();
         messageLayout = findViewById(R.id.message_layout);
         messageImage = (ImageView) findViewById(R.id.file_image);
+        titleTv = (TextView) findViewById(R.id.titleTv);
+        sizeTv = (TextView) findViewById(R.id.sizeTv);
+        messageImage = (ImageView) findViewById(R.id.file_image);
         imageProgress = (MGProgressbar) findViewById(R.id.tt_image_progress);
         imageProgress.setShowText(false);
     }
@@ -83,11 +92,14 @@ public class FileRenderView extends BaseMsgRenderView {
     @Override
     public void render(final MessageEntity messageEntity, final UserEntity userEntity, Context ctx) {
         super.render(messageEntity, userEntity, ctx);
-        FileMessage fileMessage= (FileMessage) messageEntity;
-        if (fileMessage.getLoadStatus()==MessageConstant.FILE_UNLOAD){
+        FileMessage fileMessage = (FileMessage) messageEntity;
+        if (fileMessage.getLoadStatus() == MessageConstant.FILE_UNLOAD) {
             //下载
             IMMessageManager.instance().startSaveFile(fileMessage.getTaskId());
         }
+
+        titleTv.setText(CommonUtil.getFileNameWithSuffix(((FileMessage) messageEntity).getPath()));
+        sizeTv.setText(Formatter.formatShortFileSize(ctx,((FileMessage) messageEntity).getSize()));
     }
 
 
@@ -129,10 +141,7 @@ public class FileRenderView extends BaseMsgRenderView {
      */
     @Override
     public void msgSendinging(final MessageEntity entity) {
-        if (isMine()) {
 
-            messageImage.setImageResource(R.mipmap.file_icon);
-        }
 
     }
 
@@ -146,7 +155,6 @@ public class FileRenderView extends BaseMsgRenderView {
     @Override
     public void msgSuccess(final MessageEntity entity) {
         super.msgSuccess(entity);
-        messageImage.setImageResource(R.mipmap.file_icon);
     }
 
     /**

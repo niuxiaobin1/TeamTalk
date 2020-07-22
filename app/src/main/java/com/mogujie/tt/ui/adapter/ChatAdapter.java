@@ -172,7 +172,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.lastTime = (TextView) convertView.findViewById(R.id.message_time);
             holder.msgCount = (TextView) convertView.findViewById(R.id.message_count_notify);
             holder.noDisturb = (ImageView)convertView.findViewById(R.id.message_time_no_disturb_view);
-            holder.avatar.setImageResource(R.drawable.tt_round_bg);
+            holder.avatar.setImageResource(R.mipmap.default_head);
             convertView.setTag(holder);
         }else{
             holder = (ContactViewHolder)convertView.getTag();
@@ -193,7 +193,7 @@ public class ChatAdapter extends BaseAdapter {
         RecentInfo recentInfo = recentSessionList.get(position);
         GroupViewHolder holder;
         if (null == convertView) {
-            convertView = mInflater.inflate(R.layout.tt_item_chat_group, parent,false);
+            convertView = mInflater.inflate(R.layout.tt_item_group_chat, parent,false);
             holder = new GroupViewHolder();
             holder.avatarLayout = (IMGroupAvatar) convertView.findViewById(R.id.contact_portrait);
             holder.uname = (TextView) convertView.findViewById(R.id.shop_name);
@@ -314,7 +314,7 @@ public class ChatAdapter extends BaseAdapter {
             contactViewHolder.msgCount.setVisibility(View.GONE);
         }
         //头像设置
-        contactViewHolder.avatar.setDefaultImageRes(R.drawable.tt_round_bg);
+        contactViewHolder.avatar.setDefaultImageRes(R.mipmap.default_user_icon);
         contactViewHolder.avatar.setCorner(8);
         contactViewHolder.avatar.setImageUrl(avatarUrl);
         // 设置其它信息

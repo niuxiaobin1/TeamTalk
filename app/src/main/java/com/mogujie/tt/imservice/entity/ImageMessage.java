@@ -1,5 +1,7 @@
 package com.mogujie.tt.imservice.entity;
 
+import android.text.TextUtils;
+
 import com.luck.picture.lib.entity.LocalMedia;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
@@ -211,7 +213,11 @@ public class ImageMessage extends MessageEntity implements Serializable {
         } else if (item.isCut()) {
             iconPath = item.getCutPath();
         } else {
-            iconPath = item.getPath();
+            if (!TextUtils.isEmpty(item.getRealPath())){
+                iconPath = item.getRealPath();
+            }else{
+                iconPath = item.getAndroidQToPath();
+            }
         }
         if (new File(iconPath).exists()) {
             msg.setPath(iconPath);

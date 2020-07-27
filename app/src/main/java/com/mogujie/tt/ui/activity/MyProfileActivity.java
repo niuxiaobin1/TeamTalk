@@ -356,7 +356,11 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
                         } else if (media.isCut()) {
                             iconPath = media.getCutPath();
                         } else {
-                            iconPath = media.getPath();
+                            if (!TextUtils.isEmpty(media.getRealPath())){
+                                iconPath = media.getRealPath();
+                            }else{
+                                iconPath = media.getAndroidQToPath();
+                            }
                         }
                     }
                     if (!TextUtils.isEmpty(iconPath)) {

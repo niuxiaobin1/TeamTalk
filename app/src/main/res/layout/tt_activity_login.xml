@@ -90,6 +90,7 @@
                         android:gravity="center_vertical"
                         android:hint="@string/password"
                         android:singleLine="true"
+                        android:inputType="textPassword"
                         android:textColor="@color/color_33"
                         android:textColorHint="@color/color_87"
                         android:textSize="17sp" />

@@ -545,6 +545,15 @@ public class IMContactManager extends IMManager {
             return;
         }
 
+        if (imAgreeFirendNotify.getStatus()==1){
+            //agree
+            int updateTime = dbInterface.getUserInfoLastTime();
+            reqGetAllFriendsUsers(updateTime);
+        }else if(imAgreeFirendNotify.getStatus()==2){
+            //deny
+        }
+
+
     }
 
 
@@ -557,6 +566,16 @@ public class IMContactManager extends IMManager {
         if (imAddFriendRsp == null) {
             return;
         }
+        if (imAddFriendRsp.getResultCode()!=0){
+            //添加失败
+            ToastUtil.toastLongMessage(imAddFriendRsp.getResultString());
+        }else if(imAddFriendRsp.getResultCode()==10){
+            //自动同意
+            int updateTime = dbInterface.getUserInfoLastTime();
+            reqGetAllFriendsUsers(updateTime);
+        }
+
+
 
     }
 

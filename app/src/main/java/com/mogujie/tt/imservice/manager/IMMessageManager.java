@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.DBInterface;
@@ -407,7 +406,6 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq) {
-        Log.e("nxb", "send---发送文件 " + imFilePullDataReq.getOffset());
         FileMessage msg = getFileMsgByTask(imFilePullDataReq.getTaskId());
         if (msg == null) {
             return;
@@ -439,7 +437,6 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onPullFileDataRsq(IMFile.IMFilePullDataRsp imFilePullDataRsp) {
-        Log.e("nxb", "receive--- 存储文件" + imFilePullDataRsp.getOffset());
         FileMessage msg = getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId());
         if (msg == null) {
             return;
@@ -497,10 +494,8 @@ public class IMMessageManager extends IMManager {
 
     public void onRspFileStatus(IMFile.IMFileState imFileState) {
         if (imFileState.getState().getNumber() == IMBaseDefine.ClientFileState.CLIENT_FILE_DONE_VALUE) {
-            Log.e("nxb", "CLIENT_FILE_DONE_VALUE");
             if (imFileState.getUserId() == IMLoginManager.instance().getLoginId()) {
                 //传输完成
-                Log.e("nxb", "send  发送成功");
                 FileMessage msg = getFileMsgByTask(imFileState.getTaskId());
                 if (msg == null) {
                     return;
@@ -521,7 +516,6 @@ public class IMMessageManager extends IMManager {
                 ToastUtil.toastShortMessage("Send File Success");
             } else {
                 //接收完成
-                Log.e("nxb", "receive--- 接收成功");
                 FileMessage msg = getFileReceiveMsgByTask(imFileState.getTaskId());
                 if (msg == null) {
                     return;
@@ -546,7 +540,6 @@ public class IMMessageManager extends IMManager {
     }
 
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
-        Log.e("nxb", "onRsqFileNotify");
         FileMessage fileMessage = null;
         try {
             fileMessage = FileMessage.buildForSend(imFileNotify.getFileName(), imFileNotify.getFromUserId(),
@@ -629,7 +622,6 @@ public class IMMessageManager extends IMManager {
                     if (imFileLoginRsp.getResultCode() != 0) {
                         ToastUtil.toastShortMessage("login file server error");
                     } else {
-                        Log.e("nxb", "send---login file server success");
                     }
 
                 } catch (IOException e) {
@@ -666,11 +658,8 @@ public class IMMessageManager extends IMManager {
                 try {
                     IMFile.IMFileLoginRsp imFileLoginRsp = IMFile.IMFileLoginRsp.parseFrom((CodedInputStream) response);
                     if (imFileLoginRsp.getResultCode() != 0) {
-                        Log.e("nxb",imFileLoginRsp.getResultCode()+"");
                         ToastUtil.toastShortMessage("login receive file server error");
                     } else {
-                        Log.e("nxb", "receive---login file server success");
-                        Log.e("nxb", "receive--- 发起文件传输请求");
                         IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
                                 .setUserId(IMLoginManager.instance().getLoginId())
                                 .setTaskId(fileMessage.getTaskId())

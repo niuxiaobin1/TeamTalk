@@ -188,7 +188,6 @@ public class IMFileSocketManager extends IMManager {
         this.currentFileAddress = currentFileAddress;
 
         String priorIP = currentFileAddress.priorIP;
-        Log.e("nxb", "send---connect server" + priorIP);
         int port = currentFileAddress.port;
         logger.i("login#connectFileServer -> (%s:%d)", priorIP, port);
 
@@ -237,7 +236,6 @@ public class IMFileSocketManager extends IMManager {
 
     public void onFileServerConnected() {
         logger.i("login#onFileServerConnected");
-        Log.e("nxb", "send---onFileServerConnected");
         listenerQueue.onStart();
         triggerEvent(SocketEvent.CONNECT_FILE_SERVER_SUCCESS);
         IMMessageManager.instance().loginFileServer();

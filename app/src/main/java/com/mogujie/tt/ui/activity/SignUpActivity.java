@@ -284,7 +284,6 @@ public class SignUpActivity extends TTBaseActivity {
         timer=new Timer();
         timer.schedule(new CountDownTask(),100,1000);
         sendCodeTv.setEnabled(false);
-        Log.e("nxb",imRegGetCodeRsp.getCode());
 //        userVerifiCodeEt.setText(imRegGetCodeRsp.getCode());
         ToastUtil.toastShortMessage(getResources().getString(R.string.app_code_sended));
     }

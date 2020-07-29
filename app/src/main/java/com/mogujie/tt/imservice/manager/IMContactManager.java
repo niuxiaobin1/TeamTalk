@@ -544,10 +544,6 @@ public class IMContactManager extends IMManager {
             EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_FAIL);
             return;
         }
-        Log.e("nxb-self",IMLoginManager.instance().getLoginId()+"");
-        Log.e("nxb",imAgreeFirendNotify.getStatus()+"");
-        Log.e("nxb",imAgreeFirendNotify.getFromUserId()+"");
-        Log.e("nxb",imAgreeFirendNotify.getToUserId()+"");
 
     }
 

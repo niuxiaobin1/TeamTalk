@@ -1,17 +1,20 @@
 package com.mogujie.tt.ui.widget.message;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.luck.picture.lib.PictureSelector;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
@@ -24,6 +27,9 @@ import com.mogujie.tt.ui.widget.MGProgressbar;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.ToastUtil;
+
+import java.io.File;
 
 /**
  * @author : yingmu on 15-1-9.
@@ -70,7 +76,6 @@ public class FileRenderView extends BaseMsgRenderView {
         messageImage = (ImageView) findViewById(R.id.file_image);
         titleTv = (TextView) findViewById(R.id.titleTv);
         sizeTv = (TextView) findViewById(R.id.sizeTv);
-        messageImage = (ImageView) findViewById(R.id.file_image);
         imageProgress = (MGProgressbar) findViewById(R.id.tt_image_progress);
         imageProgress.setShowText(false);
     }
@@ -97,9 +102,24 @@ public class FileRenderView extends BaseMsgRenderView {
             //下载
             IMMessageManager.instance().startSaveFile(fileMessage.getTaskId());
         }
+        if (FileUtil.getExtensionName(((FileMessage) messageEntity).getPath()).toUpperCase().equals("MP4")) {
+            //video
+            messageImage.setImageResource(R.mipmap.msg_file_video_icon);
+            messageLayout.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (new File(fileMessage.getPath()).exists()) {
+                        PictureSelector.create((Activity) getContext()).externalPictureVideo(fileMessage.getPath());
+                    } else {
+                        ToastUtil.toastShortMessage("file not exists...");
+                    }
+
+                }
+            });
+        }
 
         titleTv.setText(CommonUtil.getFileNameWithSuffix(((FileMessage) messageEntity).getPath()));
-        sizeTv.setText(Formatter.formatShortFileSize(ctx,((FileMessage) messageEntity).getSize()));
+        sizeTv.setText(Formatter.formatShortFileSize(ctx, ((FileMessage) messageEntity).getSize()));
     }
 
 

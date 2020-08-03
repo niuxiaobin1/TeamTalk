@@ -85,7 +85,7 @@ public class LoadImageService extends IntentService {
         } else {
             try {
                 File file = new File(messageInfo.getPath());
-                if (file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).toLowerCase().equals(".gif")) {
+                if (file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).toLowerCase().equals("gif")) {
                     MoGuHttpClient httpClient = new MoGuHttpClient();
                     SystemConfigSp.instance().init(getApplicationContext());
                     result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), FileUtil.File2byte(messageInfo.getPath()), messageInfo.getPath());

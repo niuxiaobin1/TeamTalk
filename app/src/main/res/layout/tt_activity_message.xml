@@ -296,6 +296,7 @@
                     android:orientation="vertical" >
 
                     <View
+                        android:id="@+id/select_video_btn"
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:background="@mipmap/ic_more_video" />

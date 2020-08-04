@@ -1268,7 +1268,7 @@ public class MessageActivity extends TTBaseActivity
                         .isPreviewVideo(true)// 是否可预览视频
                         .querySpecifiedFormatSuffix(PictureMimeType.ofMP4())// 查询指定后缀格式资源
                         //.isEnablePreviewAudio() // 是否可播放音频
-                        .isCamera(true)// 是否显示拍照按钮
+                        .isCamera(false)// 是否显示拍照按钮
                         //.isMultipleSkipCrop(false)// 多图裁剪时是否支持跳过，默认支持
                         //.isMultipleRecyclerAnimation(false)// 多图裁剪底部列表显示动画效果
                         .isZoomAnim(true)// 图片列表点击 缩放效果 默认true

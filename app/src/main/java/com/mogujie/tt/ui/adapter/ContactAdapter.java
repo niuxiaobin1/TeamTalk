@@ -17,6 +17,7 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
+import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.mogujie.tt.ui.widget.IMGroupAvatar;
@@ -435,6 +436,19 @@ public class ContactAdapter extends BaseAdapter implements
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getPeerId() == userEntity.getPeerId()) {
                 userList.remove(i);
+                break;
+            }
+        }
+        notifyDataSetChanged();
+    }
+    /**
+     * 更新用户
+     */
+    public void updateRecentInfo(UserAvatarInfoEvent userAvatarInfoEvent) {
+
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getPeerId() == userAvatarInfoEvent.userId) {
+                userList.get(i).setAvatar(userAvatarInfoEvent.avatar);
                 break;
             }
         }

@@ -22,6 +22,7 @@ import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
+import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
 import com.mogujie.tt.imservice.service.IMService;
@@ -367,6 +368,12 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
                     contactAdapter.deleteRecentInfo(event.userEntity);
                 }
                 break;
+        }
+    }
+
+    public void onEventMainThread(UserAvatarInfoEvent userAvatarInfoEvent) {
+        if (contactAdapter!=null){
+            contactAdapter.updateRecentInfo(userAvatarInfoEvent);
         }
     }
 }

@@ -190,6 +190,7 @@ public class MessageActivity extends TTBaseActivity
     private IMService imService;
     private UserEntity loginUser;
     private PeerEntity peerEntity;
+    private boolean showErrorFlg=false;
 
     // 当前的session
     private String currentSessionKey;
@@ -288,6 +289,10 @@ public class MessageActivity extends TTBaseActivity
             }
             finish();
             return;
+        }else{
+            if (peerEntity.getType()==DBConstant.SESSION_TYPE_GROUP){
+                findViewById(R.id.secondLineLl).setVisibility(View.GONE);
+            }
         }
         // 头像、历史消息加载、取消通知
         setTitleByUser();
@@ -493,7 +498,18 @@ public class MessageActivity extends TTBaseActivity
             case REQUEST_CODE_FILE:
                 Uri uri = data.getData();
                 try {
-                    handleFilePickData(ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri));
+                    String path=ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri);
+                    if (path.toUpperCase().endsWith(".JPG")||
+                            path.toUpperCase().endsWith(".PNG")||path.toUpperCase().endsWith(".GIF")){
+                        List<LocalMedia> selectList1=new ArrayList<>();
+                        LocalMedia localMedia=new LocalMedia();
+                        localMedia.setRealPath(path);
+                        selectList1.add(localMedia);
+                        handleImagePickData(selectList1);
+                    }else{
+                        handleFilePickData(path);
+                    }
+
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
@@ -931,6 +947,10 @@ public class MessageActivity extends TTBaseActivity
         soundVolumeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                if (showErrorFlg){
+                    showErrorFlg=false;
+                    return;
+                }
                 if (audioRecorderInstance.isRecording()) {
                     audioRecorderInstance.setRecording(false);
                 }
@@ -948,6 +968,7 @@ public class MessageActivity extends TTBaseActivity
                         uiHandler.sendMessage(msg);
                     }
                 } else {
+                    showErrorFlg=true;
                     soundVolumeImg.setVisibility(View.GONE);
                     soundVolumeLayout
                             .setBackgroundResource(R.drawable.tt_sound_volume_short_tip_bk);

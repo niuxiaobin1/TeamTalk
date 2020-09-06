@@ -11,6 +11,7 @@ import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.ChangeUserInfoEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
+import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
@@ -531,6 +532,17 @@ public class IMContactManager extends IMManager {
             return;
         }
         EventBus.getDefault().postSticky(ChangeUserInfoEvent.USER_CHANGE_INFO_INFO_OK);
+
+    }
+
+    /**
+     * 用户修改头像（广播）
+     *
+     * @param imAvatarChangedNotify
+     */
+    public void imUserAvatarChangedBroadCast(IMBuddy.IMAvatarChangedNotify imAvatarChangedNotify) {
+        EventBus.getDefault().postSticky(new UserAvatarInfoEvent(imAvatarChangedNotify.getChangedUserId(),
+                imAvatarChangedNotify.getAvatarUrl()));
 
     }
 

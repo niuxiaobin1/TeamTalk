@@ -19,6 +19,8 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.imservice.entity.RecentInfo;
+import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
+import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.mogujie.tt.ui.widget.IMGroupAvatar;
 import com.mogujie.tt.utils.DateUtil;
@@ -406,6 +408,19 @@ public class ChatAdapter extends BaseAdapter {
             logger.e(e.toString());
         }
 
+    }
+
+
+    public void notifyUserInfo(UserAvatarInfoEvent userAvatarInfoEvent){
+        for(RecentInfo recentInfo:recentSessionList){
+            if(recentInfo.getPeerId()==userAvatarInfoEvent.userId){
+                List<String> list=new ArrayList<>();
+                list.add(userAvatarInfoEvent.avatar);
+                recentInfo.setAvatar(list);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
 }

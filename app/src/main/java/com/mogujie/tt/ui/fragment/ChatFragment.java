@@ -39,6 +39,7 @@ import com.mogujie.tt.imservice.event.ReconnectEvent;
 import com.mogujie.tt.imservice.event.SessionEvent;
 import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.event.UnreadEvent;
+import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMReconnectManager;
@@ -714,5 +715,11 @@ public class ChatFragment extends MainFragment
                 ScanResultUtil.queryMer((MainActivity) getActivity(), qr_cate, sub_no);
             }
         });
+    }
+
+    public void onEventMainThread(UserAvatarInfoEvent userAvatarInfoEvent) {
+        if (contactAdapter!=null){
+            contactAdapter.notifyUserInfo(userAvatarInfoEvent);
+        }
     }
 }

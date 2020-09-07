@@ -6,12 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.R;
+import com.mogujie.tt.imservice.callback.Packetlistener;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.ui.base.TTBaseActivity;
-import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.ToastUtil;
+
+import java.io.IOException;
 
 public class ChangePasswordActivity extends TTBaseActivity {
 
@@ -57,32 +62,54 @@ public class ChangePasswordActivity extends TTBaseActivity {
 
         imServiceConnector.connect(ChangePasswordActivity.this);
 
-        oriPswEt=findViewById(R.id.oriPswEt);
-        newPswEt=findViewById(R.id.newPswEt);
-        newPswConfirmEt=findViewById(R.id.newPswConfirmEt);
+        oriPswEt = findViewById(R.id.oriPswEt);
+        newPswEt = findViewById(R.id.newPswEt);
+        newPswConfirmEt = findViewById(R.id.newPswConfirmEt);
     }
 
-    public void echoClick(View v){
+    public void echoClick(View v) {
 
-//        signUp();
+        changePsw();
     }
 
 
+    private void changePsw() {
 
-    private void signUp(String openId){
+        String oldPsw = oriPswEt.getText().toString().trim();
+        String newPsw = newPswEt.getText().toString().trim();
+        String newPswConfirm = newPswConfirmEt.getText().toString().trim();
+        if (TextUtils.isEmpty(oldPsw) || TextUtils.isEmpty(newPsw) || TextUtils.isEmpty(newPswConfirm)) {
+            return;
+        }
+        if (!newPsw.equals(newPswConfirm)) {
+            ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
+            return;
+        }
+        imService.getContactManager().reqChangePsw(oldPsw, newPsw, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMBuddy.IMChangePasswordRsp imChangePasswordRsp = IMBuddy.IMChangePasswordRsp.parseFrom((CodedInputStream) response);
+                    if (imChangePasswordRsp.getResultCode()==0){
+                        IMLoginManager.instance().setKickout(false);
+                        IMLoginManager.instance().logOut();
+                        finish();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
-//        String account = mUserAccountEt.getText().toString().trim();
-//        String code = userVerifiCodeEt.getText().toString().trim();
-//        String psw = userPswEt.getText().toString().trim();
-//        String confirmPsw = userConfirmPswEt.getText().toString().trim();
-//        if (TextUtils.isEmpty(account)||TextUtils.isEmpty(code)||TextUtils.isEmpty(psw)) {
-//            return;
-//        }
-//        if (!psw.equals(confirmPsw)){
-//            ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
-//            return;
-//        }
-//        imService.getLoginManager().register(account,psw,code,openId);
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("changePsw onFailed");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("changePsw onTimeout");
+            }
+        });
     }
 
 

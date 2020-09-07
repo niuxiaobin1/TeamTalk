@@ -26817,6 +26817,1504 @@ public final class IMBuddy {
     // @@protoc_insertion_point(class_scope:IM.Buddy.IMAgreeFirendNotify)
   }
 
+  public interface IMChangePasswordReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Buddy.IMChangePasswordReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    boolean hasOldPassword();
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    java.lang.String getOldPassword();
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getOldPasswordBytes();
+
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    boolean hasNewPassword();
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    java.lang.String getNewPassword();
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getNewPasswordBytes();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     * 服务端用，客户端不用设置
+     * </pre>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     * 服务端用，客户端不用设置
+     * </pre>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Buddy.IMChangePasswordReq}
+   *
+   * <pre>
+   *修改密码
+   * </pre>
+   */
+  public static final class IMChangePasswordReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Buddy.IMChangePasswordReq)
+      IMChangePasswordReqOrBuilder {
+    // Use IMChangePasswordReq.newBuilder() to construct.
+    private IMChangePasswordReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMChangePasswordReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMChangePasswordReq defaultInstance;
+    public static IMChangePasswordReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMChangePasswordReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMChangePasswordReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              oldPassword_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              newPassword_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000008;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMChangePasswordReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMChangePasswordReq>() {
+      public IMChangePasswordReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMChangePasswordReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMChangePasswordReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int OLD_PASSWORD_FIELD_NUMBER = 2;
+    private java.lang.Object oldPassword_;
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    public boolean hasOldPassword() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    public java.lang.String getOldPassword() {
+      java.lang.Object ref = oldPassword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          oldPassword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string old_password = 2;</code>
+     *
+     * <pre>
+     * 原密码
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getOldPasswordBytes() {
+      java.lang.Object ref = oldPassword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        oldPassword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NEW_PASSWORD_FIELD_NUMBER = 3;
+    private java.lang.Object newPassword_;
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    public boolean hasNewPassword() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    public java.lang.String getNewPassword() {
+      java.lang.Object ref = newPassword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          newPassword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string new_password = 3;</code>
+     *
+     * <pre>
+     * 新密码
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getNewPasswordBytes() {
+      java.lang.Object ref = newPassword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        newPassword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     * 服务端用，客户端不用设置
+     * </pre>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     * 服务端用，客户端不用设置
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      oldPassword_ = "";
+      newPassword_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOldPassword()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNewPassword()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getOldPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getNewPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getOldPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getNewPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Buddy.IMChangePasswordReq}
+     *
+     * <pre>
+     *修改密码
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Buddy.IMChangePasswordReq)
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        oldPassword_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        newPassword_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq build() {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq buildPartial() {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq result = new com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.oldPassword_ = oldPassword_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.newPassword_ = newPassword_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq other) {
+        if (other == com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasOldPassword()) {
+          bitField0_ |= 0x00000002;
+          oldPassword_ = other.oldPassword_;
+          
+        }
+        if (other.hasNewPassword()) {
+          bitField0_ |= 0x00000004;
+          newPassword_ = other.newPassword_;
+          
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasOldPassword()) {
+          
+          return false;
+        }
+        if (!hasNewPassword()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST				= 0x0236;	//修改密码
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object oldPassword_ = "";
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public boolean hasOldPassword() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public java.lang.String getOldPassword() {
+        java.lang.Object ref = oldPassword_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            oldPassword_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getOldPasswordBytes() {
+        java.lang.Object ref = oldPassword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          oldPassword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public Builder setOldPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        oldPassword_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public Builder clearOldPassword() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        oldPassword_ = getDefaultInstance().getOldPassword();
+        
+        return this;
+      }
+      /**
+       * <code>required string old_password = 2;</code>
+       *
+       * <pre>
+       * 原密码
+       * </pre>
+       */
+      public Builder setOldPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        oldPassword_ = value;
+        
+        return this;
+      }
+
+      private java.lang.Object newPassword_ = "";
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public boolean hasNewPassword() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public java.lang.String getNewPassword() {
+        java.lang.Object ref = newPassword_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            newPassword_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getNewPasswordBytes() {
+        java.lang.Object ref = newPassword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          newPassword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public Builder setNewPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        newPassword_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public Builder clearNewPassword() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        newPassword_ = getDefaultInstance().getNewPassword();
+        
+        return this;
+      }
+      /**
+       * <code>required string new_password = 3;</code>
+       *
+       * <pre>
+       * 新密码
+       * </pre>
+       */
+      public Builder setNewPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        newPassword_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       * 服务端用，客户端不用设置
+       * </pre>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       * 服务端用，客户端不用设置
+       * </pre>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       * 服务端用，客户端不用设置
+       * </pre>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       * 服务端用，客户端不用设置
+       * </pre>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Buddy.IMChangePasswordReq)
+    }
+
+    static {
+      defaultInstance = new IMChangePasswordReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Buddy.IMChangePasswordReq)
+  }
+
+  public interface IMChangePasswordRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Buddy.IMChangePasswordRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    int getResultCode();
+
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    boolean hasAttachData();
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    com.google.protobuf.ByteString getAttachData();
+  }
+  /**
+   * Protobuf type {@code IM.Buddy.IMChangePasswordRsp}
+   */
+  public static final class IMChangePasswordRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Buddy.IMChangePasswordRsp)
+      IMChangePasswordRspOrBuilder {
+    // Use IMChangePasswordRsp.newBuilder() to construct.
+    private IMChangePasswordRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMChangePasswordRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMChangePasswordRsp defaultInstance;
+    public static IMChangePasswordRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMChangePasswordRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMChangePasswordRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000004;
+              attachData_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMChangePasswordRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMChangePasswordRsp>() {
+      public IMChangePasswordRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMChangePasswordRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMChangePasswordRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 2;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 result_code = 2;</code>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int ATTACH_DATA_FIELD_NUMBER = 20;
+    private com.google.protobuf.ByteString attachData_;
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public boolean hasAttachData() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     */
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      resultCode_ = 0;
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(20, attachData_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, resultCode_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(20, attachData_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Buddy.IMChangePasswordRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Buddy.IMChangePasswordRsp)
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp build() {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp result = new com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.attachData_ = attachData_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasAttachData()) {
+          setAttachData(other.getAttachData());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMBuddy.IMChangePasswordRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:			CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE			    = 0x0237;
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000002;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 2;</code>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public com.google.protobuf.ByteString getAttachData() {
+        return attachData_;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder setAttachData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        attachData_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       */
+      public Builder clearAttachData() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attachData_ = getDefaultInstance().getAttachData();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Buddy.IMChangePasswordRsp)
+    }
+
+    static {
+      defaultInstance = new IMChangePasswordRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Buddy.IMChangePasswordRsp)
+  }
+
 
   static {
   }

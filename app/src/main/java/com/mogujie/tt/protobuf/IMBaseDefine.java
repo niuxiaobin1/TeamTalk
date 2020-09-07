@@ -773,6 +773,18 @@ public final class IMBaseDefine {
      * </pre>
      */
     CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY(39, 565),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST = 566;</code>
+     *
+     * <pre>
+     *修改密码
+     * </pre>
+     */
+    CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST(40, 566),
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE = 567;</code>
+     */
+    CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE(41, 567),
     ;
 
     /**
@@ -996,6 +1008,18 @@ public final class IMBaseDefine {
      * </pre>
      */
     public static final int CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY_VALUE = 565;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST = 566;</code>
+     *
+     * <pre>
+     *修改密码
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST_VALUE = 566;
+    /**
+     * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE = 567;</code>
+     */
+    public static final int CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE_VALUE = 567;
 
 
     public final int getNumber() { return value; }
@@ -1042,6 +1066,8 @@ public final class IMBaseDefine {
         case 563: return CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST;
         case 564: return CID_BUDDY_LIST_CHANGE_VALIDATE_RESPONSE;
         case 565: return CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY;
+        case 566: return CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST;
+        case 567: return CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE;
         default: return null;
       }
     }
@@ -1468,6 +1494,30 @@ public final class IMBaseDefine {
      * <code>CID_GROUP_OUT_RESPONSE = 1057;</code>
      */
     CID_GROUP_OUT_RESPONSE(26, 1057),
+    /**
+     * <code>CID_GROUP_PUBLISH_BOARD_NOTIFY = 1058;</code>
+     *
+     * <pre>
+     *发布公告通知
+     * </pre>
+     */
+    CID_GROUP_PUBLISH_BOARD_NOTIFY(27, 1058),
+    /**
+     * <code>CID_GROUP_CHANGE_GROUP_NAME_NOTIFY = 1059;</code>
+     *
+     * <pre>
+     *修改群名通知
+     * </pre>
+     */
+    CID_GROUP_CHANGE_GROUP_NAME_NOTIFY(28, 1059),
+    /**
+     * <code>CID_GROUP_CHANGE_NICK_NOTIFY = 1060;</code>
+     *
+     * <pre>
+     *修改昵称通知
+     * </pre>
+     */
+    CID_GROUP_CHANGE_NICK_NOTIFY(29, 1060),
     ;
 
     /**
@@ -1610,6 +1660,30 @@ public final class IMBaseDefine {
      * <code>CID_GROUP_OUT_RESPONSE = 1057;</code>
      */
     public static final int CID_GROUP_OUT_RESPONSE_VALUE = 1057;
+    /**
+     * <code>CID_GROUP_PUBLISH_BOARD_NOTIFY = 1058;</code>
+     *
+     * <pre>
+     *发布公告通知
+     * </pre>
+     */
+    public static final int CID_GROUP_PUBLISH_BOARD_NOTIFY_VALUE = 1058;
+    /**
+     * <code>CID_GROUP_CHANGE_GROUP_NAME_NOTIFY = 1059;</code>
+     *
+     * <pre>
+     *修改群名通知
+     * </pre>
+     */
+    public static final int CID_GROUP_CHANGE_GROUP_NAME_NOTIFY_VALUE = 1059;
+    /**
+     * <code>CID_GROUP_CHANGE_NICK_NOTIFY = 1060;</code>
+     *
+     * <pre>
+     *修改昵称通知
+     * </pre>
+     */
+    public static final int CID_GROUP_CHANGE_NICK_NOTIFY_VALUE = 1060;
 
 
     public final int getNumber() { return value; }
@@ -1643,6 +1717,9 @@ public final class IMBaseDefine {
         case 1049: return CID_GROUP_REMOVE_RESPONSE;
         case 1056: return CID_GROUP_OUT_REQUEST;
         case 1057: return CID_GROUP_OUT_RESPONSE;
+        case 1058: return CID_GROUP_PUBLISH_BOARD_NOTIFY;
+        case 1059: return CID_GROUP_CHANGE_GROUP_NAME_NOTIFY;
+        case 1060: return CID_GROUP_CHANGE_NICK_NOTIFY;
         default: return null;
       }
     }

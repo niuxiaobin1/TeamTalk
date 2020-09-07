@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,6 +152,11 @@ public class GroupManagerFragment extends TTBaseFragment {
         curView.findViewById(R.id.lin_group_notic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GroupEntity groupEntity = (GroupEntity) peerEntity;
+                if (imService.getLoginManager().getLoginId() != groupEntity.getCreatorId()) {
+                    return;
+                }
+
                 TextView groupNotice = curView.findViewById(R.id.group_notice_tv);
                 Bundle bundle = new Bundle();
                 bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.modify_group_notice));
@@ -359,7 +363,6 @@ public class GroupManagerFragment extends TTBaseFragment {
                     e.printStackTrace();
                 }
 
-
             }
 
             @Override
@@ -426,7 +429,7 @@ public class GroupManagerFragment extends TTBaseFragment {
         if (peerEntity.getType() == DBConstant.SESSION_TYPE_GROUP) {
             GroupEntity groupEntity = (GroupEntity) peerEntity;
             if (imService.getLoginManager().getLoginId() == groupEntity.getCreatorId()) {
-                curView.findViewById(R.id.lin_group_notic).setVisibility(View.VISIBLE);
+                curView.findViewById(R.id.lin_group_notic_rightImage).setVisibility(View.VISIBLE);
                 deleteTv.setText(R.string.dissolve);
             }
         }

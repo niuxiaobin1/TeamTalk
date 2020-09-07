@@ -52,6 +52,7 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.protobuf.CodedInputStream;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -77,6 +78,7 @@ import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.HandlerConstant;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.config.SysConstant;
+import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
@@ -84,6 +86,7 @@ import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
+import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
@@ -92,6 +95,8 @@ import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMStackManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
+import com.mogujie.tt.protobuf.IMBaseDefine;
+import com.mogujie.tt.protobuf.IMGroup;
 import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
 import com.mogujie.tt.ui.adapter.MessageAdapter;
 import com.mogujie.tt.ui.base.TTBaseActivity;
@@ -190,7 +195,7 @@ public class MessageActivity extends TTBaseActivity
     private IMService imService;
     private UserEntity loginUser;
     private PeerEntity peerEntity;
-    private boolean showErrorFlg=false;
+    private boolean showErrorFlg = false;
 
     // 当前的session
     private String currentSessionKey;
@@ -205,6 +210,7 @@ public class MessageActivity extends TTBaseActivity
     private PictureParameterStyle mPictureParameterStyle;
     private PictureCropParameterStyle mCropParameterStyle;
     private ArrayList<Uri> docPaths = new ArrayList<>();
+    private List<IMBaseDefine.UserInfo> userInfos;
     /**
      * 全局Toast
      */
@@ -289,8 +295,8 @@ public class MessageActivity extends TTBaseActivity
             }
             finish();
             return;
-        }else{
-            if (peerEntity.getType()==DBConstant.SESSION_TYPE_GROUP){
+        } else {
+            if (peerEntity.getType() == DBConstant.SESSION_TYPE_GROUP) {
                 findViewById(R.id.secondLineLl).setVisibility(View.GONE);
             }
         }
@@ -498,15 +504,15 @@ public class MessageActivity extends TTBaseActivity
             case REQUEST_CODE_FILE:
                 Uri uri = data.getData();
                 try {
-                    String path=ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri);
-                    if (path.toUpperCase().endsWith(".JPG")||
-                            path.toUpperCase().endsWith(".PNG")||path.toUpperCase().endsWith(".GIF")){
-                        List<LocalMedia> selectList1=new ArrayList<>();
-                        LocalMedia localMedia=new LocalMedia();
+                    String path = ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri);
+                    if (path.toUpperCase().endsWith(".JPG") ||
+                            path.toUpperCase().endsWith(".PNG") || path.toUpperCase().endsWith(".GIF")) {
+                        List<LocalMedia> selectList1 = new ArrayList<>();
+                        LocalMedia localMedia = new LocalMedia();
                         localMedia.setRealPath(path);
                         selectList1.add(localMedia);
                         handleImagePickData(selectList1);
-                    }else{
+                    } else {
                         handleFilePickData(path);
                     }
 
@@ -579,6 +585,15 @@ public class MessageActivity extends TTBaseActivity
                 }
             }
             break;
+        }
+    }
+
+    public void onEventMainThread(GroupEvent event) {
+        switch (event.getEvent()) {
+            case GROUP_INFO_OK:
+                userInfos = null;
+                adapter.notifyDataSetChanged();
+                break;
         }
     }
 
@@ -947,8 +962,8 @@ public class MessageActivity extends TTBaseActivity
         soundVolumeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                if (showErrorFlg){
-                    showErrorFlg=false;
+                if (showErrorFlg) {
+                    showErrorFlg = false;
                     return;
                 }
                 if (audioRecorderInstance.isRecording()) {
@@ -968,7 +983,7 @@ public class MessageActivity extends TTBaseActivity
                         uiHandler.sendMessage(msg);
                     }
                 } else {
-                    showErrorFlg=true;
+                    showErrorFlg = true;
                     soundVolumeImg.setVisibility(View.GONE);
                     soundVolumeLayout
                             .setBackgroundResource(R.drawable.tt_sound_volume_short_tip_bk);
@@ -1915,4 +1930,71 @@ public class MessageActivity extends TTBaseActivity
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, REQUEST_CODE_FILE);
     }
+
+
+    public void getGroupUserList(TextView textView, int id) {
+        imService.getGroupManager().reqIMGetGroupUserList(imService.getLoginManager().getLoginId(), peerEntity.getPeerId(), new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+
+                    IMGroup.IMGetGroupUserListRsp imChangeFriendRemarkRsp = IMGroup.IMGetGroupUserListRsp.parseFrom((CodedInputStream) response);
+                    userInfos = imChangeFriendRemarkRsp.getUserListList();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!TextUtils.isEmpty(getGroupNickName(id))) {
+                                textView.setText(getGroupNickName(id));
+                            }
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFaild() {
+                ToastUtil.toastShortMessage("UserInfo Failed");
+            }
+
+            @Override
+            public void onTimeout() {
+                ToastUtil.toastShortMessage("UserInfo Timeout");
+            }
+        });
+    }
+
+    public void setNickName(TextView textView, int id) {
+        int peerType = peerEntity.getType();
+        switch (peerType) {
+            case DBConstant.SESSION_TYPE_GROUP: {
+                if (userInfos == null) {
+                    getGroupUserList(textView, id);
+                } else {
+                    if (!TextUtils.isEmpty(getGroupNickName(id))) {
+                        textView.setText(getGroupNickName(id));
+                    }
+
+                }
+            }
+            break;
+
+        }
+    }
+
+    private String getGroupNickName(int id) {
+        String name = "";
+        for (int i = 0; i < userInfos.size(); i++) {
+            if (userInfos.get(i).getUserId() == id) {
+                name = userInfos.get(i).getUserDomain();
+            }
+        }
+        return name;
+
+    }
+
 }

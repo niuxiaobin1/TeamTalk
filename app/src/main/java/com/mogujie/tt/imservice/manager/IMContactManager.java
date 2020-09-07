@@ -376,7 +376,7 @@ public class IMContactManager extends IMManager {
      *
      * @param validate
      */
-    public void reqChangeValidate(int validate,Packetlistener packetlistener) {
+    public void reqChangeValidate(int validate, Packetlistener packetlistener) {
         logger.d("contact#contact#reqChangeValidate----%s", validate);
 
         int loginId = IMLoginManager.instance().getLoginId();
@@ -387,7 +387,7 @@ public class IMContactManager extends IMManager {
 
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_VALIDATE_REQUEST_VALUE;
-        imSocketManager.sendRequest(imChangeValidateReq, sid, cid,packetlistener);
+        imSocketManager.sendRequest(imChangeValidateReq, sid, cid, packetlistener);
     }
 
 
@@ -557,11 +557,11 @@ public class IMContactManager extends IMManager {
             return;
         }
 
-        if (imAgreeFirendNotify.getStatus()==1){
+        if (imAgreeFirendNotify.getStatus() == 1) {
             //agree
             int updateTime = dbInterface.getUserInfoLastTime();
             reqGetAllFriendsUsers(updateTime);
-        }else if(imAgreeFirendNotify.getStatus()==2){
+        } else if (imAgreeFirendNotify.getStatus() == 2) {
             //deny
         }
 
@@ -578,15 +578,14 @@ public class IMContactManager extends IMManager {
         if (imAddFriendRsp == null) {
             return;
         }
-        if (imAddFriendRsp.getResultCode()!=0){
+        if (imAddFriendRsp.getResultCode() != 0) {
             //添加失败
             ToastUtil.toastLongMessage(imAddFriendRsp.getResultString());
-        }else if(imAddFriendRsp.getResultCode()==10){
+        } else if (imAddFriendRsp.getResultCode() == 10) {
             //自动同意
             int updateTime = dbInterface.getUserInfoLastTime();
             reqGetAllFriendsUsers(updateTime);
         }
-
 
 
     }
@@ -597,7 +596,7 @@ public class IMContactManager extends IMManager {
      *
      * @param userIds
      */
-    public void reqGetDetaillUsers(ArrayList<Integer> userIds) {
+    public void reqGetDetaillUsers(ArrayList<Integer> userIds, Packetlistener packetlistener) {
         logger.i("contact#contact#reqGetDetaillUsers");
         if (null == userIds || userIds.size() <= 0) {
             logger.i("contact#contact#reqGetDetaillUsers return,cause by null or empty");
@@ -611,7 +610,7 @@ public class IMContactManager extends IMManager {
 
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_USER_INFO_REQUEST_VALUE;
-        imSocketManager.sendRequest(imUsersInfoReq, sid, cid);
+        imSocketManager.sendRequest(imUsersInfoReq, sid, cid, packetlistener);
     }
 
 
@@ -834,6 +833,23 @@ public class IMContactManager extends IMManager {
 
     public boolean isUserDataReady() {
         return userDataReady;
+    }
+
+
+    public void reqChangePsw(String old, String psw, Packetlistener packetlistener) {
+        logger.i("contact#reqChangePsw");
+        String desOld = new String(com.mogujie.tt.Security.getInstance().EncryptPass(old));
+        String desPsw = new String(com.mogujie.tt.Security.getInstance().EncryptPass(psw));
+        int userId = IMLoginManager.instance().getLoginId();
+
+        IMBuddy.IMChangePasswordReq imChangePasswordReq = IMBuddy.IMChangePasswordReq.newBuilder()
+                .setUserId(userId)
+                .setOldPassword(desOld)
+                .setNewPassword(desPsw)
+                .build();
+        int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
+        int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST_VALUE;
+        imSocketManager.sendRequest(imChangePasswordReq, sid, cid, packetlistener);
     }
 
 }

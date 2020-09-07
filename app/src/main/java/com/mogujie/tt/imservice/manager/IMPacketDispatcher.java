@@ -1,7 +1,5 @@
 package com.mogujie.tt.imservice.manager;
 
-import android.util.Log;
-
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
@@ -189,6 +187,14 @@ public class IMPacketDispatcher {
                     IMGroupManager.instance().receiveGroupChangeMemberNotify(notify);
                 case IMBaseDefine.GroupCmdID.CID_GROUP_SHIELD_GROUP_RESPONSE_VALUE:
                     //todo
+                    return;
+                case IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_GROUP_NAME_NOTIFY_VALUE:
+                    IMGroup.IMGroupChangeGroupNameNotify groupNameNotify = IMGroup.IMGroupChangeGroupNameNotify.parseFrom(buffer);
+                    IMGroupManager.instance().receiveGroupChangeNameNotify(groupNameNotify);
+                    return;
+                case IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_NICK_NOTIFY_VALUE:
+                    IMGroup.IMGroupChangeNickNotify groupChangeNickNotify = IMGroup.IMGroupChangeNickNotify.parseFrom(buffer);
+                    IMGroupManager.instance().receiveGroupChangeUserNickNotify(groupChangeNickNotify);
                     return;
 
             }

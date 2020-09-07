@@ -604,6 +604,43 @@ public class IMGroupManager extends IMManager {
         });
     }
 
+    /**
+     * 收到群昵称更改通知
+     * 服务端主动发出
+     * DB
+     */
+    public void receiveGroupChangeUserNickNotify(IMGroup.IMGroupChangeNickNotify groupChangeNickNotify) {
+        int groupId = groupChangeNickNotify.getGroupId();
+
+        if (groupMap.containsKey(groupId)) {
+            GroupEvent groupEvent = new GroupEvent(GroupEvent.Event.GROUP_INFO_OK);
+            triggerEvent(groupEvent);
+        } else {
+            //todo 没有就暂时不管了，只要聊过天都会显示在回话里面
+        }
+    }
+
+    /**
+     * 收到群名称更改通知
+     * 服务端主动发出
+     * DB
+     */
+    public void receiveGroupChangeNameNotify(IMGroup.IMGroupChangeGroupNameNotify groupNameNotify) {
+        int groupId = groupNameNotify.getGroupId();
+
+        if (groupMap.containsKey(groupId)) {
+            GroupEntity entity = groupMap.get(groupId);
+            entity.setMainName(groupNameNotify.getGroupName());
+            dbInterface.insertOrUpdateGroup(entity);
+            groupMap.put(groupId, entity);
+
+            GroupEvent groupEvent = new GroupEvent(GroupEvent.Event.GROUP_INFO_OK);
+            triggerEvent(groupEvent);
+        } else {
+            //todo 没有就暂时不管了，只要聊过天都会显示在回话里面
+        }
+    }
+
 
     /**
      * 收到群成员发生变更消息

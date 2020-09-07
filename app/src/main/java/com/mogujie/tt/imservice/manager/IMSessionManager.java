@@ -191,7 +191,7 @@ public class IMSessionManager extends IMManager {
         sessionEntity.setLatestMsgType(DBConstant.MSG_TYPE_GROUP_TEXT);
         sessionEntity.setUpdated(entity.getUpdated());
         sessionEntity.setCreated(entity.getCreated());
-        sessionEntity.setLatestMsgData("[你创建的新群喔]");
+        sessionEntity.setLatestMsgData("[create Group]");
         sessionEntity.setTalkId(entity.getCreatorId());
         sessionEntity.setLatestMsgId(0);
         sessionEntity.setPeerId(entity.getPeerId());

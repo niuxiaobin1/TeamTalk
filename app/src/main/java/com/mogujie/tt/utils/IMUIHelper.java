@@ -387,7 +387,7 @@ public class IMUIHelper {
         }
 
         String fullAvatar = getRealAvatarUrl(avatarUrl);
-        int defaultResId = -1;
+        int defaultResId = R.mipmap.default_head;
 
         if (showDefaultPortrait) {
             defaultResId = getDefaultAvatarResId(sessionType);
@@ -424,8 +424,8 @@ public class IMUIHelper {
                     cacheInMemory(true).
                     cacheOnDisk(true).
                     considerExifParams(true).
-                    displayer(new RoundedBitmapDisplayer(roundPixel)).
                     imageScaleType(ImageScaleType.EXACTLY).// 改善OOM
+//                    displayer(new RoundedBitmapDisplayer(roundPixel)).
                     bitmapConfig(Bitmap.Config.RGB_565).// 改善OOM
                     build();
         } else {

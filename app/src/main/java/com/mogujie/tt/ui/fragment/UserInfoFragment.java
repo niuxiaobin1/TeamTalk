@@ -35,6 +35,7 @@ import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.ToastUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import de.greenrobot.event.EventBus;
@@ -238,10 +239,45 @@ public class UserInfoFragment extends MainFragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DetailPortraitActivity.class);
-                intent.putExtra(IntentConstant.KEY_AVATAR_URL, currentUser.getAvatar());
-                intent.putExtra(IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, true);
-                startActivity(intent);
+
+                if (imService!=null){
+                    ArrayList<Integer> list=new ArrayList<>();
+                    list.add(currentUser.getPeerId());
+                    imService.getContactManager().reqGetDetaillUsers(list, new Packetlistener() {
+                        @Override
+                        public void onSuccess(Object response) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        IMBuddy.IMUsersInfoRsp imUsersInfoRsp = IMBuddy.IMUsersInfoRsp.parseFrom((CodedInputStream) response);
+                                        if (imUsersInfoRsp.getUserInfoListList().size()!=0){
+                                            Intent intent = new Intent(getActivity(), DetailPortraitActivity.class);
+                                            intent.putExtra(IntentConstant.KEY_AVATAR_URL, imUsersInfoRsp.getUserInfoList(0).getAvatarUrl());
+                                            intent.putExtra(IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, true);
+                                            startActivity(intent);
+                                        }
+
+                                    } catch (IOException e) {
+                                        ToastUtil.toastShortMessage(e.getMessage());
+                                    }
+
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFaild() {
+                            ToastUtil.toastShortMessage("modify userInfo failed");
+                        }
+
+                        @Override
+                        public void onTimeout() {
+                            ToastUtil.toastShortMessage("modify userInfo onTimeout");
+                        }
+                    });
+                }
             }
         });
 

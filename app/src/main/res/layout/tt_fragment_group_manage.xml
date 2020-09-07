@@ -83,36 +83,44 @@
         <LinearLayout
             android:id="@+id/lin_group_notic"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
+            android:minHeight="63dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
-                android:minWidth="50dp"
-                android:maxLines="1"
+                android:layout_marginRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
                 android:text="Group Notic"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:gravity=""
+                    android:maxLines="4"
+                    android:text=""
+                    android:id="@+id/group_notice_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:padding="3dip"
+                    android:textColor="#80989898"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
-            <TextView
-                android:maxLines="1"
-                android:text=""
-                android:id="@+id/group_notice_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:padding="3dip"
-                android:textColor="#80989898"
-                android:textSize="15sp" />
 
             <ImageView
+                android:visibility="invisible"
+                android:id="@+id/lin_group_notic_rightImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"

@@ -48,6 +48,7 @@ import com.mogujie.tt.scanResult.ScanResultUtil;
 import com.mogujie.tt.ui.activity.MainActivity;
 import com.mogujie.tt.ui.activity.ScanPayActivity;
 import com.mogujie.tt.ui.adapter.ChatAdapter;
+import com.mogujie.tt.ui.widget.SimpleListWindow;
 import com.mogujie.tt.utils.IMUIHelper;
 import com.mogujie.tt.utils.NetworkUtil;
 import com.mogujie.tt.utils.ToastUtil;
@@ -548,20 +549,16 @@ public class ChatFragment extends MainFragment
     }
 
     private void handleContactItemLongClick(final Context ctx, final RecentInfo recentInfo) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
-        builder.setTitle(recentInfo.getName());
         final boolean isTop = imService.getConfigSp().isTopSession(recentInfo.getSessionKey());
 
         int topMessageRes = isTop ? R.string.cancel_top_message : R.string.top_message;
         String[] items = new String[]{ctx.getString(R.string.check_profile),
                 ctx.getString(R.string.delete_session),
                 ctx.getString(topMessageRes)};
-
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        SimpleListWindow simpleListWindow=new SimpleListWindow(ctx, items, new SimpleListWindow.OnItemClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
+            public void onItemClick(int position) {
+                switch (position) {
                     case 0:
                         IMUIHelper.openUserProfileActivity(ctx, recentInfo.getPeerId(), true);
                         break;
@@ -575,16 +572,38 @@ public class ChatFragment extends MainFragment
                 }
             }
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        alertDialog.show();
+        simpleListWindow.setOutSideDismiss(true);
+        simpleListWindow.showPopupWindow();
+
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
+//        builder.setTitle(recentInfo.getName());
+//
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                switch (which) {
+//                    case 0:
+//                        IMUIHelper.openUserProfileActivity(ctx, recentInfo.getPeerId(), true);
+//                        break;
+//                    case 1:
+//                        imService.getSessionManager().reqRemoveSession(recentInfo);
+//                        break;
+//                    case 2: {
+//                        imService.getConfigSp().setSessionTop(recentInfo.getSessionKey(), !isTop);
+//                    }
+//                    break;
+//                }
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.setCanceledOnTouchOutside(true);
+//        alertDialog.show();
     }
 
     // 现在只有群组存在免打扰的
     private void handleGroupItemLongClick(final Context ctx, final RecentInfo recentInfo) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
-        builder.setTitle(recentInfo.getName());
 
         final boolean isTop = imService.getConfigSp().isTopSession(recentInfo.getSessionKey());
         final boolean isForbidden = recentInfo.isForbidden();
@@ -592,12 +611,10 @@ public class ChatFragment extends MainFragment
         int forbidMessageRes = isForbidden ? R.string.cancel_forbid_group_message : R.string.forbid_group_message;
 
         String[] items = new String[]{ctx.getString(R.string.delete_session), ctx.getString(topMessageRes), ctx.getString(forbidMessageRes)};
-
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-
+        SimpleListWindow simpleListWindow=new SimpleListWindow(ctx, items, new SimpleListWindow.OnItemClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
+            public void onItemClick(int position) {
+                switch (position) {
                     case 0:
                         imService.getSessionManager().reqRemoveSession(recentInfo);
                         break;
@@ -614,9 +631,44 @@ public class ChatFragment extends MainFragment
                 }
             }
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        alertDialog.show();
+        simpleListWindow.setOutSideDismiss(true);
+        simpleListWindow.showPopupWindow();
+
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
+//        builder.setTitle(recentInfo.getName());
+//
+//        final boolean isTop = imService.getConfigSp().isTopSession(recentInfo.getSessionKey());
+//        final boolean isForbidden = recentInfo.isForbidden();
+//        int topMessageRes = isTop ? R.string.cancel_top_message : R.string.top_message;
+//        int forbidMessageRes = isForbidden ? R.string.cancel_forbid_group_message : R.string.forbid_group_message;
+//
+//        String[] items = new String[]{ctx.getString(R.string.delete_session), ctx.getString(topMessageRes), ctx.getString(forbidMessageRes)};
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                switch (which) {
+//                    case 0:
+//                        imService.getSessionManager().reqRemoveSession(recentInfo);
+//                        break;
+//                    case 1: {
+//                        imService.getConfigSp().setSessionTop(recentInfo.getSessionKey(), !isTop);
+//                    }
+//                    break;
+//                    case 2: {
+//                        // 底层成功会事件通知
+//                        int shieldType = isForbidden ? DBConstant.GROUP_STATUS_ONLINE : DBConstant.GROUP_STATUS_SHIELD;
+//                        imService.getGroupManager().reqShieldGroup(recentInfo.getPeerId(), shieldType);
+//                    }
+//                    break;
+//                }
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.setCanceledOnTouchOutside(true);
+//        alertDialog.show();
     }
 
     @Override

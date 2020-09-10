@@ -542,6 +542,7 @@ public class DBInterface {
                     break;
                 case DBConstant.SHOW_PAY_TRANSFER:
                     newList.add(TransferMessage.parseFromDB(info));
+                    break;
                 case DBConstant.SHOW_FILE_TYPE:
                     newList.add(FileMessage.parseFromDB(info));
                     break;

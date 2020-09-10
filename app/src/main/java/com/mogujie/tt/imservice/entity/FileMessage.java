@@ -2,7 +2,6 @@ package com.mogujie.tt.imservice.entity;
 
 import android.os.Environment;
 
-import com.luck.picture.lib.entity.LocalMedia;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
@@ -10,11 +9,7 @@ import com.mogujie.tt.app.IMApplication;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.manager.IMLoginManager;
-import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.SequenceNumberMaker;
-import com.mogujie.tt.protobuf.IMLogin;
-import com.mogujie.tt.ui.adapter.album.ImageItem;
-import com.mogujie.tt.utils.AppContext;
 import com.mogujie.tt.utils.CommonUtil;
 
 import org.json.JSONException;
@@ -23,10 +18,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * @author : yingmu on 14-12-31.

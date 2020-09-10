@@ -33,6 +33,7 @@ import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.ui.activity.GroupMemberSelectActivity;
 import com.mogujie.tt.ui.activity.MessageActivity;
 import com.mogujie.tt.ui.activity.UserInfoActivity;
+import com.mogujie.tt.ui.widget.SimpleListWindow;
 import com.mogujie.tt.utils.pinyin.PinYin.PinYinElement;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,16 +47,12 @@ public class IMUIHelper {
         if (contact == null || ctx == null) {
             return;
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
-        builder.setTitle(contact.getMainName());
         String[] items = new String[]{ctx.getString(R.string.check_profile),
                 ctx.getString(R.string.start_session)};
-
         final int userId = contact.getPeerId();
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-
+        SimpleListWindow simpleListWindow=new SimpleListWindow(ctx, items, new SimpleListWindow.OnItemClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onItemClick(int which) {
                 switch (which) {
                     case 0:
                         IMUIHelper.openUserProfileActivity(ctx, userId);
@@ -66,9 +63,30 @@ public class IMUIHelper {
                 }
             }
         });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        alertDialog.show();
+        simpleListWindow.showPopupWindow();
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
+//        builder.setTitle(contact.getMainName());
+//
+//
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                switch (which) {
+//                    case 0:
+//                        IMUIHelper.openUserProfileActivity(ctx, userId);
+//                        break;
+//                    case 1:
+//                        IMUIHelper.openChatActivity(ctx, contact.getSessionKey());
+//                        break;
+//                }
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.setCanceledOnTouchOutside(true);
+//        alertDialog.show();
     }
 
 

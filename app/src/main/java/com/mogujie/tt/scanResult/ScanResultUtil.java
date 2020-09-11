@@ -2,7 +2,6 @@ package com.mogujie.tt.scanResult;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -10,26 +9,19 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.mogujie.tt.OkgoCallBack.NigeriaCallBack;
-import com.mogujie.tt.R;
 import com.mogujie.tt.bean.BaseBean;
-import com.mogujie.tt.bean.LoginBean;
 import com.mogujie.tt.bean.QrType0Bean;
 import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.RequestCode;
 import com.mogujie.tt.config.ServerHostConfig;
-import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.ui.activity.QrType0Activity;
 import com.mogujie.tt.ui.activity.QrType1Activity;
-import com.mogujie.tt.ui.activity.ScanPayActivity;
 import com.mogujie.tt.ui.activity.WebViewActivity;
 import com.mogujie.tt.ui.base.TTBaseActivity;
-import com.mogujie.tt.utils.PhoneUtil;
 import com.mogujie.tt.utils.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import static com.mogujie.tt.app.IMApplication.INSTITUTION_NUMBER;
 
@@ -45,9 +37,14 @@ public class ScanResultUtil {
         } else if (result.startsWith(GeneralConfig.FALG_NCAHT_PAY_CODE)) {
             callBack.payCallBack(result.substring(GeneralConfig.FALG_NCAHT_PAY_CODE.length()));
         } else {
-            byte[] encrypted1 = Base64.decode(result, Base64.DEFAULT);
+
+
+
             try {
-                String originalString = new String(encrypted1, "utf-8");
+
+//              byte[] encrypted1 = Base64.decode(result, Base64.DEFAULT);//NIBSS二维码
+//              String originalString = new String(encrypted1, "utf-8");
+                String originalString =  parseEmvcoQrCode(result);  //Emvco二维码
                 Log.e("nxb", originalString);
                 JSONObject jsonObject = new JSONObject(originalString);
                 String qr_cate = jsonObject.getString("qr_cate");
@@ -59,7 +56,7 @@ public class ScanResultUtil {
                     callBack.cSbCallBack3(qr_cate, sub_no);
                 }
 
-            } catch (UnsupportedEncodingException | JSONException e) {
+            } catch ( JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -123,5 +120,85 @@ public class ScanResultUtil {
                 });
     }
 
+    public static final String parseEmvcoQrCode(String codeString) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        if (TextUtils.isEmpty(codeString)) {
+            return null;
+        }
+        String[] results = new String[15];
+
+        while (codeString != null && codeString.length() != 0) {
+            if (codeString.startsWith("crc")) {
+                results[14] = codeString.substring(5);
+                codeString = codeString.substring(5);
+            } else {
+                String t = codeString.substring(0, 2);
+                int l = Integer.parseInt(codeString.substring(2, 4));
+                String v = codeString.substring(4, 4 + l);
+                int position = 0;
+                switch (t) {
+                    case "00":
+                        if (l == 2) {
+                            position = 0;
+                        } else if (l == 19) {
+                            position = 4;
+                        }
+
+                        break;
+                    case "01":
+                        if (l == 2) {
+                            position = 1;
+                        } else if (l == 11) {
+                            position = 5;
+                        }
+
+                        break;
+                    case "15":
+                        position = 2;
+                        break;
+                    case "26":
+                        position = 3;
+                        break;
+                    case "02":
+                        position = 6;
+                        break;
+                    case "58":
+                        position = 7;
+                        break;
+                    case "52":
+                        position = 8;
+                        break;
+                    case "53":
+                        position = 9;
+                        break;
+                    case "59":
+                        position = 10;
+                        break;
+                    case "60":
+                        position = 11;
+                        break;
+                    case "54":
+                        position = 12;
+                        break;
+                    case "63":
+                        position = 13;
+                        break;
+                }
+                results[position] = v;
+                codeString = codeString.substring(4 + l);
+                if (TextUtils.isEmpty(codeString) && !TextUtils.isEmpty(results[3])&&
+                        TextUtils.isEmpty(results[4])) {
+                    codeString = results[3];
+                }
+            }
+        }
+
+
+        jsonObject.put("qr_cate","11".equals(results[1])?"1":"2");
+        jsonObject.put("order_sn",results[6]);
+        jsonObject.put("sub_no",results[5]);
+
+        return jsonObject.toString();
+    }
 
 }

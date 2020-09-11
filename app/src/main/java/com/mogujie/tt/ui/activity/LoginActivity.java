@@ -460,12 +460,12 @@ public class LoginActivity extends TTBaseActivity implements View.OnClickListene
         }
     }
 
-    @NeedsPermission({Manifest.permission.READ_PHONE_STATE})
+    @NeedsPermission({Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECORD_AUDIO})
     public void getPermission() {
 
     }
 
-    @OnPermissionDenied(Manifest.permission.READ_PHONE_STATE)
+    @OnPermissionDenied({Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECORD_AUDIO})
     void showRecordDenied() {
         ToastUtil.toastShortMessage("Please allow permission");
     }

@@ -50,6 +50,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.google.protobuf.CodedInputStream;
@@ -132,6 +133,7 @@ import droidninja.filepicker.FilePickerConst;
 import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.ContentUriUtils;
 import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.RuntimePermissions;
 
 import static com.mogujie.tt.config.SysConstant.MAX_SELECT_IMAGE_COUNT;
@@ -869,26 +871,11 @@ public class MessageActivity extends TTBaseActivity
             @Override
             public void onClick(View v) {
                 scrollToBottomListItem();
-                if (AudioPlayerHandler.getInstance().isPlaying())
+                if (AudioPlayerHandler.getInstance().isPlaying()){
                     AudioPlayerHandler.getInstance().stopPlayer();
-                recordAudioBtn.setBackgroundResource(R.drawable.message_push_text_bg);
-                recordAudioBtn.setText(MessageActivity.this.getResources().getString(
-                        R.string.tuikit_clickToEnd));
+                }
+                MessageActivityPermissionsDispatcher.startRecordWithPermissionCheck(MessageActivity.this);
 
-                soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_01);
-                soundVolumeImg.setVisibility(View.VISIBLE);
-                soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_default_bk);
-                soundVolumeDialog.show();
-                audioSavePath = CommonUtil
-                        .getAudioSavePath(IMLoginManager.instance().getLoginId());
-
-                // 这个callback很蛋疼，发送消息从MotionEvent.ACTION_UP 判断
-                audioRecorderInstance = new AudioRecordHandler(audioSavePath);
-
-                audioRecorderThread = new Thread(audioRecorderInstance);
-                audioRecorderInstance.setRecording(true);
-                logger.d("message_activity#audio#audio record thread starts");
-                audioRecorderThread.start();
             }
         });
 
@@ -1997,4 +1984,36 @@ public class MessageActivity extends TTBaseActivity
 
     }
 
+
+    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO})
+    public void startRecord() {
+        recordAudioBtn.setBackgroundResource(R.drawable.message_push_text_bg);
+        recordAudioBtn.setText(MessageActivity.this.getResources().getString(
+                R.string.tuikit_clickToEnd));
+
+        soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_01);
+        soundVolumeImg.setVisibility(View.VISIBLE);
+        soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_default_bk);
+        soundVolumeDialog.show();
+        audioSavePath = CommonUtil
+                .getAudioSavePath(IMLoginManager.instance().getLoginId());
+
+        // 这个callback很蛋疼，发送消息从MotionEvent.ACTION_UP 判断
+        audioRecorderInstance = new AudioRecordHandler(audioSavePath);
+
+        audioRecorderThread = new Thread(audioRecorderInstance);
+        audioRecorderInstance.setRecording(true);
+        logger.d("message_activity#audio#audio record thread starts");
+        audioRecorderThread.start();
+    }
+    @OnPermissionDenied({Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECORD_AUDIO})
+    void showRecordDenied() {
+        ToastUtil.toastShortMessage("Please allow permission");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        MessageActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
 }

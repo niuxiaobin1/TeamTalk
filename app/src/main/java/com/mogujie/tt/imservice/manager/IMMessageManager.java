@@ -405,6 +405,10 @@ public class IMMessageManager extends IMManager {
 
     }
 
+    /**
+     * 开始发送文件
+     * @param imFilePullDataReq
+     */
     public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq) {
         FileMessage msg = getFileMsgByTask(imFilePullDataReq.getTaskId());
         if (msg == null) {
@@ -436,6 +440,10 @@ public class IMMessageManager extends IMManager {
 
     }
 
+    /**
+     * 接受文件
+     * @param imFilePullDataRsp
+     */
     public void onPullFileDataRsq(IMFile.IMFilePullDataRsp imFilePullDataRsp) {
         FileMessage msg = getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId());
         if (msg == null) {
@@ -492,6 +500,10 @@ public class IMMessageManager extends IMManager {
         return msg;
     }
 
+    /**
+     * 发送或者接收文件完成
+     * @param imFileState
+     */
     public void onRspFileStatus(IMFile.IMFileState imFileState) {
         if (imFileState.getState().getNumber() == IMBaseDefine.ClientFileState.CLIENT_FILE_DONE_VALUE) {
             if (imFileState.getUserId() == IMLoginManager.instance().getLoginId()) {
@@ -539,6 +551,10 @@ public class IMMessageManager extends IMManager {
 
     }
 
+    /**
+     * 收到新文件消息通知
+     * @param imFileNotify
+     */
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
         FileMessage fileMessage = null;
         try {
@@ -642,6 +658,10 @@ public class IMMessageManager extends IMManager {
         });
     }
 
+    /**
+     * 登录成功后，开始接受
+     * @param fileMessage
+     */
     public void loginFileReceiveServer(FileMessage fileMessage) {
         IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
                 .setUserId(IMLoginManager.instance().getLoginId())

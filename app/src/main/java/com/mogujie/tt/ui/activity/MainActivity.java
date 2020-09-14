@@ -1,33 +1,70 @@
 package com.mogujie.tt.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
+import com.mogujie.tt.DB.sp.ConfigurationSp;
+import com.mogujie.tt.OkgoCallBack.NigeriaCallBack;
 import com.mogujie.tt.R;
+import com.mogujie.tt.bean.BaseBean;
+import com.mogujie.tt.config.Constants;
 import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.config.RequestCode;
+import com.mogujie.tt.config.ServerHostConfig;
+import com.mogujie.tt.dto.VersionDto;
 import com.mogujie.tt.imservice.event.LoginEvent;
 import com.mogujie.tt.imservice.event.UnreadEvent;
+import com.mogujie.tt.imservice.event.UserAddFriendNotifyEvent;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.base.TTBaseActivity;
 import com.mogujie.tt.ui.fragment.ChatFragment;
 import com.mogujie.tt.ui.fragment.ContactFragment;
 import com.mogujie.tt.ui.widget.NaviTabButton;
+import com.mogujie.tt.ui.widget.UpdatePopupWindow;
 import com.mogujie.tt.utils.LocationUtils;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.PhoneUtil;
+import com.mogujie.tt.utils.SPUtils;
 import com.mogujie.tt.utils.ToastUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
+import okhttp3.ResponseBody;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
@@ -84,7 +121,7 @@ public class MainActivity extends TTBaseActivity {
             getWindow().getDecorView().setSystemUiVisibility(vis);
         }
         MainActivityPermissionsDispatcher.getLocationWithPermissionCheck(MainActivity.this);
-
+        getVersionUpdateInfo();
     }
 
     @Override
@@ -140,6 +177,11 @@ public class MainActivity extends TTBaseActivity {
         mTabButtons[3].setIndex(3);
         mTabButtons[3].setSelectedImage(getResources().getDrawable(R.mipmap.myself_selected));
         mTabButtons[3].setUnselectedImage(getResources().getDrawable(R.mipmap.myself_normal));
+
+
+        int loginId = IMLoginManager.instance().getLoginId();
+        int num = ConfigurationSp.instance(MainActivity.this, loginId).getNewAddUnread();
+        mTabButtons[1].setUnreadNotify(num);
     }
 
     public void setFragmentIndicator(int which) {
@@ -245,6 +287,19 @@ public class MainActivity extends TTBaseActivity {
         }
     }
 
+    public void onEventMainThread(UserAddFriendNotifyEvent userAddFriendNotifyEvent) {
+        int loginId = IMLoginManager.instance().getLoginId();
+        ConfigurationSp.instance(MainActivity.this, loginId).setNewAddUnread();
+        mTabButtons[1].setUnreadNotify(1);
+    }
+
+
+    public void clearContactUnReadNum() {
+        int loginId = IMLoginManager.instance().getLoginId();
+        ConfigurationSp.instance(MainActivity.this, loginId).clearNewAddUnread();
+        mTabButtons[1].setUnreadNotify(0);
+    }
+
     private void showUnreadMessageCount() {
         //todo eric when to
         if (imService != null) {
@@ -311,5 +366,146 @@ public class MainActivity extends TTBaseActivity {
                 .setCancelable(false)
                 .setMessage("Please allow location permission")
                 .show();
+    }
+
+
+    private void getVersionUpdateInfo() {
+
+        OkGo.<String>get(ServerHostConfig.GET_VERSION).tag(this)
+                .execute(new NigeriaCallBack() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        VersionDto bean = new Gson().fromJson(response.body(), VersionDto.class);
+                        if (PhoneUtil.getVersionCode(MainActivity.this) < bean.data.version) {
+                            showDialogUpdate(bean.data.url);//弹出提示版本更新的对话框
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+    }
+
+    /**
+     * 提示版本更新的对话框
+     */
+    private void showDialogUpdate(String url) {
+        new UpdatePopupWindow(this, new UpdatePopupWindow.OnUpdateListener() {
+            @Override
+            public void update() {
+                ToastUtil.toastShortMessage("后台下载中...");
+                downLoadApk1(url);
+            }
+        }).showPopupWindow();
+    }
+
+    private void downLoadApk1(String url) {
+        OkGo.<File>get(url)//
+                .tag(this)//
+                .execute(new FileCallback(getExternalFilesDir(null).getPath(), "update.apk") {
+
+                    @Override
+                    public void onStart(Request<File, ? extends Request> request) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Response<File> response) {
+                        Log.e("nxb", response.body().getPath());
+                        File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "update.apk");
+                        setInstallPermission(futureStudioIconFile);
+                    }
+
+                    @Override
+                    public void onError(Response<File> response) {
+                        ToastUtil.toastShortMessage("下载出错");
+                    }
+
+                    @Override
+                    public void downloadProgress(Progress progress) {
+                    }
+                });
+    }
+
+    public void setInstallPermission(File file) {
+        boolean haveInstallPermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //先判断是否有安装未知来源应用的权限
+            haveInstallPermission = getPackageManager().canRequestPackageInstalls();
+            if (!haveInstallPermission) {
+                new AlertDialog.Builder(this)
+                        .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                toInstallPermissionSettingIntent();
+                            }
+                        })
+                        .setNegativeButton("不给", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setCancelable(false)
+                        .setMessage("需要打开允许来自此来源，请去设置中开启此权限")
+                        .show();
+            } else {
+                installApk(file);
+            }
+        } else {
+            installApk(file);
+        }
+    }
+
+    /**
+     * 开启安装未知来源权限
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void toInstallPermissionSettingIntent() {
+        Uri packageURI = Uri.parse("package:" + getPackageName());
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+        startActivityForResult(intent, 24);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 24) {
+            File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "update.apk");
+            installApk(futureStudioIconFile);
+        }
+    }
+
+
+    /**
+     * 安装apk
+     */
+    @NeedsPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES)
+    public void installApk(File file) {
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri fileUri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            fileUri = FileProvider.getUriForFile(this, "com.mogujie.tt", file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+        } else {
+            fileUri = Uri.fromFile(file);
+            intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+        }
+        // 查询所有符合 intent 跳转目标应用类型的应用，注意此方法必须放置在 setDataAndType 方法之后
+        List<ResolveInfo> resolveLists = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        // 然后全部授权
+        for (ResolveInfo resolveInfo : resolveLists) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            grantUriPermission(packageName, fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+        startActivity(intent);
+        //如果不加，最后不会提示完成、打开。
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

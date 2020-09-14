@@ -1,0 +1,8 @@
+<paths>
+    <external-path
+        name="my_images"
+        path="Pictures"/>
+    <external-files-path
+        name="external"
+        path="."/>
+</paths>

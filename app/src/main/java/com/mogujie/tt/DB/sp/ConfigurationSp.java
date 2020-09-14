@@ -62,7 +62,7 @@ public class ConfigurationSp {
 
 
     public boolean isTopSession(String sessionKey) {
-        HashSet<String> list =  getSessionTopList();
+        HashSet<String> list = getSessionTopList();
         if (list != null && list.size() > 0 && list.contains(sessionKey)) {
             return true;
         }
@@ -127,6 +127,23 @@ public class ConfigurationSp {
         editor.putInt(timeLine.name(), newTimePoint);
         //提交当前数据
         editor.commit();
+    }
+
+    public void setNewAddUnread() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("newFriend", 1);
+        //提交当前数据
+        editor.commit();
+    }
+    public void clearNewAddUnread() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("newFriend", 0);
+        //提交当前数据
+        editor.commit();
+    }
+
+    public int getNewAddUnread() {
+        return sharedPreferences.getInt("newFriend", 0);
     }
 
     /**

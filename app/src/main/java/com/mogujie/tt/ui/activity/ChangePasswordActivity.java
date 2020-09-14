@@ -85,6 +85,11 @@ public class ChangePasswordActivity extends TTBaseActivity {
             ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
             return;
         }
+
+        if (newPsw.length()<6){
+            ToastUtil.toastShortMessage(getResources().getString(R.string.pswLengthAlert));
+            return;
+        }
         imService.getContactManager().reqChangePsw(oldPsw, newPsw, new Packetlistener() {
             @Override
             public void onSuccess(Object response) {

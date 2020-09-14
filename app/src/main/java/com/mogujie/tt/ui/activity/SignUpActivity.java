@@ -188,6 +188,11 @@ public class SignUpActivity extends TTBaseActivity {
             ToastUtil.toastShortMessage(getResources().getString(R.string.app_password_atypism));
             return;
         }
+
+        if (psw.length()<6){
+            ToastUtil.toastShortMessage(getResources().getString(R.string.pswLengthAlert));
+            return;
+        }
         imService.getLoginManager().register(account,psw,code,openId);
     }
 
@@ -229,7 +234,10 @@ public class SignUpActivity extends TTBaseActivity {
         }else{
             confirmPswInputLayout.setErrorEnabled(false);
         }
-
+        if (psw.length()<6){
+            ToastUtil.toastShortMessage(getResources().getString(R.string.pswLengthAlert));
+            return;
+        }
         imService.getLoginManager().forgetPsw(account,psw,code);
 
     }

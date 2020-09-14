@@ -785,6 +785,14 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE = 567;</code>
      */
     CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE(41, 567),
+    /**
+     * <code>CID_BUDDY_LIST_ADD_FRIEND_NOTIFY = 568;</code>
+     *
+     * <pre>
+     *添加好友通知对方.
+     * </pre>
+     */
+    CID_BUDDY_LIST_ADD_FRIEND_NOTIFY(42, 568),
     ;
 
     /**
@@ -1020,6 +1028,14 @@ public final class IMBaseDefine {
      * <code>CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE = 567;</code>
      */
     public static final int CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE_VALUE = 567;
+    /**
+     * <code>CID_BUDDY_LIST_ADD_FRIEND_NOTIFY = 568;</code>
+     *
+     * <pre>
+     *添加好友通知对方.
+     * </pre>
+     */
+    public static final int CID_BUDDY_LIST_ADD_FRIEND_NOTIFY_VALUE = 568;
 
 
     public final int getNumber() { return value; }
@@ -1068,6 +1084,7 @@ public final class IMBaseDefine {
         case 565: return CID_BUDDY_LIST_AGREE_FRIEND_NOTIFY;
         case 566: return CID_BUDDY_LIST_CHANGE_PASSWORD_REQUEST;
         case 567: return CID_BUDDY_LIST_CHANGE_PASSWORD_RESPONSE;
+        case 568: return CID_BUDDY_LIST_ADD_FRIEND_NOTIFY;
         default: return null;
       }
     }
@@ -1814,6 +1831,22 @@ public final class IMBaseDefine {
      * <code>CID_FILE_DEL_OFFLINE_REQ = 1292;</code>
      */
     CID_FILE_DEL_OFFLINE_REQ(11, 1292),
+    /**
+     * <code>CID_GROUPFILE_REQUEST = 1293;</code>
+     *
+     * <pre>
+     * To MsgServer
+     * </pre>
+     */
+    CID_GROUPFILE_REQUEST(12, 1293),
+    /**
+     * <code>CID_GROUPFILE_RESPONSE = 1294;</code>
+     *
+     * <pre>
+     * 
+     * </pre>
+     */
+    CID_GROUPFILE_RESPONSE(13, 1294),
     ;
 
     /**
@@ -1880,6 +1913,22 @@ public final class IMBaseDefine {
      * <code>CID_FILE_DEL_OFFLINE_REQ = 1292;</code>
      */
     public static final int CID_FILE_DEL_OFFLINE_REQ_VALUE = 1292;
+    /**
+     * <code>CID_GROUPFILE_REQUEST = 1293;</code>
+     *
+     * <pre>
+     * To MsgServer
+     * </pre>
+     */
+    public static final int CID_GROUPFILE_REQUEST_VALUE = 1293;
+    /**
+     * <code>CID_GROUPFILE_RESPONSE = 1294;</code>
+     *
+     * <pre>
+     * 
+     * </pre>
+     */
+    public static final int CID_GROUPFILE_RESPONSE_VALUE = 1294;
 
 
     public final int getNumber() { return value; }
@@ -1898,6 +1947,8 @@ public final class IMBaseDefine {
         case 1290: return CID_FILE_HAS_OFFLINE_RES;
         case 1291: return CID_FILE_ADD_OFFLINE_REQ;
         case 1292: return CID_FILE_DEL_OFFLINE_REQ;
+        case 1293: return CID_GROUPFILE_REQUEST;
+        case 1294: return CID_GROUPFILE_RESPONSE;
         default: return null;
       }
     }
@@ -2845,6 +2896,22 @@ public final class IMBaseDefine {
      * </pre>
      */
     MSG_TYPE_GROUP_AUDIO(9, 18),
+    /**
+     * <code>MSG_TYPE_OFFLINE_FILE = 19;</code>
+     *
+     * <pre>
+     *个人离线文件
+     * </pre>
+     */
+    MSG_TYPE_OFFLINE_FILE(10, 19),
+    /**
+     * <code>MSG_TYPE_GROUP_OFFLINE_FILE = 20;</code>
+     *
+     * <pre>
+     *组离线文件
+     * </pre>
+     */
+    MSG_TYPE_GROUP_OFFLINE_FILE(11, 20),
     ;
 
     /**
@@ -2927,6 +2994,22 @@ public final class IMBaseDefine {
      * </pre>
      */
     public static final int MSG_TYPE_GROUP_AUDIO_VALUE = 18;
+    /**
+     * <code>MSG_TYPE_OFFLINE_FILE = 19;</code>
+     *
+     * <pre>
+     *个人离线文件
+     * </pre>
+     */
+    public static final int MSG_TYPE_OFFLINE_FILE_VALUE = 19;
+    /**
+     * <code>MSG_TYPE_GROUP_OFFLINE_FILE = 20;</code>
+     *
+     * <pre>
+     *组离线文件
+     * </pre>
+     */
+    public static final int MSG_TYPE_GROUP_OFFLINE_FILE_VALUE = 20;
 
 
     public final int getNumber() { return value; }
@@ -2943,6 +3026,8 @@ public final class IMBaseDefine {
         case 8: return MSG_TYPE_SINGLE_REFUSE_TRANSFER;
         case 17: return MSG_TYPE_GROUP_TEXT;
         case 18: return MSG_TYPE_GROUP_AUDIO;
+        case 19: return MSG_TYPE_OFFLINE_FILE;
+        case 20: return MSG_TYPE_GROUP_OFFLINE_FILE;
         default: return null;
       }
     }

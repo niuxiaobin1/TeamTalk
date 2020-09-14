@@ -115,6 +115,10 @@ public class IMPacketDispatcher {
                 IMBuddy.IMAvatarChangedNotify imAvatarChangedNotify = IMBuddy.IMAvatarChangedNotify.parseFrom(buffer);
                 IMContactManager.instance().imUserAvatarChangedBroadCast(imAvatarChangedNotify);
                 return;
+            case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_ADD_FRIEND_NOTIFY_VALUE:
+                IMBuddy.IMAddFirendNotify imAddFirendNotify = IMBuddy.IMAddFirendNotify.parseFrom(buffer);
+                IMContactManager.instance().ImAddFriendNotifyBroadCast(imAddFirendNotify);
+                return;
 
         }
         } catch (IOException e) {

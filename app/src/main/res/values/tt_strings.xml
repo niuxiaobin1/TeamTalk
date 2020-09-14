@@ -393,5 +393,6 @@
     <string name="permission_read_storage_denied">Need Storage Permission</string>
     <string name="permission_read_storage_never_ask">Need Storage Permission</string>
     <string name="amount0623">Amount</string>
+    <string name="pswLengthAlert">Password length must be greater than 6 bits</string>
 
 </resources>

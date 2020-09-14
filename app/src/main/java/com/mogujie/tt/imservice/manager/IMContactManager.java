@@ -1,7 +1,6 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
@@ -10,6 +9,7 @@ import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.ChangeUserInfoEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
+import com.mogujie.tt.imservice.event.UserAddFriendNotifyEvent;
 import com.mogujie.tt.imservice.event.UserApplyInfoEvent;
 import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
@@ -543,6 +543,17 @@ public class IMContactManager extends IMManager {
     public void imUserAvatarChangedBroadCast(IMBuddy.IMAvatarChangedNotify imAvatarChangedNotify) {
         EventBus.getDefault().postSticky(new UserAvatarInfoEvent(imAvatarChangedNotify.getChangedUserId(),
                 imAvatarChangedNotify.getAvatarUrl()));
+
+    }
+    /**
+     * 申请添加好友通知
+     *
+     * @param imAddFirendNotify
+     */
+    public void ImAddFriendNotifyBroadCast( IMBuddy.IMAddFirendNotify imAddFirendNotify) {
+
+        EventBus.getDefault().postSticky(new UserAddFriendNotifyEvent(imAddFirendNotify.getFromUserId(),
+                ""));
 
     }
 

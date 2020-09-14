@@ -14186,6 +14186,23 @@ public final class IMBuddy {
         getResultStringBytes();
 
     /**
+     * <code>required uint32 fuser_id = 4;</code>
+     *
+     * <pre>
+     *添加的朋友ID
+     * </pre>
+     */
+    boolean hasFuserId();
+    /**
+     * <code>required uint32 fuser_id = 4;</code>
+     *
+     * <pre>
+     *添加的朋友ID
+     * </pre>
+     */
+    int getFuserId();
+
+    /**
      * <code>optional bytes attach_data = 20;</code>
      */
     boolean hasAttachData();
@@ -14260,8 +14277,13 @@ public final class IMBuddy {
               resultString_ = bs;
               break;
             }
-            case 162: {
+            case 32: {
               bitField0_ |= 0x00000008;
+              fuserId_ = input.readUInt32();
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000010;
               attachData_ = input.readBytes();
               break;
             }
@@ -14379,13 +14401,36 @@ public final class IMBuddy {
       }
     }
 
+    public static final int FUSER_ID_FIELD_NUMBER = 4;
+    private int fuserId_;
+    /**
+     * <code>required uint32 fuser_id = 4;</code>
+     *
+     * <pre>
+     *添加的朋友ID
+     * </pre>
+     */
+    public boolean hasFuserId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 fuser_id = 4;</code>
+     *
+     * <pre>
+     *添加的朋友ID
+     * </pre>
+     */
+    public int getFuserId() {
+      return fuserId_;
+    }
+
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
      * <code>optional bytes attach_data = 20;</code>
      */
     public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional bytes attach_data = 20;</code>
@@ -14398,6 +14443,7 @@ public final class IMBuddy {
       userId_ = 0;
       resultCode_ = 0;
       resultString_ = "";
+      fuserId_ = 0;
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -14411,6 +14457,10 @@ public final class IMBuddy {
         return false;
       }
       if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFuserId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -14431,6 +14481,9 @@ public final class IMBuddy {
         output.writeBytes(3, getResultStringBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, fuserId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(20, attachData_);
       }
       output.writeRawBytes(unknownFields);
@@ -14455,6 +14508,10 @@ public final class IMBuddy {
           .computeBytesSize(3, getResultStringBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, fuserId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -14558,8 +14615,10 @@ public final class IMBuddy {
         bitField0_ = (bitField0_ & ~0x00000002);
         resultString_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        fuserId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -14598,6 +14657,10 @@ public final class IMBuddy {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.fuserId_ = fuserId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.attachData_ = attachData_;
         result.bitField0_ = to_bitField0_;
         return result;
@@ -14616,6 +14679,9 @@ public final class IMBuddy {
           resultString_ = other.resultString_;
           
         }
+        if (other.hasFuserId()) {
+          setFuserId(other.getFuserId());
+        }
         if (other.hasAttachData()) {
           setAttachData(other.getAttachData());
         }
@@ -14630,6 +14696,10 @@ public final class IMBuddy {
           return false;
         }
         if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasFuserId()) {
           
           return false;
         }
@@ -14811,12 +14881,60 @@ public final class IMBuddy {
         return this;
       }
 
+      private int fuserId_ ;
+      /**
+       * <code>required uint32 fuser_id = 4;</code>
+       *
+       * <pre>
+       *添加的朋友ID
+       * </pre>
+       */
+      public boolean hasFuserId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 fuser_id = 4;</code>
+       *
+       * <pre>
+       *添加的朋友ID
+       * </pre>
+       */
+      public int getFuserId() {
+        return fuserId_;
+      }
+      /**
+       * <code>required uint32 fuser_id = 4;</code>
+       *
+       * <pre>
+       *添加的朋友ID
+       * </pre>
+       */
+      public Builder setFuserId(int value) {
+        bitField0_ |= 0x00000008;
+        fuserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 fuser_id = 4;</code>
+       *
+       * <pre>
+       *添加的朋友ID
+       * </pre>
+       */
+      public Builder clearFuserId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        fuserId_ = 0;
+        
+        return this;
+      }
+
       private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes attach_data = 20;</code>
        */
       public boolean hasAttachData() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
@@ -14831,7 +14949,7 @@ public final class IMBuddy {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         attachData_ = value;
         
         return this;
@@ -14840,7 +14958,7 @@ public final class IMBuddy {
        * <code>optional bytes attach_data = 20;</code>
        */
       public Builder clearAttachData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         attachData_ = getDefaultInstance().getAttachData();
         
         return this;
@@ -28313,6 +28431,645 @@ public final class IMBuddy {
     }
 
     // @@protoc_insertion_point(class_scope:IM.Buddy.IMChangePasswordRsp)
+  }
+
+  public interface IMAddFirendNotifyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Buddy.IMAddFirendNotify)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0238
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0238
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *加你那个人的ID
+     * </pre>
+     */
+    boolean hasFromUserId();
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *加你那个人的ID
+     * </pre>
+     */
+    int getFromUserId();
+
+    /**
+     * <code>required bytes remark = 3;</code>
+     *
+     * <pre>
+     *备注
+     * </pre>
+     */
+    boolean hasRemark();
+    /**
+     * <code>required bytes remark = 3;</code>
+     *
+     * <pre>
+     *备注
+     * </pre>
+     */
+    com.google.protobuf.ByteString getRemark();
+  }
+  /**
+   * Protobuf type {@code IM.Buddy.IMAddFirendNotify}
+   *
+   * <pre>
+   * 添加好友申请通知（广播通知）
+   * </pre>
+   */
+  public static final class IMAddFirendNotify extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Buddy.IMAddFirendNotify)
+      IMAddFirendNotifyOrBuilder {
+    // Use IMAddFirendNotify.newBuilder() to construct.
+    private IMAddFirendNotify(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMAddFirendNotify(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMAddFirendNotify defaultInstance;
+    public static IMAddFirendNotify getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMAddFirendNotify getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMAddFirendNotify(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              fromUserId_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              remark_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMAddFirendNotify> PARSER =
+        new com.google.protobuf.AbstractParser<IMAddFirendNotify>() {
+      public IMAddFirendNotify parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMAddFirendNotify(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMAddFirendNotify> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0238
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id:		0x0238
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int FROM_USER_ID_FIELD_NUMBER = 2;
+    private int fromUserId_;
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *加你那个人的ID
+     * </pre>
+     */
+    public boolean hasFromUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     *
+     * <pre>
+     *加你那个人的ID
+     * </pre>
+     */
+    public int getFromUserId() {
+      return fromUserId_;
+    }
+
+    public static final int REMARK_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString remark_;
+    /**
+     * <code>required bytes remark = 3;</code>
+     *
+     * <pre>
+     *备注
+     * </pre>
+     */
+    public boolean hasRemark() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes remark = 3;</code>
+     *
+     * <pre>
+     *备注
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getRemark() {
+      return remark_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      fromUserId_ = 0;
+      remark_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFromUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRemark()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, remark_);
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, remark_);
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Buddy.IMAddFirendNotify}
+     *
+     * <pre>
+     * 添加好友申请通知（广播通知）
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Buddy.IMAddFirendNotify)
+        com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotifyOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        remark_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify build() {
+        com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify buildPartial() {
+        com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify result = new com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.fromUserId_ = fromUserId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.remark_ = remark_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify other) {
+        if (other == com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasFromUserId()) {
+          setFromUserId(other.getFromUserId());
+        }
+        if (other.hasRemark()) {
+          setRemark(other.getRemark());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasFromUserId()) {
+          
+          return false;
+        }
+        if (!hasRemark()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMBuddy.IMAddFirendNotify) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0238
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0238
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0238
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id:		0x0238
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int fromUserId_ ;
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *加你那个人的ID
+       * </pre>
+       */
+      public boolean hasFromUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *加你那个人的ID
+       * </pre>
+       */
+      public int getFromUserId() {
+        return fromUserId_;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *加你那个人的ID
+       * </pre>
+       */
+      public Builder setFromUserId(int value) {
+        bitField0_ |= 0x00000002;
+        fromUserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       *
+       * <pre>
+       *加你那个人的ID
+       * </pre>
+       */
+      public Builder clearFromUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fromUserId_ = 0;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString remark_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes remark = 3;</code>
+       *
+       * <pre>
+       *备注
+       * </pre>
+       */
+      public boolean hasRemark() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes remark = 3;</code>
+       *
+       * <pre>
+       *备注
+       * </pre>
+       */
+      public com.google.protobuf.ByteString getRemark() {
+        return remark_;
+      }
+      /**
+       * <code>required bytes remark = 3;</code>
+       *
+       * <pre>
+       *备注
+       * </pre>
+       */
+      public Builder setRemark(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        remark_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required bytes remark = 3;</code>
+       *
+       * <pre>
+       *备注
+       * </pre>
+       */
+      public Builder clearRemark() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        remark_ = getDefaultInstance().getRemark();
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Buddy.IMAddFirendNotify)
+    }
+
+    static {
+      defaultInstance = new IMAddFirendNotify(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Buddy.IMAddFirendNotify)
   }
 
 

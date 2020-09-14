@@ -384,10 +384,10 @@ public class MyProfileActivity extends TTBaseActivity implements View.OnClickLis
 
         String nickName = mModifyNickNameView.getContent();
         String phone = mModifyPhoneView.getContent();
-        if (!CommonUtils.isMobileNO(phone)) {
-            ToastUtil.toastShortMessage("Telephone Format Error");
-            return;
-        }
+//        if (!CommonUtils.isMobileNO(phone)) {
+//            ToastUtil.toastShortMessage("Telephone Format Error");
+//            return;
+//        }
 
         if (imService == null) {
             return;

@@ -9824,6 +9824,2043 @@ public final class IMFile {
     // @@protoc_insertion_point(class_scope:IM.File.IMFileDelOfflineReq)
   }
 
+  public interface IMGroupFileReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.File.IMGroupFileReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 from_user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050d
+     * </pre>
+     */
+    boolean hasFromUserId();
+    /**
+     * <code>required uint32 from_user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050d
+     * </pre>
+     */
+    int getFromUserId();
+
+    /**
+     * <code>required uint32 to_group_id = 2;</code>
+     */
+    boolean hasToGroupId();
+    /**
+     * <code>required uint32 to_group_id = 2;</code>
+     */
+    int getToGroupId();
+
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    boolean hasFileName();
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    java.lang.String getFileName();
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNameBytes();
+
+    /**
+     * <code>required uint32 file_size = 4;</code>
+     */
+    boolean hasFileSize();
+    /**
+     * <code>required uint32 file_size = 4;</code>
+     */
+    int getFileSize();
+
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+     */
+    boolean hasTransMode();
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode();
+  }
+  /**
+   * Protobuf type {@code IM.File.IMGroupFileReq}
+   */
+  public static final class IMGroupFileReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.File.IMGroupFileReq)
+      IMGroupFileReqOrBuilder {
+    // Use IMGroupFileReq.newBuilder() to construct.
+    private IMGroupFileReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupFileReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupFileReq defaultInstance;
+    public static IMGroupFileReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupFileReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupFileReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              fromUserId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              toGroupId_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              fileName_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              fileSize_ = input.readUInt32();
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType value = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.valueOf(rawValue);
+              if (value == null) {
+                unknownFieldsCodedOutput.writeRawVarint32(tag);
+                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
+              } else {
+                bitField0_ |= 0x00000010;
+                transMode_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupFileReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupFileReq>() {
+      public IMGroupFileReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupFileReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupFileReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int FROM_USER_ID_FIELD_NUMBER = 1;
+    private int fromUserId_;
+    /**
+     * <code>required uint32 from_user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050d
+     * </pre>
+     */
+    public boolean hasFromUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 from_user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050d
+     * </pre>
+     */
+    public int getFromUserId() {
+      return fromUserId_;
+    }
+
+    public static final int TO_GROUP_ID_FIELD_NUMBER = 2;
+    private int toGroupId_;
+    /**
+     * <code>required uint32 to_group_id = 2;</code>
+     */
+    public boolean hasToGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 to_group_id = 2;</code>
+     */
+    public int getToGroupId() {
+      return toGroupId_;
+    }
+
+    public static final int FILE_NAME_FIELD_NUMBER = 3;
+    private java.lang.Object fileName_;
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    public boolean hasFileName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          fileName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string file_name = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILE_SIZE_FIELD_NUMBER = 4;
+    private int fileSize_;
+    /**
+     * <code>required uint32 file_size = 4;</code>
+     */
+    public boolean hasFileSize() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 file_size = 4;</code>
+     */
+    public int getFileSize() {
+      return fileSize_;
+    }
+
+    public static final int TRANS_MODE_FIELD_NUMBER = 5;
+    private com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType transMode_;
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+     */
+    public boolean hasTransMode() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode() {
+      return transMode_;
+    }
+
+    private void initFields() {
+      fromUserId_ = 0;
+      toGroupId_ = 0;
+      fileName_ = "";
+      fileSize_ = 0;
+      transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasFromUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasToGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFileName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFileSize()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTransMode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, toGroupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getFileNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, fileSize_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeEnum(5, transMode_.getNumber());
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, toGroupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getFileNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, fileSize_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, transMode_.getNumber());
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMFile.IMGroupFileReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.File.IMGroupFileReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMFile.IMGroupFileReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.File.IMGroupFileReq)
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMFile.IMGroupFileReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        fromUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        toGroupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fileName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileSize_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMFile.IMGroupFileReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileReq build() {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileReq buildPartial() {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileReq result = new com.mogujie.tt.protobuf.IMFile.IMGroupFileReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.fromUserId_ = fromUserId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.toGroupId_ = toGroupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.fileName_ = fileName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.fileSize_ = fileSize_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.transMode_ = transMode_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMFile.IMGroupFileReq other) {
+        if (other == com.mogujie.tt.protobuf.IMFile.IMGroupFileReq.getDefaultInstance()) return this;
+        if (other.hasFromUserId()) {
+          setFromUserId(other.getFromUserId());
+        }
+        if (other.hasToGroupId()) {
+          setToGroupId(other.getToGroupId());
+        }
+        if (other.hasFileName()) {
+          bitField0_ |= 0x00000004;
+          fileName_ = other.fileName_;
+          
+        }
+        if (other.hasFileSize()) {
+          setFileSize(other.getFileSize());
+        }
+        if (other.hasTransMode()) {
+          setTransMode(other.getTransMode());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasFromUserId()) {
+          
+          return false;
+        }
+        if (!hasToGroupId()) {
+          
+          return false;
+        }
+        if (!hasFileName()) {
+          
+          return false;
+        }
+        if (!hasFileSize()) {
+          
+          return false;
+        }
+        if (!hasTransMode()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMFile.IMGroupFileReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int fromUserId_ ;
+      /**
+       * <code>required uint32 from_user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050d
+       * </pre>
+       */
+      public boolean hasFromUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 from_user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050d
+       * </pre>
+       */
+      public int getFromUserId() {
+        return fromUserId_;
+      }
+      /**
+       * <code>required uint32 from_user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050d
+       * </pre>
+       */
+      public Builder setFromUserId(int value) {
+        bitField0_ |= 0x00000001;
+        fromUserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 from_user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050d
+       * </pre>
+       */
+      public Builder clearFromUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromUserId_ = 0;
+        
+        return this;
+      }
+
+      private int toGroupId_ ;
+      /**
+       * <code>required uint32 to_group_id = 2;</code>
+       */
+      public boolean hasToGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 to_group_id = 2;</code>
+       */
+      public int getToGroupId() {
+        return toGroupId_;
+      }
+      /**
+       * <code>required uint32 to_group_id = 2;</code>
+       */
+      public Builder setToGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        toGroupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 to_group_id = 2;</code>
+       */
+      public Builder clearToGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        toGroupId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object fileName_ = "";
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public boolean hasFileName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            fileName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public Builder setFileName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        fileName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public Builder clearFileName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileName_ = getDefaultInstance().getFileName();
+        
+        return this;
+      }
+      /**
+       * <code>required string file_name = 3;</code>
+       */
+      public Builder setFileNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        fileName_ = value;
+        
+        return this;
+      }
+
+      private int fileSize_ ;
+      /**
+       * <code>required uint32 file_size = 4;</code>
+       */
+      public boolean hasFileSize() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint32 file_size = 4;</code>
+       */
+      public int getFileSize() {
+        return fileSize_;
+      }
+      /**
+       * <code>required uint32 file_size = 4;</code>
+       */
+      public Builder setFileSize(int value) {
+        bitField0_ |= 0x00000008;
+        fileSize_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 file_size = 4;</code>
+       */
+      public Builder clearFileSize() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        fileSize_ = 0;
+        
+        return this;
+      }
+
+      private com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+       */
+      public boolean hasTransMode() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode() {
+        return transMode_;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+       */
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
+        transMode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 5;</code>
+       */
+      public Builder clearTransMode() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.File.IMGroupFileReq)
+    }
+
+    static {
+      defaultInstance = new IMGroupFileReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.File.IMGroupFileReq)
+  }
+
+  public interface IMGroupFileRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.File.IMGroupFileRsp)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 result_code = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050e
+     * </pre>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050e
+     * </pre>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     */
+    boolean hasFromUserId();
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     */
+    int getFromUserId();
+
+    /**
+     * <code>required uint32 to_group_id = 3;</code>
+     */
+    boolean hasToGroupId();
+    /**
+     * <code>required uint32 to_group_id = 3;</code>
+     */
+    int getToGroupId();
+
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    boolean hasFileName();
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    java.lang.String getFileName();
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNameBytes();
+
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    boolean hasTaskId();
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    java.lang.String getTaskId();
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getTaskIdBytes();
+
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> 
+        getIpAddrListList();
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.IpAddr getIpAddrList(int index);
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    int getIpAddrListCount();
+
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+     */
+    boolean hasTransMode();
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+     */
+    com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode();
+  }
+  /**
+   * Protobuf type {@code IM.File.IMGroupFileRsp}
+   */
+  public static final class IMGroupFileRsp extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.File.IMGroupFileRsp)
+      IMGroupFileRspOrBuilder {
+    // Use IMGroupFileRsp.newBuilder() to construct.
+    private IMGroupFileRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupFileRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupFileRsp defaultInstance;
+    public static IMGroupFileRsp getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupFileRsp getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupFileRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              fromUserId_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              toGroupId_ = input.readUInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              fileName_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              taskId_ = bs;
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                ipAddrList_ = new java.util.ArrayList<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              ipAddrList_.add(input.readMessage(com.mogujie.tt.protobuf.IMBaseDefine.IpAddr.PARSER, extensionRegistry));
+              break;
+            }
+            case 56: {
+              int rawValue = input.readEnum();
+              com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType value = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.valueOf(rawValue);
+              if (value == null) {
+                unknownFieldsCodedOutput.writeRawVarint32(tag);
+                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
+              } else {
+                bitField0_ |= 0x00000020;
+                transMode_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          ipAddrList_ = java.util.Collections.unmodifiableList(ipAddrList_);
+        }
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupFileRsp> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupFileRsp>() {
+      public IMGroupFileRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupFileRsp(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupFileRsp> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RESULT_CODE_FIELD_NUMBER = 1;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050e
+     * </pre>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 result_code = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050e
+     * </pre>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int FROM_USER_ID_FIELD_NUMBER = 2;
+    private int fromUserId_;
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     */
+    public boolean hasFromUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 from_user_id = 2;</code>
+     */
+    public int getFromUserId() {
+      return fromUserId_;
+    }
+
+    public static final int TO_GROUP_ID_FIELD_NUMBER = 3;
+    private int toGroupId_;
+    /**
+     * <code>required uint32 to_group_id = 3;</code>
+     */
+    public boolean hasToGroupId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint32 to_group_id = 3;</code>
+     */
+    public int getToGroupId() {
+      return toGroupId_;
+    }
+
+    public static final int FILE_NAME_FIELD_NUMBER = 4;
+    private java.lang.Object fileName_;
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    public boolean hasFileName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          fileName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string file_name = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TASK_ID_FIELD_NUMBER = 5;
+    private java.lang.Object taskId_;
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    public java.lang.String getTaskId() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          taskId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string task_id = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTaskIdBytes() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        taskId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IP_ADDR_LIST_FIELD_NUMBER = 6;
+    private java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> ipAddrList_;
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    public java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> getIpAddrListList() {
+      return ipAddrList_;
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    public java.util.List<? extends com.mogujie.tt.protobuf.IMBaseDefine.IpAddrOrBuilder> 
+        getIpAddrListOrBuilderList() {
+      return ipAddrList_;
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    public int getIpAddrListCount() {
+      return ipAddrList_.size();
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.IpAddr getIpAddrList(int index) {
+      return ipAddrList_.get(index);
+    }
+    /**
+     * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.IpAddrOrBuilder getIpAddrListOrBuilder(
+        int index) {
+      return ipAddrList_.get(index);
+    }
+
+    public static final int TRANS_MODE_FIELD_NUMBER = 7;
+    private com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType transMode_;
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+     */
+    public boolean hasTransMode() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+     */
+    public com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode() {
+      return transMode_;
+    }
+
+    private void initFields() {
+      resultCode_ = 0;
+      fromUserId_ = 0;
+      toGroupId_ = 0;
+      fileName_ = "";
+      taskId_ = "";
+      ipAddrList_ = java.util.Collections.emptyList();
+      transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFromUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasToGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFileName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTaskId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTransMode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getIpAddrListCount(); i++) {
+        if (!getIpAddrList(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, resultCode_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, toGroupId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getFileNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getTaskIdBytes());
+      }
+      for (int i = 0; i < ipAddrList_.size(); i++) {
+        output.writeMessage(6, ipAddrList_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeEnum(7, transMode_.getNumber());
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, resultCode_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, fromUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, toGroupId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getFileNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getTaskIdBytes());
+      }
+      for (int i = 0; i < ipAddrList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, ipAddrList_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, transMode_.getNumber());
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.File.IMGroupFileRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.File.IMGroupFileRsp)
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileRspOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        toGroupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        taskId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        ipAddrList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp build() {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp buildPartial() {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp result = new com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.fromUserId_ = fromUserId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.toGroupId_ = toGroupId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.fileName_ = fileName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.taskId_ = taskId_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          ipAddrList_ = java.util.Collections.unmodifiableList(ipAddrList_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.ipAddrList_ = ipAddrList_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.transMode_ = transMode_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp other) {
+        if (other == com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp.getDefaultInstance()) return this;
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasFromUserId()) {
+          setFromUserId(other.getFromUserId());
+        }
+        if (other.hasToGroupId()) {
+          setToGroupId(other.getToGroupId());
+        }
+        if (other.hasFileName()) {
+          bitField0_ |= 0x00000008;
+          fileName_ = other.fileName_;
+          
+        }
+        if (other.hasTaskId()) {
+          bitField0_ |= 0x00000010;
+          taskId_ = other.taskId_;
+          
+        }
+        if (!other.ipAddrList_.isEmpty()) {
+          if (ipAddrList_.isEmpty()) {
+            ipAddrList_ = other.ipAddrList_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureIpAddrListIsMutable();
+            ipAddrList_.addAll(other.ipAddrList_);
+          }
+          
+        }
+        if (other.hasTransMode()) {
+          setTransMode(other.getTransMode());
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasFromUserId()) {
+          
+          return false;
+        }
+        if (!hasToGroupId()) {
+          
+          return false;
+        }
+        if (!hasFileName()) {
+          
+          return false;
+        }
+        if (!hasTaskId()) {
+          
+          return false;
+        }
+        if (!hasTransMode()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getIpAddrListCount(); i++) {
+          if (!getIpAddrList(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMFile.IMGroupFileRsp) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050e
+       * </pre>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 result_code = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050e
+       * </pre>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050e
+       * </pre>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000001;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050e
+       * </pre>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private int fromUserId_ ;
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       */
+      public boolean hasFromUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       */
+      public int getFromUserId() {
+        return fromUserId_;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       */
+      public Builder setFromUserId(int value) {
+        bitField0_ |= 0x00000002;
+        fromUserId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 from_user_id = 2;</code>
+       */
+      public Builder clearFromUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fromUserId_ = 0;
+        
+        return this;
+      }
+
+      private int toGroupId_ ;
+      /**
+       * <code>required uint32 to_group_id = 3;</code>
+       */
+      public boolean hasToGroupId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint32 to_group_id = 3;</code>
+       */
+      public int getToGroupId() {
+        return toGroupId_;
+      }
+      /**
+       * <code>required uint32 to_group_id = 3;</code>
+       */
+      public Builder setToGroupId(int value) {
+        bitField0_ |= 0x00000004;
+        toGroupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 to_group_id = 3;</code>
+       */
+      public Builder clearToGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        toGroupId_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object fileName_ = "";
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public boolean hasFileName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            fileName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public Builder setFileName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        fileName_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public Builder clearFileName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        fileName_ = getDefaultInstance().getFileName();
+        
+        return this;
+      }
+      /**
+       * <code>required string file_name = 4;</code>
+       */
+      public Builder setFileNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        fileName_ = value;
+        
+        return this;
+      }
+
+      private java.lang.Object taskId_ = "";
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public java.lang.String getTaskId() {
+        java.lang.Object ref = taskId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            taskId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTaskIdBytes() {
+        java.lang.Object ref = taskId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          taskId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public Builder setTaskId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        taskId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        taskId_ = getDefaultInstance().getTaskId();
+        
+        return this;
+      }
+      /**
+       * <code>required string task_id = 5;</code>
+       */
+      public Builder setTaskIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        taskId_ = value;
+        
+        return this;
+      }
+
+      private java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> ipAddrList_ =
+        java.util.Collections.emptyList();
+      private void ensureIpAddrListIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          ipAddrList_ = new java.util.ArrayList<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr>(ipAddrList_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public java.util.List<com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> getIpAddrListList() {
+        return java.util.Collections.unmodifiableList(ipAddrList_);
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public int getIpAddrListCount() {
+        return ipAddrList_.size();
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.IpAddr getIpAddrList(int index) {
+        return ipAddrList_.get(index);
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder setIpAddrList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.IpAddr value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureIpAddrListIsMutable();
+        ipAddrList_.set(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder setIpAddrList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.IpAddr.Builder builderForValue) {
+        ensureIpAddrListIsMutable();
+        ipAddrList_.set(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder addIpAddrList(com.mogujie.tt.protobuf.IMBaseDefine.IpAddr value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureIpAddrListIsMutable();
+        ipAddrList_.add(value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder addIpAddrList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.IpAddr value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureIpAddrListIsMutable();
+        ipAddrList_.add(index, value);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder addIpAddrList(
+          com.mogujie.tt.protobuf.IMBaseDefine.IpAddr.Builder builderForValue) {
+        ensureIpAddrListIsMutable();
+        ipAddrList_.add(builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder addIpAddrList(
+          int index, com.mogujie.tt.protobuf.IMBaseDefine.IpAddr.Builder builderForValue) {
+        ensureIpAddrListIsMutable();
+        ipAddrList_.add(index, builderForValue.build());
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder addAllIpAddrList(
+          java.lang.Iterable<? extends com.mogujie.tt.protobuf.IMBaseDefine.IpAddr> values) {
+        ensureIpAddrListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ipAddrList_);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder clearIpAddrList() {
+        ipAddrList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+
+        return this;
+      }
+      /**
+       * <code>repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;</code>
+       */
+      public Builder removeIpAddrList(int index) {
+        ensureIpAddrListIsMutable();
+        ipAddrList_.remove(index);
+
+        return this;
+      }
+
+      private com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+       */
+      public boolean hasTransMode() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+       */
+      public com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType getTransMode() {
+        return transMode_;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+       */
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        transMode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required .IM.BaseDefine.TransferFileType trans_mode = 7;</code>
+       */
+      public Builder clearTransMode() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.TransferFileType.FILE_TYPE_ONLINE;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.File.IMGroupFileRsp)
+    }
+
+    static {
+      defaultInstance = new IMGroupFileRsp(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.File.IMGroupFileRsp)
+  }
+
 
   static {
   }

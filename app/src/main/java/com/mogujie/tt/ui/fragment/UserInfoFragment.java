@@ -37,6 +37,7 @@ import com.mogujie.tt.utils.ToastUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -52,6 +53,7 @@ public class UserInfoFragment extends MainFragment {
     private UserEntity currentUser;
     private int currentUserId;
     private IMBaseDefine.UserInfo userInfo;
+    private boolean isNewAddFriend;
     private IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
@@ -79,6 +81,17 @@ public class UserInfoFragment extends MainFragment {
                     currentUser = imService.getLoginManager().getLoginInfo();
                 } else {
                     currentUser = imService.getContactManager().findContact(currentUserId);
+                    if (currentUser==null){
+                        //可能是好友申请待通过列表中的
+                        Map<Integer, UserEntity> applyUsers = imService.getContactManager().getApplyUserMap();
+                        currentUser=applyUsers.get(currentUserId);
+                        if (currentUser!=null){
+                            isNewAddFriend=true;
+                            curView.findViewById(R.id.lin_alisa).setVisibility(View.GONE);
+                            curView.findViewById(R.id.lin_delete).setVisibility(View.GONE);
+                            ((TextView) curView.findViewById(R.id.chat_btn)).setText("Agree");
+                        }
+                    }
                 }
             }
             if (currentUser != null) {
@@ -294,12 +307,19 @@ public class UserInfoFragment extends MainFragment {
             chatBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    if (getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID, 0) == 0) {
-                        imService.getContactManager().reqAddUsers(currentUser.getPeerId(), "");
-                    } else {
-                        IMUIHelper.openChatActivity(getActivity(), currentUser.getSessionKey());
-                        getActivity().finish();
+
+                    if (isNewAddFriend){
+                        imService.getContactManager().reqApplyActionUsers(currentUser.getPeerId());
+                    }else{
+                        if (getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID, 0) == 0) {
+                            imService.getContactManager().reqAddUsers(currentUser.getPeerId(), "");
+                        } else{
+                            IMUIHelper.openChatActivity(getActivity(), currentUser.getSessionKey());
+                            getActivity().finish();
+                        }
                     }
+
+
                     getActivity().finish();
 
                 }

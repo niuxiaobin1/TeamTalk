@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +16,26 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.mogujie.tt.DB.entity.DepartmentEntity;
-import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
+import com.mogujie.tt.DB.sp.ConfigurationSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.HandlerConstant;
-import com.mogujie.tt.imservice.event.ChangeHeaderEvent;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
+import com.mogujie.tt.imservice.event.UserAddFriendNotifyEvent;
 import com.mogujie.tt.imservice.event.UserAvatarInfoEvent;
 import com.mogujie.tt.imservice.event.UserInfoEvent;
 import com.mogujie.tt.imservice.manager.IMContactManager;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.activity.GroupListActivity;
+import com.mogujie.tt.ui.activity.MainActivity;
 import com.mogujie.tt.ui.activity.NewFriendsActivity;
 import com.mogujie.tt.ui.adapter.ContactAdapter;
 import com.mogujie.tt.ui.adapter.DeptAdapter;
 import com.mogujie.tt.ui.widget.SortSideBar;
 import com.mogujie.tt.ui.widget.SortSideBar.OnTouchingLetterChangedListener;
-import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
@@ -186,6 +188,8 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         headView.findViewById(R.id.new_friends).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ((MainActivity)getActivity()).clearContactUnReadNum();
                 Intent intent = new Intent(getActivity(), NewFriendsActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
             }
@@ -376,4 +380,6 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             contactAdapter.updateRecentInfo(userAvatarInfoEvent);
         }
     }
+
+
 }

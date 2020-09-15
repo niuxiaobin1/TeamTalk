@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -30,6 +29,7 @@ import com.mogujie.tt.imservice.entity.MixMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
+import com.mogujie.tt.imservice.event.FileProgressEvent;
 import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.ui.activity.PreviewGifActivity;
@@ -56,9 +56,6 @@ import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.DateUtil;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -272,6 +269,25 @@ public class MessageAdapter extends BaseAdapter {
                 }
                 if (entity.getId() == dbId && entity.getMsgId() == msgId) {
                     msgObjectList.set(index, messageEntity);
+                    break;
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 更新文件进度
+     */
+    public void updateFileProgress(FileProgressEvent fileProgressEvent) {
+        fileProgressEvent.fileMessage.setProgress(fileProgressEvent.progress);
+        int len = msgObjectList.size();
+        for (int index = len - 1; index > 0; index--) {
+            Object object = msgObjectList.get(index);
+            if (object instanceof FileMessage) {
+                FileMessage fileMessage = (FileMessage) object;
+                if ( fileMessage.getTaskId() == fileProgressEvent.fileMessage.getTaskId()) {
+                    msgObjectList.set(index, fileProgressEvent.fileMessage);
                     break;
                 }
             }

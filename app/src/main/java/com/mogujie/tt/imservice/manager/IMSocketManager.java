@@ -147,7 +147,6 @@ public class IMSocketManager extends IMManager {
         logger.d("dispatch packet, serviceId:%d, commandId:%d", serviceId,
                 commandId);
         CodedInputStream codedInputStream = CodedInputStream.newInstance(new ChannelBufferInputStream(buffer.getOrignalBuffer()));
-
         Packetlistener listener = listenerQueue.pop(seqNo);
         if (listener != null) {
             listener.onSuccess(codedInputStream);

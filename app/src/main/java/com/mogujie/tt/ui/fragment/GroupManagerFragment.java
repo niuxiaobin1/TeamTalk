@@ -118,6 +118,7 @@ public class GroupManagerFragment extends TTBaseFragment {
                                                 getActivity().runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
+                                                        setTopTitle(imGroupChangeGroupNameRsp.getGroupName());
                                                         groupName.setText(imGroupChangeGroupNameRsp.getGroupName());
                                                         imService.getGroupManager().updateGroupName(peerEntity.getPeerId(), imGroupChangeGroupNameRsp.getGroupName());
                                                         EventBus.getDefault().post(new GroupEvent(GroupEvent.Event.GROUP_INFO_UPDATED));

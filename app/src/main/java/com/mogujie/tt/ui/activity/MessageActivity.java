@@ -27,7 +27,6 @@ import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -87,6 +86,7 @@ import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
 import com.mogujie.tt.imservice.entity.UnreadEntity;
+import com.mogujie.tt.imservice.event.FileProgressEvent;
 import com.mogujie.tt.imservice.event.GroupEvent;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.OtherUserInfoUpdateEvent;
@@ -110,6 +110,7 @@ import com.mogujie.tt.ui.widget.EmoGridView.OnEmoGridViewItemClick;
 import com.mogujie.tt.ui.widget.MGProgressbar;
 import com.mogujie.tt.ui.widget.RedPacketWindow;
 import com.mogujie.tt.ui.widget.YayaEmoGridView;
+import com.mogujie.tt.utils.AudioModeManger;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.GlideEngine;
 import com.mogujie.tt.utils.IMUIHelper;
@@ -118,7 +119,6 @@ import com.mogujie.tt.utils.ToastUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -128,9 +128,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.greenrobot.event.EventBus;
-import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.ContentUriUtils;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnPermissionDenied;
@@ -217,6 +215,7 @@ public class MessageActivity extends TTBaseActivity
      * 全局Toast
      */
     private Toast mToast;
+    private AudioModeManger audioModeManger;
 
     public void showToast(int resId) {
         String text = getResources().getString(resId);
@@ -273,6 +272,8 @@ public class MessageActivity extends TTBaseActivity
         EventBus.getDefault().register(this, SysConstant.MESSAGE_EVENTBUS_PRIORITY);
         logger.d("message_activity#register im service and eventBus");
         getWeChatStyle();
+        audioModeManger = new AudioModeManger();
+
     }
 
     // 触发条件,imservice链接成功，或者newIntent
@@ -351,6 +352,7 @@ public class MessageActivity extends TTBaseActivity
     protected void onResume() {
         logger.d("message_activity#onresume:%s", this);
         super.onResume();
+        audioModeManger.register();
         IMApplication.gifRunning = true;
         historyTimes = 0;
         // not the first time
@@ -384,6 +386,9 @@ public class MessageActivity extends TTBaseActivity
         ImageMessage.clearImageMessageList();
         unregisterReceiver(receiver);
         super.onDestroy();
+        if (audioModeManger != null) {
+            audioModeManger.unregister();
+        }
     }
 
     public void onEventMainThread(OtherUserInfoUpdateEvent event) {
@@ -507,6 +512,9 @@ public class MessageActivity extends TTBaseActivity
                 Uri uri = data.getData();
                 try {
                     String path = ContentUriUtils.INSTANCE.getFilePath(MessageActivity.this, uri);
+                    if (TextUtils.isEmpty(path)) {
+                        return;
+                    }
                     if (path.toUpperCase().endsWith(".JPG") ||
                             path.toUpperCase().endsWith(".PNG") || path.toUpperCase().endsWith(".GIF")) {
                         List<LocalMedia> selectList1 = new ArrayList<>();
@@ -596,6 +604,10 @@ public class MessageActivity extends TTBaseActivity
                 userInfos = null;
                 adapter.notifyDataSetChanged();
                 break;
+            case GROUP_INFO_UPDATED:
+                peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
+                setTitle(peerEntity.getMainName());
+                break;
         }
     }
 
@@ -640,6 +652,9 @@ public class MessageActivity extends TTBaseActivity
         }
     }
 
+    public void onEventMainThread(FileProgressEvent fileProgressEvent) {
+        adapter.updateFileProgress(fileProgressEvent);
+    }
 
     public void onEventMainThread(QueryRedPacketEvent event) {
         QueryRedPacketEvent.Event type = event.getEvent();
@@ -871,7 +886,7 @@ public class MessageActivity extends TTBaseActivity
             @Override
             public void onClick(View v) {
                 scrollToBottomListItem();
-                if (AudioPlayerHandler.getInstance().isPlaying()){
+                if (AudioPlayerHandler.getInstance().isPlaying()) {
                     AudioPlayerHandler.getInstance().stopPlayer();
                 }
                 MessageActivityPermissionsDispatcher.startRecordWithPermissionCheck(MessageActivity.this);
@@ -1985,7 +2000,7 @@ public class MessageActivity extends TTBaseActivity
     }
 
 
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO})
+    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO})
     public void startRecord() {
         recordAudioBtn.setBackgroundResource(R.drawable.message_push_text_bg);
         recordAudioBtn.setText(MessageActivity.this.getResources().getString(
@@ -2006,7 +2021,8 @@ public class MessageActivity extends TTBaseActivity
         logger.d("message_activity#audio#audio record thread starts");
         audioRecorderThread.start();
     }
-    @OnPermissionDenied({Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECORD_AUDIO})
+
+    @OnPermissionDenied({Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECORD_AUDIO})
     void showRecordDenied() {
         ToastUtil.toastShortMessage("Please allow permission");
     }

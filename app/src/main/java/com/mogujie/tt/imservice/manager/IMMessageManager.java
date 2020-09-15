@@ -20,6 +20,7 @@ import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TextMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
+import com.mogujie.tt.imservice.event.FileProgressEvent;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.imservice.event.PriorityEvent;
 import com.mogujie.tt.imservice.event.QueryRedPacketEvent;
@@ -74,10 +75,11 @@ public class IMMessageManager extends IMManager {
     private final long IMAGE_TIMEOUT_MILLISECONDS = 4 * 60 * 1000;
 
     private static final List<FileMessage> fileList = new ArrayList<>();
+    private static final List<FileMessage> fileSendTransIngList = new ArrayList<>();
+
     private static final List<FileMessage> fileReceiveList = new ArrayList<>();
     private static final List<FileMessage> fileTransIngList = new ArrayList<>();
     private static final List<FileMessage> fileTransWaitList = new ArrayList<>();
-
 
 
     private long getTimeoutTolerance(MessageEntity msg) {
@@ -119,7 +121,7 @@ public class IMMessageManager extends IMManager {
         }
 
         //登录成功后，主动询问服务器是否有离线文件----------有点难受😣
-        reqOfflineFile();
+//        reqOfflineFile();
     }
 
 
@@ -140,7 +142,7 @@ public class IMMessageManager extends IMManager {
                         FileMessage fileMessage = null;
                         try {
                             fileMessage = FileMessage.buildForSend(imFileHasOfflineRsp.getOfflineFileList(i)
-                                    .getFileName(), imFileHasOfflineRsp.getOfflineFileList(i).getFromUserId(),
+                                            .getFileName(), imFileHasOfflineRsp.getOfflineFileList(i).getFromUserId(),
                                     imFileHasOfflineRsp.getOfflineFileList(i).getFileSize());
                             fileMessage.setIp(imFileHasOfflineRsp.getIpAddrList(0).getIp());
                             fileMessage.setPort(imFileHasOfflineRsp.getIpAddrList(0).getPort());
@@ -149,7 +151,7 @@ public class IMMessageManager extends IMManager {
                             fileMessage.buildSessionKey(false);
                             fileMessage.setStatus(MessageConstant.MSG_SUCCESS);
                             /**对于混合消息，未读消息计数还是1,session已经更新*/
-                            if (!fileReceiveList.contains(fileMessage)){
+                            if (!fileReceiveList.contains(fileMessage)) {
                                 fileReceiveList.add(fileMessage);
                             }
                             dbInterface.insertOrUpdateMessage(fileMessage);
@@ -302,10 +304,8 @@ public class IMMessageManager extends IMManager {
                 && msgEntity.getMsgType() != DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN) {
             throw new RuntimeException("#sendMessage# msgId is wrong,cause by 0!");
         }
-
         IMBaseDefine.MsgType msgType = Java2ProtoBuf.getProtoMsgType(msgEntity.getMsgType());
         byte[] sendContent = msgEntity.getSendContent();
-
 
         IMMessage.IMMsgData msgData = IMMessage.IMMsgData.newBuilder()
                 .setFromUserId(msgEntity.getFromId())
@@ -317,8 +317,6 @@ public class IMMessageManager extends IMManager {
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_DATA_VALUE;
-
-
         final MessageEntity messageEntity = msgEntity;
         imSocketManager.sendRequest(msgData, sid, cid, new Packetlistener(getTimeoutTolerance(messageEntity)) {
             @Override
@@ -377,14 +375,9 @@ public class IMMessageManager extends IMManager {
                 try {
                     IMFile.IMFileRsp imFileRsp = IMFile.IMFileRsp.parseFrom((CodedInputStream) response);
                     if (imFileRsp.getResultCode() == 0) {
-
-                        for (int i = 0; i < fileList.size(); i++) {
-                            if (fileMessage == fileList.get(i)) {
-                                fileList.get(i).setTaskId(imFileRsp.getTaskId());
-                                fileList.get(i).setIp(imFileRsp.getIpAddrList(0).getIp());
-                                fileList.get(i).setPort(imFileRsp.getIpAddrList(0).getPort());
-                            }
-                        }
+                        fileMessage.setTaskId(imFileRsp.getTaskId());
+                        fileMessage.setIp(imFileRsp.getIpAddrList(0).getIp());
+                        fileMessage.setPort(imFileRsp.getIpAddrList(0).getPort());
                         fileSocketManager.reqFileServer(imFileRsp);
                     }
 
@@ -407,10 +400,11 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 开始发送文件
+     *
      * @param imFilePullDataReq
      */
     public void onPullFileDataReq(IMFile.IMFilePullDataReq imFilePullDataReq) {
-        FileMessage msg = getFileMsgByTask(imFilePullDataReq.getTaskId());
+        FileMessage msg = fileSendTransIngList.get(0);
         if (msg == null) {
             return;
         }
@@ -431,7 +425,9 @@ public class IMMessageManager extends IMManager {
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_RSP_VALUE;
                 fileSocketManager.sendRequest(imFilePullDataRsp, sid, cid);
+                triggerEvent(new FileProgressEvent((int) ((float) imFilePullDataReq.getOffset() / raf.length() * 100), fileSendTransIngList.get(0)));
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -442,6 +438,7 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 接受文件
+     *
      * @param imFilePullDataRsp
      */
     public void onPullFileDataRsq(IMFile.IMFilePullDataRsp imFilePullDataRsp) {
@@ -467,7 +464,7 @@ public class IMMessageManager extends IMManager {
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_REQ_VALUE;
                 imFileReceiveSocketManager.sendRequest(imFilePullDataReq, sid, cid);
             }
-
+            triggerEvent(new FileProgressEvent((int) ((float) raf.length() / msg.getSize() * 100), getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId())));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -502,13 +499,14 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 发送或者接收文件完成
+     *
      * @param imFileState
      */
     public void onRspFileStatus(IMFile.IMFileState imFileState) {
         if (imFileState.getState().getNumber() == IMBaseDefine.ClientFileState.CLIENT_FILE_DONE_VALUE) {
             if (imFileState.getUserId() == IMLoginManager.instance().getLoginId()) {
                 //传输完成
-                FileMessage msg = getFileMsgByTask(imFileState.getTaskId());
+                FileMessage msg = fileSendTransIngList.get(0);
                 if (msg == null) {
                     return;
                 }
@@ -524,8 +522,10 @@ public class IMMessageManager extends IMManager {
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
                 imSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
                 long pkId = DBInterface.instance().insertOrUpdateMessage(msg);
-                fileList.remove(msg);
-                ToastUtil.toastShortMessage("Send File Success");
+                sendMessage(msg);
+                fileSendTransIngList.clear();
+                sendHeaderFile();
+//                ToastUtil.toastShortMessage("Send File Success");
             } else {
                 //接收完成
                 FileMessage msg = getFileReceiveMsgByTask(imFileState.getTaskId());
@@ -540,11 +540,13 @@ public class IMMessageManager extends IMManager {
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
                 imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
-                ToastUtil.toastShortMessage("Receive file--"+msg.getPath());
+                ToastUtil.toastShortMessage("Receive file--" + msg.getPath());
+                msg.setDownloading(false);
+                msg.setDownLoaded(true);
+                DBInterface.instance().insertOrUpdateMessage(msg);
                 fileReceiveList.remove(msg);
                 fileTransIngList.clear();
                 startReqFileServer();
-
             }
 
         }
@@ -553,6 +555,7 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 收到新文件消息通知
+     *
      * @param imFileNotify
      */
     public void onRsqFileNotify(IMFile.IMFileNotify imFileNotify) {
@@ -567,7 +570,7 @@ public class IMMessageManager extends IMManager {
             fileMessage.buildSessionKey(false);
             fileMessage.setStatus(MessageConstant.MSG_SUCCESS);
             /**对于混合消息，未读消息计数还是1,session已经更新*/
-            if (!fileReceiveList.contains(fileMessage)){
+            if (!fileReceiveList.contains(fileMessage)) {
                 fileReceiveList.add(fileMessage);
             }
             dbInterface.insertOrUpdateMessage(fileMessage);
@@ -588,10 +591,14 @@ public class IMMessageManager extends IMManager {
 
     }
 
-    public void startSaveFile(String taskId){
-        if (getFileReceiveMsgByTask(taskId)!=null){
-            if (!fileTransWaitList.contains(getFileReceiveMsgByTask(taskId))){
-                fileTransWaitList.add(getFileReceiveMsgByTask(taskId));
+    public void startSaveFile(FileMessage saveMsg) {
+        /**对于混合消息，未读消息计数还是1,session已经更新*/
+        if (!fileReceiveList.contains(saveMsg)) {
+            fileReceiveList.add(saveMsg);
+        }
+        if (saveMsg != null) {
+            if (!fileTransWaitList.contains(saveMsg)) {
+                fileTransWaitList.add(saveMsg);
                 startReqFileServer();
             }
 
@@ -600,13 +607,12 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 单个接受，不能多个接受
-     *
      */
-    private void startReqFileServer(){
-        if (fileTransWaitList.size()==0){
+    private void startReqFileServer() {
+        if (fileTransWaitList.size() == 0) {
             return;
         }
-        if (fileTransIngList.size()==0){
+        if (fileTransIngList.size() == 0) {
             fileTransIngList.add(fileTransWaitList.get(0));
             fileTransWaitList.remove(0);
             imFileReceiveSocketManager.reqFileServer(fileTransIngList.get(0));
@@ -615,9 +621,8 @@ public class IMMessageManager extends IMManager {
 
 
     public void loginFileServer() {
-        loginFileServer(fileList.get(0));
+        loginFileServer(fileSendTransIngList.get(0));
     }
-
 
 
     private void loginFileServer(FileMessage fileMessage) {
@@ -660,6 +665,7 @@ public class IMMessageManager extends IMManager {
 
     /**
      * 登录成功后，开始接受
+     *
      * @param fileMessage
      */
     public void loginFileReceiveServer(FileMessage fileMessage) {
@@ -774,8 +780,26 @@ public class IMMessageManager extends IMManager {
         logger.i("chat#sendFile#fileMessage");
         fileMessage.setStatus(MessageConstant.MSG_SENDING);
         sessionManager.updateSession(fileMessage);
-        fileList.add(fileMessage);
-        sendFileMsg(fileMessage);
+
+        if (fileMessage != null) {
+            if (!fileList.contains(fileMessage)) {
+                fileList.add(fileMessage);
+            }
+        }
+        sendHeaderFile();
+
+    }
+
+
+    private void sendHeaderFile() {
+        if (fileList.size() == 0) {
+            return;
+        }
+        if (fileSendTransIngList.size() == 0) {
+            fileSendTransIngList.add(fileList.get(0));
+            fileList.remove(0);
+            sendFileMsg(fileSendTransIngList.get(0));
+        }
     }
 
     public void sendTransfer(TransferMessage transferMessage) {

@@ -25,6 +25,10 @@ public class Java2ProtoBuf {
                 return IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TRANSFER;
             case DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN:
                 return IMBaseDefine.MsgType.MSG_TYPE_SINGLE_RECV_RED_PACK;
+            case DBConstant.MSG_TYPE_SINGLE_FILE:
+                return IMBaseDefine.MsgType.MSG_TYPE_OFFLINE_FILE;
+            case DBConstant.MSG_TYPE_GROUP_FILE:
+                return IMBaseDefine.MsgType.MSG_TYPE_GROUP_OFFLINE_FILE;
             default:
                 throw new IllegalArgumentException("msgType is illegal,cause by #getProtoMsgType#" +msgType);
         }

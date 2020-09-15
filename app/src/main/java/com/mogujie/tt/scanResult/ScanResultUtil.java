@@ -45,7 +45,6 @@ public class ScanResultUtil {
 //              byte[] encrypted1 = Base64.decode(result, Base64.DEFAULT);//NIBSS二维码
 //              String originalString = new String(encrypted1, "utf-8");
                 String originalString =  parseEmvcoQrCode(result);  //Emvco二维码
-                Log.e("nxb", originalString);
                 JSONObject jsonObject = new JSONObject(originalString);
                 String qr_cate = jsonObject.getString("qr_cate");
                 String sub_no = jsonObject.getString("sub_no");

@@ -44,12 +44,12 @@
             <FrameLayout
                 android:id="@+id/message_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <LinearLayout
-                    android:background="@mipmap/chat_other_content_bg_copy"
                     android:layout_width="199mm"
                     android:layout_height="wrap_content"
+                    android:background="@mipmap/chat_other_content_bg_copy"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -62,25 +62,24 @@
                         android:paddingRight="9mm">
 
 
-
                         <ImageView
                             android:id="@+id/file_image"
-                            android:layout_marginRight="15mm"
                             android:layout_width="26mm"
                             android:layout_height="29mm"
+                            android:layout_marginRight="15mm"
                             android:src="@mipmap/msg_file_icon" />
 
                         <LinearLayout
-                            android:layout_marginRight="10mm"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="10mm"
                             android:orientation="vertical">
 
                             <TextView
-                                android:ellipsize="end"
                                 android:id="@+id/titleTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:ellipsize="end"
                                 android:textColor="@color/color_33"
                                 android:textSize="14sp" />
 
@@ -97,21 +96,33 @@
                     </LinearLayout>
 
                     <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1mm"
                         android:layout_marginLeft="10mm"
                         android:layout_marginRight="10mm"
-                        android:background="@color/status_bar_color"
-                        android:layout_width="match_parent"
-                        android:layout_height="1mm"/>
+                        android:background="@color/status_bar_color" />
 
                     <TextView
-                        android:text="@string/chat_file_transfer"
                         android:layout_width="199mm"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15mm"
                         android:paddingTop="3mm"
                         android:paddingBottom="2mm"
+                        android:text="@string/chat_file_transfer"
                         android:textColor="@color/color_78"
                         android:textSize="10sp" />
+
+                    <ProgressBar
+                        android:progressDrawable="@drawable/turnout_progressbar_horizontal"
+                        android:visibility="gone"
+                        android:id="@+id/progress_bar_h"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:max="100"
+                        android:progress="0"
+                        />
 
                 </LinearLayout>
 
@@ -144,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:visibility="gone" />
+
         </RelativeLayout>
     </LinearLayout>
 

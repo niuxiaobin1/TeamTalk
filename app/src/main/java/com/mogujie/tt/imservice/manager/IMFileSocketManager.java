@@ -1,45 +1,24 @@
 package com.mogujie.tt.imservice.manager;
 
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.google.gson.Gson;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.GeneratedMessageLite;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.mogujie.tt.DB.sp.SystemConfigSp;
-import com.mogujie.tt.app.IMApplication;
-import com.mogujie.tt.config.GeneralConfig;
 import com.mogujie.tt.config.SysConstant;
-import com.mogujie.tt.dto.InstitutionDto;
 import com.mogujie.tt.imservice.callback.ListenerQueue;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.SocketEvent;
 import com.mogujie.tt.imservice.network.FileServerHandler;
-import com.mogujie.tt.imservice.network.MsgServerHandler;
 import com.mogujie.tt.imservice.network.SocketThread;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMFile;
-import com.mogujie.tt.protobuf.IMMessage;
 import com.mogujie.tt.protobuf.base.DataBuffer;
 import com.mogujie.tt.protobuf.base.DefaultHeader;
-import com.mogujie.tt.utils.AES;
 import com.mogujie.tt.utils.Logger;
 
-import org.apache.http.Header;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferInputStream;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URLDecoder;
 
 import de.greenrobot.event.EventBus;
-
-import static com.mogujie.tt.config.ServerHostConfig.GET_INSTITUTION_NUMBER;
-import static com.mogujie.tt.config.SysConstant.INSTITUTION_AESKEY;
 
 
 /**
@@ -215,7 +194,7 @@ public class IMFileSocketManager extends IMManager {
      * 断开与msg的链接
      */
     public void disconnectFileServer() {
-        listenerQueue.onDestory();
+//        listenerQueue.onDestory();
         logger.i("login#disconnectFileServer");
         if (fileServerThread != null) {
             fileServerThread.close();
@@ -236,7 +215,7 @@ public class IMFileSocketManager extends IMManager {
 
     public void onFileServerConnected() {
         logger.i("login#onFileServerConnected");
-        listenerQueue.onStart();
+//        listenerQueue.onStart();
         triggerEvent(SocketEvent.CONNECT_FILE_SERVER_SUCCESS);
         IMMessageManager.instance().loginFileServer();
     }

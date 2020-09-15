@@ -224,8 +224,8 @@ public class IMPacketDispatcher {
                     IMMessageManager.instance().onRspFileStatus(imFileState);
                     return;
                 case IMBaseDefine.FileCmdID.CID_FILE_NOTIFY_VALUE:
-                    IMFile.IMFileNotify imFileNotify =IMFile.IMFileNotify.parseFrom(buffer);
-                    IMMessageManager.instance().onRsqFileNotify(imFileNotify);
+//                    IMFile.IMFileNotify imFileNotify =IMFile.IMFileNotify.parseFrom(buffer);
+//                    IMMessageManager.instance().onRsqFileNotify(imFileNotify);
                     return;
 
             }

@@ -1,7 +1,5 @@
 package com.mogujie.tt.protobuf.helper;
 
-import android.util.Log;
-
 import com.google.protobuf.ByteString;
 import com.mogujie.tt.DB.entity.DepartmentEntity;
 import com.mogujie.tt.DB.entity.GroupEntity;
@@ -11,6 +9,7 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
+import com.mogujie.tt.imservice.entity.FileMessage;
 import com.mogujie.tt.imservice.entity.MsgAnalyzeEngine;
 import com.mogujie.tt.imservice.entity.RedPacketMessage;
 import com.mogujie.tt.imservice.entity.TransferMessage;
@@ -100,6 +99,8 @@ public class ProtoBuf2JavaBean {
             desMessage=DBConstant.DISPLAY_FOR_RED_PACKET_OPEN;
         }else if(msgType== DBConstant.MSG_TYPE_SINGLE_TRANSFER){
             desMessage=DBConstant.DISPLAY_FOR_TRANFER;
+        }else if(msgType== DBConstant.MSG_TYPE_SINGLE_FILE||msgType== DBConstant.MSG_TYPE_GROUP_FILE){
+            desMessage=DBConstant.DISPLAY_FILE_DATA;
         }
 
         sessionEntity.setLatestMsgData(desMessage);
@@ -275,6 +276,24 @@ public class ProtoBuf2JavaBean {
         return redPacketMessage;
     }
 
+    public static FileMessage analyzeFile(IMBaseDefine.MsgInfo msgInfo) {
+        FileMessage fileMessage = new FileMessage();
+        fileMessage.setFromId(msgInfo.getFromSessionId());
+        fileMessage.setMsgId(msgInfo.getMsgId());
+        fileMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
+        fileMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        fileMessage.setDisplayType(DBConstant.SHOW_FILE_TYPE);
+        fileMessage.setCreated(msgInfo.getCreateTime());
+        fileMessage.setUpdated(msgInfo.getCreateTime());
+
+        /**
+         * 解密文本信息
+         */
+        String desMessage = new String(com.mogujie.tt.Security.getInstance().DecryptMsg(msgInfo.getMsgData().toStringUtf8()));
+        fileMessage.setContent(desMessage);
+        fileMessage.parseFileInfo();
+        return fileMessage;
+    }
 
     public static AudioMessage analyzeAudio(IMBaseDefine.MsgInfo msgInfo) throws JSONException, UnsupportedEncodingException {
         AudioMessage audioMessage = new AudioMessage();
@@ -355,6 +374,10 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_RECV_RED_PACK:
                 messageEntity = analyzeOpenRedPacket(msgInfo);
                 break;
+            case MSG_TYPE_GROUP_OFFLINE_FILE:
+            case MSG_TYPE_OFFLINE_FILE:
+                messageEntity = analyzeFile(msgInfo);
+                break;
             default:
                 throw new RuntimeException("ProtoBuf2JavaBean#getMessageEntity wrong type!");
         }
@@ -398,6 +421,10 @@ public class ProtoBuf2JavaBean {
                 return DBConstant.MSG_TYPE_SINGLE_TRANSFER;
             case MSG_TYPE_SINGLE_RECV_RED_PACK:
                 return DBConstant.MSG_TYPE_SINGLE_RED_PACKET_OPEN;
+            case MSG_TYPE_GROUP_OFFLINE_FILE:
+                return DBConstant.MSG_TYPE_GROUP_FILE;
+            case MSG_TYPE_OFFLINE_FILE:
+                return DBConstant.MSG_TYPE_SINGLE_FILE;
             default:
                 throw new IllegalArgumentException("msgType is illegal,cause by #getProtoMsgType#" +msgType);
         }

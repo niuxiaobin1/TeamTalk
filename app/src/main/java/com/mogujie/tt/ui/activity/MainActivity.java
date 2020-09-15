@@ -414,7 +414,6 @@ public class MainActivity extends TTBaseActivity {
 
                     @Override
                     public void onSuccess(Response<File> response) {
-                        Log.e("nxb", response.body().getPath());
                         File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "update.apk");
                         setInstallPermission(futureStudioIconFile);
                     }

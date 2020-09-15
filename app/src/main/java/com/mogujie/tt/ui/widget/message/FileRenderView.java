@@ -2,16 +2,13 @@ package com.mogujie.tt.ui.widget.message;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.luck.picture.lib.PictureSelector;
@@ -20,9 +17,8 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.FileMessage;
-import com.mogujie.tt.imservice.entity.ImageMessage;
+import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMMessageManager;
-import com.mogujie.tt.ui.widget.BubbleImageView;
 import com.mogujie.tt.ui.widget.MGProgressbar;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.FileUtil;
@@ -52,6 +48,7 @@ public class FileRenderView extends BaseMsgRenderView {
 
     private TextView titleTv;
     private TextView sizeTv;
+    private ProgressBar progress_bar_h;
     /**
      * 图片状态指示
      */
@@ -72,6 +69,7 @@ public class FileRenderView extends BaseMsgRenderView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        progress_bar_h = findViewById(R.id.progress_bar_h);
         messageLayout = findViewById(R.id.message_layout);
         messageImage = (ImageView) findViewById(R.id.file_image);
         titleTv = (TextView) findViewById(R.id.titleTv);
@@ -98,9 +96,11 @@ public class FileRenderView extends BaseMsgRenderView {
     public void render(final MessageEntity messageEntity, final UserEntity userEntity, Context ctx) {
         super.render(messageEntity, userEntity, ctx);
         FileMessage fileMessage = (FileMessage) messageEntity;
-        if (fileMessage.getLoadStatus() == MessageConstant.FILE_UNLOAD) {
+        boolean isRecieved = fileMessage.getFromId() != IMLoginManager.instance().getLoginId();
+        if (isRecieved && !fileMessage.isDownLoaded() && !fileMessage.isDownloading()) {
             //下载
-            IMMessageManager.instance().startSaveFile(fileMessage.getTaskId());
+            fileMessage.setDownloading(true);
+            IMMessageManager.instance().startSaveFile(fileMessage);
         }
         if (FileUtil.getExtensionName(((FileMessage) messageEntity).getPath()).toUpperCase().equals("MP4")) {
             //video
@@ -117,9 +117,16 @@ public class FileRenderView extends BaseMsgRenderView {
                 }
             });
         }
+        if (((FileMessage) messageEntity).getProgress() != 0 && ((FileMessage) messageEntity).getProgress() != 100
+                && messageEntity.getStatus() != MessageConstant.MSG_SUCCESS) {
+            progress_bar_h.setVisibility(VISIBLE);
+            progress_bar_h.setProgress(((FileMessage) messageEntity).getProgress());
+        } else {
+            progress_bar_h.setVisibility(GONE);
+        }
 
         titleTv.setText(CommonUtil.getFileNameWithSuffix(((FileMessage) messageEntity).getPath()));
-        sizeTv.setText(Formatter.formatShortFileSize(ctx, ((FileMessage) messageEntity).getSize()));
+        sizeTv.setText(Formatter.formatFileSize(ctx, ((FileMessage) messageEntity).getSize()));
     }
 
 
@@ -161,8 +168,8 @@ public class FileRenderView extends BaseMsgRenderView {
      */
     @Override
     public void msgSendinging(final MessageEntity entity) {
-
-
+        super.msgSendinging(entity);
+        imageProgress.showProgress();
     }
 
 
@@ -175,6 +182,12 @@ public class FileRenderView extends BaseMsgRenderView {
     @Override
     public void msgSuccess(final MessageEntity entity) {
         super.msgSuccess(entity);
+        imageProgress.hideProgress();
+        boolean isRecieved = entity.getFromId() != IMLoginManager.instance().getLoginId();
+        if (!isRecieved) {
+            progress_bar_h.setVisibility(GONE);
+        }
+
     }
 
     /**

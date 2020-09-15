@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
-
+     
                 <LinearLayout
                     android:layout_width="199mm"
                     android:layout_height="51mm"
@@ -119,6 +119,17 @@
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
+                <ProgressBar
+                    android:progressDrawable="@drawable/turnout_progressbar_horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/progress_bar_h"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="0"
+                    />
             </LinearLayout>
 
 

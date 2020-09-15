@@ -1,6 +1,7 @@
 package com.mogujie.tt.imservice.entity;
 
 import android.os.Environment;
+import android.util.Log;
 
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author : yingmu on 14-12-31.
@@ -33,8 +35,11 @@ public class FileMessage extends MessageEntity implements Serializable {
     private String taskId = "";
     private String ip = "";
     private int port = 0;
+    private int progress =0;
 
     private int loadStatus;
+    private boolean isDownloading=false;
+    private boolean isDownLoaded=false;
 
 
     public FileMessage() {
@@ -74,14 +79,8 @@ public class FileMessage extends MessageEntity implements Serializable {
             fileMessage.setTaskId(extraContent.getString("taskId"));
             fileMessage.setIp(extraContent.getString("ip"));
             fileMessage.setPort(extraContent.getInt("port"));
-
-            int loadStatus = extraContent.getInt("loadStatus");
-
-            //todo temp solution
-            if (loadStatus == MessageConstant.IFILE_LOADING) {
-                loadStatus = MessageConstant.FILE_UNLOAD;
-            }
-            fileMessage.setLoadStatus(loadStatus);
+            fileMessage.setDownLoaded(extraContent.getBoolean("download"));
+            fileMessage.setLoadStatus(MessageConstant.FILE_LOADED_SUCCESS);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -118,7 +117,7 @@ public class FileMessage extends MessageEntity implements Serializable {
     }
 
     // 消息页面，接收文件消息
-    public static FileMessage buildForSend(String fileName, int fromId,int size) throws IOException {
+    public static FileMessage buildForSend(String fileName, int fromId, int size) throws IOException {
         FileMessage msg = new FileMessage();
         String receivePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
@@ -128,11 +127,11 @@ public class FileMessage extends MessageEntity implements Serializable {
             receivePath = IMApplication.sApplicationContext.getFilesDir().getPath();
         }
 
-        msg.setPath(receivePath+File.separator+fileName);
-        if (new File(msg.getPath()).exists()){
-            msg.setPath(receivePath+File.separator+System.currentTimeMillis()+fileName);
+        msg.setPath(receivePath + File.separator + fileName);
+        if (new File(msg.getPath()).exists()) {
+            msg.setPath(receivePath + File.separator + System.currentTimeMillis() + fileName);
         }
-        if (!new File(msg.getPath()).exists()){
+        if (!new File(msg.getPath()).exists()) {
             new File(msg.getPath()).createNewFile();
         }
         msg.setSize(size);
@@ -141,6 +140,7 @@ public class FileMessage extends MessageEntity implements Serializable {
 
 
         msg.setFromId(fromId);
+
         msg.setToId(IMLoginManager.instance().getLoginId());
         msg.setCreated(nowTime);
         msg.setUpdated(nowTime);
@@ -152,6 +152,20 @@ public class FileMessage extends MessageEntity implements Serializable {
         msg.setStatus(MessageConstant.MSG_SENDING);
         msg.setLoadStatus(MessageConstant.FILE_UNLOAD);
         msg.buildSessionKey(true);
+
+//        JSONObject extraContent = new JSONObject();
+//        try {
+//            extraContent.put("path", msg.path);
+//            extraContent.put("loadStatus", msg.loadStatus);
+//            extraContent.put("taskId", msg.taskId);
+//            extraContent.put("ip", msg.id);
+//            extraContent.put("port", msg.port);
+//            extraContent.put("size", msg.size);
+//            String fileContent = extraContent.toString();
+//            msg.setContent(fileContent);
+//        } catch (JSONException e) {
+//            Log.e("nxb",e.toString());
+//        }
         return msg;
     }
 
@@ -161,25 +175,18 @@ public class FileMessage extends MessageEntity implements Serializable {
      */
     @Override
     public String getContent() {
-        JSONObject extraContent = new JSONObject();
-        try {
-            extraContent.put("path", path);
-            extraContent.put("loadStatus", loadStatus);
-            extraContent.put("taskId", taskId);
-            extraContent.put("ip", ip);
-            extraContent.put("port", port);
-            extraContent.put("size", size);
-            String fileContent = extraContent.toString();
-            return fileContent;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return content;
     }
 
     @Override
     public byte[] getSendContent() {
-
+        try {
+            /** 加密*/
+            String sendContent = new String(com.mogujie.tt.Security.getInstance().EncryptMsg(content));
+            return sendContent.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -209,6 +216,16 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setSize(long size) {
         this.size = size;
+        updateContent();
+    }
+
+    public boolean isDownLoaded() {
+        return isDownLoaded;
+    }
+
+    public void setDownLoaded(boolean downLoaded) {
+        isDownLoaded = downLoaded;
+        updateContent();
     }
 
     public String getTaskId() {
@@ -217,6 +234,7 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+        updateContent();
     }
 
     public String getIp() {
@@ -225,6 +243,7 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip;
+        updateContent();
     }
 
     public int getPort() {
@@ -233,5 +252,72 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setPort(int port) {
         this.port = port;
+        updateContent();
+    }
+
+    private void updateContent() {
+        JSONObject extraContent = new JSONObject();
+        String fileName = CommonUtil.getFileNameWithSuffix(path);
+        try {
+            extraContent.put("name", fileName);
+            extraContent.put("path", path);
+            extraContent.put("taskId", taskId);
+            extraContent.put("ip", ip);
+            extraContent.put("port", port);
+            extraContent.put("size", size);
+            extraContent.put("download", isDownLoaded);
+            String fileContent = extraContent.toString();
+            setContent(fileContent);
+        } catch (JSONException e) {
+            Log.e("nxb", e.toString());
+        }
+    }
+
+
+    public void parseFileInfo() {
+        JSONObject extraContent;
+        try {
+            extraContent = new JSONObject(content);
+            String receivePath;
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                    || !Environment.isExternalStorageRemovable()) {
+                receivePath = IMApplication.sApplicationContext.getExternalCacheDir().getPath();
+            } else {
+                receivePath = IMApplication.sApplicationContext.getFilesDir().getPath();
+            }
+
+            path = receivePath + File.separator + extraContent.getString("name");
+            if (new File(path).exists()) {
+                path = receivePath + File.separator + System.currentTimeMillis() + extraContent.getString("name");
+            }
+//            if (!new File(path).exists()) {
+//                new File(path).createNewFile();
+//            }
+            size = extraContent.getLong("size");
+            taskId = extraContent.getString("taskId");
+            ip = extraContent.getString("ip");
+            port = extraContent.getInt("port");
+            isDownLoaded = extraContent.getBoolean("download");
+            updateContent();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean isDownloading() {
+        return isDownloading;
+    }
+
+    public void setDownloading(boolean downloading) {
+        isDownloading = downloading;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 }

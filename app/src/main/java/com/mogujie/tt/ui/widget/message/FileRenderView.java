@@ -117,8 +117,10 @@ public class FileRenderView extends BaseMsgRenderView {
                 }
             });
         }
-        if (((FileMessage) messageEntity).getProgress() != 0 && ((FileMessage) messageEntity).getProgress() != 100
-                && messageEntity.getStatus() != MessageConstant.MSG_SUCCESS) {
+        if (((FileMessage) messageEntity).getProgress() != 0
+                && ((FileMessage) messageEntity).getProgress() != 100
+//                && messageEntity.getStatus() != MessageConstant.MSG_SUCCESS
+        ) {
             progress_bar_h.setVisibility(VISIBLE);
             progress_bar_h.setProgress(((FileMessage) messageEntity).getProgress());
         } else {

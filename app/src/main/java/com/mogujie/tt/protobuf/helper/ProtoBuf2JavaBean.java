@@ -182,6 +182,10 @@ public class ProtoBuf2JavaBean {
             case MSG_TYPE_SINGLE_TEXT:
                 messageEntity = analyzeText(msgInfo);
                 break;
+            case MSG_TYPE_OFFLINE_FILE:
+            case MSG_TYPE_GROUP_OFFLINE_FILE:
+                messageEntity = analyzeFile(msgInfo);
+                break;
             case MSG_TYPE_SINGLE_RED_PACK:
                 messageEntity = analyzeRedPacket(msgInfo);
                 break;

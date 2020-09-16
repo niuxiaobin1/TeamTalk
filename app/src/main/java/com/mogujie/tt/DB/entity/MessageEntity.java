@@ -156,9 +156,11 @@ public class MessageEntity implements java.io.Serializable {
         switch (msgType) {
             case  DBConstant.MSG_TYPE_SINGLE_TEXT:
             case  DBConstant.MSG_TYPE_SINGLE_AUDIO:
+            case  DBConstant.MSG_TYPE_SINGLE_FILE:
                 return DBConstant.SESSION_TYPE_SINGLE;
             case DBConstant.MSG_TYPE_GROUP_TEXT:
             case DBConstant.MSG_TYPE_GROUP_AUDIO:
+            case DBConstant.MSG_TYPE_GROUP_FILE:
                 return DBConstant.SESSION_TYPE_GROUP;
             default:
                 //todo 有问题

@@ -446,6 +446,15 @@ public class IMMessageManager extends IMManager {
         if (msg == null) {
             return;
         }
+        FileMessage curFileMesg=getFileReceiveMsgByTask(imFilePullDataRsp.getTaskId());
+        boolean isSend = curFileMesg.isSend(IMLoginManager.instance().getLoginId());
+        int loginId=0;
+        if(curFileMesg.getMsgType()==DBConstant.MSG_TYPE_GROUP_FILE){
+            loginId=curFileMesg.getPeerId(isSend);
+        }else{
+            loginId=IMLoginManager.instance().getLoginId();
+        }
+        final int curId=loginId;
         try {
             int offset = imFilePullDataRsp.getOffset();
             RandomAccessFile raf = new RandomAccessFile(new File(msg.getPath()), "rw");
@@ -454,7 +463,7 @@ public class IMMessageManager extends IMManager {
 
             if (msg.getSize() != raf.length()) {
                 IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
-                        .setUserId(IMLoginManager.instance().getLoginId())
+                        .setUserId(curId)
                         .setTaskId(imFilePullDataRsp.getTaskId())
                         .setTransMode(IMBaseDefine.TransferFileType.FILE_TYPE_OFFLINE)
                         .setOffset((int) raf.length())
@@ -532,14 +541,16 @@ public class IMMessageManager extends IMManager {
                 if (msg == null) {
                     return;
                 }
-                IMFile.IMFileDelOfflineReq imFileDelOfflineReq = IMFile.IMFileDelOfflineReq.newBuilder()
-                        .setFromUserId(msg.getFromId())
-                        .setToUserId(msg.getToId())
-                        .setTaskId(imFileState.getTaskId())
-                        .build();
-                int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
-                int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
-                imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                if (msg.getMsgType()==DBConstant.MSG_TYPE_SINGLE_FILE){
+                    IMFile.IMFileDelOfflineReq imFileDelOfflineReq = IMFile.IMFileDelOfflineReq.newBuilder()
+                            .setFromUserId(msg.getFromId())
+                            .setToUserId(msg.getToId())
+                            .setTaskId(imFileState.getTaskId())
+                            .build();
+                    int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
+                    int cid = IMBaseDefine.FileCmdID.CID_FILE_DEL_OFFLINE_REQ_VALUE;
+                    imSocketManager.sendRequest(imFileDelOfflineReq, sid, cid);
+                }
                 ToastUtil.toastShortMessage("Receive file--" + msg.getPath());
                 msg.setDownloading(false);
                 msg.setDownLoaded(true);
@@ -669,8 +680,16 @@ public class IMMessageManager extends IMManager {
      * @param fileMessage
      */
     public void loginFileReceiveServer(FileMessage fileMessage) {
+        boolean isSend = fileMessage.isSend(IMLoginManager.instance().getLoginId());
+        int loginId=0;
+        if(fileMessage.getMsgType()==DBConstant.MSG_TYPE_GROUP_FILE){
+            loginId=fileMessage.getPeerId(isSend);
+        }else{
+            loginId=IMLoginManager.instance().getLoginId();
+        }
+        final int curId=loginId;
         IMFile.IMFileLoginReq imFileLoginReq = IMFile.IMFileLoginReq.newBuilder()
-                .setUserId(IMLoginManager.instance().getLoginId())
+                .setUserId(curId)
                 .setTaskId(fileMessage.getTaskId())
                 .setFileRole(IMBaseDefine.ClientFileRole.CLIENT_OFFLINE_DOWNLOAD)
                 .build();
@@ -687,7 +706,7 @@ public class IMMessageManager extends IMManager {
                         ToastUtil.toastShortMessage("login receive file server error");
                     } else {
                         IMFile.IMFilePullDataReq imFilePullDataReq = IMFile.IMFilePullDataReq.newBuilder()
-                                .setUserId(IMLoginManager.instance().getLoginId())
+                                .setUserId(curId)
                                 .setTaskId(fileMessage.getTaskId())
                                 .setTransMode(IMBaseDefine.TransferFileType.FILE_TYPE_OFFLINE)
                                 .setOffset(0)

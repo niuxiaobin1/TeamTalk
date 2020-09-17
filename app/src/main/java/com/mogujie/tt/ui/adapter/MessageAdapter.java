@@ -671,6 +671,10 @@ public class MessageAdapter extends BaseAdapter {
         TextRenderView textRenderView;
         final TextMessage textMessage = (TextMessage) msgObjectList.get(position);
         UserEntity userEntity = imService.getContactManager().findContact(textMessage.getFromId());
+        if (userEntity==null){
+            userEntity=new UserEntity();
+            userEntity.setPeerId(textMessage.getFromId());
+        }
         if (isMine) {
             userEntity = imService.getLoginManager().getLoginInfo();
         }

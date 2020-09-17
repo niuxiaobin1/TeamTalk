@@ -235,7 +235,11 @@ public class GroupManagerAdapter extends BaseAdapter {
         if (position >= 0 && memberList.size() > position) {
             logger.d("groupmgr#in mebers area");
             final UserEntity userEntity = memberList.get(position);
-            setHolder(holder, position, userEntity.getAvatar(), R.mipmap.default_head, userEntity.getMainName(), userEntity);
+            String showName=userEntity.getMainName();
+            if (!TextUtils.isEmpty(userEntity.getPinyinName())){
+                showName=userEntity.getPinyinName();
+            }
+            setHolder(holder, position, userEntity.getAvatar(), R.mipmap.default_head, showName, userEntity);
 
             if (holder.imageView != null) {
                 holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -331,7 +335,7 @@ public class GroupManagerAdapter extends BaseAdapter {
 
             holder.userTitle.setText(name);
             holder.imageView.setVisibility(View.VISIBLE);
-            holder.userTitle.setVisibility(View.GONE);
+            holder.userTitle.setVisibility(View.VISIBLE);
         }
     }
 

@@ -358,6 +358,13 @@ public class DBInterface {
         return formatMessage(listMsg);
     }
 
+    public void delHistoryMsg(String chatKey) {
+        MessageDao dao = openReadableDb().getMessageDao();
+        dao.queryBuilder().where(
+                MessageDao.Properties.SessionKey.eq(chatKey))
+                .buildDelete().executeDeleteWithoutDetachingEntities();
+    }
+
     /**
      * IMGetLatestMsgIdReq 后去最后一条合法的msgid
      */

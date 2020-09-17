@@ -21,6 +21,7 @@ import com.mogujie.tt.imservice.manager.IMLoginManager;
 import com.mogujie.tt.imservice.manager.IMMessageManager;
 import com.mogujie.tt.ui.widget.MGProgressbar;
 import com.mogujie.tt.utils.CommonUtil;
+import com.mogujie.tt.utils.FileOpenUtils;
 import com.mogujie.tt.utils.FileUtil;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.utils.ToastUtil;
@@ -110,6 +111,23 @@ public class FileRenderView extends BaseMsgRenderView {
                 public void onClick(View v) {
                     if (new File(fileMessage.getPath()).exists()) {
                         PictureSelector.create((Activity) getContext()).externalPictureVideo(fileMessage.getPath());
+                    } else {
+                        ToastUtil.toastShortMessage("file not exists...");
+                    }
+
+                }
+            });
+        }else{
+            messageLayout.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (new File(fileMessage.getPath()).exists()) {
+                        try {
+                            FileOpenUtils.openFile((Activity) getContext(),new File(fileMessage.getPath()));
+
+                        }catch (Exception e){
+                            ToastUtil.toastShortMessage("can not open file");
+                        }
                     } else {
                         ToastUtil.toastShortMessage("file not exists...");
                     }

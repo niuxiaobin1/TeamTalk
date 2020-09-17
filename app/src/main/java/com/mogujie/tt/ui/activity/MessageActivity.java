@@ -1993,6 +1993,12 @@ public class MessageActivity extends TTBaseActivity
         for (int i = 0; i < userInfos.size(); i++) {
             if (userInfos.get(i).getUserId() == id) {
                 name = userInfos.get(i).getUserDomain();
+                if (TextUtils.isEmpty(name)){
+                    name=userInfos.get(i).getUserNickName();
+                }
+                if (TextUtils.isEmpty(name)){
+                    name=userInfos.get(i).getEmail();
+                }
             }
         }
         return name;

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.DBConstant;
@@ -560,6 +561,7 @@ public class ChatFragment extends MainFragment
                         IMUIHelper.openUserProfileActivity(ctx, recentInfo.getPeerId(), true);
                         break;
                     case 1:
+                        DBInterface.instance().delHistoryMsg(recentInfo.getSessionKey());
                         imService.getSessionManager().reqRemoveSession(recentInfo);
                         break;
                     case 2: {
@@ -613,6 +615,7 @@ public class ChatFragment extends MainFragment
             public void onItemClick(int position) {
                 switch (position) {
                     case 0:
+                        DBInterface.instance().delHistoryMsg(recentInfo.getSessionKey());
                         imService.getSessionManager().reqRemoveSession(recentInfo);
                         break;
                     case 1: {

@@ -66,6 +66,7 @@ import com.luck.picture.lib.language.LanguageConfig;
 import com.luck.picture.lib.style.PictureCropParameterStyle;
 import com.luck.picture.lib.style.PictureParameterStyle;
 import com.luck.picture.lib.tools.SdkVersionUtils;
+import com.mogujie.tt.DB.DBInterface;
 import com.mogujie.tt.DB.entity.GroupEntity;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
@@ -554,6 +555,7 @@ public class MessageActivity extends TTBaseActivity
             e.printStackTrace();
         }
         pushList(fileMessage);
+        long pkId = DBInterface.instance().insertOrUpdateMessage(fileMessage);
         imService.getMessageManager().sendFile(fileMessage);
     }
 

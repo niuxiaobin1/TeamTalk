@@ -1535,6 +1535,14 @@ public final class IMBaseDefine {
      * </pre>
      */
     CID_GROUP_CHANGE_NICK_NOTIFY(29, 1060),
+    /**
+     * <code>CID_GROUP_ADD_FRIEND_NOTIFY = 1061;</code>
+     *
+     * <pre>
+     *加入群通知
+     * </pre>
+     */
+    CID_GROUP_ADD_FRIEND_NOTIFY(30, 1061),
     ;
 
     /**
@@ -1701,6 +1709,14 @@ public final class IMBaseDefine {
      * </pre>
      */
     public static final int CID_GROUP_CHANGE_NICK_NOTIFY_VALUE = 1060;
+    /**
+     * <code>CID_GROUP_ADD_FRIEND_NOTIFY = 1061;</code>
+     *
+     * <pre>
+     *加入群通知
+     * </pre>
+     */
+    public static final int CID_GROUP_ADD_FRIEND_NOTIFY_VALUE = 1061;
 
 
     public final int getNumber() { return value; }
@@ -1737,6 +1753,7 @@ public final class IMBaseDefine {
         case 1058: return CID_GROUP_PUBLISH_BOARD_NOTIFY;
         case 1059: return CID_GROUP_CHANGE_GROUP_NAME_NOTIFY;
         case 1060: return CID_GROUP_CHANGE_NICK_NOTIFY;
+        case 1061: return CID_GROUP_ADD_FRIEND_NOTIFY;
         default: return null;
       }
     }
@@ -1847,6 +1864,14 @@ public final class IMBaseDefine {
      * </pre>
      */
     CID_GROUPFILE_RESPONSE(13, 1294),
+    /**
+     * <code>CID_FILE_SEND_MAIL_REQ = 1295;</code>
+     *
+     * <pre>
+     *发送邮件
+     * </pre>
+     */
+    CID_FILE_SEND_MAIL_REQ(14, 1295),
     ;
 
     /**
@@ -1929,6 +1954,14 @@ public final class IMBaseDefine {
      * </pre>
      */
     public static final int CID_GROUPFILE_RESPONSE_VALUE = 1294;
+    /**
+     * <code>CID_FILE_SEND_MAIL_REQ = 1295;</code>
+     *
+     * <pre>
+     *发送邮件
+     * </pre>
+     */
+    public static final int CID_FILE_SEND_MAIL_REQ_VALUE = 1295;
 
 
     public final int getNumber() { return value; }
@@ -1949,6 +1982,7 @@ public final class IMBaseDefine {
         case 1292: return CID_FILE_DEL_OFFLINE_REQ;
         case 1293: return CID_GROUPFILE_REQUEST;
         case 1294: return CID_GROUPFILE_RESPONSE;
+        case 1295: return CID_FILE_SEND_MAIL_REQ;
         default: return null;
       }
     }
@@ -4472,7 +4506,7 @@ public final class IMBaseDefine {
      * <code>required uint32 user_gender = 2;</code>
      *
      * <pre>
-     *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+     * 用户性别,男：1 女：2 人妖/外星人：0
      * </pre>
      */
     boolean hasUserGender();
@@ -4480,7 +4514,7 @@ public final class IMBaseDefine {
      * <code>required uint32 user_gender = 2;</code>
      *
      * <pre>
-     *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+     * 用户性别,男：1 女：2 人妖/外星人：0
      * </pre>
      */
     int getUserGender();
@@ -4866,7 +4900,7 @@ public final class IMBaseDefine {
      * <code>required uint32 user_gender = 2;</code>
      *
      * <pre>
-     *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+     * 用户性别,男：1 女：2 人妖/外星人：0
      * </pre>
      */
     public boolean hasUserGender() {
@@ -4876,7 +4910,7 @@ public final class IMBaseDefine {
      * <code>required uint32 user_gender = 2;</code>
      *
      * <pre>
-     *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+     * 用户性别,男：1 女：2 人妖/外星人：0
      * </pre>
      */
     public int getUserGender() {
@@ -5865,7 +5899,7 @@ public final class IMBaseDefine {
        * <code>required uint32 user_gender = 2;</code>
        *
        * <pre>
-       *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+       * 用户性别,男：1 女：2 人妖/外星人：0
        * </pre>
        */
       public boolean hasUserGender() {
@@ -5875,7 +5909,7 @@ public final class IMBaseDefine {
        * <code>required uint32 user_gender = 2;</code>
        *
        * <pre>
-       *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+       * 用户性别,男：1 女：2 人妖/外星人：0
        * </pre>
        */
       public int getUserGender() {
@@ -5885,7 +5919,7 @@ public final class IMBaseDefine {
        * <code>required uint32 user_gender = 2;</code>
        *
        * <pre>
-       *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+       * 用户性别,男：1 女：2 人妖/外星人：0
        * </pre>
        */
       public Builder setUserGender(int value) {
@@ -5898,7 +5932,7 @@ public final class IMBaseDefine {
        * <code>required uint32 user_gender = 2;</code>
        *
        * <pre>
-       *&#47;/ 用户性别,男：1 女：2 人妖/外星人：0
+       * 用户性别,男：1 女：2 人妖/外星人：0
        * </pre>
        */
       public Builder clearUserGender() {
@@ -6768,7 +6802,7 @@ public final class IMBaseDefine {
      * <code>required uint32 friend_id = 2;</code>
      *
      * <pre>
-     * 好友id
+     *好友id
      * </pre>
      */
     boolean hasFriendId();
@@ -6776,7 +6810,7 @@ public final class IMBaseDefine {
      * <code>required uint32 friend_id = 2;</code>
      *
      * <pre>
-     * 好友id
+     *好友id
      * </pre>
      */
     int getFriendId();
@@ -7016,7 +7050,7 @@ public final class IMBaseDefine {
      * <code>required uint32 friend_id = 2;</code>
      *
      * <pre>
-     * 好友id
+     *好友id
      * </pre>
      */
     public boolean hasFriendId() {
@@ -7026,7 +7060,7 @@ public final class IMBaseDefine {
      * <code>required uint32 friend_id = 2;</code>
      *
      * <pre>
-     * 好友id
+     *好友id
      * </pre>
      */
     public int getFriendId() {
@@ -7568,7 +7602,7 @@ public final class IMBaseDefine {
        * <code>required uint32 friend_id = 2;</code>
        *
        * <pre>
-       * 好友id
+       *好友id
        * </pre>
        */
       public boolean hasFriendId() {
@@ -7578,7 +7612,7 @@ public final class IMBaseDefine {
        * <code>required uint32 friend_id = 2;</code>
        *
        * <pre>
-       * 好友id
+       *好友id
        * </pre>
        */
       public int getFriendId() {
@@ -7588,7 +7622,7 @@ public final class IMBaseDefine {
        * <code>required uint32 friend_id = 2;</code>
        *
        * <pre>
-       * 好友id
+       *好友id
        * </pre>
        */
       public Builder setFriendId(int value) {
@@ -7601,7 +7635,7 @@ public final class IMBaseDefine {
        * <code>required uint32 friend_id = 2;</code>
        *
        * <pre>
-       * 好友id
+       *好友id
        * </pre>
        */
       public Builder clearFriendId() {

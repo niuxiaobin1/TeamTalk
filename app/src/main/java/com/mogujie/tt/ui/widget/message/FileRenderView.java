@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -205,7 +206,7 @@ public class FileRenderView extends BaseMsgRenderView {
         imageProgress.hideProgress();
         boolean isRecieved = entity.getFromId() != IMLoginManager.instance().getLoginId();
         if (!isRecieved) {
-            progress_bar_h.setVisibility(GONE);
+//            progress_bar_h.setVisibility(GONE);
         }
 
     }

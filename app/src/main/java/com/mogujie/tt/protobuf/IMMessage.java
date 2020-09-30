@@ -83,11 +83,62 @@ public final class IMMessage {
     com.google.protobuf.ByteString getMsgData();
 
     /**
+     * <code>optional uint32 result_code = 7;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>optional uint32 result_code = 7;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    int getResultCode();
+
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    boolean hasResultString();
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    java.lang.String getResultString();
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getResultStringBytes();
+
+    /**
      * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
      */
     boolean hasAttachData();
     /**
      * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
      */
     com.google.protobuf.ByteString getAttachData();
   }
@@ -182,8 +233,19 @@ public final class IMMessage {
               msgData_ = input.readBytes();
               break;
             }
-            case 162: {
+            case 56: {
               bitField0_ |= 0x00000040;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              resultString_ = bs;
+              break;
+            }
+            case 162: {
+              bitField0_ |= 0x00000100;
               attachData_ = input.readBytes();
               break;
             }
@@ -327,16 +389,101 @@ public final class IMMessage {
       return msgData_;
     }
 
+    public static final int RESULT_CODE_FIELD_NUMBER = 7;
+    private int resultCode_;
+    /**
+     * <code>optional uint32 result_code = 7;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional uint32 result_code = 7;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int RESULT_STRING_FIELD_NUMBER = 8;
+    private java.lang.Object resultString_;
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    public boolean hasResultString() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    public java.lang.String getResultString() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          resultString_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string result_string = 8;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getResultStringBytes() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        resultString_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
      * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
      */
     public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional bytes attach_data = 20;</code>
+     *
+     * <pre>
+     *发送端不需要传
+     * </pre>
      */
     public com.google.protobuf.ByteString getAttachData() {
       return attachData_;
@@ -349,6 +496,8 @@ public final class IMMessage {
       createTime_ = 0;
       msgType_ = com.mogujie.tt.protobuf.IMBaseDefine.MsgType.MSG_TYPE_SINGLE_TEXT;
       msgData_ = com.google.protobuf.ByteString.EMPTY;
+      resultCode_ = 0;
+      resultString_ = "";
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -407,6 +556,12 @@ public final class IMMessage {
         output.writeBytes(6, msgData_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt32(7, resultCode_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getResultStringBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(20, attachData_);
       }
       output.writeRawBytes(unknownFields);
@@ -443,6 +598,14 @@ public final class IMMessage {
           .computeBytesSize(6, msgData_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, resultCode_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getResultStringBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(20, attachData_);
       }
@@ -556,8 +719,12 @@ public final class IMMessage {
         bitField0_ = (bitField0_ & ~0x00000010);
         msgData_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
-        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        resultCode_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        resultString_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        attachData_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -608,6 +775,14 @@ public final class IMMessage {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.resultString_ = resultString_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
         result.attachData_ = attachData_;
         result.bitField0_ = to_bitField0_;
         return result;
@@ -632,6 +807,14 @@ public final class IMMessage {
         }
         if (other.hasMsgData()) {
           setMsgData(other.getMsgData());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasResultString()) {
+          bitField0_ |= 0x00000080;
+          resultString_ = other.resultString_;
+          
         }
         if (other.hasAttachData()) {
           setAttachData(other.getAttachData());
@@ -918,36 +1101,200 @@ public final class IMMessage {
         return this;
       }
 
-      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      private int resultCode_ ;
       /**
-       * <code>optional bytes attach_data = 20;</code>
+       * <code>optional uint32 result_code = 7;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
        */
-      public boolean hasAttachData() {
+      public boolean hasResultCode() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
+       * <code>optional uint32 result_code = 7;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>optional uint32 result_code = 7;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000040;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional uint32 result_code = 7;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object resultString_ = "";
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public boolean hasResultString() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public java.lang.String getResultString() {
+        java.lang.Object ref = resultString_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            resultString_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getResultStringBytes() {
+        java.lang.Object ref = resultString_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          resultString_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public Builder setResultString(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        resultString_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public Builder clearResultString() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        resultString_ = getDefaultInstance().getResultString();
+        
+        return this;
+      }
+      /**
+       * <code>optional string result_string = 8;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public Builder setResultStringBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        resultString_ = value;
+        
+        return this;
+      }
+
+      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
+      /**
        * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
+       */
+      public boolean hasAttachData() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
        */
       public com.google.protobuf.ByteString getAttachData() {
         return attachData_;
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000100;
         attachData_ = value;
         
         return this;
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       *
+       * <pre>
+       *发送端不需要传
+       * </pre>
        */
       public Builder clearAttachData() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000100);
         attachData_ = getDefaultInstance().getAttachData();
         
         return this;
@@ -1011,6 +1358,37 @@ public final class IMMessage {
      * <code>required .IM.BaseDefine.SessionType session_type = 4;</code>
      */
     com.mogujie.tt.protobuf.IMBaseDefine.SessionType getSessionType();
+
+    /**
+     * <code>required uint32 result_code = 5;</code>
+     *
+     * <pre>
+     *0成功,其余失败,显示下面的错误信息
+     * </pre>
+     */
+    boolean hasResultCode();
+    /**
+     * <code>required uint32 result_code = 5;</code>
+     *
+     * <pre>
+     *0成功,其余失败,显示下面的错误信息
+     * </pre>
+     */
+    int getResultCode();
+
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    boolean hasResultString();
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    java.lang.String getResultString();
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getResultStringBytes();
   }
   /**
    * Protobuf type {@code IM.Message.IMMsgDataAck}
@@ -1087,6 +1465,17 @@ public final class IMMessage {
                 bitField0_ |= 0x00000008;
                 sessionType_ = value;
               }
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              resultCode_ = input.readUInt32();
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              resultString_ = bs;
               break;
             }
           }
@@ -1191,11 +1580,78 @@ public final class IMMessage {
       return sessionType_;
     }
 
+    public static final int RESULT_CODE_FIELD_NUMBER = 5;
+    private int resultCode_;
+    /**
+     * <code>required uint32 result_code = 5;</code>
+     *
+     * <pre>
+     *0成功,其余失败,显示下面的错误信息
+     * </pre>
+     */
+    public boolean hasResultCode() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required uint32 result_code = 5;</code>
+     *
+     * <pre>
+     *0成功,其余失败,显示下面的错误信息
+     * </pre>
+     */
+    public int getResultCode() {
+      return resultCode_;
+    }
+
+    public static final int RESULT_STRING_FIELD_NUMBER = 6;
+    private java.lang.Object resultString_;
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    public boolean hasResultString() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    public java.lang.String getResultString() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          resultString_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string result_string = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getResultStringBytes() {
+      java.lang.Object ref = resultString_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        resultString_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       userId_ = 0;
       sessionId_ = 0;
       msgId_ = 0;
       sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
+      resultCode_ = 0;
+      resultString_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1219,6 +1675,14 @@ public final class IMMessage {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasResultCode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasResultString()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1237,6 +1701,12 @@ public final class IMMessage {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(4, sessionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(5, resultCode_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getResultStringBytes());
       }
       output.writeRawBytes(unknownFields);
     }
@@ -1262,6 +1732,14 @@ public final class IMMessage {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, sessionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, resultCode_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getResultStringBytes());
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -1365,6 +1843,10 @@ public final class IMMessage {
         bitField0_ = (bitField0_ & ~0x00000004);
         sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
         bitField0_ = (bitField0_ & ~0x00000008);
+        resultCode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        resultString_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -1404,6 +1886,14 @@ public final class IMMessage {
           to_bitField0_ |= 0x00000008;
         }
         result.sessionType_ = sessionType_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.resultCode_ = resultCode_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.resultString_ = resultString_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -1421,6 +1911,14 @@ public final class IMMessage {
         }
         if (other.hasSessionType()) {
           setSessionType(other.getSessionType());
+        }
+        if (other.hasResultCode()) {
+          setResultCode(other.getResultCode());
+        }
+        if (other.hasResultString()) {
+          bitField0_ |= 0x00000020;
+          resultString_ = other.resultString_;
+          
         }
         setUnknownFields(
             getUnknownFields().concat(other.unknownFields));
@@ -1441,6 +1939,14 @@ public final class IMMessage {
           return false;
         }
         if (!hasSessionType()) {
+          
+          return false;
+        }
+        if (!hasResultCode()) {
+          
+          return false;
+        }
+        if (!hasResultString()) {
           
           return false;
         }
@@ -1609,6 +2115,130 @@ public final class IMMessage {
       public Builder clearSessionType() {
         bitField0_ = (bitField0_ & ~0x00000008);
         sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
+        
+        return this;
+      }
+
+      private int resultCode_ ;
+      /**
+       * <code>required uint32 result_code = 5;</code>
+       *
+       * <pre>
+       *0成功,其余失败,显示下面的错误信息
+       * </pre>
+       */
+      public boolean hasResultCode() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required uint32 result_code = 5;</code>
+       *
+       * <pre>
+       *0成功,其余失败,显示下面的错误信息
+       * </pre>
+       */
+      public int getResultCode() {
+        return resultCode_;
+      }
+      /**
+       * <code>required uint32 result_code = 5;</code>
+       *
+       * <pre>
+       *0成功,其余失败,显示下面的错误信息
+       * </pre>
+       */
+      public Builder setResultCode(int value) {
+        bitField0_ |= 0x00000010;
+        resultCode_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 result_code = 5;</code>
+       *
+       * <pre>
+       *0成功,其余失败,显示下面的错误信息
+       * </pre>
+       */
+      public Builder clearResultCode() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        resultCode_ = 0;
+        
+        return this;
+      }
+
+      private java.lang.Object resultString_ = "";
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public boolean hasResultString() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public java.lang.String getResultString() {
+        java.lang.Object ref = resultString_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            resultString_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getResultStringBytes() {
+        java.lang.Object ref = resultString_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          resultString_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public Builder setResultString(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        resultString_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public Builder clearResultString() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        resultString_ = getDefaultInstance().getResultString();
+        
+        return this;
+      }
+      /**
+       * <code>required string result_string = 6;</code>
+       */
+      public Builder setResultStringBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        resultString_ = value;
         
         return this;
       }

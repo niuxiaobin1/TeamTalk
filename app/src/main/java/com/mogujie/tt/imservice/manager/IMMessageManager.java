@@ -105,6 +105,8 @@ public class IMMessageManager extends IMManager {
                 .setSessionId(msg.getToId())
                 .setUserId(msg.getFromId())
                 .setSessionType(sessionType)
+                .setResultCode(0)
+                .setResultString("succ")
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_DATA_ACK_VALUE;
@@ -324,6 +326,10 @@ public class IMMessageManager extends IMManager {
                 try {
                     IMMessage.IMMsgDataAck imMsgDataAck = IMMessage.IMMsgDataAck.parseFrom((CodedInputStream) response);
                     logger.i("chat#onAckSendedMsg");
+                    if (imMsgDataAck.getResultCode()!=0){
+                        ToastUtil.toastShortMessage(imMsgDataAck.getResultString());
+                        return;
+                    }
                     if (imMsgDataAck.getMsgId() <= 0) {
                         throw new RuntimeException("Msg ack error,cause by msgId <=0");
                     }
@@ -378,6 +384,7 @@ public class IMMessageManager extends IMManager {
                         fileMessage.setTaskId(imFileRsp.getTaskId());
                         fileMessage.setIp(imFileRsp.getIpAddrList(0).getIp());
                         fileMessage.setPort(imFileRsp.getIpAddrList(0).getPort());
+                        DBInterface.instance().insertOrUpdateMessage(fileMessage);
                         fileSocketManager.reqFileServer(imFileRsp);
                     }
 
@@ -425,6 +432,8 @@ public class IMMessageManager extends IMManager {
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_PULL_DATA_RSP_VALUE;
                 fileSocketManager.sendRequest(imFilePullDataRsp, sid, cid);
+                msg.setProgress((int) ((float) imFilePullDataReq.getOffset() / raf.length() * 100));
+                DBInterface.instance().insertOrUpdateMessage(msg);
                 triggerEvent(new FileProgressEvent((int) ((float) imFilePullDataReq.getOffset() / raf.length() * 100), fileSendTransIngList.get(0)));
             }
 
@@ -530,6 +539,8 @@ public class IMMessageManager extends IMManager {
                 int sid = IMBaseDefine.ServiceID.SID_FILE_VALUE;
                 int cid = IMBaseDefine.FileCmdID.CID_FILE_ADD_OFFLINE_REQ_VALUE;
                 imSocketManager.sendRequest(imFileAddOfflineReq, sid, cid);
+                msg.setProgress(100);
+                triggerEvent(new FileProgressEvent(100, msg));
                 long pkId = DBInterface.instance().insertOrUpdateMessage(msg);
                 sendMessage(msg);
                 fileSendTransIngList.clear();
@@ -554,6 +565,8 @@ public class IMMessageManager extends IMManager {
                 ToastUtil.toastShortMessage("Receive file--" + msg.getPath());
                 msg.setDownloading(false);
                 msg.setDownLoaded(true);
+                msg.setProgress(100);
+                triggerEvent(new FileProgressEvent(100, msg));
                 DBInterface.instance().insertOrUpdateMessage(msg);
                 fileReceiveList.remove(msg);
                 fileTransIngList.clear();

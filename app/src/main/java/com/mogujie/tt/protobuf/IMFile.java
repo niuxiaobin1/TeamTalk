@@ -11861,6 +11861,919 @@ public final class IMFile {
     // @@protoc_insertion_point(class_scope:IM.File.IMGroupFileRsp)
   }
 
+  public interface IMFileSendMailReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.File.IMFileSendMailReq)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    boolean hasRecieveMail();
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    java.lang.String getRecieveMail();
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getRecieveMailBytes();
+
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    boolean hasMailTitle();
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    java.lang.String getMailTitle();
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getMailTitleBytes();
+
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    boolean hasMailContent();
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    java.lang.String getMailContent();
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getMailContentBytes();
+  }
+  /**
+   * Protobuf type {@code IM.File.IMFileSendMailReq}
+   */
+  public static final class IMFileSendMailReq extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.File.IMFileSendMailReq)
+      IMFileSendMailReqOrBuilder {
+    // Use IMFileSendMailReq.newBuilder() to construct.
+    private IMFileSendMailReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMFileSendMailReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMFileSendMailReq defaultInstance;
+    public static IMFileSendMailReq getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMFileSendMailReq getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMFileSendMailReq(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              recieveMail_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              mailTitle_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              mailContent_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMFileSendMailReq> PARSER =
+        new com.google.protobuf.AbstractParser<IMFileSendMailReq>() {
+      public IMFileSendMailReq parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMFileSendMailReq(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMFileSendMailReq> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RECIEVE_MAIL_FIELD_NUMBER = 1;
+    private java.lang.Object recieveMail_;
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    public boolean hasRecieveMail() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    public java.lang.String getRecieveMail() {
+      java.lang.Object ref = recieveMail_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          recieveMail_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string recieve_mail = 1;</code>
+     *
+     * <pre>
+     *cmd id: 	0x050f   发送邮件
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getRecieveMailBytes() {
+      java.lang.Object ref = recieveMail_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        recieveMail_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MAIL_TITLE_FIELD_NUMBER = 2;
+    private java.lang.Object mailTitle_;
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    public boolean hasMailTitle() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    public java.lang.String getMailTitle() {
+      java.lang.Object ref = mailTitle_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          mailTitle_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string mail_title = 2;</code>
+     *
+     * <pre>
+     *邮件title
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getMailTitleBytes() {
+      java.lang.Object ref = mailTitle_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        mailTitle_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MAIL_CONTENT_FIELD_NUMBER = 3;
+    private java.lang.Object mailContent_;
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    public boolean hasMailContent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    public java.lang.String getMailContent() {
+      java.lang.Object ref = mailContent_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          mailContent_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string mail_content = 3;</code>
+     *
+     * <pre>
+     *邮件内容
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getMailContentBytes() {
+      java.lang.Object ref = mailContent_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        mailContent_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      recieveMail_ = "";
+      mailTitle_ = "";
+      mailContent_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasRecieveMail()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMailTitle()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasMailContent()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getRecieveMailBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMailTitleBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getMailContentBytes());
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getRecieveMailBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getMailTitleBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getMailContentBytes());
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.File.IMFileSendMailReq}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.File.IMFileSendMailReq)
+        com.mogujie.tt.protobuf.IMFile.IMFileSendMailReqOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        recieveMail_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        mailTitle_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        mailContent_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq build() {
+        com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq buildPartial() {
+        com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq result = new com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.recieveMail_ = recieveMail_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.mailTitle_ = mailTitle_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.mailContent_ = mailContent_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq other) {
+        if (other == com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq.getDefaultInstance()) return this;
+        if (other.hasRecieveMail()) {
+          bitField0_ |= 0x00000001;
+          recieveMail_ = other.recieveMail_;
+          
+        }
+        if (other.hasMailTitle()) {
+          bitField0_ |= 0x00000002;
+          mailTitle_ = other.mailTitle_;
+          
+        }
+        if (other.hasMailContent()) {
+          bitField0_ |= 0x00000004;
+          mailContent_ = other.mailContent_;
+          
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasRecieveMail()) {
+          
+          return false;
+        }
+        if (!hasMailTitle()) {
+          
+          return false;
+        }
+        if (!hasMailContent()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMFile.IMFileSendMailReq) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object recieveMail_ = "";
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public boolean hasRecieveMail() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public java.lang.String getRecieveMail() {
+        java.lang.Object ref = recieveMail_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            recieveMail_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getRecieveMailBytes() {
+        java.lang.Object ref = recieveMail_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          recieveMail_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public Builder setRecieveMail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        recieveMail_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public Builder clearRecieveMail() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        recieveMail_ = getDefaultInstance().getRecieveMail();
+        
+        return this;
+      }
+      /**
+       * <code>required string recieve_mail = 1;</code>
+       *
+       * <pre>
+       *cmd id: 	0x050f   发送邮件
+       * </pre>
+       */
+      public Builder setRecieveMailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        recieveMail_ = value;
+        
+        return this;
+      }
+
+      private java.lang.Object mailTitle_ = "";
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public boolean hasMailTitle() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public java.lang.String getMailTitle() {
+        java.lang.Object ref = mailTitle_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            mailTitle_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getMailTitleBytes() {
+        java.lang.Object ref = mailTitle_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mailTitle_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public Builder setMailTitle(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        mailTitle_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public Builder clearMailTitle() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        mailTitle_ = getDefaultInstance().getMailTitle();
+        
+        return this;
+      }
+      /**
+       * <code>required string mail_title = 2;</code>
+       *
+       * <pre>
+       *邮件title
+       * </pre>
+       */
+      public Builder setMailTitleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        mailTitle_ = value;
+        
+        return this;
+      }
+
+      private java.lang.Object mailContent_ = "";
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public boolean hasMailContent() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public java.lang.String getMailContent() {
+        java.lang.Object ref = mailContent_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            mailContent_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getMailContentBytes() {
+        java.lang.Object ref = mailContent_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mailContent_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public Builder setMailContent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        mailContent_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public Builder clearMailContent() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        mailContent_ = getDefaultInstance().getMailContent();
+        
+        return this;
+      }
+      /**
+       * <code>required string mail_content = 3;</code>
+       *
+       * <pre>
+       *邮件内容
+       * </pre>
+       */
+      public Builder setMailContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        mailContent_ = value;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.File.IMFileSendMailReq)
+    }
+
+    static {
+      defaultInstance = new IMFileSendMailReq(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.File.IMFileSendMailReq)
+  }
+
 
   static {
   }

@@ -80,6 +80,7 @@ public class FileMessage extends MessageEntity implements Serializable {
             fileMessage.setIp(extraContent.getString("ip"));
             fileMessage.setPort(extraContent.getInt("port"));
             fileMessage.setDownLoaded(extraContent.getBoolean("download"));
+            fileMessage.setProgress(extraContent.getInt("progress"));
             fileMessage.setLoadStatus(MessageConstant.FILE_LOADED_SUCCESS);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -266,6 +267,7 @@ public class FileMessage extends MessageEntity implements Serializable {
             extraContent.put("port", port);
             extraContent.put("size", size);
             extraContent.put("download", isDownLoaded);
+            extraContent.put("progress", progress);
             String fileContent = extraContent.toString();
             setContent(fileContent);
         } catch (JSONException e) {
@@ -319,5 +321,6 @@ public class FileMessage extends MessageEntity implements Serializable {
 
     public void setProgress(int progress) {
         this.progress = progress;
+        updateContent();
     }
 }

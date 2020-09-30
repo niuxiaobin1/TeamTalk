@@ -286,7 +286,7 @@ public class MessageAdapter extends BaseAdapter {
             Object object = msgObjectList.get(index);
             if (object instanceof FileMessage) {
                 FileMessage fileMessage = (FileMessage) object;
-                if ( fileMessage.getTaskId() == fileProgressEvent.fileMessage.getTaskId()) {
+                if ( fileMessage.getTaskId().equals(fileProgressEvent.fileMessage.getTaskId()) ) {
                     msgObjectList.set(index, fileProgressEvent.fileMessage);
                     break;
                 }

@@ -23108,6 +23108,817 @@ public final class IMGroup {
     // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeNickNotify)
   }
 
+  public interface IMGroupAddFriendNotifyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IM.Group.IMGroupAddFriendNotify)
+      com.google.protobuf.MessageLiteOrBuilder {
+
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 			0x0424
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 			0x0424
+     * </pre>
+     */
+    int getUserId();
+
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    boolean hasGroupId();
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>required uint32 friend_id = 3;</code>
+     *
+     * <pre>
+     *加你进群的好友id
+     * </pre>
+     */
+    boolean hasFriendId();
+    /**
+     * <code>required uint32 friend_id = 3;</code>
+     *
+     * <pre>
+     *加你进群的好友id
+     * </pre>
+     */
+    int getFriendId();
+
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getCurUserIdListList();
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    int getCurUserIdListCount();
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    int getCurUserIdList(int index);
+  }
+  /**
+   * Protobuf type {@code IM.Group.IMGroupAddFriendNotify}
+   *
+   * <pre>
+   *好友加你入群通知
+   * </pre>
+   */
+  public static final class IMGroupAddFriendNotify extends
+      com.google.protobuf.GeneratedMessageLite implements
+      // @@protoc_insertion_point(message_implements:IM.Group.IMGroupAddFriendNotify)
+      IMGroupAddFriendNotifyOrBuilder {
+    // Use IMGroupAddFriendNotify.newBuilder() to construct.
+    private IMGroupAddFriendNotify(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private IMGroupAddFriendNotify(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
+
+    private static final IMGroupAddFriendNotify defaultInstance;
+    public static IMGroupAddFriendNotify getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public IMGroupAddFriendNotify getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.ByteString unknownFields;
+    private IMGroupAddFriendNotify(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.ByteString.Output unknownFieldsOutput =
+          com.google.protobuf.ByteString.newOutput();
+      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
+          com.google.protobuf.CodedOutputStream.newInstance(
+              unknownFieldsOutput);
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              groupId_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              friendId_ = input.readUInt32();
+              break;
+            }
+            case 32: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                curUserIdList_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              curUserIdList_.add(input.readUInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                curUserIdList_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                curUserIdList_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          curUserIdList_ = java.util.Collections.unmodifiableList(curUserIdList_);
+        }
+        try {
+          unknownFieldsCodedOutput.flush();
+        } catch (java.io.IOException e) {
+        // Should not happen
+        } finally {
+          unknownFields = unknownFieldsOutput.toByteString();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<IMGroupAddFriendNotify> PARSER =
+        new com.google.protobuf.AbstractParser<IMGroupAddFriendNotify>() {
+      public IMGroupAddFriendNotify parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new IMGroupAddFriendNotify(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IMGroupAddFriendNotify> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 			0x0424
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 user_id = 1;</code>
+     *
+     * <pre>
+     *cmd id: 			0x0424
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public boolean hasGroupId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int FRIEND_ID_FIELD_NUMBER = 3;
+    private int friendId_;
+    /**
+     * <code>required uint32 friend_id = 3;</code>
+     *
+     * <pre>
+     *加你进群的好友id
+     * </pre>
+     */
+    public boolean hasFriendId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint32 friend_id = 3;</code>
+     *
+     * <pre>
+     *加你进群的好友id
+     * </pre>
+     */
+    public int getFriendId() {
+      return friendId_;
+    }
+
+    public static final int CUR_USER_ID_LIST_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> curUserIdList_;
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getCurUserIdListList() {
+      return curUserIdList_;
+    }
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    public int getCurUserIdListCount() {
+      return curUserIdList_.size();
+    }
+    /**
+     * <code>repeated uint32 cur_user_id_list = 4;</code>
+     *
+     * <pre>
+     *现有的成员id	
+     * </pre>
+     */
+    public int getCurUserIdList(int index) {
+      return curUserIdList_.get(index);
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      groupId_ = 0;
+      friendId_ = 0;
+      curUserIdList_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGroupId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFriendId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, friendId_);
+      }
+      for (int i = 0; i < curUserIdList_.size(); i++) {
+        output.writeUInt32(4, curUserIdList_.get(i));
+      }
+      output.writeRawBytes(unknownFields);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, groupId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, friendId_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < curUserIdList_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(curUserIdList_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getCurUserIdListList().size();
+      }
+      size += unknownFields.size();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code IM.Group.IMGroupAddFriendNotify}
+     *
+     * <pre>
+     *好友加你入群通知
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify, Builder>
+        implements
+        // @@protoc_insertion_point(builder_implements:IM.Group.IMGroupAddFriendNotify)
+        com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotifyOrBuilder {
+      // Construct using com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        friendId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        curUserIdList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify getDefaultInstanceForType() {
+        return com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify.getDefaultInstance();
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify build() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify buildPartial() {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify result = new com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupId_ = groupId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.friendId_ = friendId_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          curUserIdList_ = java.util.Collections.unmodifiableList(curUserIdList_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.curUserIdList_ = curUserIdList_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify other) {
+        if (other == com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasGroupId()) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.hasFriendId()) {
+          setFriendId(other.getFriendId());
+        }
+        if (!other.curUserIdList_.isEmpty()) {
+          if (curUserIdList_.isEmpty()) {
+            curUserIdList_ = other.curUserIdList_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureCurUserIdListIsMutable();
+            curUserIdList_.addAll(other.curUserIdList_);
+          }
+          
+        }
+        setUnknownFields(
+            getUnknownFields().concat(other.unknownFields));
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasGroupId()) {
+          
+          return false;
+        }
+        if (!hasFriendId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.mogujie.tt.protobuf.IMGroup.IMGroupAddFriendNotify) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 			0x0424
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 			0x0424
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 			0x0424
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 user_id = 1;</code>
+       *
+       * <pre>
+       *cmd id: 			0x0424
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public boolean hasGroupId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        bitField0_ |= 0x00000002;
+        groupId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupId_ = 0;
+        
+        return this;
+      }
+
+      private int friendId_ ;
+      /**
+       * <code>required uint32 friend_id = 3;</code>
+       *
+       * <pre>
+       *加你进群的好友id
+       * </pre>
+       */
+      public boolean hasFriendId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint32 friend_id = 3;</code>
+       *
+       * <pre>
+       *加你进群的好友id
+       * </pre>
+       */
+      public int getFriendId() {
+        return friendId_;
+      }
+      /**
+       * <code>required uint32 friend_id = 3;</code>
+       *
+       * <pre>
+       *加你进群的好友id
+       * </pre>
+       */
+      public Builder setFriendId(int value) {
+        bitField0_ |= 0x00000004;
+        friendId_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required uint32 friend_id = 3;</code>
+       *
+       * <pre>
+       *加你进群的好友id
+       * </pre>
+       */
+      public Builder clearFriendId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        friendId_ = 0;
+        
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> curUserIdList_ = java.util.Collections.emptyList();
+      private void ensureCurUserIdListIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          curUserIdList_ = new java.util.ArrayList<java.lang.Integer>(curUserIdList_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getCurUserIdListList() {
+        return java.util.Collections.unmodifiableList(curUserIdList_);
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public int getCurUserIdListCount() {
+        return curUserIdList_.size();
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public int getCurUserIdList(int index) {
+        return curUserIdList_.get(index);
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public Builder setCurUserIdList(
+          int index, int value) {
+        ensureCurUserIdListIsMutable();
+        curUserIdList_.set(index, value);
+        
+        return this;
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public Builder addCurUserIdList(int value) {
+        ensureCurUserIdListIsMutable();
+        curUserIdList_.add(value);
+        
+        return this;
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public Builder addAllCurUserIdList(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureCurUserIdListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, curUserIdList_);
+        
+        return this;
+      }
+      /**
+       * <code>repeated uint32 cur_user_id_list = 4;</code>
+       *
+       * <pre>
+       *现有的成员id	
+       * </pre>
+       */
+      public Builder clearCurUserIdList() {
+        curUserIdList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:IM.Group.IMGroupAddFriendNotify)
+    }
+
+    static {
+      defaultInstance = new IMGroupAddFriendNotify(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:IM.Group.IMGroupAddFriendNotify)
+  }
+
 
   static {
   }

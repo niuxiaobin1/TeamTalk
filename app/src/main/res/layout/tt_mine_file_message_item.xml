@@ -75,6 +75,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:maxLines="1"
                             android:ellipsize="end"
                             android:id="@+id/titleTv"
                             android:layout_width="wrap_content"
